@@ -145,3 +145,28 @@ services:
     environment:
       - discovery.type=single-node
     restart: always
+  ################################################################################
+  # DELTAS
+  ################################################################################
+  consumer-lokale-besturen:
+    image: lblod/delta-consumer:latest
+    environment:
+      DCR_SYNC_BASE_URL: "https://organisaties.abb.vlaanderen.be"
+      DCR_SERVICE_NAME: "consumer-lokale-besturen"
+      DCR_SYNC_FILES_PATH: "/sync/lokale-besturen/files"
+      DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/WorshipPostsCacheGraphDump"
+      DCR_INITIAL_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/ophLokaleBesturen"
+      DCR_DELTA_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/ophLokaleBesturenDeltaFileSyncing"
+      DCR_JOB_CREATOR_URI: "http://data.lblod.info/services/id/consumer-lokale-besturen"
+      DCR_KEEP_DELTA_FILES: "true"
+      DCR_DELTA_FILE_FOLDER: "/consumer-files"
+      BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: "false"
+      INGEST_GRAPH: "http://mu.semte.ch/graphs/ingest"
+      BATCH_SIZE: 1000
+    volumes:
+      - ./config/consumers/lokale-besturen:/config/triples-dispatching/custom-dispatching
+      - ./data/files/consumer-files/lokale-besturen:/consumer-files/
+    links:
+      - database:database
+    restart: always
+    logging: *default-logging
