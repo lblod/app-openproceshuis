@@ -1,0 +1,26 @@
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX proces: <https://data.vlaanderen.be/ns/proces#>
+
+DELETE {
+  GRAPH ?g {
+    ?process ext:hasStatistics ?stat .
+    ?stat a ext:ProcessStatistic ;
+          ?p ?o .
+  }
+}
+INSERT {
+  GRAPH <http://mu.semte.ch/graphs/statistics> {
+    ?process ext:hasStatistics ?stat .
+    ?stat a ext:ProcessStatistic ;
+          ?p ?o .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?process ext:hasStatistics ?stat .
+    ?stat a ext:ProcessStatistic ;
+          ?p ?o .
+  }
+  
+  FILTER(?g != <http://mu.semte.ch/graphs/statistics>)
+}
