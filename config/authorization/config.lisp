@@ -111,6 +111,10 @@
        :for-allowed-group "public")
 
 (grant (read write)
+       :to-graph statistics
+       :for-allowed-group "public")
+
+(grant (read write)
        :to-graph organizations
        :for-allowed-group "org")
 
@@ -174,8 +178,7 @@
   ("proces:Proces" -> _)
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _)
-  ("ext:ProcessStatistic" -> _))
+  ("ipdc:ConceptualPublicService" -> _))
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
   ;; bpmn-element-type
@@ -222,8 +225,7 @@
   ("proces:Proces" -> _)
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _)
-  ("ext:ProcessStatistic" -> _))
+  ("ipdc:ConceptualPublicService" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ;; bpmn-element-type
@@ -271,7 +273,6 @@
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
-  ("ext:ProcessStatistic" -> _)
   ;; public-type
   ("org:Role" -> _)
   ("besluit:Bestuurseenheid" -> _)
@@ -297,3 +298,7 @@
 (define-graph reports ("http://mu.semte.ch/graphs/reports")
   ("reporting:Report" -> _)
   ("nfo:FileDataObject" -> _))
+
+(define-graph statistics ("http://mu.semte.ch/graphs/statistics")
+  ("ext:ProcessStatistic" -> _)
+  ("proces:Proces" -> "ext:hasStatistics"))
