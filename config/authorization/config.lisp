@@ -175,7 +175,7 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("proces:Proces" -> _)
+  ("proces:Proces" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _))
@@ -222,7 +222,7 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("proces:Proces" -> _)
+  ("proces:Proces" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _))
@@ -269,7 +269,7 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("proces:Proces" -> _)
+  ("proces:Proces" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
