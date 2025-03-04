@@ -45,7 +45,9 @@
                             :as "ipdc-products")
               (administrative-unit-classification-code :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
                                  :as "relevant-for")
-             )
+              (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
+                                :inverse t
+                                :as "infomrationAssets"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
@@ -59,10 +61,20 @@
                 (:process-views :number ,(s-prefix "ext:processViews")))
   :has-one `((process :via ,(s-prefix "ext:hasStatistics")
                       :inverse t
-                      :as "process"))
+                      :as "processes"))
   :resource-base (s-url "http://data.lblod.info/process-statistics/")
   :on-path "process-statistics")
 
+
+(define-resource informationAsset()
+  :class (s-prefix "skos:Concept")
+  :properties `((:label :string ,(s-prefix "skos:prefLabel"))
+                (:scheme :url ,(s-prefix "skos:inScheme")))
+  :has-many `((process :via ,(s-prefix "icr:hasInformationAsset")
+                       :inverse t
+                       :as "process"))
+  :resource-base (s-url "http://data.lblod.info/information-assets/")
+  :on-path "information-assets")
 
 ;; -------------------------------------------------------------------------------------
 ;; BPMN Based Ontology (BBO) (See https://www.irit.fr/recherches/MELODI/ontologies/BBO)
