@@ -54,7 +54,9 @@
   :bbo "https://www.irit.fr/recherches/MELODI/ontologies/BBO#"
   :bboext "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
-  :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#")
+  :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
+  :dpv "https://w3id.org/dpv#"
+  )
 
 
 ;;;;;;;;;;;;;
@@ -175,7 +177,7 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("proces:Proces" x> "ext:hasStatistics")
+  ("dpv:Process" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _))
@@ -222,7 +224,7 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("proces:Proces" x> "ext:hasStatistics")
+  ("dpv:Process" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _))
@@ -269,7 +271,7 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("proces:Proces" x> "ext:hasStatistics")
+  ("dpv:Process" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
@@ -301,4 +303,4 @@
 
 (define-graph statistics ("http://mu.semte.ch/graphs/statistics")
   ("ext:ProcessStatistic" -> _)
-  ("proces:Proces" -> "ext:hasStatistics"))
+  ("dpv:Process" -> "ext:hasStatistics"))
