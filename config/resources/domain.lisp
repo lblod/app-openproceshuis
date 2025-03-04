@@ -72,7 +72,7 @@
                 (:scheme :url ,(s-prefix "skos:inScheme")))
   :has-many `((process :via ,(s-prefix "icr:hasInformationAsset")
                        :inverse t
-                       :as "process"))
+                       :as "processes"))
   :resource-base (s-url "http://data.lblod.info/information-assets/")
   :on-path "information-assets")
 
