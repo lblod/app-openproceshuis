@@ -61,7 +61,7 @@
                 (:process-views :number ,(s-prefix "ext:processViews")))
   :has-one `((process :via ,(s-prefix "ext:hasStatistics")
                       :inverse t
-                      :as "processes"))
+                      :as "process"))
   :resource-base (s-url "http://data.lblod.info/process-statistics/")
   :on-path "process-statistics")
 
