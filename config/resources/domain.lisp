@@ -47,7 +47,7 @@
                                  :as "relevant-for")
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
                                 :inverse t
-                                :as "infomrationAssets"))
+                                :as "informationAssets"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
