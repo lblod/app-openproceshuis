@@ -71,6 +71,19 @@
   :on-path "process-statistics")
 
 
+<<<<<<< HEAD
+=======
+(define-resource informationAsset()
+  :class (s-prefix "skos:Concept")
+  :properties `((:label :string ,(s-prefix "skos:prefLabel"))
+                (:scheme :url ,(s-prefix "skos:inScheme")))
+  :has-many `((process :via ,(s-prefix "icr:hasInformationAsset")
+                       :inverse t
+                       :as "processes"))
+  :resource-base (s-url "http://data.lblod.info/information-assets/")
+  :on-path "information-assets")
+
+>>>>>>> 373cb60 (fix)
 ;; -------------------------------------------------------------------------------------
 ;; BPMN Based Ontology (BBO) (See https://www.irit.fr/recherches/MELODI/ontologies/BBO)
 ;; -------------------------------------------------------------------------------------
