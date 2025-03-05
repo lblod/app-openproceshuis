@@ -1,6 +1,6 @@
-PREFIX mu: <http://mu.semte.ch/vocabularies/core/> 
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#> 
+@prefix mu: <http://mu.semte.ch/vocabularies/core/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 <http://lblod.data.gift/concept-schemes/4c0f0408-01b9-4902-9640-477b667bd086>
   mu:uuid "4c0f0408-01b9-4902-9640-477b667bd086" ;
