@@ -46,7 +46,6 @@
               (administrative-unit-classification-code :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
                                  :as "relevant-for")
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
-                                :inverse t
                                 :as "informationAssets"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
