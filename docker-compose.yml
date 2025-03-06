@@ -59,7 +59,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    image: tenforce/virtuoso:1.3.2-virtuoso7.2.5.1
+    image: redpencil/virtuoso:1.2.1
     environment:
       SPARQL_UPDATE: "true"
       DEFAULT_GRAPH: "http://mu.semte.ch/application"
