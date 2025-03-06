@@ -7,6 +7,7 @@ PREFIX euvoc: <http://publications.europa.eu/ontology/euvoc#>
 PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX schema: <http://schema.org/>
 PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX regorg: <http://www.w3.org/ns/regorg#>
 
 
 DELETE WHERE {
@@ -33,6 +34,13 @@ DELETE WHERE {
 DELETE WHERE {
   GRAPH <http://mu.semte.ch/graphs/public> {
     ?s a code:TypeVestiging ;
+      ?p ?o .
+  }
+} ;
+
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?s a besluit:Bestuurseenheid ;
       ?p ?o .
   }
 } ;
@@ -117,6 +125,13 @@ DELETE WHERE {
 DELETE WHERE {
   GRAPH <http://mu.semte.ch/graphs/public> {
     ?s a ere:CentraalBestuurVanDeEredienst ;
+      ?p ?o .
+  }
+} ;
+
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?s a regorg:RegisteredOrganization ;
       ?p ?o .
   }
 }
