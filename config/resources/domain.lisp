@@ -9,6 +9,8 @@
 (defparameter *cache-count-queries* t)
 (defparameter *supply-cache-headers-p* t)
 
+(defparameter *use-custom-boolean-type-p* nil)
+
 (read-domain-file "auth.json")
 (read-domain-file "job.lisp")
 (read-domain-file "file.lisp")
