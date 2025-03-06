@@ -1,0 +1,6 @@
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?s ?p ?o .
+    FILTER NOT EXISTS { ?s a ?type }
+  }
+}
