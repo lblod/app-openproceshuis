@@ -1,9 +1,10 @@
 PREFIX cogs: <http://vocab.deri.ie/cogs#>
 PREFIX task: <http://redpencil.data.gift/vocabularies/tasks/>
 PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 
-# INITIAL SYNC JOBS
+# INITIAL SYNC JOBS & TASKS
 
 DELETE WHERE {
   GRAPH <http://mu.semte.ch/graphs/system/jobs> {
@@ -15,20 +16,265 @@ DELETE WHERE {
       dct:isPartOf ?job ;
       ?tp ?to .
   }
-}
+} ;
 
-;
+# DELTA SYNC TASKS
+
+# -∞ - 2024/07/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?task a task:Task ;
+          dct:isPartOf ?job ;
+          dct:created ?created ;
+          ?p ?o .
+          
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> .
+
+    FILTER ( ?created < "2024-07-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/07/01 - 2024/08/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?task a task:Task ;
+          dct:isPartOf ?job ;
+          dct:created ?created ;
+          ?p ?o .
+          
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> .
+
+    FILTER ( ?created >= "2024-07-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-08-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/08/01 - 2024/09/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?task a task:Task ;
+          dct:isPartOf ?job ;
+          dct:created ?created ;
+          ?p ?o .
+          
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> .
+
+    FILTER ( ?created >= "2024-08-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-09-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/09/01 - 2024/10/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?task a task:Task ;
+          dct:isPartOf ?job ;
+          dct:created ?created ;
+          ?p ?o .
+          
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> .
+
+    FILTER ( ?created >= "2024-09-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-10-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/10/01 - 2024/11/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?task a task:Task ;
+          dct:isPartOf ?job ;
+          dct:created ?created ;
+          ?p ?o .
+          
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> .
+
+    FILTER ( ?created >= "2024-10-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-11-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/11/01 - 2024/12/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?task a task:Task ;
+          dct:isPartOf ?job ;
+          dct:created ?created ;
+          ?p ?o .
+          
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> .
+
+    FILTER ( ?created >= "2024-11-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-12-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/12/01 - 2025/01/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?task a task:Task ;
+          dct:isPartOf ?job ;
+          dct:created ?created ;
+          ?p ?o .
+          
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> .
+
+    FILTER ( ?created >= "2024-12-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2025-01-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2025/01/01 - 2025/02/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?task a task:Task ;
+          dct:isPartOf ?job ;
+          dct:created ?created ;
+          ?p ?o .
+          
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> .
+
+    FILTER ( ?created >= "2025-01-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2025-02-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2025/02/01 - ∞
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?task a task:Task ;
+          dct:isPartOf ?job ;
+          dct:created ?created ;
+          ?p ?o .
+          
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> .
+
+    FILTER ( ?created >= "2025-02-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
 
 # DELTA SYNC JOBS
 
+# -∞ - 2024/07/01
 DELETE WHERE {
   GRAPH <http://mu.semte.ch/graphs/system/jobs> {
     ?job a cogs:Job ;
-      task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
-      ?jp ?jo .
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
+         dct:created ?created ;
+         ?p ?o .
 
-    ?task a task:Task ;
-      dct:isPartOf ?job ;
-      ?tp ?to .
+    FILTER ( ?created < "2024-07-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/07/01 - 2024/08/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
+         dct:created ?created ;
+         ?p ?o .
+
+    FILTER ( ?created >= "2024-07-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-08-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/08/01 - 2024/09/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
+         dct:created ?created ;
+         ?p ?o .
+
+    FILTER ( ?created >= "2024-08-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-09-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/09/01 - 2024/10/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
+         dct:created ?created ;
+         ?p ?o .
+
+    FILTER ( ?created >= "2024-09-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-10-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/10/01 - 2024/11/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
+         dct:created ?created ;
+         ?p ?o .
+
+    FILTER ( ?created >= "2024-10-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-11-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/11/01 - 2024/12/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
+         dct:created ?created ;
+         ?p ?o .
+
+    FILTER ( ?created >= "2024-11-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2024-12-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2024/12/01 - 2025/01/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
+         dct:created ?created ;
+         ?p ?o .
+
+    FILTER ( ?created >= "2024-12-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2025-01-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2025/01/01 - 2025/02/01
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
+         dct:created ?created ;
+         ?p ?o .
+
+    FILTER ( ?created >= "2025-01-01T00:00:00Z"^^xsd:dateTime &&
+             ?created <  "2025-02-01T00:00:00Z"^^xsd:dateTime )
+  }
+} ;
+
+# 2025/02/01 - ∞
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/system/jobs> {
+    ?job a cogs:Job ;
+         task:operation <http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/opDeltaFileSyncing> ;
+         dct:created ?created ;
+         ?p ?o .
+
+    FILTER ( ?created >= "2025-02-01T00:00:00Z"^^xsd:dateTime )
   }
 }
