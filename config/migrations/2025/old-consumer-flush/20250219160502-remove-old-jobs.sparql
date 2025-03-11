@@ -20,7 +20,7 @@ DELETE WHERE {
 
 # DELTA SYNC TASKS
 
-# -∞ - 2024/07/01
+# -INFINITY - 2024/07/01
 DELETE WHERE {
   GRAPH <http://mu.semte.ch/graphs/system/jobs> {
     ?task a task:Task ;
@@ -147,7 +147,7 @@ DELETE WHERE {
   }
 } ;
 
-# 2025/02/01 - ∞
+# 2025/02/01 - INFINITY
 DELETE WHERE {
   GRAPH <http://mu.semte.ch/graphs/system/jobs> {
     ?task a task:Task ;
@@ -164,7 +164,7 @@ DELETE WHERE {
 
 # DELTA SYNC JOBS
 
-# -∞ - 2024/07/01
+# -INFINITY - 2024/07/01
 DELETE WHERE {
   GRAPH <http://mu.semte.ch/graphs/system/jobs> {
     ?job a cogs:Job ;
@@ -267,7 +267,7 @@ DELETE WHERE {
   }
 } ;
 
-# 2025/02/01 - ∞
+# 2025/02/01 - INFINITY
 DELETE WHERE {
   GRAPH <http://mu.semte.ch/graphs/system/jobs> {
     ?job a cogs:Job ;
