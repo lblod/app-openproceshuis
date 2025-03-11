@@ -130,7 +130,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    image: lblod/openproceshuis-visio-service:0.0.1
+    image: lblod/openproceshuis-visio-service:1.0.0
     volumes:
       - ./data/files:/share
     restart: always
