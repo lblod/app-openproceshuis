@@ -185,6 +185,8 @@ services:
       DCR_ENABLE_TRIPLE_REMAPPING: "true"
       DCR_LANDING_ZONE_GRAPH: "http://mu.semte.ch/graphs/op/landing"
       DCR_REMAPPING_GRAPH: "http://mu.semte.ch/graphs/public"
+      DCR_DISABLE_INITIAL_SYNC: "true"
+      DCR_DISABLE_DELTA_INGEST: "false"
       DCR_BATCH_SIZE: 1000
       SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: "404,500,503"
       SUDO_QUERY_RETRY: "true"

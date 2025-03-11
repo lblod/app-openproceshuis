@@ -47,6 +47,7 @@ services:
   #   environment:
   #     DCR_LANDING_ZONE_DATABASE: "virtuoso" # Only on first run
   #     DCR_REMAPPING_DATABASE: "virtuoso" # Only on first run
+  #     DCR_DISABLE_INITIAL_SYNC: "false" # Only on first run
   #     DCR_DISABLE_DELTA_INGEST: "true" # Only on first run
 ```
 
