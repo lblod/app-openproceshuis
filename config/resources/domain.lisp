@@ -9,6 +9,8 @@
 (defparameter *cache-count-queries* t)
 (defparameter *supply-cache-headers-p* t)
 
+(defparameter *use-custom-boolean-type-p* nil)
+
 (read-domain-file "auth.json")
 (read-domain-file "job.lisp")
 (read-domain-file "file.lisp")
@@ -18,13 +20,22 @@
 ;; -------------------------------------------------------------------------------------
 
 (define-resource process()
-  :class (s-prefix "proces:Proces")
+  :class (s-prefix "dpv:Process")
   :properties `((:title :string ,(s-prefix "dct:title"))
                 (:description :string ,(s-prefix "dct:description"))
                 (:email :string ,(s-prefix "schema:email"))
                 (:created :datetime ,(s-prefix "dct:created"))
                 (:modified :datetime ,(s-prefix "dct:modified"))
-                (:status :url ,(s-prefix "adms:status")))
+                (:status :url ,(s-prefix "adms:status"))
+                (:confidentiality-score :number ,(s-prefix "icr:confidentialityScore"))
+                (:integrity-score :number ,(s-prefix "icr:integrityScore"))
+                (:availability-score :number ,(s-prefix "icr:availabilityScore"))
+                (:contains-personal-data :boolean ,(s-prefix "icr:containsPersonalData"))
+                (:contains-professional-data :boolean ,(s-prefix "icr:containsProfessionalData"))
+                (:contains-sensitive-personal-data :boolean ,(s-prefix "icr:containsSensitivePersonalData"))
+                (:additional-information :string ,(s-prefix "icr:additionalInformation"))
+                (:has-control-measure :url ,(s-prefix "icr:hasControlMeasure"))
+                (:is-blueprint :boolean ,(s-prefix "icr:isBlueprint")))
   :has-one `((group :via ,(s-prefix "dct:publisher")
                     :as "publisher")
             (processStatistic :via ,(s-prefix "ext:hasStatistics")
@@ -34,7 +45,10 @@
                     :as "files")
               (ipdcProduct :via ,(s-prefix "prov:derivation")
                             :as "ipdc-products")
-             )
+              (administrative-unit-classification-code :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
+                                 :as "relevant-for")
+              (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
+                                :as "informationAssets"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
@@ -44,12 +58,24 @@
                 (:png-downloads :number ,(s-prefix "ext:pngDownloads"))
                 (:svg-downloads :number ,(s-prefix "ext:svgDownloads"))
                 (:bpmn-downloads :number ,(s-prefix "ext:bpmnDownloads"))
+                (:visio-downloads :number ,(s-prefix "ext:visioDownloads"))
                 (:process-views :number ,(s-prefix "ext:processViews")))
   :has-one `((process :via ,(s-prefix "ext:hasStatistics")
                       :inverse t
                       :as "process"))
   :resource-base (s-url "http://data.lblod.info/process-statistics/")
   :on-path "process-statistics")
+
+
+(define-resource informationAsset()
+  :class (s-prefix "skos:Concept")
+  :properties `((:label :string ,(s-prefix "skos:prefLabel"))
+                (:scheme :url ,(s-prefix "skos:inScheme")))
+  :has-many `((process :via ,(s-prefix "icr:hasInformationAsset")
+                       :inverse t
+                       :as "processes"))
+  :resource-base (s-url "http://data.lblod.info/information-assets/")
+  :on-path "information-assets")
 
 ;; -------------------------------------------------------------------------------------
 ;; BPMN Based Ontology (BBO) (See https://www.irit.fr/recherches/MELODI/ontologies/BBO)
