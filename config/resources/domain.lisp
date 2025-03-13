@@ -50,7 +50,8 @@
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
                                 :as "informationAssets")
               (process :via ,(s-prefix "prov:wasInfluencedBy")
-                                      :as "linked-blueprint"))
+                                      :inverse t
+                                      :as "linked-blueprints"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
