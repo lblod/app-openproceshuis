@@ -34,7 +34,16 @@
                     :as "files")
               (ipdcProduct :via ,(s-prefix "prov:derivation")
                             :as "ipdc-products")
+<<<<<<< HEAD
              )
+=======
+              (administrative-unit-classification-code :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
+                                 :as "relevant-for")
+              (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
+                                :as "informationAssets")
+              (process :via ,(s-prefix "prov:wasInfluencedBy")
+                                      :as "linked-blueprints"))
+>>>>>>> 3e0711c (Link process to blueprint (#57))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
