@@ -46,7 +46,7 @@
               (ipdcProduct :via ,(s-prefix "prov:derivation")
                             :as "ipdc-products")
               (administrative-unit-classification-code :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
-                                 :as "relevant-for")
+                                :as "relevant-for")
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
                                 :as "informationAssets")
               (process :via ,(s-prefix "prov:wasInfluencedBy")
