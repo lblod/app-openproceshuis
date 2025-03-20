@@ -52,7 +52,6 @@
               (process :via ,(s-prefix "prov:wasInfluencedBy")
                                       :as "linked-blueprints")
               (group :via ,(s-prefix "prov:usedBy")
-                                      :inverse t
                                       :as "users"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
