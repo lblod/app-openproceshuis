@@ -225,7 +225,8 @@
   ("proces:Proces" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _))
+  ("ipdc:ConceptualPublicService" -> _)
+  ("skos:Concept" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ;; bpmn-element-type
