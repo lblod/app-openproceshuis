@@ -38,12 +38,18 @@
              )
 =======
               (administrative-unit-classification-code :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
-                                 :as "relevant-for")
+                                :as "relevant-for")
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
                                 :as "informationAssets")
               (process :via ,(s-prefix "prov:wasInfluencedBy")
+<<<<<<< HEAD
                                       :as "linked-blueprints"))
 >>>>>>> 3e0711c (Link process to blueprint (#57))
+=======
+                                      :as "linked-blueprints")
+              (group :via ,(s-prefix "prov:usedBy")
+                                      :as "users"))
+>>>>>>> 1b9057e (We use this process (#58))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
