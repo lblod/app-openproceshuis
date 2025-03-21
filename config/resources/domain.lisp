@@ -40,7 +40,7 @@
               (administrative-unit-classification-code :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
                                 :as "relevant-for")
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
-                                :as "informationAssets")
+                                :as "information-assets")
               (process :via ,(s-prefix "prov:wasInfluencedBy")
 <<<<<<< HEAD
                                       :as "linked-blueprints"))
