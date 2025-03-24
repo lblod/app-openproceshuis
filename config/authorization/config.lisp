@@ -63,6 +63,14 @@
             }
           }")
 
+(supply-allowed-group "authenticated"
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          SELECT DISTINCT ?session_group ?session_role WHERE {
+            <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
+                         ext:sessionRole ?session_role.
+          }")
+
 (supply-allowed-group "admin"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           SELECT DISTINCT ?session_role WHERE {
@@ -80,6 +88,10 @@
 (grant (read)
        :to-graph public
        :for-allowed-group "public")
+       
+(grant (read)
+       :to-graph shared
+       :for-allowed-group "public")
 
 (grant (read)
        :to-graph job
@@ -94,6 +106,10 @@
        :for-allowed-group "org")
 
 (grant (read write)
+       :to-graph shared
+       :for-allowed-group "authenticated")
+
+(grant (read write)
        :to-graph sessions
        :for-allowed-group "admin")
 
@@ -103,6 +119,54 @@
 
 ;;;;;;;;;
 ;;; Graphs
+
+(define-graph shared ("http://mu.semte.ch/graphs/shared")
+  ;; bpmn-element-type
+  ("bbo:Activity" -> _)
+  ("bbo:BoundaryEvent" -> _)
+  ("bbo:BusinessRuleTask" -> _)
+  ("bbo:CallableElement" -> _)
+  ("bbo:CatchEvent" -> _)
+  ("bbo:EndEvent" -> _)
+  ("bbo:Error" -> _)
+  ("bbo:ErrorEventDefinition" -> _)
+  ("bbo:Event" -> _)
+  ("bbo:EventDefinition" -> _)
+  ("bbo:ExclusiveGateway" -> _)
+  ("bbo:FlowElement" -> _)
+  ("bbo:FlowElementsContainer" -> _)
+  ("bbo:FlowNode" -> _)
+  ("bbo:Gateway" -> _)
+  ("bbo:InclusiveGateway" -> _)
+  ("bbo:IntermediateThrowEvent" -> _)
+  ("bbo:ManualTask" -> _)
+  ("bbo:MessageEventDefinition" -> _)
+  ("bbo:ParallelGateway" -> _)
+  ("bbo:Process" -> _)
+  ("bbo:Property" -> _)
+  ("bbo:ReceiveTask" -> _)
+  ("bbo:RootElement" -> _)
+  ("bbo:ScriptTask" -> _)
+  ("bbo:SendTask" -> _)
+  ("bbo:SequenceFlow" -> _)
+  ("bbo:ServiceTask" -> _)
+  ("bbo:StartEvent" -> _)
+  ("bbo:SubProcess" -> _)
+  ("bbo:Task" -> _)
+  ("bbo:ThrowEvent" -> _)
+  ("bbo:UserTask" -> _)
+  ("bboext:Collaboration" -> _)
+  ("bboext:DataObject" -> _)
+  ("bboext:DataObjectReference" -> _)
+  ("bboext:Lane" -> _)
+  ("bboext:LaneSet" -> _)
+  ("bboext:Participant" -> _)
+  ;; process-type
+  ("dpv:Process" x> "ext:hasStatistics")
+  ("nfo:FileDataObject" -> _)
+  ("ipdc:InstancePublicService" -> _)
+  ("ipdc:ConceptualPublicService" -> _)
+  ("skos:Concept" -> _))
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
   ;; bpmn-element-type
