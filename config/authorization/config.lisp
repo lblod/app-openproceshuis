@@ -17,21 +17,10 @@
 (in-package :server)
 (setf *log-incoming-requests-p* t)
 
-;;;;;;;;;;;;;;;;
-;;; Prefix types
-
-(in-package :type-cache)
-
-(add-type-for-prefix "http://mu.semte.ch/sessions/" "http://mu.semte.ch/vocabularies/session/Session")
-
 ;;;;;;;;;;;;;;;;;
 ;;; Access rights
 
 (in-package :acl)
-
-(defparameter *access-specifications* nil)
-(defparameter *graphs* nil)
-(defparameter *rights* nil)
 
 ;;;;;;;;;;;;;;;;
 ;;; Prefixes
@@ -52,8 +41,7 @@
   :bboext "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
-  :dpv "https://w3id.org/dpv#"
-  )
+  :dpv "https://w3id.org/dpv#")
 
 
 ;;;;;;;;;;;;;
