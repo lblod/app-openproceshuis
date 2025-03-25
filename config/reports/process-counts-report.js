@@ -16,7 +16,7 @@ export default {
     const queryString = `
       PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
       PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-      PREFIX proces: <https://data.vlaanderen.be/ns/proces#>
+      PREFIX dpv: <https://w3id.org/dpv#>
       PREFIX dct: <http://purl.org/dc/terms/>
       PREFIX adms: <http://www.w3.org/ns/adms#>
 
@@ -31,7 +31,7 @@ export default {
             ?group a besluit:Bestuurseenheid ;
                    skos:prefLabel ?groupName .
 
-            ?process a proces:Proces ;
+            ?process a dpv:Process ;
                      dct:publisher ?group .
 
             OPTIONAL { ?process adms:status ?status }
@@ -49,7 +49,7 @@ export default {
                  (COUNT(DISTINCT ?archivedProcess) AS ?archivedProcesses)
                  (COUNT(DISTINCT ?process) AS ?totalProcesses)
           WHERE {
-            ?process a proces:Proces .
+            ?process a dpv:Process .
 
             OPTIONAL { ?process adms:status ?status }
 
