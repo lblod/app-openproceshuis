@@ -156,16 +156,6 @@ services:
     logging: *default-logging
     volumes:
       - ./config/search/prd:/config
-  elasticsearch:
-    labels:
-      - "logging=true"
-    logging: *default-logging
-    image: semtech/mu-search-elastic-backend:1.1.0
-    volumes:
-      - ./data/elasticsearch/:/usr/share/elasticsearch/data
-    environment:
-      - discovery.type=single-node
-    restart: always
 
   ################################################################################
   # OP PUBLIC CONSUMER
