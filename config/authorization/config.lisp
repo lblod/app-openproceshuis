@@ -17,21 +17,10 @@
 (in-package :server)
 (setf *log-incoming-requests-p* t)
 
-;;;;;;;;;;;;;;;;
-;;; Prefix types
-
-(in-package :type-cache)
-
-(add-type-for-prefix "http://mu.semte.ch/sessions/" "http://mu.semte.ch/vocabularies/session/Session")
-
 ;;;;;;;;;;;;;;;;;
 ;;; Access rights
 
 (in-package :acl)
-
-(defparameter *access-specifications* nil)
-(defparameter *graphs* nil)
-(defparameter *rights* nil)
 
 ;;;;;;;;;;;;;;;;
 ;;; Prefixes
@@ -42,19 +31,21 @@
   :ext "http://mu.semte.ch/vocabularies/ext/"
   :besluit "http://data.vlaanderen.be/ns/besluit#"
   :organisatie "http://lblod.data.gift/vocabularies/organisatie/"
-  :euvoc "http://publications.europa.eu/ontology/euvoc#"
   :schema "http://schema.org/"
   :cogs "http://vocab.deri.ie/cogs#"
   :nfo "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
   :skos "http://www.w3.org/2004/02/skos/core#"
   :org "http://www.w3.org/ns/org#"
-  :prov "http://www.w3.org/ns/prov#"
   :foaf "http://xmlns.com/foaf/0.1/"
-  :proces "https://data.vlaanderen.be/ns/proces#"
   :bbo "https://www.irit.fr/recherches/MELODI/ontologies/BBO#"
   :bboext "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
+<<<<<<< HEAD
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#")
+=======
+  :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
+  :dpv "https://w3id.org/dpv#")
+>>>>>>> e782b05 (Clean up SPARQL parser configuration (#61))
 
 
 ;;;;;;;;;;;;;
@@ -101,7 +92,7 @@
 (grant (read)
        :to-graph public
        :for-allowed-group "public")
-
+       
 (grant (read)
        :to-graph shared
        :for-allowed-group "public")
@@ -178,7 +169,8 @@
   ("proces:Proces" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _))
+  ("ipdc:ConceptualPublicService" -> _)
+  ("skos:Concept" -> _))
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
   ;; bpmn-element-type
@@ -229,6 +221,7 @@
   ("skos:Concept" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
+<<<<<<< HEAD
   ;; bpmn-element-type
   ("bbo:Activity" -> _)
   ("bbo:BoundaryEvent" -> _)
@@ -276,6 +269,8 @@
   ("ipdc:ConceptualPublicService" -> _)
   ;; public-type
   ("org:Role" -> _)
+=======
+>>>>>>> e782b05 (Clean up SPARQL parser configuration (#61))
   ("besluit:Bestuurseenheid" -> _)
   ("foaf:Person" -> _)
   ("foaf:OnlineAccount" -> _)
@@ -286,9 +281,7 @@
   ("organisatie:TypeVestiging" -> _)
   ("organisatie:BestuurseenheidClassificatieCode" -> _)
   ("organisatie:OrganisatieStatusCode" -> _)
-  ("skos:ConceptScheme" -> _)
-  ("euvoc:Country" -> _)
-  ("prov:Location" -> _))
+  ("skos:ConceptScheme" -> _))
 
 (define-graph job ("http://mu.semte.ch/graphs/bpmn-job")
   ("cogs:Job" -> _))
