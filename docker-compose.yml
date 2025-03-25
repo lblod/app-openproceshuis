@@ -144,20 +144,6 @@ services:
     logging: *default-logging
 
   ################################################################################
-  # MU SEARCH
-  ################################################################################
-  search:
-    image: semtech/mu-search:0.10.0-beta.5
-    links:
-      - database:database
-    restart: always
-    labels:
-      - "logging=true"
-    logging: *default-logging
-    volumes:
-      - ./config/search/prd:/config
-
-  ################################################################################
   # OP PUBLIC CONSUMER
   ################################################################################
   op-consumer:
