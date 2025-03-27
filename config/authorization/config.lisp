@@ -49,6 +49,14 @@
 
 (supply-allowed-group "public")
 
+(supply-allowed-group "shared-processes-reader"
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          SELECT DISTINCT ?session_group WHERE {
+              <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
+                           ext:sessionRole \"Test-SharedProcessesReader\" .
+          }")
+
 (supply-allowed-group "organization-processes-editor"
   :parameters ("session_group")
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
