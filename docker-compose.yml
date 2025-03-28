@@ -144,30 +144,6 @@ services:
     logging: *default-logging
 
   ################################################################################
-  # MU SEARCH
-  ################################################################################
-  search:
-    image: semtech/mu-search:0.10.0-beta.5
-    links:
-      - database:database
-    restart: always
-    labels:
-      - "logging=true"
-    logging: *default-logging
-    volumes:
-      - ./config/search/prd:/config
-  elasticsearch:
-    labels:
-      - "logging=true"
-    logging: *default-logging
-    image: semtech/mu-search-elastic-backend:1.1.0
-    volumes:
-      - ./data/elasticsearch/:/usr/share/elasticsearch/data
-    environment:
-      - discovery.type=single-node
-    restart: always
-
-  ################################################################################
   # OP PUBLIC CONSUMER
   ################################################################################
   op-consumer:
