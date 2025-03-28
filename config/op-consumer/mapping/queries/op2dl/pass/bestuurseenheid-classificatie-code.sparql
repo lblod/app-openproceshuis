@@ -5,14 +5,12 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 
 CONSTRUCT {
-  ?s ?p ?o.
+  ?s rdf:type ?type ;
+     mu:uuid ?uuid ;
+     skos:prefLabel ?label .
 } WHERE {
-  ?s a organisatie:BestuurseenheidClassificatieCode;
-    ?p ?o.
-
-  FILTER (?p IN (
-    rdf:type,
-    mu:uuid,
-    skos:prefLabel
-  ))
+  ?s a organisatie:BestuurseenheidClassificatieCode ;
+     rdf:type ?type ;
+     mu:uuid ?uuid ;
+     skos:prefLabel ?label .
 }

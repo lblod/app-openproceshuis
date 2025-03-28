@@ -7,17 +7,12 @@ PREFIX org: <http://www.w3.org/ns/org#>
 
 
 CONSTRUCT {
-  ?s ?p ?o.
+  ?s dct:identifier ?identifier .
 } WHERE {
-  ?s a besluit:Bestuurseenheid;
-    ?p ?o.
-
-  FILTER (?p IN (
-    rdf:type,
-    mu:uuid,
-    skos:prefLabel,
-    org:classification,
-    org:hasPrimarySite,
-    dct:identifier
-  ))
+  ?s a besluit:Bestuurseenheid ;
+     rdf:type ?type ;
+     mu:uuid ?uuid ;
+     skos:prefLabel ?label ;
+     org:classification ?classification ;
+     dct:identifier ?identifier .
 }

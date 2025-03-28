@@ -1,21 +1,14 @@
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
-PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX org: <http://www.w3.org/ns/org#>
 PREFIX ere: <http://data.lblod.info/vocabularies/erediensten/>
 
 
 CONSTRUCT {
-  ?s ?p ?o.
+  ?s ere:vestigingstype ?type .
 } WHERE {
-  ?s a org:Site;
-    ?p ?o.
-
-  FILTER (?p IN (
-    rdf:type,
-    mu:uuid,
-    dct:description,
-    org:siteAddress,
-    ere:vestigingstype
-  ))
+  ?s a org:Site ;
+     rdf:type ?type ;
+     mu:uuid ?uuid ;
+     ere:vestigingstype ?type .
 }

@@ -5,17 +5,11 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 
 CONSTRUCT {
-  ?s ?p ?o.
+  ?s foaf:page ?page .
 } WHERE {
-  ?s a schema:ContactPoint;
-    ?p ?o.
-
-  FILTER (?p IN (
-    rdf:type,
-    mu:uuid,
-    schema:email,
-    schema:telephone,
-    schema:contactType,
-    foaf:page
-  ))
+  ?s a schema:ContactPoint ;
+     rdf:type ?type ;
+     mu:uuid ?uuid ;
+     schema:contactType ?contactType ;
+     foaf:page ?page .
 }
