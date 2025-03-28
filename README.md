@@ -46,22 +46,22 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose
 5. Run and wait for the mock users to be generated
 
 ```bash
- docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.override.yml up -d mock-bestuurseenheid-generator
+docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.override.yml up -d mock-bestuurseenheid-generator
 ```
 
 6. Update `docker-compose.override.yml`
 
 ```yml
-services:
-  # op-public-consumer:
-  #   environment:
-  #     DCR_LANDING_ZONE_DATABASE: "virtuoso" # Only on first run
-  #     DCR_REMAPPING_DATABASE: "virtuoso" # Only on first run
-  #     DCR_DISABLE_INITIAL_SYNC: "false" # Only on first run
-  #     DCR_DISABLE_DELTA_INGEST: "true" # Only on first run
-  # mock-bestuurseenheid-generator:
-  #   environment:
-  #     MU_SPARQL_ENDPOINT: "http://virtuoso:8890/sparql" # Only on first run
+# services:
+#   op-public-consumer:
+#     environment:
+#       DCR_LANDING_ZONE_DATABASE: "virtuoso" # Only on first run
+#       DCR_REMAPPING_DATABASE: "virtuoso" # Only on first run
+#       DCR_DISABLE_INITIAL_SYNC: "false" # Only on first run
+#       DCR_DISABLE_DELTA_INGEST: "true" # Only on first run
+#   mock-bestuurseenheid-generator:
+#     environment:
+#       MU_SPARQL_ENDPOINT: "http://virtuoso:8890/sparql" # Only on first run
 ```
 
 7. Start the (complete) application
