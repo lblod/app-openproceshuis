@@ -52,9 +52,10 @@
 (supply-allowed-group "shared-processes-reader"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
           SELECT DISTINCT ?session_group WHERE {
-              <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
-                           ext:sessionRole \"Test-SharedProcessesReader\" .
+            <SESSION_ID> ext:sessionGroup ?session_group.
+            ?session_group mu:uuid ?uuid.
           }")
 
 (supply-allowed-group "organization-processes-editor"
@@ -104,7 +105,7 @@
        
 (grant (read)
        :to-graph shared
-       :for-allowed-group "public")
+       :for-allowed-group "shared-processes-reader")
 
 (grant (read)
        :to-graph job
