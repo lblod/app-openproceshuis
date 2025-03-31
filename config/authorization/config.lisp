@@ -53,7 +53,16 @@
 
 (supply-allowed-group "public")
 
-(supply-allowed-group "org"
+(supply-allowed-group "shared-processes-reader"
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+          SELECT DISTINCT ?session_group WHERE {
+            <SESSION_ID> ext:sessionGroup ?session_group.
+            ?session_group mu:uuid ?uuid.
+          }")
+
+(supply-allowed-group "organization-processes-editor"
   :parameters ("session_group")
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
@@ -67,14 +76,19 @@
             }
           }")
 
-(supply-allowed-group "authenticated"
+(supply-allowed-group "shared-processes-editor"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
-          SELECT DISTINCT ?session_group ?session_role WHERE {
-            <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
-                         ext:sessionRole ?session_role.
+          SELECT DISTINCT ?session_group WHERE {
+            {
+              <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
+                           ext:sessionRole \"LoketLB-OpenProcesHuisGebruiker\".
+            } UNION {
+              <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
+                           ext:originalSessionRole \"LoketLB-OpenProcesHuisGebruiker\".
+            }
           }")
-
+          
 (supply-allowed-group "admin"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           SELECT DISTINCT ?session_role WHERE {
@@ -95,7 +109,7 @@
        
 (grant (read)
        :to-graph shared
-       :for-allowed-group "public")
+       :for-allowed-group "shared-processes-reader")
 
 (grant (read)
        :to-graph job
@@ -107,11 +121,11 @@
 
 (grant (read write)
        :to-graph organizations
-       :for-allowed-group "org")
+       :for-allowed-group "organization-processes-editor")
 
 (grant (read write)
        :to-graph shared
-       :for-allowed-group "authenticated")
+       :for-allowed-group "shared-processes-editor")
 
 (grant (read write)
        :to-graph sessions
