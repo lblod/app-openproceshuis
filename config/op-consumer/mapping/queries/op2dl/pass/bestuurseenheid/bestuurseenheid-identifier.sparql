@@ -1,4 +1,3 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
 PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 PREFIX dct: <http://purl.org/dc/terms/>
@@ -10,9 +9,8 @@ CONSTRUCT {
   ?s dct:identifier ?identifier .
 } WHERE {
   ?s a besluit:Bestuurseenheid ;
-     rdf:type ?type ;
      mu:uuid ?uuid ;
-     skos:prefLabel ?label ;
-     org:classification ?classification ;
+     skos:prefLabel ?label ; # required
+     org:classification ?classification ; # required
      dct:identifier ?identifier .
 }

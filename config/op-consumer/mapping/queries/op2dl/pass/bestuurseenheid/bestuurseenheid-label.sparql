@@ -5,11 +5,10 @@ PREFIX org: <http://www.w3.org/ns/org#>
 
 
 CONSTRUCT {
-  ?s org:hasPrimarySite ?site .
+  ?s skos:prefLabel ?label  .
 } WHERE {
   ?s a besluit:Bestuurseenheid ;
      mu:uuid ?uuid ;
      skos:prefLabel ?label ; # required
      org:classification ?classification ; # required
-     org:hasPrimarySite ?site .
 }

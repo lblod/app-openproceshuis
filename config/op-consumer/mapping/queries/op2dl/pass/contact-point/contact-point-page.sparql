@@ -1,4 +1,3 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
 PREFIX schema: <http://schema.org/>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
@@ -8,8 +7,7 @@ CONSTRUCT {
   ?s foaf:page ?page .
 } WHERE {
   ?s a schema:ContactPoint ;
-     rdf:type ?type ;
      mu:uuid ?uuid ;
-     schema:contactType ?contactType ;
+     schema:contactType ?contactType ; # required
      foaf:page ?page .
 }
