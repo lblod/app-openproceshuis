@@ -17,6 +17,12 @@
 (in-package :server)
 (setf *log-incoming-requests-p* t)
 
+;;;;;;;;;;;;;;;;
+;;; Prefix types
+
+(in-package :type-cache)
+(add-type-for-prefix "http://mu.semte.ch/sessions/" "http://mu.semte.ch/vocabularies/session/Session")
+
 ;;;;;;;;;;;;;;;;;
 ;;; Access rights
 
