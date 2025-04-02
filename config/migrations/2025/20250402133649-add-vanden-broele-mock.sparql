@@ -8,7 +8,7 @@ INSERT DATA {
   GRAPH <http://mu.semte.ch/graphs/organizations/973a571a-2944-482f-88f2-d0491aca9859> {
     <http://data.lblod.info/id/persoon/4e273f59-b963-4c96-a157-f540899a3f4c> a foaf:Person ;
       mu:uuid "4e273f59-b963-4c96-a157-f540899a3f4c" ;
-      foaf:firstName "Vanden Broele" ;
+      foaf:firstName "Leverancier" ;
       foaf:familyName "Vanden Broele" ;
       foaf:member <http://data.lblod.info/id/bestuurseenheden/973a571a-2944-482f-88f2-d0491aca9859> ;
       foaf:account <http://data.lblod.info/id/account/cd7c5e03-3532-4416-a11d-7e6f78641439> .
