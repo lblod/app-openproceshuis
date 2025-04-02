@@ -78,6 +78,20 @@
             }
           }")
 
+(supply-allowed-group "supplier"
+  :parameters ("session_group")
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          SELECT DISTINCT ?session_group WHERE {
+            {
+              <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
+                           ext:sessionRole \"LoketLB-OpenProcesHuisAfnemer\".
+            } UNION {
+              <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
+                           ext:originalSessionRole \"LoketLB-OpenProcesHuisAfnemer\".
+            }
+          }")
+
 (supply-allowed-group "shared-processes-editor"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
@@ -90,6 +104,7 @@
                            ext:originalSessionRole \"LoketLB-OpenProcesHuisGebruiker\".
             }
           }")
+
           
 (supply-allowed-group "admin"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -124,6 +139,10 @@
 (grant (read write)
        :to-graph organizations
        :for-allowed-group "organization-processes-editor")
+
+(grant (read write)
+       :to-graph organizations
+       :for-allowed-group "supplier")
 
 (grant (read write)
        :to-graph shared
