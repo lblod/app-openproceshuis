@@ -157,7 +157,7 @@
        :to-graph shared
        :for-allowed-group "shared-processes-editor")
 
-(grant (read write) ;; TODO: disallow shared process editors from writing icr data
+(grant (read write)
        :to-graph icr
        :for-allowed-group "icr-editor")
 
