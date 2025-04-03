@@ -73,12 +73,10 @@
               <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
                            ext:sessionRole ?role.
               FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
-              FILTER(?vvsgIdentifier IN (\"OVO001989\", \"0451857573\"))
             } UNION {
               <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
                            ext:originalSessionRole ?role.
               FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
-              FILTER(?vvsgIdentifier IN (\"OVO001989\", \"0451857573\"))
             }
           }")
 
@@ -89,14 +87,11 @@
             {
               <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
                            ext:sessionRole ?role;
-                           dct:identifier ?vvsgIdentifier.
               FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
-              FILTER(?vvsgIdentifier IN (\"OVO001989\", \"0451857573\"))
             } UNION {
               <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
                            ext:originalSessionRole ?role.
               FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
-              FILTER(?vvsgIdentifier IN (\"OVO001989\", \"0451857573\"))
             }
           }")
 
