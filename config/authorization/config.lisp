@@ -47,7 +47,11 @@
   :bboext "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
-  :dpv "https://w3id.org/dpv#")
+  :dpv "https://w3id.org/dpv#"
+  :icr "http://lblod.data.gift/vocabularies/informationclassification/"
+  :dct "http://purl.org/dc/terms/"
+  :adms "http://www.w3.org/ns/adms#"
+  :prov "http://www.w3.org/ns/prov#")
 
 
 ;;;;;;;;;;;;;
@@ -132,6 +136,10 @@
        :for-allowed-group "shared-processes-reader")
 
 (grant (read)
+       :to-graph icr
+       :for-allowed-group "shared-processes-reader")
+
+(grant (read)
        :to-graph job
        :for-allowed-group "public")
 
@@ -145,6 +153,10 @@
 
 (grant (read write)
        :to-graph shared
+       :for-allowed-group "shared-processes-editor")
+
+(grant (read write) ;; TODO: disallow shared process editors from writing icr data
+       :to-graph icr
        :for-allowed-group "shared-processes-editor")
 
 (grant (read write)
@@ -200,11 +212,20 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("dpv:Process" x> "ext:hasStatistics")
+  ("dpv:Process" -> "dct:title")
+  ("dpv:Process" -> "dct:description")
+  ("dpv:Process" -> "schema:email")
+  ("dpv:Process" -> "dct:created")
+  ("dpv:Process" -> "dct:modified")
+  ("dpv:Process" -> "adms:status")
+  ("dpv:Process" -> "dct:publisher")
+  ("dpv:Process" -> "prov:derivation")
+  ("dpv:Process" -> "icr:isRelevantForAdministrativeUnit")
+  ("dpv:Process" -> "prov:wasInfluencedBy")
+  ("dpv:Process" -> "prov:usedBy")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _)
-  ("skos:Concept" -> _))
+  ("ipdc:ConceptualPublicService" -> _))
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
   ;; bpmn-element-type
@@ -248,11 +269,20 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("dpv:Process" x> "ext:hasStatistics")
+  ("dpv:Process" -> "dct:title")
+  ("dpv:Process" -> "dct:description")
+  ("dpv:Process" -> "schema:email")
+  ("dpv:Process" -> "dct:created")
+  ("dpv:Process" -> "dct:modified")
+  ("dpv:Process" -> "adms:status")
+  ("dpv:Process" -> "dct:publisher")
+  ("dpv:Process" -> "prov:derivation")
+  ("dpv:Process" -> "icr:isRelevantForAdministrativeUnit")
+  ("dpv:Process" -> "prov:wasInfluencedBy")
+  ("dpv:Process" -> "prov:usedBy")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _)
-  ("skos:Concept" -> _))
+  ("ipdc:ConceptualPublicService" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("besluit:Bestuurseenheid" -> _)
@@ -266,6 +296,19 @@
   ("organisatie:BestuurseenheidClassificatieCode" -> _)
   ("organisatie:OrganisatieStatusCode" -> _)
   ("skos:ConceptScheme" -> _))
+
+(define-graph icr ("http://mu.semte.ch/graphs/information-classification")
+  ("dpv:Process" -> "icr:confidentialityScore")
+  ("dpv:Process" -> "icr:integrityScore")
+  ("dpv:Process" -> "icr:availabilityScore")
+  ("dpv:Process" -> "icr:containsPersonalData")
+  ("dpv:Process" -> "icr:containsProfessionalData")
+  ("dpv:Process" -> "icr:containsSensitivePersonalData")
+  ("dpv:Process" -> "icr:additionalInformation")
+  ("dpv:Process" -> "icr:hasControlMeasure")
+  ("dpv:Process" -> "icr:isBlueprint")
+  ("dpv:Process" -> "icr:hasInformationAsset")
+  ("skos:Concept" -> _))
 
 (define-graph job ("http://mu.semte.ch/graphs/bpmn-job")
   ("cogs:Job" -> _))
