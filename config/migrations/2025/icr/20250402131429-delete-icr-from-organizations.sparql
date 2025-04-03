@@ -35,6 +35,7 @@ WHERE {
     icr:containsSensitivePersonalData,
     icr:additionalInformation,
     icr:hasControlMeasure,
+    icr:hasInformationAsset,
     icr:isBlueprint
   ))
 }
