@@ -75,10 +75,12 @@
           SELECT DISTINCT ?session_group WHERE {
             {
               <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
-                           ext:sessionRole \"LoketLB-OpenProcesHuisGebruiker\".
+                           ext:sessionRole ?role.
+              FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             } UNION {
               <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
-                           ext:originalSessionRole \"LoketLB-OpenProcesHuisGebruiker\".
+                           ext:originalSessionRole ?role.
+              FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             }
           }")
 
@@ -88,12 +90,15 @@
           SELECT DISTINCT ?session_group WHERE {
             {
               <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
-                           ext:sessionRole \"LoketLB-OpenProcesHuisGebruiker\".
+                           ext:sessionRole ?role.
+              FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             } UNION {
               <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
-                           ext:originalSessionRole \"LoketLB-OpenProcesHuisGebruiker\".
+                           ext:originalSessionRole ?role.
+              FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             }
           }")
+
           
 (supply-allowed-group "admin"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
