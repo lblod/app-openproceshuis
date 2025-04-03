@@ -86,7 +86,7 @@
           SELECT DISTINCT ?session_group WHERE {
             {
               <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
-                           ext:sessionRole ?role;
+                           ext:sessionRole ?role.
               FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             } UNION {
               <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
