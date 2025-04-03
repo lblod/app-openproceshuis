@@ -90,6 +90,24 @@
                            ext:originalSessionRole \"LoketLB-OpenProcesHuisGebruiker\".
             }
           }")
+
+(supply-allowed-group "icr-editor" ;; Agentschap Binnenlands Bestuur or Digitaal Vlaanderen
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          PREFIX dct: <http://purl.org/dc/terms/>
+          SELECT DISTINCT ?session_group_id WHERE {
+            {
+              <SESSION_ID> ext:sessionGroup ?session_group .
+              ?session_group mu:uuid ?session_group ;
+                             dct:identifier ?ovo .
+              FILTER(?ovo IN (\"OVO001835\", \"OVO002949\"))
+            } UNION {
+              <SESSION_ID> ext:originalSessionGroup ?session_group .
+              ?session_group mu:uuid ?session_group ;
+                             dct:identifier ?ovo .
+              FILTER(?ovo IN (\"OVO001835\", \"OVO002949\"))
+            }
+          }")
           
 (supply-allowed-group "admin"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
