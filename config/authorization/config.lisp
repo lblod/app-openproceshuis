@@ -110,7 +110,6 @@
           }
           LIMIT 1")
 
-
 (grant (read)
        :to-graph public
        :for-allowed-group "public")
