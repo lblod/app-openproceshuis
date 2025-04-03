@@ -26,7 +26,7 @@ services:
     logging: *default-logging
     restart: always
   identifier:
-    image: semtech/mu-identifier:1.10.1
+    image: semtech/mu-identifier:1.10.3
     labels:
       - "logging=true"
     logging: *default-logging
@@ -50,7 +50,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    image: semtech/sparql-parser:0.0.13
+    image: semtech/sparql-parser:0.0.14
     volumes:
       - ./config/authorization:/config
       - ./data/authorization:/data
@@ -81,7 +81,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    image: semtech/mu-cl-resources:feature-unions-for-optional-deletes
+    image: semtech/mu-cl-resources:1.27.0
     environment:
       CACHE_CLEAR_PATH: "http://cache/.mu/clear-keys"
     links:
@@ -98,7 +98,7 @@ services:
     restart: always
     logging: *default-logging
   deltanotifier:
-    image: semtech/mu-delta-notifier:0.2.0
+    image: semtech/mu-delta-notifier:0.4.0
     volumes:
       - ./config/delta:/config
     labels:
@@ -186,7 +186,7 @@ services:
   # ACM/IDM
   ################################################################################
   login:
-    image: lblod/acmidm-login-service:0.9.2
+    image: lblod/acmidm-login-service:0.12.0
     environment:
       MU_APPLICATION_AUTH_USERID_CLAIM: "vo_id"
       MU_APPLICATION_AUTH_ROLE_CLAIM: "abb_openproceshuis_rol_3d"
