@@ -105,6 +105,24 @@
           }
           LIMIT 1")
 
+(supply-allowed-group "vvsg-editor"
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          PREFIX dct: <http://purl.org/dc/terms/>
+          SELECT DISTINCT ?session_group_id WHERE {
+            {
+              <SESSION_ID> ext:sessionGroup ?session_group .
+              ?session_group mu:uuid ?session_group ;
+                             dct:identifier ?ovo .
+              FILTER(?ovo IN (\"OVO001989\"))
+            } UNION {
+              <SESSION_ID> ext:originalSessionGroup ?session_group .
+              ?session_group mu:uuid ?session_group ;
+                             dct:identifier ?ovo .
+              FILTER(?ovo IN (\"OVO001989\"))
+            }
+          }")
+
 (grant (read)
        :to-graph public
        :for-allowed-group "public")
@@ -126,8 +144,16 @@
        :for-allowed-group "organization-processes-editor")
 
 (grant (read write)
+       :to-graph organizations
+       :for-allowed-group "vvsg-editor")
+
+(grant (read write)
        :to-graph shared
        :for-allowed-group "shared-processes-editor")
+
+(grant (read write)
+       :to-graph shared
+       :for-allowed-group "vvsg-editor")
 
 (grant (read write)
        :to-graph sessions
