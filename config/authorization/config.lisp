@@ -101,13 +101,15 @@
           PREFIX dct: <http://purl.org/dc/terms/>
           SELECT DISTINCT ?session_group_id WHERE {
             {
-              <SESSION_ID> ext:sessionGroup ?session_group .
-              ?session_group mu:uuid ?session_group ;
+              <SESSION_ID> ext:sessionGroup ?session_group ;
+                           ext:sessionRole \"LoketLB-OpenProcesHuisGebruiker\" .
+              ?session_group mu:uuid ?session_group_id ;
                              dct:identifier ?ovo .
               FILTER(?ovo IN (\"OVO001835\", \"OVO002949\"))
             } UNION {
-              <SESSION_ID> ext:originalSessionGroup ?session_group .
-              ?session_group mu:uuid ?session_group ;
+              <SESSION_ID> ext:originalSessionGroup ?session_group ;
+                           ext:originalSessionRole \"LoketLB-OpenProcesHuisGebruiker\" .
+              ?session_group mu:uuid ?session_group_id ;
                              dct:identifier ?ovo .
               FILTER(?ovo IN (\"OVO001835\", \"OVO002949\"))
             }
@@ -154,6 +156,10 @@
 (grant (read write)
        :to-graph shared
        :for-allowed-group "shared-processes-editor")
+
+(grant (read write) ;; TODO: disallow shared process editors from writing icr data
+       :to-graph icr
+       :for-allowed-group "icr-editor")
 
 (grant (read write) ;; TODO: disallow shared process editors from writing icr data
        :to-graph icr
