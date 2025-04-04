@@ -1,0 +1,2 @@
+<http://data.lblod.info/id/bestuurseenheden/61b9383b-31bc-463b-b6d9-8508e26dcda6>
+	<http://www.w3.org/ns/org#classification>	<http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/4d79a18a-7a46-4b03-8712-3bcf3467787b> .
