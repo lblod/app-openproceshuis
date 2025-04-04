@@ -1,0 +1,14 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX schema: <http://schema.org/>
+
+
+CONSTRUCT {
+  ?s rdf:type ?type ;
+     mu:uuid ?uuid .
+} WHERE {
+  ?s a schema:ContactPoint ;
+     rdf:type ?type ;
+     mu:uuid ?uuid ;
+     schema:contactType ?contactType . # required
+}

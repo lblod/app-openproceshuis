@@ -1,0 +1,14 @@
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX org: <http://www.w3.org/ns/org#>
+
+
+CONSTRUCT {
+  ?s org:classification ?classification .
+} WHERE {
+  ?s a besluit:Bestuurseenheid ;
+     mu:uuid ?uuid ;
+     skos:prefLabel ?label ; # required
+     org:classification ?classification . # required
+}

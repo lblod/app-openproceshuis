@@ -1,0 +1,12 @@
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX schema: <http://schema.org/>
+
+
+CONSTRUCT {
+  ?s schema:telephone ?telephone .
+} WHERE {
+  ?s a schema:ContactPoint ;
+     mu:uuid ?uuid ;
+     schema:contactType ?contactType ; # required
+     schema:telephone ?telephone .
+}
