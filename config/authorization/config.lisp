@@ -64,19 +64,26 @@
           }")
 
 (supply-allowed-group "organization-processes-editor"
-  :parameters ("session_group")
+  :parameters ("graph_extension")
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
-          SELECT DISTINCT ?session_group WHERE {
+          PREFIX dct: <http://purl.org/dc/terms/>
+          SELECT DISTINCT ?graph_extension WHERE {
             {
-              <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
-                           ext:sessionRole ?role.
-              FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
+              <SESSION_ID> ext:sessionGroup ?group ;
+                          ext:sessionRole ?role .
+              ?group mu:uuid ?group_id ;
+                     dct:identifier ?identifier .
             } UNION {
-              <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
-                           ext:originalSessionRole ?role.
-              FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
+              <SESSION_ID> ext:originalSessionGroup ?group ;
+                          ext:originalSessionRole ?role .
+              ?group mu:uuid ?group_id ;
+                     dct:identifier ?identifier .
             }
+            FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
+            BIND(IF(?identifier IN (\"OVO001835\", \"OVO002949\"),
+                    \"agentschap-binnenlands-bestuur-digitaal-vlaanderen\",
+                    ?group_id) AS ?graph_extension)
           }")
 
 (supply-allowed-group "shared-processes-editor"
