@@ -1,0 +1,15 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX organisatie: <http://lblod.data.gift/vocabularies/organisatie/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+CONSTRUCT {
+  ?s rdf:type ?type ;
+     mu:uuid ?uuid .
+} WHERE {
+  ?s a organisatie:BestuurseenheidClassificatieCode ;
+     rdf:type ?type ;
+     mu:uuid ?uuid ;
+     skos:prefLabel ?label . # required
+}

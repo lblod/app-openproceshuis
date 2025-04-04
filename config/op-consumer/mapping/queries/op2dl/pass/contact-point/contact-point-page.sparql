@@ -1,0 +1,13 @@
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX schema: <http://schema.org/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+
+CONSTRUCT {
+  ?s foaf:page ?page .
+} WHERE {
+  ?s a schema:ContactPoint ;
+     mu:uuid ?uuid ;
+     schema:contactType ?contactType ; # required
+     foaf:page ?page .
+}

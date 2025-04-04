@@ -1,0 +1,12 @@
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX org: <http://www.w3.org/ns/org#>
+PREFIX ere: <http://data.lblod.info/vocabularies/erediensten/>
+
+
+CONSTRUCT {
+  ?s ere:vestigingstype ?type .
+} WHERE {
+  ?s a org:Site ;
+     mu:uuid ?uuid ;
+     ere:vestigingstype ?type .
+}

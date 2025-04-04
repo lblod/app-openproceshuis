@@ -1,0 +1,17 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX org: <http://www.w3.org/ns/org#>
+
+
+CONSTRUCT {
+  ?s rdf:type ?type ;
+     mu:uuid ?uuid .
+} WHERE {
+  ?s a besluit:Bestuurseenheid ;
+     rdf:type ?type ;
+     mu:uuid ?uuid ;
+     skos:prefLabel ?label ; # required
+     org:classification ?classification . # required
+}

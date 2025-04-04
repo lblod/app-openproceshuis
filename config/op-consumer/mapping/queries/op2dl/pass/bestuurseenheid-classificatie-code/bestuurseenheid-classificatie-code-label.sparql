@@ -1,0 +1,12 @@
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX organisatie: <http://lblod.data.gift/vocabularies/organisatie/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+CONSTRUCT {
+  ?s skos:prefLabel ?label .
+} WHERE {
+  ?s a organisatie:BestuurseenheidClassificatieCode ;
+     mu:uuid ?uuid ;
+     skos:prefLabel ?label . # required
+}
