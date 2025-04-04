@@ -47,12 +47,7 @@
   :bboext "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
-  :dpv "https://w3id.org/dpv#"
-  :icr "http://lblod.data.gift/vocabularies/informationclassification/"
-  :dct "http://purl.org/dc/terms/"
-  :adms "http://www.w3.org/ns/adms#"
-  :prov "http://www.w3.org/ns/prov#")
-
+  :dpv "https://w3id.org/dpv#")
 
 ;;;;;;;;;;;;;
 ;;; User roles
@@ -98,26 +93,6 @@
               FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             }
           }")
-
-(supply-allowed-group "icr-editor" ;; Agentschap Binnenlands Bestuur or Digitaal Vlaanderen
-  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
-          PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
-          PREFIX dct: <http://purl.org/dc/terms/>
-          SELECT DISTINCT ?session_group_id WHERE {
-            {
-              <SESSION_ID> ext:sessionGroup ?session_group ;
-                           ext:sessionRole \"LoketLB-OpenProcesHuisGebruiker\" .
-              ?session_group mu:uuid ?session_group_id ;
-                             dct:identifier ?ovo .
-              FILTER(?ovo IN (\"OVO001835\", \"OVO002949\"))
-            } UNION {
-              <SESSION_ID> ext:originalSessionGroup ?session_group ;
-                           ext:originalSessionRole \"LoketLB-OpenProcesHuisGebruiker\" .
-              ?session_group mu:uuid ?session_group_id ;
-                             dct:identifier ?ovo .
-              FILTER(?ovo IN (\"OVO001835\", \"OVO002949\"))
-            }
-          }")
           
 (supply-allowed-group "admin"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -142,10 +117,6 @@
        :for-allowed-group "shared-processes-reader")
 
 (grant (read)
-       :to-graph icr
-       :for-allowed-group "shared-processes-reader")
-
-(grant (read)
        :to-graph job
        :for-allowed-group "public")
 
@@ -159,14 +130,6 @@
 
 (grant (read write)
        :to-graph shared
-       :for-allowed-group "shared-processes-editor")
-
-(grant (read write)
-       :to-graph icr
-       :for-allowed-group "icr-editor")
-
-(grant (read write) ;; TODO: disallow shared process editors from writing icr data
-       :to-graph icr
        :for-allowed-group "shared-processes-editor")
 
 (grant (read write)
@@ -222,20 +185,11 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("dpv:Process" -> "dct:title")
-  ("dpv:Process" -> "dct:description")
-  ("dpv:Process" -> "schema:email")
-  ("dpv:Process" -> "dct:created")
-  ("dpv:Process" -> "dct:modified")
-  ("dpv:Process" -> "adms:status")
-  ("dpv:Process" -> "dct:publisher")
-  ("dpv:Process" -> "prov:derivation")
-  ("dpv:Process" -> "icr:isRelevantForAdministrativeUnit")
-  ("dpv:Process" -> "prov:wasInfluencedBy")
-  ("dpv:Process" -> "prov:usedBy")
+  ("dpv:Process" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _))
+  ("ipdc:ConceptualPublicService" -> _)
+  ("skos:Concept" -> _))
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
   ;; bpmn-element-type
@@ -279,20 +233,11 @@
   ("bboext:LaneSet" -> _)
   ("bboext:Participant" -> _)
   ;; process-type
-  ("dpv:Process" -> "dct:title")
-  ("dpv:Process" -> "dct:description")
-  ("dpv:Process" -> "schema:email")
-  ("dpv:Process" -> "dct:created")
-  ("dpv:Process" -> "dct:modified")
-  ("dpv:Process" -> "adms:status")
-  ("dpv:Process" -> "dct:publisher")
-  ("dpv:Process" -> "prov:derivation")
-  ("dpv:Process" -> "icr:isRelevantForAdministrativeUnit")
-  ("dpv:Process" -> "prov:wasInfluencedBy")
-  ("dpv:Process" -> "prov:usedBy")
+  ("dpv:Process" x> "ext:hasStatistics")
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _))
+  ("ipdc:ConceptualPublicService" -> _)
+  ("skos:Concept" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("besluit:Bestuurseenheid" -> _)
@@ -306,19 +251,6 @@
   ("organisatie:BestuurseenheidClassificatieCode" -> _)
   ("organisatie:OrganisatieStatusCode" -> _)
   ("skos:ConceptScheme" -> _))
-
-(define-graph icr ("http://mu.semte.ch/graphs/information-classification")
-  ("dpv:Process" -> "icr:confidentialityScore")
-  ("dpv:Process" -> "icr:integrityScore")
-  ("dpv:Process" -> "icr:availabilityScore")
-  ("dpv:Process" -> "icr:containsPersonalData")
-  ("dpv:Process" -> "icr:containsProfessionalData")
-  ("dpv:Process" -> "icr:containsSensitivePersonalData")
-  ("dpv:Process" -> "icr:additionalInformation")
-  ("dpv:Process" -> "icr:hasControlMeasure")
-  ("dpv:Process" -> "icr:isBlueprint")
-  ("dpv:Process" -> "icr:hasInformationAsset")
-  ("skos:Concept" -> _))
 
 (define-graph job ("http://mu.semte.ch/graphs/bpmn-job")
   ("cogs:Job" -> _))
