@@ -1,0 +1,20 @@
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mu:<http://mu.semte.ch/vocabularies/core/>
+PREFIX ext:<http://mu.semte.ch/vocabularies/ext/>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/organizations/b743dd2a-d552-4268-b1f9-eecfbf1a5cb2> {
+    <http://data.lblod.info/id/persoon/9246412b-7144-4ce0-849c-f9578c3f0e59> a foaf:Person ;
+      mu:uuid "9246412b-7144-4ce0-849c-f9578c3f0e59" ;
+      foaf:firstName "Vereniging van Vlaamse Steden en Gemeenten" ;
+      foaf:familyName "Mock" ;
+      foaf:member <http://data.lblod.info/id/bestuurseenheden/b743dd2a-d552-4268-b1f9-eecfbf1a5cb2> ;
+      foaf:account <http://data.lblod.info/id/account/56b1d676-9289-4ac8-8bf8-5d285e64a11f> .
+    <http://data.lblod.info/id/account/56b1d676-9289-4ac8-8bf8-5d285e64a11f> a foaf:OnlineAccount ;
+      mu:uuid "56b1d676-9289-4ac8-8bf8-5d285e64a11f" ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service>;
+      ext:sessionRole "LoketLB-OpenProcesHuisGebruiker".
+  }
+}
