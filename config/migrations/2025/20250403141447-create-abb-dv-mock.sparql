@@ -1,0 +1,62 @@
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mu:<http://mu.semte.ch/vocabularies/core/>
+PREFIX ext:<http://mu.semte.ch/vocabularies/ext/>
+
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    <http://data.lblod.info/id/persoon/a0488c9d-b91a-4ecf-8f33-0280cd8548fc> a foaf:Person ;
+      mu:uuid "a0488c9d-b91a-4ecf-8f33-0280cd8548fc" ;
+      foaf:firstName "Agentschap Binnenlands Bestuur" ;
+      foaf:familyName "Agentschap Binnenlands Bestuur (mock)" ;
+      foaf:member <http://data.lblod.info/id/bestuurseenheden/3b29ce9c-47d4-4245-8dca-1e42ed03bc04> ;
+      foaf:account <http://data.lblod.info/id/account/17c52b4f-1b0e-4d22-be0f-d9e9cda21fe3> .
+    <http://data.lblod.info/id/account/17c52b4f-1b0e-4d22-be0f-d9e9cda21fe3> a foaf:OnlineAccount ;
+      mu:uuid "17c52b4f-1b0e-4d22-be0f-d9e9cda21fe3" ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service>;
+      ext:sessionRole "LoketLB-OpenProcesHuisGebruiker".
+
+    <http://data.lblod.info/id/persoon/56c7ada8-d031-46b8-8704-f3bb77f5aea0> a foaf:Person ;
+      mu:uuid "56c7ada8-d031-46b8-8704-f3bb77f5aea0" ;
+      foaf:firstName "Digitaal Vlaanderen" ;
+      foaf:familyName "Digitaal Vlaanderen (mock)" ;
+      foaf:member <http://data.lblod.info/id/bestuurseenheden/61b9383b-31bc-463b-b6d9-8508e26dcda6> ;
+      foaf:account <http://data.lblod.info/id/account/4034d2d0-7044-42c7-a102-4ec1052806ac> .
+    <http://data.lblod.info/id/account/4034d2d0-7044-42c7-a102-4ec1052806ac> a foaf:OnlineAccount ;
+      mu:uuid "4034d2d0-7044-42c7-a102-4ec1052806ac" ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service>;
+      ext:sessionRole "LoketLB-OpenProcesHuisGebruiker".
+  }
+};
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/organizations/3b29ce9c-47d4-4245-8dca-1e42ed03bc04> {
+    <http://data.lblod.info/id/persoon/a0488c9d-b91a-4ecf-8f33-0280cd8548fc> a foaf:Person ;
+      mu:uuid "a0488c9d-b91a-4ecf-8f33-0280cd8548fc" ;
+      foaf:firstName "Agentschap Binnenlands Bestuur" ;
+      foaf:familyName "Agentschap Binnenlands Bestuur (mock)" ;
+      foaf:member <http://data.lblod.info/id/bestuurseenheden/3b29ce9c-47d4-4245-8dca-1e42ed03bc04> ;
+      foaf:account <http://data.lblod.info/id/account/17c52b4f-1b0e-4d22-be0f-d9e9cda21fe3> .
+    <http://data.lblod.info/id/account/17c52b4f-1b0e-4d22-be0f-d9e9cda21fe3> a foaf:OnlineAccount ;
+      mu:uuid "17c52b4f-1b0e-4d22-be0f-d9e9cda21fe3" ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service>;
+      ext:sessionRole "LoketLB-OpenProcesHuisGebruiker".
+  }
+};
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/organizations/61b9383b-31bc-463b-b6d9-8508e26dcda6> {
+    <http://data.lblod.info/id/persoon/56c7ada8-d031-46b8-8704-f3bb77f5aea0> a foaf:Person ;
+      mu:uuid "56c7ada8-d031-46b8-8704-f3bb77f5aea0" ;
+      foaf:firstName "Digitaal Vlaanderen" ;
+      foaf:familyName "Digitaal Vlaanderen (mock)" ;
+      foaf:member <http://data.lblod.info/id/bestuurseenheden/61b9383b-31bc-463b-b6d9-8508e26dcda6> ;
+      foaf:account <http://data.lblod.info/id/account/4034d2d0-7044-42c7-a102-4ec1052806ac> .
+    <http://data.lblod.info/id/account/4034d2d0-7044-42c7-a102-4ec1052806ac> a foaf:OnlineAccount ;
+      mu:uuid "4034d2d0-7044-42c7-a102-4ec1052806ac" ;
+      foaf:accountServiceHomepage <https://github.com/lblod/mock-login-service>;
+      ext:sessionRole "LoketLB-OpenProcesHuisGebruiker".
+  }
+}

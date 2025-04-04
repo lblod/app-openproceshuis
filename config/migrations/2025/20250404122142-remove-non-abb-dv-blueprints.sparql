@@ -1,0 +1,27 @@
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dpv: <https://w3id.org/dpv#>
+PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
+
+DELETE {
+  GRAPH ?g {
+    ?process icr:isBlueprint "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+  }
+}
+INSERT {
+  GRAPH ?g {
+    ?process icr:isBlueprint "false"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?process a dpv:Process ;
+             dct:publisher ?publisher ;
+             icr:isBlueprint "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+  }
+  FILTER(
+    ?publisher NOT IN (
+      <http://data.lblod.info/id/bestuurseenheden/61b9383b-31bc-463b-b6d9-8508e26dcda6>,
+      <http://data.lblod.info/id/bestuurseenheden/3b29ce9c-47d4-4245-8dca-1e42ed03bc04>
+    )
+  )
+}

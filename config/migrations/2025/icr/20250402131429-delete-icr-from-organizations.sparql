@@ -1,0 +1,41 @@
+PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+
+DELETE {
+  GRAPH ?g {
+    ?process icr:hasInformationAsset ?asset .
+    ?asset skos:prefLabel ?label .
+    ?asset skos:inScheme ?scheme .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?process icr:hasInformationAsset ?asset .
+    OPTIONAL { ?asset skos:prefLabel ?label } .
+    OPTIONAL { ?asset skos:inScheme ?scheme } .
+  }
+  FILTER(STRSTARTS(STR(?g), "http://mu.semte.ch/graphs/organizations/"))
+};
+
+DELETE {
+  GRAPH ?g { ?s ?p ?o }
+}
+WHERE {
+  GRAPH ?g {
+    ?s ?p ?o .
+  }
+  FILTER(STRSTARTS(STR(?g), "http://mu.semte.ch/graphs/organizations/"))
+  FILTER(?p IN (
+    icr:confidentialityScore,
+    icr:integrityScore,
+    icr:availabilityScore,
+    icr:containsPersonalData,
+    icr:containsProfessionalData,
+    icr:containsSensitivePersonalData,
+    icr:additionalInformation,
+    icr:hasControlMeasure,
+    icr:hasInformationAsset,
+    icr:isBlueprint
+  ))
+}
