@@ -1,0 +1,20 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+
+DELETE {
+  GRAPH ?g {
+    ?s ?p ?o .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    { ?s ?p ?o .
+      FILTER (?s = <http://data.lblod.info/id/persoon/a0488c9d-b91a-4ecf-8f33-0280cd8548fc>)
+    }
+    UNION
+    { ?s ?p ?o .
+      FILTER (?s = <http://data.lblod.info/id/account/17c52b4f-1b0e-4d22-be0f-d9e9cda21fe3>)
+    }
+  }
+}
