@@ -1,0 +1,7 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
+
+<http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/4d79a18a-7a46-4b03-8712-3bcf3467787b>
+	rdf:type	<http://lblod.data.gift/vocabularies/organisatie/BestuurseenheidClassificatieCode> , <http://mu.semte.ch/vocabularies/ext/OrganizationClassificationCode> ;
+	skos:prefLabel	"Digitaal Vlaanderen" ;
+	<http://mu.semte.ch/vocabularies/core/uuid>	"4d79a18a-7a46-4b03-8712-3bcf3467787b" .

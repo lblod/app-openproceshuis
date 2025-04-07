@@ -1,0 +1,7 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
+
+<http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/fd4dda91-a6a5-485a-9d49-1378c94a5ff0>
+	rdf:type	<http://lblod.data.gift/vocabularies/organisatie/BestuurseenheidClassificatieCode> , <http://mu.semte.ch/vocabularies/ext/OrganizationClassificationCode> ;
+	skos:prefLabel	"Vereniging van Vlaamse Steden en Gemeenten" ;
+	<http://mu.semte.ch/vocabularies/core/uuid>	"fd4dda91-a6a5-485a-9d49-1378c94a5ff0" .
