@@ -1,0 +1,7 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
+
+<http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/c4483583-f9fe-4d2f-96f4-47ddb3440d71>
+	rdf:type	<http://lblod.data.gift/vocabularies/organisatie/BestuurseenheidClassificatieCode> , <http://mu.semte.ch/vocabularies/ext/OrganizationClassificationCode> ;
+	skos:prefLabel	"Leverancier" ;
+	<http://mu.semte.ch/vocabularies/core/uuid>	"c4483583-f9fe-4d2f-96f4-47ddb3440d71" .
