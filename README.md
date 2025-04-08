@@ -27,6 +27,7 @@ services:
       DCR_DISABLE_INITIAL_SYNC: "false" # Only on first run
       DCR_DISABLE_DELTA_INGEST: "true" # Only on first run
   mock-bestuurseenheid-generator:
+    image: lblod/update-bestuurseenheid-mock-login-service:0.5.0
     environment:
       MU_SPARQL_ENDPOINT: "http://virtuoso:8890/sparql" # Only on first run
 ```
