@@ -59,8 +59,7 @@
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
           PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
           SELECT DISTINCT ?session_group WHERE {
-            <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
-            ext:sessionRole ?session_role.
+            <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group.
           }")
 
 (supply-allowed-group "organization-processes-editor"
