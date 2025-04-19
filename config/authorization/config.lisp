@@ -60,7 +60,7 @@
           PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
           SELECT DISTINCT ?session_group WHERE {
             <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
-            ?session_group mu:uuid ?uuid.
+            ext:sessionRole ?session_role.
           }")
 
 (supply-allowed-group "organization-processes-editor"
