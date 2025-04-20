@@ -1,0 +1,20 @@
+PREFIX dpv: <https://w3id.org/dpv#>
+PREFIX fix: <https://w3id.org/dpv>
+
+DELETE {
+    GRAPH ?g {
+        ?s a fix:Process
+    }
+}
+
+INSERT {
+    GRAPH ?g {
+        ?s a dpv:Process
+    }
+}
+
+WHERE {
+    GRAPH ?g {
+        ?s a fix:Process
+    }
+}
