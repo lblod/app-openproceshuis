@@ -18,17 +18,8 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/process-statistics/"
   end
 
-<<<<<<< HEAD
-  match "/bpmn-elements",  %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, [], "http://cache/bpmn-elements/"
-  end
-
-  match "/bpmn-element-types", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, [], "http://cache/bpmn-element-types/"
-=======
   match "/information-assets/*path", %{ accept: [:json], layer: :api } do
     Proxy.forward conn, path, "http://cache/information-assets/"
->>>>>>> 74c751e (Remove mu-search remains (#62))
   end
 
   match "/administrative-unit-classification-codes", %{ accept: [:json], layer: :api } do
