@@ -19,8 +19,9 @@ export default {
       PREFIX dct: <http://purl.org/dc/terms/>
       PREFIX adms: <http://www.w3.org/ns/adms#>
       PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+      PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
 
-      SELECT DISTINCT *
+      SELECT DISTINCT ?groupName ?title ?created ?modified ?status ?processViews ?bpmnDownloads ?pdfDownloads ?svgDownloads ?pngDownloads (GROUP_CONCAT(DISTINCT ?adminUnitLabel; SEPARATOR="; ") AS ?adminUnitLabels)
       WHERE {
         ?group a besluit:Bestuurseenheid ;
                skos:prefLabel ?groupName .
@@ -40,9 +41,14 @@ export default {
           OPTIONAL { ?stats ext:svgDownloads ?svgDownloads }
           OPTIONAL { ?stats ext:pdfDownloads ?pdfDownloads }
         }
+          OPTIONAL {
+                     ?process icr:isRelevantForAdministrativeUnit ?adminUnit .
+          OPTIONAL { ?adminUnit skos:prefLabel ?adminUnitLabel }
+        }
 
 }
-      ORDER BY LCASE(?groupName), LCASE(?title), ?created, ?modified, ?status, ?pdfDownloads, ?svgDownloads, ?pngDownloads, ?bpmnDownloads, ?processViews
+      GROUP BY ?groupName ?title ?created ?modified ?status ?processViews ?bpmnDownloads ?pdfDownloads ?svgDownloads ?pngDownloads
+      ORDER BY LCASE(?groupName) LCASE(?title) ?created
        
     `;
     const queryResponse = await batchedQuery(queryString);
@@ -57,6 +63,7 @@ export default {
         "http://lblod.data.gift/concepts/concept-status/gearchiveerd"
           ? "Ja"
           : "Nee",
+      "Relevant voor type bestuur": process.adminUnitLabels?.value || "",
       "Aantal weergaven": process.processViews?.value,
       "Totaal aantal downloads": String(
         [
@@ -82,6 +89,7 @@ export default {
         "Aangemaakt op",
         "Aangepast op",
         "Gearchiveerd",
+        "Relevant voor type bestuur",
         "Aantal weergaven",
         "Totaal aantal downloads",
         "Aantal downloads (bpmn)",
