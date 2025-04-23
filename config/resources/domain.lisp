@@ -39,7 +39,7 @@
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
                                 :as "information-assets")
               (process :via ,(s-prefix "prov:wasInfluencedBy")
-                                      :as "linked-blueprints"))
+                                      :as "linked-blueprints")
               (group :via ,(s-prefix "prov:usedBy")
                                       :as "users"))
   :resource-base (s-url "http://data.lblod.info/processes/")
