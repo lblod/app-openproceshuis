@@ -46,12 +46,8 @@
   :bbo "https://www.irit.fr/recherches/MELODI/ontologies/BBO#"
   :bboext "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
-<<<<<<< HEAD
-  :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#")
-=======
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
   :dpv "https://w3id.org/dpv#")
->>>>>>> e782b05 (Clean up SPARQL parser configuration (#61))
 
 ;;;;;;;;;;;;;
 ;;; User roles
@@ -251,56 +247,6 @@
   ("skos:Concept" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
-<<<<<<< HEAD
-  ;; bpmn-element-type
-  ("bbo:Activity" -> _)
-  ("bbo:BoundaryEvent" -> _)
-  ("bbo:BusinessRuleTask" -> _)
-  ("bbo:CallableElement" -> _)
-  ("bbo:CatchEvent" -> _)
-  ("bbo:EndEvent" -> _)
-  ("bbo:Error" -> _)
-  ("bbo:ErrorEventDefinition" -> _)
-  ("bbo:Event" -> _)
-  ("bbo:EventDefinition" -> _)
-  ("bbo:ExclusiveGateway" -> _)
-  ("bbo:FlowElement" -> _)
-  ("bbo:FlowElementsContainer" -> _)
-  ("bbo:FlowNode" -> _)
-  ("bbo:Gateway" -> _)
-  ("bbo:InclusiveGateway" -> _)
-  ("bbo:IntermediateThrowEvent" -> _)
-  ("bbo:ManualTask" -> _)
-  ("bbo:MessageEventDefinition" -> _)
-  ("bbo:ParallelGateway" -> _)
-  ("bbo:Process" -> _)
-  ("bbo:Property" -> _)
-  ("bbo:ReceiveTask" -> _)
-  ("bbo:RootElement" -> _)
-  ("bbo:ScriptTask" -> _)
-  ("bbo:SendTask" -> _)
-  ("bbo:SequenceFlow" -> _)
-  ("bbo:ServiceTask" -> _)
-  ("bbo:StartEvent" -> _)
-  ("bbo:SubProcess" -> _)
-  ("bbo:Task" -> _)
-  ("bbo:ThrowEvent" -> _)
-  ("bbo:UserTask" -> _)
-  ("bboext:Collaboration" -> _)
-  ("bboext:DataObject" -> _)
-  ("bboext:DataObjectReference" -> _)
-  ("bboext:Lane" -> _)
-  ("bboext:LaneSet" -> _)
-  ("bboext:Participant" -> _)
-  ;; process-type
-  ("proces:Proces" x> "ext:hasStatistics")
-  ("nfo:FileDataObject" -> _)
-  ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _)
-  ;; public-type
-  ("org:Role" -> _)
-=======
->>>>>>> e782b05 (Clean up SPARQL parser configuration (#61))
   ("besluit:Bestuurseenheid" -> _)
   ("foaf:Person" -> _)
   ("foaf:OnlineAccount" -> _)
