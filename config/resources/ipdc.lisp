@@ -3,6 +3,8 @@
 (define-resource ipdcProduct ()
   :properties `((:name :language-string-set ,(s-prefix "dct:title"))
                 (:product-number :string ,(s-prefix "schema:productID")))
+  :has-many `((process :via ,(s-prefix "cpsv:follows")
+                       :as "processes"))
   :on-path "ipdc-products")
 
 (define-resource ipdcInstance (ipdcProduct)
