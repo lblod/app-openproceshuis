@@ -46,7 +46,6 @@
               (ipdcProduct :via ,(s-prefix "prov:derivation")
                             :as "ipdc-products")
               (administrative-unit-classification-code :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
-<<<<<<< HEAD
                                 :as "relevant-for")
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
                                 :as "information-assets")
@@ -54,10 +53,6 @@
                                       :as "linked-blueprints")
               (group :via ,(s-prefix "prov:usedBy")
                                       :as "users"))
-=======
-                                 :as "relevant-for")
-             )
->>>>>>> 9f114a1 (domain changes - information assets not included)
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
