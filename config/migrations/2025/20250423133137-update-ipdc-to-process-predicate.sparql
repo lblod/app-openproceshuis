@@ -1,0 +1,29 @@
+PREFIX dpv: <https://w3id.org/dpv#>
+PREFIX cpsv: <http://purl.org/vocab/cpsv#>
+PREFIX ipdc: <https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+
+DELETE {
+  GRAPH ?g_relation {
+    ?process prov:derivation ?ipdcProduct .
+  }
+}
+INSERT {
+  GRAPH ?g_relation {
+    ?ipdcProduct cpsv:follows ?process .
+  }
+}
+WHERE {
+  GRAPH ?g_relation {
+    ?process prov:derivation ?ipdcProduct .
+  }
+
+  GRAPH ?g_process {
+    ?process a dpv:Process .
+  }
+
+  GRAPH ?g_product {
+    ?ipdcProduct a ?ipdcProductType .
+    FILTER(?ipdcProductType IN (ipdc:InstancePublicService, ipdc:ConceptualPublicService))
+  }
+}
