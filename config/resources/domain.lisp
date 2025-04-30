@@ -43,16 +43,17 @@
   :has-many `((file :via ,(s-prefix "nie:isPartOf")
                     :inverse t
                     :as "files")
-              (ipdcProduct :via ,(s-prefix "prov:derivation")
-                            :as "ipdc-products")
+              (ipdcProduct :via ,(s-prefix "cpsv:follows")
+                           :inverse t
+                           :as "ipdc-products")
               (administrative-unit-classification-codes :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
                                 :as "relevant-administrative-units")
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
                                 :as "information-assets")
               (process :via ,(s-prefix "prov:wasInfluencedBy")
-                                      :as "linked-blueprints")
+                       :as "linked-blueprints")
               (group :via ,(s-prefix "prov:usedBy")
-                                      :as "users"))
+                     :as "users"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 

@@ -25,3 +25,4 @@
 (add-prefix "ipdc" "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#")
 (add-prefix "icr" "http://lblod.data.gift/vocabularies/informationclassification/")
 (add-prefix "dpv" "https://w3id.org/dpv#")
+(add-prefix "cpsv" "http://purl.org/vocab/cpsv#")
