@@ -46,8 +46,8 @@
               (ipdcProduct :via ,(s-prefix "cpsv:follows")
                            :inverse t
                            :as "ipdc-products")
-              (administrative-unit-classification-code :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
-                                                       :as "relevant-for")
+              (administrative-unit-classification-codes :via ,(s-prefix "icr:isRelevantForAdministrativeUnit")
+                                :as "relevant-administrative-units")
               (informationAsset :via ,(s-prefix "icr:hasInformationAsset")
                                 :as "information-assets")
               (process :via ,(s-prefix "prov:wasInfluencedBy")
