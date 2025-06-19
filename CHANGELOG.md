@@ -1,4 +1,4 @@
-## 2.4.0 (2025-06-18)
+## What's changed
 
 #### :rocket: Enhancement
 
@@ -30,3 +30,102 @@
 - [#64](https://github.com/lblod/app-openproceshuis/pull/64) Upgrade dependencies ([@andreo141](https://github.com/andreo141))
 - [#62](https://github.com/lblod/app-openproceshuis/pull/62) Remove mu-search remains ([@MartijnBogaert](https://github.com/MartijnBogaert))
 - [#61](https://github.com/lblod/app-openproceshuis/pull/61) Clean up SPARQL parser configuration ([@MartijnBogaert](https://github.com/MartijnBogaert))
+
+## Deploy instructions
+
+### 1. Virtuoso upgrade
+
+#### 1. dump nquads
+When upgrading it's recommended (and sometimes required!) to first dump to quads using the dump_nquads procedure:
+
+```sh
+docker compose exec virtuoso isql-v
+SQL> dump_nquads ('dumps', 1, 1000000000, 1);
+```
+#### 2. stop the db
+```sh
+docker compose stop virtuoso
+```
+#### 3. remove old db and related files
+When this has completed move the dumps folder to the toLoad folder. Make sure to remove the following files:
+
+`.data_loaded`
+`.dba_pwd_set`
+`virtuoso.db`
+`virtuoso.trx`
+`virtuoso.pxa`
+`virtuoso-temp.db`
+```sh
+mv data/db/dumps/* data/db/toLoad
+rm data/db/virtuoso.{db,trx,pxa} data/db/virtuoso-temp.db data/db/.data_loaded data/db/.dba_pwd_set
+```
+Consider truncating or removing the `virtuoso.log` file as well.
+
+#### 4. update virtuoso version
+Modify the docker-compose file to update the virtuoso version
+```diff
+   virtuoso:
+-    image: redpencil/virtuoso:1.0.0
++    image: redpencil/virtuoso:1.2.0-rc.1
+```
+#### 5. start the db
+Start the DB and monitor the logs, importing the nquads might take a long time .
+```sh
+docker compose up -d virtuoso
+docker compose logs -f virtuoso
+```
+
+### 2. New OP consumer
+1. Add the following to `docker-compose.override.yml`
+
+```yml
+services:
+  op-public-consumer:
+    environment:
+      DCR_LANDING_ZONE_DATABASE: "virtuoso" # Only on first run
+      DCR_REMAPPING_DATABASE: "virtuoso" # Only on first run
+      DCR_DISABLE_INITIAL_SYNC: "false" # Only on first run
+      DCR_DISABLE_DELTA_INGEST: "true" # Only on first run
+  mock-bestuurseenheid-generator:
+    environment:
+      MU_SPARQL_ENDPOINT: "http://virtuoso:8890/sparql" # Only on first run
+```
+
+2. Run and wait for the migrations to finish
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.override.yml up -d migrations
+```
+
+3. Run and wait for the OP consumer to finish
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.override.yml up -d database op-public-consumer
+```
+
+4. Run and wait for the mock users to be generated
+
+```bash
+ docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.override.yml up -d mock-bestuurseenheid-generator
+```
+
+5. Update `docker-compose.override.yml`
+
+```yml
+services:
+  # op-public-consumer:
+  #   environment:
+  #     DCR_LANDING_ZONE_DATABASE: "virtuoso" # Only on first run
+  #     DCR_REMAPPING_DATABASE: "virtuoso" # Only on first run
+  #     DCR_DISABLE_INITIAL_SYNC: "false" # Only on first run
+  #     DCR_DISABLE_DELTA_INGEST: "true" # Only on first run
+  # mock-bestuurseenheid-generator:
+  #   environment:
+  #     MU_SPARQL_ENDPOINT: "http://virtuoso:8890/sparql" # Only on first run
+```
+
+6. Start the (complete) application
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.override.yml up -d
+```
