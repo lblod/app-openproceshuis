@@ -115,3 +115,55 @@ Different services from the stack handle different HTTP requests. The [mu-dispat
 - [loket-report-generation-service](https://github.com/lblod/loket-report-generation-service)
 - [mock-login-service](https://github.com/lblod/mock-login-service)
 - [update-bestuurseenheid-mock-login-service](https://github.com/lblod/update-bestuurseenheid-mock-login-service)
+
+## How to make a release
+
+Before you make a release. Here is a checklist to make sure you have everything ready before releasing. In this example we will simulate bumping from version `v2.3.0` to `v2.4.0`
+
+### 1. Update the changelog
+
+- Go to the `CHANGELOG.md` and update according to the merged PR's since the latest release.
+- Group into sections. Currently we use:
+  - :rocket: Enhancement (new features)
+  - :bug: Bugfixes
+  - :wrench: Maintenance
+- Format using the same style as previous entries (PR number, description, author mention).
+- Sort by PR number in descending order
+
+- Commit and push the changelog
+
+```sh
+git add CHANGELOG.md
+git commit -m "Release v2.4.0"
+git push
+```
+
+- Create the tag and push
+
+```sh
+git tag -a v2.4.0 -m "Release v2.4.0"
+git push origin v2.4.0
+```
+
+### 2. Add deploy instructions to the changelog
+
+Backend PRs often include changes that require specific deployment steps. For example, if a migration is included, it must be rerun during deployment. If Virtuoso is upgraded in one of the PRs, it needs to be deployed carefully, as the upgrade instructions may require a different order of actions before restarting the stack.
+
+### 3. Merge previous tag to current tag
+
+Go to the Github UI and go to the releases page
+
+![alt text](image-3.png)
+
+Draft a new release
+
+![alt text](image-2.png)
+
+![alt text](image-1.png)
+
+- Select the new tag in the first dropdown
+- Set `master` as the target branch
+- Set the previous tag
+- Set the release title (eg. Release 1.4.0)
+- Add the release notes in the description. As we currently are keeping track of the changes in our `CHANGELOG.md`, we can just copy and paste the changelog of the new version we previously created (without deploy instructions).
+- Check `set as latest release` and click on `Publish release`
