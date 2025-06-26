@@ -120,6 +120,8 @@ Different services from the stack handle different HTTP requests. The [mu-dispat
 
 Before you make a release. Here is a checklist to make sure you have everything ready before releasing. In this example we will simulate bumping from version `v2.3.0` to `v2.4.0`
 
+⚠️ **Heads-up:** Before releasing to PROD, notify the helpdesk so they’re aware of the deployment and can assist users if any issues arise.
+
 ### 1. Update the changelog
 
 - Go to the `CHANGELOG.md` and update according to the merged PR's since the latest release.
