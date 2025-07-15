@@ -1,12 +1,16 @@
 PREFIX dcterms: <http://purl.org/dc/terms/>
 
 DELETE {
-  ?district dcterms:identifier ?oldId .
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?district dcterms:identifier ?oldId .
+  }
 }
 INSERT {
-  ?district
-    dcterms:identifier ?ovo ;
-    dcterms:identifier ?kbo .
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?district
+      dcterms:identifier ?ovo ;
+      dcterms:identifier ?kbo .
+  }
 }
 WHERE {
   VALUES (?district ?ovo ?kbo) {
