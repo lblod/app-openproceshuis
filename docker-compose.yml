@@ -142,6 +142,13 @@ services:
       - database:database
     restart: always
     logging: *default-logging
+  mock-bestuurseenheid-generator:
+    image: lblod/update-bestuurseenheid-mock-login-service:0.5.0
+    environment:
+      RUN_CRON_ON_START: "true"
+    volumes:
+      - ./config/mock-login:/config
+    restart: "no"
 
   ################################################################################
   # OP PUBLIC CONSUMER
