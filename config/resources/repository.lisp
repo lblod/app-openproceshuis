@@ -26,4 +26,4 @@
 (add-prefix "icr" "http://lblod.data.gift/vocabularies/informationclassification/")
 (add-prefix "dpv" "https://w3id.org/dpv#")
 (add-prefix "cpsv" "http://purl.org/vocab/cpsv#")
-(add-prefix "oph" "https://openproceshuis.vlaanderen.be/")
+(add-prefix "oph" "http://lblod.data.gift/vocabularies/openproceshuis/")
