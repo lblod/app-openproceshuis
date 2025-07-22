@@ -39,8 +39,10 @@
                 (:is-blueprint :boolean ,(s-prefix "icr:isBlueprint")))
   :has-one `((group :via ,(s-prefix "dct:publisher")
                     :as "publisher")
-            (processStatistic :via ,(s-prefix "ext:hasStatistics")
-                              :as "process-statistics"))
+             (processStatistic :via ,(s-prefix "ext:hasStatistics")
+                               :as "process-statistics")
+             (linkedConcept :via ,(s-prefix "dct:source")
+                               :as "linked-concept"))
   :has-many `((file :via ,(s-prefix "nie:isPartOf")
                     :inverse t
                     :as "files")
