@@ -16,6 +16,7 @@
 (read-domain-file "file.lisp")
 (read-domain-file "report.lisp")
 (read-domain-file "ipdc.lisp")
+(read-domain-file "conceptual-process.lisp")
 
 ;; -------------------------------------------------------------------------------------
 
