@@ -1,5 +1,6 @@
 import pandas as pd
 import uuid
+from datetime import datetime, timezone
 
 EXCEL_FILEPATH = "20250611_Inventarisatie (kritieke) processen LB_vF.xlsx"
 EXCEL_SHEET_NAME = "5. Lijst (kritieke) processen"
@@ -12,16 +13,13 @@ EXCEL_COLS = {
     "Hoofdproces": "title",
 }
 
-PREFIXES_CONCEPTS = [
+PREFIXES = [
     "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
     "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
     "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
-]
-PREFIXES_PROCESSES = [
-    "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
-    "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
     "@prefix oph: <http://lblod.data.gift/vocabularies/openproceshuis/> .",
     "@prefix dct: <http://purl.org/dc/terms/> .",
+    "@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .",
 ]
 
 BASE_CATEGORIES = "http://data.lblod.info/process-categories/"
@@ -94,27 +92,30 @@ def normalize_data(df):
     return categories, domains, groups, processes
 
 
-def export_categories_ttl(categories):
+def export_categories_ttl(categories, timestamp):
+    timestamp_ttl = timestamp.strftime('"%Y-%m-%dT%H:%M:%SZ"^^xsd:dateTime')
+
     lines = []
-    lines.extend(PREFIXES_CONCEPTS)
+    lines.extend(PREFIXES)
     lines.append("")
     for _, row in categories.iterrows():
-        uuid = row["category_uuid"]
-        label = row["category"]
-
-        lines.append(f"<{BASE_CATEGORIES}{uuid}>")
-        lines.append(f'  mu:uuid "{uuid}" ;')
+        lines.append(f"<{BASE_CATEGORIES}{row['category_uuid']}>")
+        lines.append(f'  mu:uuid "{row["category_uuid"]}" ;')
         lines.append("  rdf:type skos:Concept ;")
-        lines.append(f'  skos:prefLabel "{label}"@nl ;')
+        lines.append(f'  skos:prefLabel "{row["category"]}"@nl ;')
+        lines.append(f"  dct:created {timestamp_ttl} ;")
+        lines.append(f"  dct:modified {timestamp_ttl} ;")
         lines.append(f"  skos:inScheme <{SCHEME_URI_CATEGORIES}> .")
     ttl = "\n".join(lines)
     with open("categories.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
 
 
-def export_domains_ttl(domains):
+def export_domains_ttl(domains, timestamp):
+    timestamp_ttl = timestamp.strftime('"%Y-%m-%dT%H:%M:%SZ"^^xsd:dateTime')
+
     lines = []
-    lines.extend(PREFIXES_CONCEPTS)
+    lines.extend(PREFIXES)
     lines.append("")
     for _, row in domains.iterrows():
         uuid = row["domain_uuid"]
@@ -125,6 +126,8 @@ def export_domains_ttl(domains):
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type skos:Concept ;")
         lines.append(f'  skos:prefLabel "{label}"@nl ;')
+        lines.append(f"  dct:created {timestamp_ttl} ;")
+        lines.append(f"  dct:modified {timestamp_ttl} ;")
         lines.append(f"  skos:relatedMatch <{BASE_CATEGORIES}{category_uuid}> ;")
         lines.append(f"  skos:inScheme <{SCHEME_URI_DOMAINS}> .")
     ttl = "\n".join(lines)
@@ -132,9 +135,11 @@ def export_domains_ttl(domains):
         f.write(ttl)
 
 
-def export_groups_ttl(groups):
+def export_groups_ttl(groups, timestamp):
+    timestamp_ttl = timestamp.strftime('"%Y-%m-%dT%H:%M:%SZ"^^xsd:dateTime')
+
     lines = []
-    lines.extend(PREFIXES_CONCEPTS)
+    lines.extend(PREFIXES)
     lines.append("")
     for _, row in groups.iterrows():
         uuid = row["group_uuid"]
@@ -145,6 +150,8 @@ def export_groups_ttl(groups):
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type skos:Concept ;")
         lines.append(f'  skos:prefLabel "{label}"@nl ;')
+        lines.append(f"  dct:created {timestamp_ttl} ;")
+        lines.append(f"  dct:modified {timestamp_ttl} ;")
         lines.append(f"  skos:relatedMatch <{BASE_DOMAINS}{domain_uuid}> ;")
         lines.append(f"  skos:inScheme <{SCHEME_URI_GROUPS}> .")
     ttl = "\n".join(lines)
@@ -152,9 +159,11 @@ def export_groups_ttl(groups):
         f.write(ttl)
 
 
-def export_processes_ttl(processes):
+def export_processes_ttl(processes, timestamp):
+    timestamp_ttl = timestamp.strftime('"%Y-%m-%dT%H:%M:%SZ"^^xsd:dateTime')
+
     lines = []
-    lines.extend(PREFIXES_PROCESSES)
+    lines.extend(PREFIXES)
     lines.append("")
     for _, row in processes.iterrows():
         uuid = row["process_uuid"]
@@ -167,6 +176,8 @@ def export_processes_ttl(processes):
         lines.append("  rdf:type oph:ConceptueelProces ;")
         lines.append(f'  dct:title "{title}"@nl ;')
         lines.append(f"  dct:number {number} ;")
+        lines.append(f"  dct:created {timestamp_ttl} ;")
+        lines.append(f"  dct:modified {timestamp_ttl} ;")
         lines.append(f"  oph:procesGroep <{BASE_GROUPS}{group_uuid}> .")
     ttl = "\n".join(lines)
     with open("processes.ttl", "w", encoding="utf-8") as f:
@@ -174,14 +185,15 @@ def export_processes_ttl(processes):
 
 
 def main():
-    df = load_excel_data()
+    timestamp = datetime.now(timezone.utc)
 
+    df = load_excel_data()
     categories, domains, groups, processes = normalize_data(df)
 
-    export_categories_ttl(categories)
-    export_domains_ttl(domains)
-    export_groups_ttl(groups)
-    export_processes_ttl(processes)
+    export_categories_ttl(categories, timestamp)
+    export_domains_ttl(domains, timestamp)
+    export_groups_ttl(groups, timestamp)
+    export_processes_ttl(processes, timestamp)
 
 
 if __name__ == "__main__":
