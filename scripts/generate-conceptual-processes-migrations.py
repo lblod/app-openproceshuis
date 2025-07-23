@@ -13,6 +13,8 @@ EXCEL_COLS = {
     "Hoofdproces": "title",
 }
 
+OUTPUT_FOLDER = "../config/migrations/2025/conceptual-processes/"
+
 PREFIXES = [
     "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
     "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
@@ -94,6 +96,7 @@ def normalize_data(df):
 
 def export_categories_ttl(categories, timestamp):
     timestamp_ttl = timestamp.strftime('"%Y-%m-%dT%H:%M:%SZ"^^xsd:dateTime')
+    timestamp_filename = timestamp.strftime("%Y%m%d%H%M%S")
 
     lines = []
     lines.extend(PREFIXES)
@@ -107,12 +110,15 @@ def export_categories_ttl(categories, timestamp):
         lines.append(f"  dct:modified {timestamp_ttl} ;")
         lines.append(f"  skos:inScheme <{SCHEME_URI_CATEGORIES}> .")
     ttl = "\n".join(lines)
-    with open("categories.ttl", "w", encoding="utf-8") as f:
+
+    output_file = f"{OUTPUT_FOLDER}{timestamp_filename}-add-process-categories.ttl"
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(ttl)
 
 
 def export_domains_ttl(domains, timestamp):
     timestamp_ttl = timestamp.strftime('"%Y-%m-%dT%H:%M:%SZ"^^xsd:dateTime')
+    timestamp_filename = timestamp.strftime("%Y%m%d%H%M%S")
 
     lines = []
     lines.extend(PREFIXES)
@@ -131,12 +137,15 @@ def export_domains_ttl(domains, timestamp):
         lines.append(f"  skos:relatedMatch <{BASE_CATEGORIES}{category_uuid}> ;")
         lines.append(f"  skos:inScheme <{SCHEME_URI_DOMAINS}> .")
     ttl = "\n".join(lines)
-    with open("domains.ttl", "w", encoding="utf-8") as f:
+
+    output_file = f"{OUTPUT_FOLDER}{timestamp_filename}-add-process-domains.ttl"
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(ttl)
 
 
 def export_groups_ttl(groups, timestamp):
     timestamp_ttl = timestamp.strftime('"%Y-%m-%dT%H:%M:%SZ"^^xsd:dateTime')
+    timestamp_filename = timestamp.strftime("%Y%m%d%H%M%S")
 
     lines = []
     lines.extend(PREFIXES)
@@ -155,12 +164,15 @@ def export_groups_ttl(groups, timestamp):
         lines.append(f"  skos:relatedMatch <{BASE_DOMAINS}{domain_uuid}> ;")
         lines.append(f"  skos:inScheme <{SCHEME_URI_GROUPS}> .")
     ttl = "\n".join(lines)
-    with open("groups.ttl", "w", encoding="utf-8") as f:
+
+    output_file = f"{OUTPUT_FOLDER}{timestamp_filename}-add-process-groups.ttl"
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(ttl)
 
 
 def export_processes_ttl(processes, timestamp):
     timestamp_ttl = timestamp.strftime('"%Y-%m-%dT%H:%M:%SZ"^^xsd:dateTime')
+    timestamp_filename = timestamp.strftime("%Y%m%d%H%M%S")
 
     lines = []
     lines.extend(PREFIXES)
@@ -180,7 +192,9 @@ def export_processes_ttl(processes, timestamp):
         lines.append(f"  dct:modified {timestamp_ttl} ;")
         lines.append(f"  oph:procesGroep <{BASE_GROUPS}{group_uuid}> .")
     ttl = "\n".join(lines)
-    with open("processes.ttl", "w", encoding="utf-8") as f:
+
+    output_file = f"{OUTPUT_FOLDER}{timestamp_filename}-add-conceptual-processes.ttl"
+    with open(output_file, "w", encoding="utf-8") as f:
         f.write(ttl)
 
 
