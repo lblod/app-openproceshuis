@@ -123,11 +123,44 @@ def export_domains_ttl(domains):
         f.write(ttl)
 
 
+def export_groups_ttl(groups):
+    PREFIXES = [
+        "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
+        "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
+        "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
+    ]
+    scheme_uri = (
+        "http://lblod.data.gift/concept-schemes/324e775f-2a48-4daa-9de0-9f62ef8ab22e"
+    )
+    lines = []
+    lines.extend(PREFIXES)
+    lines.append("")
+    for _, row in groups.iterrows():
+        uuid = row["group_uuid"]
+        label = row["group"]
+        domain_uuid = row["domain_uuid"]
+
+        lines.append(f"<http://lblod.data.gift/concepts/{uuid}>")
+        lines.append(f'  mu:uuid "{uuid}" ;')
+        lines.append("  rdf:type skos:Concept ;")
+        lines.append(f'  skos:prefLabel "{label}"@nl ;')
+        lines.append(
+            f"  skos:relatedMatch <http://lblod.data.gift/concepts/{domain_uuid}> ;"
+        )
+        lines.append(f"  skos:inScheme <{scheme_uri}> .")
+    ttl = "\n".join(lines)
+    with open("groups.ttl", "w", encoding="utf-8") as f:
+        f.write(ttl)
+
+
 def main():
     df = load_excel_data()
+
     categories, domains, groups, processes = normalize_data(df)
+
     export_categories_ttl(categories)
     export_domains_ttl(domains)
+    export_groups_ttl(groups)
 
 
 if __name__ == "__main__":
