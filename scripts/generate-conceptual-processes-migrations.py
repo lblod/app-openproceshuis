@@ -1,4 +1,5 @@
 import pandas as pd
+import uuid
 
 EXCEL_FILEPATH = "20250611_Inventarisatie (kritieke) processen LB_vF.xlsx"
 EXCEL_SHEET_NAME = "5. Lijst (kritieke) processen"
@@ -31,23 +32,37 @@ def load_excel_data():
 def normalize_data(df):
     categories = df[["category"]].drop_duplicates().reset_index(drop=True)
     categories["category_id"] = categories.index + 1
+    categories["category_uuid"] = categories["category_id"].map(
+        lambda _: str(uuid.uuid4())
+    )
 
     domains = df[["domain", "category"]].drop_duplicates().reset_index(drop=True)
     domains = domains.merge(categories, on="category", how="left")
     domains["domain_id"] = domains.index + 1
-    domains = domains[["domain_id", "domain", "category_id"]]
+    domains["domain_uuid"] = domains["domain_id"].map(lambda _: str(uuid.uuid4()))
+    domains = domains[
+        ["domain_id", "domain", "category_id", "category_uuid", "domain_uuid"]
+    ]
 
     groups = df[["group", "domain"]].drop_duplicates().reset_index(drop=True)
     groups = groups.merge(domains, on="domain", how="left")
     groups["group_id"] = groups.index + 1
-    groups = groups[["group_id", "group", "domain", "domain_id"]]
+    groups["group_uuid"] = groups["group_id"].map(lambda _: str(uuid.uuid4()))
+    groups = groups[
+        ["group_id", "group", "domain", "domain_id", "domain_uuid", "group_uuid"]
+    ]
 
     processes = df[["number", "title", "group", "domain"]].reset_index(drop=True)
     processes["process_id"] = processes.index + 1
     processes = processes.merge(
-        groups[["group", "domain", "group_id"]], on=["group", "domain"], how="left"
+        groups[["group", "domain", "group_id", "group_uuid"]],
+        on=["group", "domain"],
+        how="left",
     )
-    processes = processes[["process_id", "number", "title", "group_id"]]
+    processes["process_uuid"] = processes["process_id"].map(lambda _: str(uuid.uuid4()))
+    processes = processes[
+        ["process_id", "process_uuid", "number", "title", "group_id", "group_uuid"]
+    ]
 
     return categories, domains, groups, processes
 
