@@ -26,12 +26,20 @@ defmodule Dispatcher do
     Proxy.forward conn, [], "http://cache/administrative-unit-classification-codes/"
   end
 
+  ###############################################################
+  # API
+  ###############################################################
+
   post "/bpmn",  %{ accept: [:any], layer: :api } do
     Proxy.forward conn, [], "http://bpmn/"
   end
 
   get "/visio/*path",  %{ accept: [:any], layer: :api } do
     Proxy.forward conn, path, "http://visio/"
+  end
+
+  post "/anonymization/bpmn", %{ accept: [:any], layer: :api } do
+    Proxy.forward conn, [], "http://anonymization/bpmn"
   end
 
   ###############################################################
