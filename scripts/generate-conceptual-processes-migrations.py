@@ -67,30 +67,35 @@ def normalize_data(df):
     return categories, domains, groups, processes
 
 
+def export_categories_ttl(categories):
+    PREFIXES = [
+        "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
+        "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
+        "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
+    ]
+    scheme_uri = (
+        "http://lblod.data.gift/concept-schemes/21fba7d7-d0f5-4133-a108-626d0eb62298"
+    )
+    lines = []
+    lines.extend(PREFIXES)
+    lines.append("")
+    for _, row in categories.iterrows():
+        uuid = row["category_uuid"]
+        label = row["category"]
+        lines.append(f"<http://lblod.data.gift/concepts/{uuid}>")
+        lines.append(f'  mu:uuid "{uuid}" ;')
+        lines.append("  rdf:type skos:Concept ;")
+        lines.append(f'  skos:prefLabel "{label}"@nl ;')
+        lines.append(f"  skos:inScheme <{scheme_uri}> .")
+    ttl = "\n".join(lines)
+    with open("categories.ttl", "w", encoding="utf-8") as f:
+        f.write(ttl)
+
+
 def main():
     df = load_excel_data()
     categories, domains, groups, processes = normalize_data(df)
-
-    print(categories)
-    print()
-    print(domains)
-    print()
-    print(groups)
-    print()
-    print(processes)
-    print()
-
-    print(f"Number of titles in original df: {df['title'].shape[0]}")
-    print(f"Length of processes df: {processes.shape[0]}")
-    print()
-    print(f"Number of unique groups in original df: {df['group'].nunique()}")
-    print(f"Length of groups df: {groups.shape[0]}")
-    print()
-    print(f"Number of unique domains in original df: {df['domain'].nunique()}")
-    print(f"Length of domains df: {domains.shape[0]}")
-    print()
-    print(f"Number of unique categories in original df: {df['category'].nunique()}")
-    print(f"Length of categories df: {categories.shape[0]}")
+    export_categories_ttl(categories)
 
 
 if __name__ == "__main__":
