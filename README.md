@@ -155,13 +155,13 @@ Backend PRs often include changes that require specific deployment steps. For ex
 
 Go to the Github UI and go to the releases page
 
-![alt text](image-3.png)
+![alt text](./assets/releases.png)
 
 Draft a new release
 
-![alt text](image-2.png)
+![alt text](./assets/draft-new-release.png)
 
-![alt text](image-1.png)
+![alt text](./assets/release-draft.png)
 
 - Select the new tag in the first dropdown
 - Set `master` as the target branch
