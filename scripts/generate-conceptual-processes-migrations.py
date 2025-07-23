@@ -14,8 +14,8 @@ EXCEL_COLS = {
 
 CONCEPT_PREFIXES = [
     "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
-    "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
     "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
+    "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
 ]
 SCHEME_URI_CATEGORIES = (
     "http://lblod.data.gift/concept-schemes/21fba7d7-d0f5-4133-a108-626d0eb62298"
@@ -27,6 +27,14 @@ SCHEME_URI_GROUPS = (
     "http://lblod.data.gift/concept-schemes/324e775f-2a48-4daa-9de0-9f62ef8ab22e"
 )
 CONCEPT_BASE = "http://lblod.data.gift/concepts/"
+
+PROCESS_PREFIXES = [
+    "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
+    "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
+    "@prefix oph: <http://lblod.data.gift/vocabularies/openproceshuis/> .",
+    "@prefix dct: <http://purl.org/dc/terms/> .",
+]
+PROCESS_BASE = "http://data.lblod.info/conceptual-processes/"
 
 
 def load_excel_data():
@@ -143,21 +151,22 @@ def export_groups_ttl(groups):
 
 def export_processes_ttl(processes):
     lines = []
-    lines.extend(CONCEPT_PREFIXES)
+    lines.extend(PROCESS_PREFIXES)
     lines.append("")
     for _, row in processes.iterrows():
-        uuid = row["group_uuid"]
-        label = row["group"]
-        domain_uuid = row["domain_uuid"]
+        uuid = row["process_uuid"]
+        title = row["title"]
+        number = row["number"]
+        group_uuid = row["group_uuid"]
 
-        lines.append(f"<{CONCEPT_BASE}{uuid}>")
+        lines.append(f"<{PROCESS_BASE}{uuid}>")
         lines.append(f'  mu:uuid "{uuid}" ;')
-        lines.append("  rdf:type skos:Concept ;")
-        lines.append(f'  skos:prefLabel "{label}"@nl ;')
-        lines.append(f"  skos:relatedMatch <{CONCEPT_BASE}{domain_uuid}> ;")
-        lines.append(f"  skos:inScheme <{SCHEME_URI_GROUPS}> .")
+        lines.append("  rdf:type oph:ConceptueelProces ;")
+        lines.append(f'  dct:title "{title}"@nl ;')
+        lines.append(f"  dct:number {number} ;")
+        lines.append(f"  oph:procesGroep <{CONCEPT_BASE}{group_uuid}> .")
     ttl = "\n".join(lines)
-    with open("groups.ttl", "w", encoding="utf-8") as f:
+    with open("processes.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
 
 
@@ -169,6 +178,7 @@ def main():
     export_categories_ttl(categories)
     export_domains_ttl(domains)
     export_groups_ttl(groups)
+    export_processes_ttl(processes)
 
 
 if __name__ == "__main__":
