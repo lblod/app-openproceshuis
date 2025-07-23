@@ -12,10 +12,10 @@ EXCEL_COLS = {
 }
 
 
-def load_excel_data(filepath, sheet_name):
+def load_excel_data():
     df = pd.read_excel(
-        filepath,
-        sheet_name=sheet_name,
+        EXCEL_FILEPATH,
+        sheet_name=EXCEL_SHEET_NAME,
         header=EXCEL_HEADER_ROW,
         usecols=list(EXCEL_COLS.keys()),
     )
@@ -24,7 +24,7 @@ def load_excel_data(filepath, sheet_name):
 
 
 def main():
-    df = load_excel_data(EXCEL_FILEPATH, EXCEL_SHEET_NAME)
+    df = load_excel_data()
     print(df.head())
 
 
