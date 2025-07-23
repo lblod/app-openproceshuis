@@ -39,6 +39,8 @@ SCHEME_URI_GROUPS = (
     "http://lblod.data.gift/concept-schemes/324e775f-2a48-4daa-9de0-9f62ef8ab22e"
 )
 
+TARGET_GRAPH = "http://mu.semte.ch/graphs/inventory"
+
 
 def load_excel_data():
     df = pd.read_excel(
@@ -102,7 +104,7 @@ def write_migration(ttl, timestamp, description):
     with open(f"{output_filename}.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
     with open(f"{output_filename}.graph", "w", encoding="utf-8") as f:
-        f.write("http://mu.semte.ch/graphs/inventory")
+        f.write(TARGET_GRAPH)
 
 
 def export_categories_ttl(categories, timestamp):
@@ -198,10 +200,10 @@ def export_processes_ttl(processes, timestamp):
 
 
 def main():
-    timestamp = datetime.now(timezone.utc)
-
     df = load_excel_data()
     categories, domains, groups, processes = normalize_data(df)
+
+    timestamp = datetime.now(timezone.utc)
 
     export_categories_ttl(categories, timestamp)
     export_domains_ttl(domains, timestamp)
