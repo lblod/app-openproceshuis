@@ -63,6 +63,19 @@ def main():
     print(groups)
     print()
     print(processes)
+    print()
+
+    print(f"Number of titles in original df: {df['title'].shape[0]}")
+    print(f"Length of processes df: {processes.shape[0]}")
+    print()
+    print(f"Number of unique groups in original df: {df['group'].nunique()}")
+    print(f"Length of groups df: {groups.shape[0]}")
+    print()
+    print(f"Number of unique domains in original df: {df['domain'].nunique()}")
+    print(f"Length of domains df: {domains.shape[0]}")
+    print()
+    print(f"Number of unique categories in original df: {df['category'].nunique()}")
+    print(f"Length of categories df: {categories.shape[0]}")
 
 
 if __name__ == "__main__":
