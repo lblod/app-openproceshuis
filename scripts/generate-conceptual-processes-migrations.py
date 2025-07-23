@@ -111,9 +111,11 @@ def export_categories_ttl(categories, timestamp):
         lines.append(f"  skos:inScheme <{SCHEME_URI_CATEGORIES}> .")
     ttl = "\n".join(lines)
 
-    output_file = f"{OUTPUT_FOLDER}{timestamp_filename}-add-process-categories.ttl"
-    with open(output_file, "w", encoding="utf-8") as f:
+    output_filename = f"{OUTPUT_FOLDER}{timestamp_filename}-add-process-categories"
+    with open(f"{output_filename}.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
+    with open(f"{output_filename}.graph", "w", encoding="utf-8") as f:
+        f.write("http://mu.semte.ch/graphs/inventory")
 
 
 def export_domains_ttl(domains, timestamp):
@@ -138,9 +140,11 @@ def export_domains_ttl(domains, timestamp):
         lines.append(f"  skos:inScheme <{SCHEME_URI_DOMAINS}> .")
     ttl = "\n".join(lines)
 
-    output_file = f"{OUTPUT_FOLDER}{timestamp_filename}-add-process-domains.ttl"
-    with open(output_file, "w", encoding="utf-8") as f:
+    output_filename = f"{OUTPUT_FOLDER}{timestamp_filename}-add-process-domains"
+    with open(f"{output_filename}.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
+    with open(f"{output_filename}.graph", "w", encoding="utf-8") as f:
+        f.write("http://mu.semte.ch/graphs/inventory")
 
 
 def export_groups_ttl(groups, timestamp):
@@ -165,9 +169,11 @@ def export_groups_ttl(groups, timestamp):
         lines.append(f"  skos:inScheme <{SCHEME_URI_GROUPS}> .")
     ttl = "\n".join(lines)
 
-    output_file = f"{OUTPUT_FOLDER}{timestamp_filename}-add-process-groups.ttl"
-    with open(output_file, "w", encoding="utf-8") as f:
+    output_filename = f"{OUTPUT_FOLDER}{timestamp_filename}-add-process-groups"
+    with open(f"{output_filename}.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
+    with open(f"{output_filename}.graph", "w", encoding="utf-8") as f:
+        f.write("http://mu.semte.ch/graphs/inventory")
 
 
 def export_processes_ttl(processes, timestamp):
@@ -193,9 +199,11 @@ def export_processes_ttl(processes, timestamp):
         lines.append(f"  oph:procesGroep <{BASE_GROUPS}{group_uuid}> .")
     ttl = "\n".join(lines)
 
-    output_file = f"{OUTPUT_FOLDER}{timestamp_filename}-add-conceptual-processes.ttl"
-    with open(output_file, "w", encoding="utf-8") as f:
+    output_filename = f"{OUTPUT_FOLDER}{timestamp_filename}-add-conceptual-processes"
+    with open(f"{output_filename}.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
+    with open(f"{output_filename}.graph", "w", encoding="utf-8") as f:
+        f.write("http://mu.semte.ch/graphs/inventory")
 
 
 def main():
