@@ -12,6 +12,22 @@ EXCEL_COLS = {
     "Hoofdproces": "title",
 }
 
+PREFIXES = [
+    "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
+    "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
+    "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
+]
+SCHEME_URI_CATEGORIES = (
+    "http://lblod.data.gift/concept-schemes/21fba7d7-d0f5-4133-a108-626d0eb62298"
+)
+SCHEME_URI_DOMAINS = (
+    "http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1"
+)
+SCHEME_URI_GROUPS = (
+    "http://lblod.data.gift/concept-schemes/324e775f-2a48-4daa-9de0-9f62ef8ab22e"
+)
+RESOURCE_BASE = "http://lblod.data.gift/concepts/"
+
 
 def load_excel_data():
     df = pd.read_excel(
@@ -68,14 +84,6 @@ def normalize_data(df):
 
 
 def export_categories_ttl(categories):
-    PREFIXES = [
-        "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
-        "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
-        "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
-    ]
-    scheme_uri = (
-        "http://lblod.data.gift/concept-schemes/21fba7d7-d0f5-4133-a108-626d0eb62298"
-    )
     lines = []
     lines.extend(PREFIXES)
     lines.append("")
@@ -83,25 +91,17 @@ def export_categories_ttl(categories):
         uuid = row["category_uuid"]
         label = row["category"]
 
-        lines.append(f"<http://lblod.data.gift/concepts/{uuid}>")
+        lines.append(f"<{RESOURCE_BASE}{uuid}>")
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type skos:Concept ;")
         lines.append(f'  skos:prefLabel "{label}"@nl ;')
-        lines.append(f"  skos:inScheme <{scheme_uri}> .")
+        lines.append(f"  skos:inScheme <{SCHEME_URI_CATEGORIES}> .")
     ttl = "\n".join(lines)
     with open("categories.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
 
 
 def export_domains_ttl(domains):
-    PREFIXES = [
-        "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
-        "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
-        "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
-    ]
-    scheme_uri = (
-        "http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1"
-    )
     lines = []
     lines.extend(PREFIXES)
     lines.append("")
@@ -110,28 +110,18 @@ def export_domains_ttl(domains):
         label = row["domain"]
         category_uuid = row["category_uuid"]
 
-        lines.append(f"<http://lblod.data.gift/concepts/{uuid}>")
+        lines.append(f"<{RESOURCE_BASE}{uuid}>")
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type skos:Concept ;")
         lines.append(f'  skos:prefLabel "{label}"@nl ;')
-        lines.append(
-            f"  skos:relatedMatch <http://lblod.data.gift/concepts/{category_uuid}> ;"
-        )
-        lines.append(f"  skos:inScheme <{scheme_uri}> .")
+        lines.append(f"  skos:relatedMatch <{RESOURCE_BASE}{category_uuid}> ;")
+        lines.append(f"  skos:inScheme <{SCHEME_URI_DOMAINS}> .")
     ttl = "\n".join(lines)
     with open("domains.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
 
 
 def export_groups_ttl(groups):
-    PREFIXES = [
-        "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
-        "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
-        "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
-    ]
-    scheme_uri = (
-        "http://lblod.data.gift/concept-schemes/324e775f-2a48-4daa-9de0-9f62ef8ab22e"
-    )
     lines = []
     lines.extend(PREFIXES)
     lines.append("")
@@ -140,14 +130,12 @@ def export_groups_ttl(groups):
         label = row["group"]
         domain_uuid = row["domain_uuid"]
 
-        lines.append(f"<http://lblod.data.gift/concepts/{uuid}>")
+        lines.append(f"<{RESOURCE_BASE}{uuid}>")
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type skos:Concept ;")
         lines.append(f'  skos:prefLabel "{label}"@nl ;')
-        lines.append(
-            f"  skos:relatedMatch <http://lblod.data.gift/concepts/{domain_uuid}> ;"
-        )
-        lines.append(f"  skos:inScheme <{scheme_uri}> .")
+        lines.append(f"  skos:relatedMatch <{RESOURCE_BASE}{domain_uuid}> ;")
+        lines.append(f"  skos:inScheme <{SCHEME_URI_GROUPS}> .")
     ttl = "\n".join(lines)
     with open("groups.ttl", "w", encoding="utf-8") as f:
         f.write(ttl)
