@@ -82,6 +82,7 @@ def export_categories_ttl(categories):
     for _, row in categories.iterrows():
         uuid = row["category_uuid"]
         label = row["category"]
+
         lines.append(f"<http://lblod.data.gift/concepts/{uuid}>")
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type skos:Concept ;")
@@ -92,10 +93,41 @@ def export_categories_ttl(categories):
         f.write(ttl)
 
 
+def export_domains_ttl(domains):
+    PREFIXES = [
+        "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
+        "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
+        "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
+    ]
+    scheme_uri = (
+        "http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1"
+    )
+    lines = []
+    lines.extend(PREFIXES)
+    lines.append("")
+    for _, row in domains.iterrows():
+        uuid = row["domain_uuid"]
+        label = row["domain"]
+        category_uuid = row["category_uuid"]
+
+        lines.append(f"<http://lblod.data.gift/concepts/{uuid}>")
+        lines.append(f'  mu:uuid "{uuid}" ;')
+        lines.append("  rdf:type skos:Concept ;")
+        lines.append(f'  skos:prefLabel "{label}"@nl ;')
+        lines.append(
+            f"  skos:relatedMatch <http://lblod.data.gift/concepts/{category_uuid}> ;"
+        )
+        lines.append(f"  skos:inScheme <{scheme_uri}> .")
+    ttl = "\n".join(lines)
+    with open("domains.ttl", "w", encoding="utf-8") as f:
+        f.write(ttl)
+
+
 def main():
     df = load_excel_data()
     categories, domains, groups, processes = normalize_data(df)
     export_categories_ttl(categories)
+    export_domains_ttl(domains)
 
 
 if __name__ == "__main__":
