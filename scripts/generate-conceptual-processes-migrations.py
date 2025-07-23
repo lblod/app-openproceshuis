@@ -12,7 +12,7 @@ EXCEL_COLS = {
     "Hoofdproces": "title",
 }
 
-PREFIXES = [
+CONCEPT_PREFIXES = [
     "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",
     "@prefix skos: <http://www.w3.org/2004/02/skos/core#> .",
     "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .",
@@ -26,7 +26,7 @@ SCHEME_URI_DOMAINS = (
 SCHEME_URI_GROUPS = (
     "http://lblod.data.gift/concept-schemes/324e775f-2a48-4daa-9de0-9f62ef8ab22e"
 )
-RESOURCE_BASE = "http://lblod.data.gift/concepts/"
+CONCEPT_BASE = "http://lblod.data.gift/concepts/"
 
 
 def load_excel_data():
@@ -85,13 +85,13 @@ def normalize_data(df):
 
 def export_categories_ttl(categories):
     lines = []
-    lines.extend(PREFIXES)
+    lines.extend(CONCEPT_PREFIXES)
     lines.append("")
     for _, row in categories.iterrows():
         uuid = row["category_uuid"]
         label = row["category"]
 
-        lines.append(f"<{RESOURCE_BASE}{uuid}>")
+        lines.append(f"<{CONCEPT_BASE}{uuid}>")
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type skos:Concept ;")
         lines.append(f'  skos:prefLabel "{label}"@nl ;')
@@ -103,18 +103,18 @@ def export_categories_ttl(categories):
 
 def export_domains_ttl(domains):
     lines = []
-    lines.extend(PREFIXES)
+    lines.extend(CONCEPT_PREFIXES)
     lines.append("")
     for _, row in domains.iterrows():
         uuid = row["domain_uuid"]
         label = row["domain"]
         category_uuid = row["category_uuid"]
 
-        lines.append(f"<{RESOURCE_BASE}{uuid}>")
+        lines.append(f"<{CONCEPT_BASE}{uuid}>")
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type skos:Concept ;")
         lines.append(f'  skos:prefLabel "{label}"@nl ;')
-        lines.append(f"  skos:relatedMatch <{RESOURCE_BASE}{category_uuid}> ;")
+        lines.append(f"  skos:relatedMatch <{CONCEPT_BASE}{category_uuid}> ;")
         lines.append(f"  skos:inScheme <{SCHEME_URI_DOMAINS}> .")
     ttl = "\n".join(lines)
     with open("domains.ttl", "w", encoding="utf-8") as f:
@@ -123,18 +123,38 @@ def export_domains_ttl(domains):
 
 def export_groups_ttl(groups):
     lines = []
-    lines.extend(PREFIXES)
+    lines.extend(CONCEPT_PREFIXES)
     lines.append("")
     for _, row in groups.iterrows():
         uuid = row["group_uuid"]
         label = row["group"]
         domain_uuid = row["domain_uuid"]
 
-        lines.append(f"<{RESOURCE_BASE}{uuid}>")
+        lines.append(f"<{CONCEPT_BASE}{uuid}>")
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type skos:Concept ;")
         lines.append(f'  skos:prefLabel "{label}"@nl ;')
-        lines.append(f"  skos:relatedMatch <{RESOURCE_BASE}{domain_uuid}> ;")
+        lines.append(f"  skos:relatedMatch <{CONCEPT_BASE}{domain_uuid}> ;")
+        lines.append(f"  skos:inScheme <{SCHEME_URI_GROUPS}> .")
+    ttl = "\n".join(lines)
+    with open("groups.ttl", "w", encoding="utf-8") as f:
+        f.write(ttl)
+
+
+def export_processes_ttl(processes):
+    lines = []
+    lines.extend(CONCEPT_PREFIXES)
+    lines.append("")
+    for _, row in processes.iterrows():
+        uuid = row["group_uuid"]
+        label = row["group"]
+        domain_uuid = row["domain_uuid"]
+
+        lines.append(f"<{CONCEPT_BASE}{uuid}>")
+        lines.append(f'  mu:uuid "{uuid}" ;')
+        lines.append("  rdf:type skos:Concept ;")
+        lines.append(f'  skos:prefLabel "{label}"@nl ;')
+        lines.append(f"  skos:relatedMatch <{CONCEPT_BASE}{domain_uuid}> ;")
         lines.append(f"  skos:inScheme <{SCHEME_URI_GROUPS}> .")
     ttl = "\n".join(lines)
     with open("groups.ttl", "w", encoding="utf-8") as f:
