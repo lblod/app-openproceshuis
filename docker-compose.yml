@@ -229,6 +229,6 @@ services:
       - "logging=true"
     logging: *default-logging
   anonymization:
-    image: lblod/pii-identification-anonymization-service:feature-detect-pii-in-bpmn
+    image: lblod/pii-identification-anonymization-service
     ports:
       - "8080:8080"
