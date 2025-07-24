@@ -1,0 +1,191 @@
+@prefix mu: <http://mu.semte.ch/vocabularies/core/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix oph: <http://lblod.data.gift/vocabularies/openproceshuis/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://data.lblod.info/process-domains/8ccd11d6-8f76-4bd0-a35f-2c502fc09fe3>
+  mu:uuid "8ccd11d6-8f76-4bd0-a35f-2c502fc09fe3" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Cultuur, sport en vrije tijd"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/61f1952f-baf9-4461-bb3b-1f02956adbdc>
+  mu:uuid "61f1952f-baf9-4461-bb3b-1f02956adbdc" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Onthaal en secretariaat"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/3db22bfc-aabc-46b2-b796-9809328e93c2> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/423d166a-6278-4a38-a47a-54bc74f7e491>
+  mu:uuid "423d166a-6278-4a38-a47a-54bc74f7e491" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Zorg en Welzijn"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/0bf30c65-cbe2-4c79-a1c1-2abf4ab0ca21>
+  mu:uuid "0bf30c65-cbe2-4c79-a1c1-2abf4ab0ca21" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Zorg en welzijn"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/367f7dd5-dde6-4835-8c3a-463ebd4374e8>
+  mu:uuid "367f7dd5-dde6-4835-8c3a-463ebd4374e8" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Aankopen/Overheidsopdrachten"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/3db22bfc-aabc-46b2-b796-9809328e93c2> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/21f44355-c607-4aad-922b-ace3084fcbe7>
+  mu:uuid "21f44355-c607-4aad-922b-ace3084fcbe7" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Marketing en communicatie"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/3db22bfc-aabc-46b2-b796-9809328e93c2> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/e98132a0-dc91-4503-880b-4cf1c6bcc01d>
+  mu:uuid "e98132a0-dc91-4503-880b-4cf1c6bcc01d" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Organiseren van inspraak"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/23eafd66-931c-4b3b-9b50-997e76109b3b>
+  mu:uuid "23eafd66-931c-4b3b-9b50-997e76109b3b" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Strategisch beheer"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/9a6b6321-7fcb-4234-bf95-f4631bfabe41> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/58025322-f3e4-46fa-8651-ed7713b73c4d>
+  mu:uuid "58025322-f3e4-46fa-8651-ed7713b73c4d" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Facilitaire middelen en diensten"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/3db22bfc-aabc-46b2-b796-9809328e93c2> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/9c81238a-bb74-4f64-a597-5cf00bd151b6>
+  mu:uuid "9c81238a-bb74-4f64-a597-5cf00bd151b6" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Algemene financiering"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/ed24584a-0930-407b-902c-ab712d0d6154>
+  mu:uuid "ed24584a-0930-407b-902c-ab712d0d6154" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Veiligheid en preventie"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/fa710cea-5ad8-48e9-81cd-1cf19b50ac19>
+  mu:uuid "fa710cea-5ad8-48e9-81cd-1cf19b50ac19" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Wonen, ruimtelijke ordening en omgeving"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/8197f276-2a70-4035-9ac4-3113c403caad>
+  mu:uuid "8197f276-2a70-4035-9ac4-3113c403caad" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Rapportering en monitoring"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/9a6b6321-7fcb-4234-bf95-f4631bfabe41> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/00657eb3-10f0-4dca-8a76-654e2610c104>
+  mu:uuid "00657eb3-10f0-4dca-8a76-654e2610c104" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Juridische zaken en naleving"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/3db22bfc-aabc-46b2-b796-9809328e93c2> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/f81bf963-36b4-4e50-8257-93f3fa7b4fe1>
+  mu:uuid "f81bf963-36b4-4e50-8257-93f3fa7b4fe1" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Personeel en organisatie"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/3db22bfc-aabc-46b2-b796-9809328e93c2> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/691ed5f2-2e89-4f4e-bd25-e555c2344714>
+  mu:uuid "691ed5f2-2e89-4f4e-bd25-e555c2344714" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Leren en onderwijs"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/a8bd3d47-6a29-4ee9-acda-2addbbf34771>
+  mu:uuid "a8bd3d47-6a29-4ee9-acda-2addbbf34771" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Financieel beheer"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/3db22bfc-aabc-46b2-b796-9809328e93c2> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/dc6fa285-3d86-4fec-9976-e77e8b03cb0d>
+  mu:uuid "dc6fa285-3d86-4fec-9976-e77e8b03cb0d" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "ICT en informatiebeheer"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/3db22bfc-aabc-46b2-b796-9809328e93c2> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/c6a23344-e5f5-4a80-8e8a-766f351b5ffd>
+  mu:uuid "c6a23344-e5f5-4a80-8e8a-766f351b5ffd" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Burgerzaken"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/27d650d4-89ea-457a-aa30-b258a092a352>
+  mu:uuid "27d650d4-89ea-457a-aa30-b258a092a352" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Organisatiebeheer"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/9a6b6321-7fcb-4234-bf95-f4631bfabe41> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/ae8d4680-9b8e-4679-829f-3d9e8c004bcc>
+  mu:uuid "ae8d4680-9b8e-4679-829f-3d9e8c004bcc" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Afvalbeheer"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/86d2cf3f-5461-4cef-a665-c019b73f943d>
+  mu:uuid "86d2cf3f-5461-4cef-a665-c019b73f943d" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Mobiliteit"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
+<http://data.lblod.info/process-domains/f985d115-5566-49b4-bac3-9dc232154d51>
+  mu:uuid "f985d115-5566-49b4-bac3-9dc232154d51" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Ondernemen en werken"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .

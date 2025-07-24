@@ -1,0 +1,28 @@
+@prefix mu: <http://mu.semte.ch/vocabularies/core/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix oph: <http://lblod.data.gift/vocabularies/openproceshuis/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c>
+  mu:uuid "33108ddb-b83c-4aca-ab96-4cacca83db0c" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Kernproces"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/21fba7d7-d0f5-4133-a108-626d0eb62298> .
+<http://data.lblod.info/process-categories/3db22bfc-aabc-46b2-b796-9809328e93c2>
+  mu:uuid "3db22bfc-aabc-46b2-b796-9809328e93c2" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Ondersteunend proces"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/21fba7d7-d0f5-4133-a108-626d0eb62298> .
+<http://data.lblod.info/process-categories/9a6b6321-7fcb-4234-bf95-f4631bfabe41>
+  mu:uuid "9a6b6321-7fcb-4234-bf95-f4631bfabe41" ;
+  rdf:type skos:Concept ;
+  skos:prefLabel "Management proces"@nl ;
+  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
+  skos:inScheme <http://lblod.data.gift/concept-schemes/21fba7d7-d0f5-4133-a108-626d0eb62298> .
