@@ -190,7 +190,7 @@ def export_processes_ttl(processes, timestamp):
         lines.append(f'  mu:uuid "{uuid}" ;')
         lines.append("  rdf:type oph:ConceptueelProces ;")
         lines.append(f'  dct:title "{title}"@nl ;')
-        lines.append(f"  dct:number {number} ;")
+        lines.append(f"  dct:identifier {number} ;")
         lines.append(f"  dct:created {timestamp_ttl} ;")
         lines.append(f"  dct:modified {timestamp_ttl} ;")
         lines.append(f"  oph:procesGroep <{BASE_GROUPS}{group_uuid}> .")
