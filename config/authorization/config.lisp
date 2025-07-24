@@ -47,7 +47,8 @@
   :bboext "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
-  :dpv "https://w3id.org/dpv#")
+  :dpv "https://w3id.org/dpv#"
+  :oph "http://lblod.data.gift/vocabularies/openproceshuis/")
 
 ;;;;;;;;;;;;;
 ;;; User roles
@@ -146,6 +147,10 @@
 (grant (read)
        :to-graph reports
        :for-allowed-group "admin")
+
+(grant (read)
+       :to-graph inventory
+       :for-allowed-group "public")
 
 ;;;;;;;;;
 ;;; Graphs
@@ -258,6 +263,10 @@
   ("organisatie:BestuurseenheidClassificatieCode" -> _)
   ("organisatie:OrganisatieStatusCode" -> _)
   ("skos:ConceptScheme" -> _))
+
+(define-graph inventory ("http://mu.semte.ch/graphs/inventory")
+  ("oph:ConceptueelProces" -> _)
+  ("skos:Concept" -> _))
 
 (define-graph job ("http://mu.semte.ch/graphs/bpmn-job")
   ("cogs:Job" -> _))
