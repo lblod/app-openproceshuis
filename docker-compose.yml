@@ -230,5 +230,4 @@ services:
     logging: *default-logging
   anonymization:
     image: lblod/pii-identification-anonymization-service
-    ports:
-      - "8080:8080"
+    restart: always
