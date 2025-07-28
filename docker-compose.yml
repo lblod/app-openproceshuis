@@ -235,3 +235,6 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  anonymization:
+    image: lblod/pii-identification-anonymization-service
+    restart: always
