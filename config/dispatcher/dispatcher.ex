@@ -38,9 +38,8 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://visio/"
   end
 
-  post "/anonymization/bpmn", %{ accept: [:any], layer: :api } do
-    Proxy.forward conn, [], "http://anonymization/bpmn"
-  end
+  post "/anonymization/*path", %{ accept: [:any], layer: :api } do
+    Proxy.forward conn, path, "http://anonymization/"
 
   ###############################################################
   # inventory
