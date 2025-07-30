@@ -40,6 +40,7 @@ defmodule Dispatcher do
 
   post "/anonymization/*path", %{ accept: [:any], layer: :api } do
     Proxy.forward conn, path, "http://anonymization/"
+  end
 
   ###############################################################
   # inventory
