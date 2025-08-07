@@ -200,7 +200,10 @@ services:
     logging: *default-logging
   impersonation:
     image: lblod/impersonation-service
-
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
   ################################################################################
   # IPDC PROXY
   ################################################################################
