@@ -148,9 +148,9 @@
        :to-graph reports
        :for-allowed-group "admin")
 
-(grant (read)
+(grant (read write)
        :to-graph inventory
-       :for-allowed-group "public")
+       :for-allowed-group "admin")
 
 ;;;;;;;;;
 ;;; Graphs
