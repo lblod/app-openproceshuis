@@ -45,12 +45,7 @@ defmodule Dispatcher do
   ###############################################################
   # inventory
   ###############################################################
-
-  get "/conceptual-processes/*path", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, path, "http://cache/conceptual-processes/"
-  end
-  
-  post "/conceptual-processes/*path", %{ accept: [:json], layer: :api } do
+  match "/conceptual-processes/*path", %{ accept: [:json], layer: :api } do
     Proxy.forward conn, path, "http://cache/conceptual-processes/"
   end
 
