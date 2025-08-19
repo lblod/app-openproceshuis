@@ -41,7 +41,7 @@
                     :as "publisher")
              (processStatistic :via ,(s-prefix "ext:hasStatistics")
                                :as "process-statistics")
-             (linkedConcept :via ,(s-prefix "dct:source")
+             (conceptualProcess :via ,(s-prefix "dct:source")
                                :as "linked-concept"))
   :has-many `((file :via ,(s-prefix "nie:isPartOf")
                     :inverse t
