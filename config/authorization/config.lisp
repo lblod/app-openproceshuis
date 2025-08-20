@@ -148,6 +148,10 @@
        :to-graph reports
        :for-allowed-group "admin")
 
+(grant (read write)
+       :to-graph inventory
+       :for-allowed-group "admin")
+
 (grant (read)
        :to-graph inventory
        :for-allowed-group "public")
