@@ -42,6 +42,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://anonymization/"
   end
 
+  match "/process-api/*path",  %{ accept: [:any], layer: :api } do
+    Proxy.forward conn, path, "http://process/"
+  end
+
   ###############################################################
   # inventory
   ###############################################################
