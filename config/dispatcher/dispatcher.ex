@@ -8,8 +8,36 @@ defmodule Dispatcher do
     any: [ "*/*" ],
   ]
 
-  define_layers [ :api, :frontend, :not_found ]
+  define_layers [ :cors, :static, :api, :frontend, :not_found ]
 
+  ###############################################################
+  # cors
+  ###############################################################
+  options "/*_path", %{ layer: :cors } do
+    conn
+    |> Plug.Conn.put_resp_header( "access-control-allow-headers", "content-type,accept" )
+    |> Plug.Conn.put_resp_header( "access-control-allow-methods", "*" )
+    |> send_resp( 200, "{ \"message\": \"ok\" }" )
+  end
+
+  ###############################################################
+  # static
+  ###############################################################
+  match "/assets/*path", %{ accept: [:any], layer: :static } do
+    Proxy.forward conn, path, "http://frontend/assets/"
+  end
+
+  match "/@appuniversum/*path", %{ accept: [:any], layer: :static } do
+    Proxy.forward conn, path, "http://frontend/@appuniversum/"
+  end
+
+  match "/*_path", %{ accept: [:html], layer: :static } do
+    Proxy.forward conn, [], "http://frontend/index.html"
+  end
+
+  ###############################################################
+  # resources
+  ###############################################################
   match "/processes/*path",  %{ accept: [:json], layer: :api } do
     Proxy.forward conn, path, "http://cache/processes/"
   end
@@ -24,6 +52,41 @@ defmodule Dispatcher do
 
   match "/administrative-unit-classification-codes", %{ accept: [:json], layer: :api } do
     Proxy.forward conn, [], "http://cache/administrative-unit-classification-codes/"
+  end
+
+  ###############################################################
+  # >> inventory
+  ###############################################################
+  match "/conceptual-processes/*path", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, path, "http://cache/conceptual-processes/"
+  end
+
+  get "/process-groups/*path", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, path, "http://cache/process-groups/"
+  end
+
+  get "/process-domains/*path", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, path, "http://cache/process-domains/"
+  end
+
+  get "/process-categories/*path", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, path, "http://cache/process-categories/"
+  end
+
+  ###############################################################
+  # >> ipdc
+  ###############################################################
+
+  match "/ipdc-instances", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, [], "http://cache/ipdc-instances/"
+  end
+
+  match "/ipdc-concepts", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, [], "http://cache/ipdc-concepts/"
+  end
+
+  get "/ipdc-products", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, [], "http://cache/ipdc-products/"
   end
 
   ###############################################################
@@ -44,41 +107,6 @@ defmodule Dispatcher do
 
   match "/process-api/*path",  %{ accept: [:any], layer: :api } do
     Proxy.forward conn, path, "http://process/"
-  end
-
-  ###############################################################
-  # inventory
-  ###############################################################
-  match "/conceptual-processes/*path", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, path, "http://cache/conceptual-processes/"
-  end
-
-  get "/process-groups/*path", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, path, "http://cache/process-groups/"
-  end
-
-  get "/process-domains/*path", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, path, "http://cache/process-domains/"
-  end
-
-  get "/process-categories/*path", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, path, "http://cache/process-categories/"
-  end
-
-  ###############################################################
-  # ipdc
-  ###############################################################
-
-  match "/ipdc-instances", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, [], "http://cache/ipdc-instances/"
-  end
-
-  match "/ipdc-concepts", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, [], "http://cache/ipdc-concepts/"
-  end
-
-  get "/ipdc-products", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, [], "http://cache/ipdc-products/"
   end
 
   ###############################################################
@@ -166,23 +194,7 @@ defmodule Dispatcher do
   end
 
   ###############################################################
-  # frontend
-  ###############################################################
-
-  match "/assets/*path", %{ accept: [:any], layer: :api } do
-    Proxy.forward conn, path, "http://frontend/assets/"
-  end
-
-  match "/@appuniversum/*path", %{ accept: [:any], layer: :api } do
-    Proxy.forward conn, path, "http://frontend/@appuniversum/"
-  end
-
-  match "/*_path", %{ accept: [:html], layer: :api } do
-    Proxy.forward conn, [], "http://frontend/index.html"
-  end
-
-  ###############################################################
-  # errors
+  # NOT FOUND
   ###############################################################
 
   match "/*_path", %{ accept: [:any], layer: :not_found } do
