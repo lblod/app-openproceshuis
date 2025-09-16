@@ -253,7 +253,8 @@
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
-  ("skos:Concept" -> _))
+  ("skos:Concept" -> _)
+  ("nfo:Bookmark" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("besluit:Bestuurseenheid" -> _)

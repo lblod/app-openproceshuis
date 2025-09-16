@@ -56,7 +56,9 @@
               (process :via ,(s-prefix "prov:wasInfluencedBy")
                        :as "linked-blueprints")
               (group :via ,(s-prefix "prov:usedBy")
-                     :as "users"))
+                     :as "users")
+              (link :via ,(s-prefix "ext:hasRelevantLink")
+                     :as "links"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
@@ -84,6 +86,16 @@
                        :as "processes"))
   :resource-base (s-url "http://data.lblod.info/information-assets/")
   :on-path "information-assets")
+
+  (define-resource link ()
+  :class (s-prefix "nfo:Bookmark")
+  :properties `((:label :string ,(s-prefix "skos:prefLabel"))
+                (:href :string ,(s-prefix "nie:links")))
+  :has-one `((process :via ,(s-prefix "ext:hasRelevantLink")
+                      :inverse t
+                      :as "process"))
+  :resource-base (s-url "http://data.lblod.info/links/")
+  :on-path "links")
 
 ;; -------------------------------------------------------------------------------------
 ;; BPMN Based Ontology (BBO) (See https://www.irit.fr/recherches/MELODI/ontologies/BBO)
