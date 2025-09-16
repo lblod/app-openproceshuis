@@ -134,6 +134,12 @@ services:
     volumes:
       - ./data/files:/share
     restart: always
+  process:
+    image: lblod/openproceshuis-process-service:0.0.1
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
   accountdetail:
     image: lblod/account-detail-service:0.1.0
     labels:
