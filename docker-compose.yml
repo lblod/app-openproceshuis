@@ -135,8 +135,7 @@ services:
       - ./data/files:/share
     restart: always
   process:
-    #image: lblod/openproceshuis-process-service:0.0.0
-    image: local-process-service
+    image: lblod/openproceshuis-process-service:0.0.1
     restart: always
     labels:
       - "logging=true"
