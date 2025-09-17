@@ -44,6 +44,7 @@
   :org "http://www.w3.org/ns/org#"
   :foaf "http://xmlns.com/foaf/0.1/"
   :bbo "https://www.irit.fr/recherches/MELODI/ontologies/BBO#"
+  :nfo "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
   :bboext "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
@@ -205,7 +206,8 @@
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
-  ("skos:Concept" -> _))
+  ("skos:Concept" -> _)
+  ("nfo:Bookmark" -> _))
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
   ;; bpmn-element-type
