@@ -81,7 +81,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    image: semtech/mu-cl-resources:feature-always-assume-lockless-hashtables
+    image: semtech/mu-cl-resources:1.27.2
     environment:
       CACHE_CLEAR_PATH: "http://cache/.mu/clear-keys"
     links:
