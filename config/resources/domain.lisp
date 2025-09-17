@@ -57,7 +57,7 @@
                        :as "linked-blueprints")
               (group :via ,(s-prefix "prov:usedBy")
                      :as "users")
-              (link :via ,(s-prefix "ext:hasRelevantLink")
+              (link :via ,(s-prefix "rdfs:seeAlso")
                      :as "links"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
@@ -91,7 +91,7 @@
   :class (s-prefix "nfo:Bookmark")
   :properties `((:label :string ,(s-prefix "skos:prefLabel"))
                 (:href :string ,(s-prefix "nie:links")))
-  :has-one `((process :via ,(s-prefix "ext:hasRelevantLink")
+  :has-one `((process :via ,(s-prefix "rdfs:seeAlso")
                       :inverse t
                       :as "process"))
   :resource-base (s-url "http://data.lblod.info/links/")
