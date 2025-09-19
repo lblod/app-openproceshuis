@@ -26,6 +26,10 @@ defmodule Dispatcher do
     Proxy.forward conn, [], "http://cache/administrative-unit-classification-codes/"
   end
 
+  match "/links/*path", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, path, "http://cache/links/"
+  end
+
   ###############################################################
   # API
   ###############################################################
