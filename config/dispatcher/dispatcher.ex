@@ -57,15 +57,15 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/conceptual-processes/"
   end
 
-  get "/process-groups/*path", %{ accept: [:json], layer: :api } do
+  match "/process-groups/*path", %{ accept: [:json], layer: :api } do
     Proxy.forward conn, path, "http://cache/process-groups/"
   end
 
-  get "/process-domains/*path", %{ accept: [:json], layer: :api } do
+  match "/process-domains/*path", %{ accept: [:json], layer: :api } do
     Proxy.forward conn, path, "http://cache/process-domains/"
   end
 
-  get "/process-categories/*path", %{ accept: [:json], layer: :api } do
+  match "/process-categories/*path", %{ accept: [:json], layer: :api } do
     Proxy.forward conn, path, "http://cache/process-categories/"
   end
 
