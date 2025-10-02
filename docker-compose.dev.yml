@@ -13,6 +13,8 @@ services:
       - database:database
     restart: "no"
   op-public-consumer:
+    environment:
+      DCR_SYNC_BASE_URL: "https://organisaties.abb.lblod.info"
     restart: "no"
   frontend:
     image: lblod/frontend-openproceshuis:latest
