@@ -9,6 +9,12 @@
         "http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/52cc9d8d-1c9a-4d92-9936-da9d4a622ec4",
         "http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/4d79a18a-7a46-4b03-8712-3bcf3467787b"
       ]
+    },
+    {
+      "sessionRole": "LoketLB-OpenProcesHuisAfnemer",
+      "restrictToClassifications": [
+        "http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/c4483583-f9fe-4d2f-96f4-47ddb3440d71"
+      ]
     }
   ]
 }
