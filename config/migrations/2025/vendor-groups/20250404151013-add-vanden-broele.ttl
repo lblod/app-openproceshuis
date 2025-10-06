@@ -3,9 +3,11 @@
 @prefix besluit: <http://data.vlaanderen.be/ns/besluit#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix org: <http://www.w3.org/ns/org#> .
 
 <http://data.lblod.info/id/bestuurseenheden/973a571a-2944-482f-88f2-d0491aca9859>
   mu:uuid "973a571a-2944-482f-88f2-d0491aca9859" ;
   rdf:type besluit:Bestuurseenheid ;
   skos:prefLabel "Vanden Broele" ;
-  dct:identifier "0451355351" .
+  dct:identifier "0451355351" ;
+  org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/c4483583-f9fe-4d2f-96f4-47ddb3440d71> . # Leverancier
