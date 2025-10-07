@@ -6,6 +6,9 @@ Open Proces Huis is one of many applications developed under the [Agentschap Bin
 
 In addition to the aforementioned services, a range of others are also essential to the stack. All of them are listed in [this overview](#overview-of-services), and can of course also be found in [`docker-compose.yml`](./docker-compose.yml).
 
+> ⚠️ **Warning:**
+> Organization data is being automatically inserted and updated by the OP consumer. However, the following organizations are not part of OP and are thus inserted through migrations: Digitaal Vlaanderen, Vanden Broele and VVSG. If for any reason the organizational data gets removed to be reintroduced afterwards, it should not be forgotten to also insert those three organizations again.
+
 ## Getting started
 
 ### First run

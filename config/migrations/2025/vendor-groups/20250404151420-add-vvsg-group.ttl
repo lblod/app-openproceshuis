@@ -4,10 +4,12 @@
 @prefix besluit: <http://data.vlaanderen.be/ns/besluit#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix dct: <http://purl.org/dc/terms/> .
+@prefix org: <http://www.w3.org/ns/org#> .
 
 <http://data.lblod.info/id/bestuurseenheden/b743dd2a-d552-4268-b1f9-eecfbf1a5cb2>
   mu:uuid "b743dd2a-d552-4268-b1f9-eecfbf1a5cb2" ;
   rdf:type besluit:Bestuurseenheid ;
   skos:prefLabel "Vereniging van Vlaamse Steden en Gemeenten" ;
   dct:identifier "OVO001989" ;
-  dct:identifier "0451857573".
+  dct:identifier "0451857573";
+  org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/fd4dda91-a6a5-485a-9d49-1378c94a5ff0> . # Vereniging van Vlaamse Steden en Gemeenten
