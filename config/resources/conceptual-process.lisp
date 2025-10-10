@@ -21,7 +21,9 @@
                 (:scheme :url ,(s-prefix "skos:inScheme"))
                 (:archived-at :datetime ,(s-prefix "prov:invalidatedAtTime")))
   :has-many `((processDomain :via ,(s-prefix "skos:relatedMatch")
-                             :as "process-domains"))
+                             :as "process-domains")
+              (processGroup  :via ,(s-prefix "dct:replaces")
+                             :as "replaced-groups"))
   :resource-base (s-url "http://data.lblod.info/process-groups/")
   :on-path "process-groups")
 
