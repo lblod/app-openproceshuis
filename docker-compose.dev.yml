@@ -17,10 +17,10 @@ services:
   frontend:
     image: lblod/frontend-openproceshuis:latest
   bpmn:
-    image: lblod/openproceshuis-bpmn-service:latest
+    image: lblod/openproceshuis-bpmn-service:feature-oph-741-bump-js-template
   visio:
     image: lblod/openproceshuis-visio-service:latest
   process:
-    image: lblod/openproceshuis-process-service:latest
+    image: lblod/openproceshuis-process-service:feature-oph-741-bump-js-template
     restart: "no"
 
