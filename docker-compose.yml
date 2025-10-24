@@ -121,7 +121,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    image: lblod/openproceshuis-bpmn-service:2.1.0
+    image: lblod/openproceshuis-bpmn-service:2.1.1-0
     volumes:
       - ./config/bpmn:/config
       - ./data/files:/share
