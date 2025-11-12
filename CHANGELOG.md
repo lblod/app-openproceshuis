@@ -38,7 +38,6 @@ Kill & start the following services:
 - process
 - frontend
 
-
 # v2.4.0
 
 ## What's changed
