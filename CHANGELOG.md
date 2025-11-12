@@ -27,7 +27,7 @@ Pull image for the following services:
 - process
 - frontend
 
-Restart the following services:
+Kill & start the following services:
 
 - dispatcher
 - resource
