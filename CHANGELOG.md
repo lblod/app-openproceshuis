@@ -1,4 +1,43 @@
-# v2.4.0 
+## v2.5.0
+
+#### :rocket: Enhancement
+
+- [#92](https://github.com/lblod/app-openproceshuis/pull/92) OPH-722 | add many relation to process-group for replacements [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#91](https://github.com/lblod/app-openproceshuis/pull/91) OPH-721 | Restrict archiving conceptual-process entities [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#90](https://github.com/lblod/app-openproceshuis/pull/90) BREAKING-CHANGE | OPH-714 | update dv organisational data [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#89](https://github.com/lblod/app-openproceshuis/pull/89) OPH-665 | Allow MATCH on process-group,category & domain [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#88](https://github.com/lblod/app-openproceshuis/pull/88) Feature/oph 671 hyperlinks to relevant bronnen [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#87](https://github.com/lblod/app-openproceshuis/pull/87) OPH-662 | Process service for export [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#85](https://github.com/lblod/app-openproceshuis/pull/85) grant rights to admin to add inventory process ([@andreo141](https://github.com/andreo141))
+- [#83](https://github.com/lblod/app-openproceshuis/pull/83) Dispatch all anonymization requests to anonymization service ([@MartijnBogaert](https://github.com/MartijnBogaert))
+- [#82](https://github.com/lblod/app-openproceshuis/pull/82) map to conceptualProcess instead of linkedConcept ([@andreo141](https://github.com/andreo141))
+- [#81](https://github.com/lblod/app-openproceshuis/pull/81) Populate inventory ([@MartijnBogaert](https://github.com/MartijnBogaert))
+- [#80](https://github.com/lblod/app-openproceshuis/pull/80) Add anonymization service ([@andreo141](https://github.com/andreo141))
+- [#79](https://github.com/lblod/app-openproceshuis/pull/79) Add conceptual process classes to datamodel ([@MartijnBogaert](https://github.com/MartijnBogaert))
+
+#### :wrench: Maintenance
+
+- [#84](https://github.com/lblod/app-openproceshuis/pull/84) Add missing docker-compose directives missing for impersonation. ([@cecemel](https://github.com/cecemel))
+
+## Deploy instructions
+
+Pull image for the following services:
+
+- bpmn
+- process
+- frontend
+
+Restart the following services:
+
+- dispatcher
+- resource
+- cache
+- bpmn
+- process
+- frontend
+
+# v2.4.0
+
 ## What's changed
 
 #### :rocket: Enhancement
@@ -37,17 +76,22 @@
 ### 1. Virtuoso upgrade
 
 #### 1. dump nquads
+
 When upgrading it's recommended (and sometimes required!) to first dump to quads using the dump_nquads procedure:
 
 ```sh
 docker compose exec virtuoso isql-v
 SQL> dump_nquads ('dumps', 1, 1000000000, 1);
 ```
+
 #### 2. stop the db
+
 ```sh
 docker compose stop virtuoso
 ```
+
 #### 3. remove old db and related files
+
 When this has completed move the dumps folder to the toLoad folder. Make sure to remove the following files:
 
 `.data_loaded`
@@ -56,27 +100,35 @@ When this has completed move the dumps folder to the toLoad folder. Make sure to
 `virtuoso.trx`
 `virtuoso.pxa`
 `virtuoso-temp.db`
+
 ```sh
 mv data/db/dumps/* data/db/toLoad
 rm data/db/virtuoso.{db,trx,pxa} data/db/virtuoso-temp.db data/db/.data_loaded data/db/.dba_pwd_set
 ```
+
 Consider truncating or removing the `virtuoso.log` file as well.
 
 #### 4. update virtuoso version
+
 Modify the docker-compose file to update the virtuoso version
+
 ```diff
    virtuoso:
 -    image: redpencil/virtuoso:1.0.0
 +    image: redpencil/virtuoso:1.2.0-rc.1
 ```
+
 #### 5. start the db
+
 Start the DB and monitor the logs, importing the nquads might take a long time .
+
 ```sh
 docker compose up -d virtuoso
 docker compose logs -f virtuoso
 ```
 
 ### 2. New OP consumer
+
 1. Add the following to `docker-compose.override.yml`
 
 ```yml
