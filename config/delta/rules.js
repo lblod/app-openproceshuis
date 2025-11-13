@@ -29,4 +29,18 @@ export default [
       retryTimeout: 250,
     },
   },
+  {
+    match: {
+      subject: {},
+    },
+    callback: {
+      url: "http://ldes-delta-pusher/publish",
+      method: "POST",
+    },
+    options: {
+      resourceFormat: "v0.0.1",
+      ignoreFromSelf: false,
+      gracePeriod: 15000,
+    },
+  },
 ];
