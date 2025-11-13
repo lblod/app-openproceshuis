@@ -23,4 +23,5 @@ services:
   process:
     image: lblod/openproceshuis-process-service:latest
     restart: "no"
-
+  modified:
+    restart: "no"
