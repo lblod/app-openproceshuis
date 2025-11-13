@@ -272,3 +272,49 @@ services:
       - ./config/modified:/config
     restart: always
     logging: *default-logging
+
+  ################################################################################
+  # LDES
+  ################################################################################
+  ldes-serve-feed:
+    image: lblod/ldes-serve-feed-service:0.1.1
+    restart: always
+    environment:
+      LDES_STREAM_PREFIX: "http://dev.openproceshuis.lblod.info/streams/ldes/"
+      TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
+      PAGE_RESOURCES_COUNT: "50"
+      DATA_FOLDER: "/data"
+      LDES_FOLDER: "public"
+    volumes:
+      - ./data/ldes-feed:/data
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  ldes-delta-pusher:
+    image: redpencil/ldes-delta-pusher:1.2.9
+    restart: always
+    environment:
+      CRON_HEALING: "0 0 0 * * *" # Every day at midnight
+      AUTO_HEALING: "true"
+      FOLDER_DEPTH: "1"
+      PAGE_RESOURCES_COUNT: "50"
+      LDES_STREAM_PREFIX: "http://dev.openproceshuis.lblod.info/streams/ldes/"
+      LDES_BASE: "http://dev.openproceshuis.lblod.info/streams/ldes/"
+      TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
+      CACHE_SIZE: "1000"
+      DATA_FOLDER: "/data"
+      LDES_FOLDER: "public"
+      CRON_CHECKPOINT: "0 0 5 1 * *"
+      SUDO_QUERY_RETRY_TIMEOUT_INCREMENT_FACTOR: 0.003
+      SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: 429,500,502,503,504
+      MAX_PAGE_SIZE_BYTES: 10000000
+      INITIAL_STATE_LIMIT: 10000
+      DIRECT_DB_ENDPOINT: "http://virtuoso:8890/sparql"
+      WRITE_INITIAL_STATE: "false"
+    volumes:
+      - ./config/ldes-delta-pusher/:/config/
+      - ./data/ldes-feed/:/data/
+    logging: *default-logging
+    labels:
+      - "logging=true"
+
