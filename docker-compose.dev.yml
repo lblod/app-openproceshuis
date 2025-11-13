@@ -25,4 +25,5 @@ services:
     restart: "no"
   swagger:
     restart: "no"
-
+  modified:
+    restart: "no"
