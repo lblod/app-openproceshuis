@@ -164,8 +164,8 @@ defmodule Dispatcher do
   ###############################################################
   # ldes
   ###############################################################
-  match "/ldes/*path", %{ accept: %{any: true}, layer: :api} do
-    Proxy.forward conn, path, "http://ldes-serve-feed/"
+  get "/ldes/*path", %{ accept: %{any: true}, layer: :api} do
+    Proxy.forward conn, path, "http://ldes-serve-feed"
   end
 
   ###############################################################
