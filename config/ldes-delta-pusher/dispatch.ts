@@ -20,12 +20,13 @@ export default async function dispatch(changesets: Changeset[]) {
 				} else {
 					const askIfInteresting = await querySudo(`
 					ASK {
-						${sparqlEscapeUri(subjectUri)} a ?type .
+						?s a ?type .
 						${typeFilterUnion}
 
 						VALUES ?type {
 							${Object.keys(ldesInstances).map(type => sparqlEscapeUri(type)).join('\n')}
 						}
+						BIND(${sparqlEscapeUri(subjectUri)} AS ?s)
 					}	
 				`);
 					if (Boolean(askIfInteresting?.boolean)) {
@@ -54,5 +55,5 @@ function createTypeFilterUnion() {
 				${ldesInstances[type]?.filter ?? ''}
 			}
 		`
-	}).join('\n UNION')
+	}).join('\n UNION') // NOTE Expensive + even more when the filters grow
 }
