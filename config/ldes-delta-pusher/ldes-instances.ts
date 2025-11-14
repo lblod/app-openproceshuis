@@ -1,8 +1,10 @@
-export const ldesInstances = {
-    "https://w3id.org/dpv#Process": {},
-    "http://lblod.data.gift/vocabularies/openproceshuis/ConceptueelProces": {},
-    "http://www.w3.org/2004/02/skos/core#Concept": {
-      filter: `
+export type LdesInstances = Record<string, { filter?: string }>;
+
+export const ldesInstances: LdesInstances = {
+  "https://w3id.org/dpv#Process": {},
+  "http://lblod.data.gift/vocabularies/openproceshuis/ConceptueelProces": {},
+  "http://www.w3.org/2004/02/skos/core#Concept": {
+    filter: `
         ?s <http://www.w3.org/2004/02/skos/core#inScheme> ?scheme .
         FILTER (?scheme IN(
             <http://lblod.data.gift/concept-schemes/21fba7d7-d0f5-4133-a108-626d0eb62298>, # process-category
@@ -13,6 +15,6 @@ export const ldesInstances = {
           )
         )
       `
-    },
-    "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {},
+  },
+  "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {},
 }
