@@ -8,6 +8,8 @@ import { sparqlEscapeUri } from "mu";
 
 export default async function dispatch(changesets: Changeset[]) {
 	const interestingSubjectUris: Array<string> = [];
+	const typeFilterUnion = createTypeFilterUnion();
+
 	for (const changeset of changesets) {
 		const interestingChanges = async (arrayOfQuads: Array<Quad>) => {
 			const interestingQuads = [];
@@ -19,6 +21,7 @@ export default async function dispatch(changesets: Changeset[]) {
 					const askIfInteresting = await querySudo(`
 					ASK {
 						${sparqlEscapeUri(subjectUri)} a ?type .
+						${typeFilterUnion}
 
 						VALUES ?type {
 							${Object.keys(ldesInstances).map(type => sparqlEscapeUri(type)).join('\n')}
@@ -41,4 +44,15 @@ export default async function dispatch(changesets: Changeset[]) {
 			},
 		]);
 	}
+}
+
+function createTypeFilterUnion() {
+	return Object.keys(ldesInstances).map(type => {
+		return `
+			{
+				FILTER(?type = ${sparqlEscapeUri(type)})
+				${ldesInstances[type]?.filter ?? ''}
+			}
+		`
+	}).join('\n UNION')
 }
