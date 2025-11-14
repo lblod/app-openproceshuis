@@ -118,6 +118,31 @@ Different services from the stack handle different HTTP requests. The [mu-dispat
 - [loket-report-generation-service](https://github.com/lblod/loket-report-generation-service)
 - [mock-login-service](https://github.com/lblod/mock-login-service)
 - [update-bestuurseenheid-mock-login-service](https://github.com/lblod/update-bestuurseenheid-mock-login-service)
+- [modified](https://github.com/lblod/track-modified-service) ([LDES](#ldes))
+- [ldes-serve-feed](https://github.com/lblod/ldes-serve-feed-service) ([LDES](#ldes))
+- [ldes-delta-pusher](https://github.com/redpencilio/ldes-delta-pusher-service) ([LDES](#ldes))
+
+## M2M
+
+> TODO
+
+## LDES
+
+> ⚠️ **Warning:**
+> This is not publicly available yet. The services are added to the project but not yet deployed. At the earliest stage a stream can be found on the development environment. [https://dev.openproceshuis.lblod.info/ldes/public/1](https://dev.openproceshuis.lblod.info/ldes/public/1)
+
+A `Linked Data Event Stream` is available with the uploaded and conceptual process data.
+
+The stream can be found by going this url: [https://openproceshuis.vlaanderen.be/ldes/public/1](https://openproceshuis.vlaanderen.be/ldes/public/1). Internally the request will go through our authorization layer and so to use the stream you will need to be authorized. The Security layer added is [`Machine-2-Machine`](##M2M) that works with ACM/IDM.
+
+### configuration
+
+| Interesting type                                                          |
+| ------------------------------------------------------------------------- |
+| <https://w3id.org/dpv#Process>                                            |
+| <http://lblod.data.gift/vocabularies/openproceshuis/ConceptueelProces>    |
+| <http://www.w3.org/2004/02/skos/core#Concept>                             |
+| <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject> |
 
 ## How to make a release
 
