@@ -247,3 +247,17 @@ services:
   anonymization:
     image: lblod/pii-identification-anonymization-service
     restart: always
+
+  ################################################################################
+  # JSON-LD API
+  ################################################################################
+  openapi:
+    image: swaggerapi/swagger-ui:latest
+    restart: always
+    environment:
+      SWAGGER_JSON: /spec/openapi.yml
+    volumes:
+      - ./config/integration/json-ld-api/openapi.yml:/spec/openapi.yml:ro
+    labels:
+      - 'logging=true'
+    logging: *default-logging
