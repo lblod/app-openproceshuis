@@ -32,6 +32,7 @@ export const ldesInstances: LdesInstances = {
   },
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {
     filter: `
+      ?uploadedProcess <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#isPartOf> ?s .
       FILTER NOT EXISTS {
         ?s <http://www.w3.org/ns/adms#status> <http://lblod.data.gift/concepts/concept-status/gearchiveerd> .
       }
