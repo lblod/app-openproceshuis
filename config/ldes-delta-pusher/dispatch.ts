@@ -4,7 +4,6 @@ import { Changeset, Quad, Term } from "../types";
 import { querySudo } from "@lblod/mu-auth-sudo";
 import { sparqlEscapeUri } from "mu";
 
-import { createTombstoneQuads } from './create-tombstone';
 import { ldesInstances } from './ldes-instances';
 import { debug } from './logging';
 
@@ -29,16 +28,11 @@ async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promis
 	debug('DISPATCH', `Found ${uniqueSubjectUris.length} subjects to check.`)
 	for (const subjectUri of uniqueSubjectUris) {
 		const typeSparqlResult = await querySudo(`
-				SELECT DISTINCT ?type ?isArchived
+				SELECT DISTINCT ?type
 				WHERE {
 					${sparqlEscapeUri(subjectUri)} a ?type .
 
 					FILTER(?type IN(${Object.keys(ldesInstances).map(type => sparqlEscapeUri(type)).join(',\n')}))
-
-					OPTIONAL {
-						${sparqlEscapeUri(subjectUri)} <http://www.w3.org/ns/adms#status> ?status .
-					}
-					BIND(IF(?status = <http://lblod.data.gift/concepts/concept-status/gearchiveerd>, "true", "false") as ?isArchived)
 				}	LIMIT 1
 			`)
 		const typeUri = typeSparqlResult?.results?.bindings[0]?.['type']?.value;
@@ -47,20 +41,13 @@ async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promis
 			continue;
 		}
 
-		if (
-			ldesInstances[typeUri]?.createTombstones &&
-			typeSparqlResult?.results?.bindings[0]?.['isArchived']?.value == 'true'
-		) {
-			quadsToPublish.push(...createTombstoneQuads(subjectUri, typeUri));
-			debug('TOMBSTONE', `Created quads for tombstone. (${subjectUri})`)
-		} else {
-			const typeFilter = ldesInstances[typeUri]?.filter;
-			const ignoredPredicates = ldesInstances[typeUri]?.ignoredPredicates;
-			let predicateFilter = '';
-			if (ignoredPredicates && ignoredPredicates.length >= 1) {
-				predicateFilter = `FILTER(?p NOT IN(${ignoredPredicates.map(uri => sparqlEscapeUri(uri)).join(',\n')}))`;
-			}
-			const sparqlResult = await querySudo(`
+		const typeFilter = ldesInstances[typeUri]?.filter;
+		const ignoredPredicates = ldesInstances[typeUri]?.ignoredPredicates;
+		let predicateFilter = '';
+		if (ignoredPredicates && ignoredPredicates.length >= 1) {
+			predicateFilter = `FILTER(?p NOT IN(${ignoredPredicates.map(uri => sparqlEscapeUri(uri)).join(',\n')}))`;
+		}
+		const sparqlResult = await querySudo(`
 				SELECT DISTINCT ?s ?p ?o
 				WHERE {
 					?s a ${sparqlEscapeUri(typeUri)} .
@@ -70,10 +57,8 @@ async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promis
 					VALUES ?s { ${sparqlEscapeUri(subjectUri)} }
 				}	
 			`);
-			quadsToPublish.push(...transformSparqlResultToArrayOfQuads(sparqlResult));
-			debug('SUBJECT', `Fetched latest info for subject. (${subjectUri})`)
-		}
-
+		quadsToPublish.push(...transformSparqlResultToArrayOfQuads(sparqlResult));
+		debug('SUBJECT', `Fetched latest info for subject. (${subjectUri})`)
 	}
 	return quadsToPublish;
 }

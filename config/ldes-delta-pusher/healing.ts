@@ -15,9 +15,6 @@ export const getHealingConfig = async () => {
         "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": [
           "http://purl.org/dc/terms/modified",
         ],
-        "https://www.w3.org/ns/activitystreams#Tombstone": [
-          "http://purl.org/dc/terms/modified",
-        ],
       },
     },
   };
