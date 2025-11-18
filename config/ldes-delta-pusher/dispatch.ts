@@ -1,5 +1,5 @@
 import { moveTriples } from "../support";
-import { Changeset, Quad } from "../types";
+import { Changeset, Quad, Term } from "../types";
 import { ldesInstances } from './ldes-instances';
 
 import { querySudo } from "@lblod/mu-auth-sudo";
@@ -7,44 +7,55 @@ import { sparqlEscapeUri } from "mu";
 
 
 export default async function dispatch(changesets: Changeset[]) {
-	const interestingSubjectUris: Array<string> = [];
-	const typeFilterUnion = createTypeFilterUnion();
-
 	for (const changeset of changesets) {
-		const interestingChanges = async (arrayOfQuads: Array<Quad>) => {
-			const interestingQuads = [];
-			for (const quad of arrayOfQuads) {
-				const subjectUri = quad.subject.value;
-				if (interestingSubjectUris.find(uri => uri === subjectUri)) {
-					interestingQuads.push(quad);
-				} else {
-					const askIfInteresting = await querySudo(`
-					ASK {
-						?s a ?type .
-						${typeFilterUnion}
-
-						VALUES ?type {
-							${Object.keys(ldesInstances).map(type => sparqlEscapeUri(type)).join('\n')}
-						}
-						BIND(${sparqlEscapeUri(subjectUri)} AS ?s)
-					}	
-				`);
-					if (Boolean(askIfInteresting?.boolean)) {
-						interestingSubjectUris.push(subjectUri);
-						interestingQuads.push(quad);
-					}
-				}
-			}
-			return interestingQuads;
-		}
+		const typeFilterUnion = createTypeFilterUnion();
+		const publishQuads = await getQuadsForInterestingSubjects(changeset.inserts, typeFilterUnion);
 
 		await moveTriples([
 			{
-				inserts: await interestingChanges(changeset.inserts),
-				deletes: await interestingChanges(changeset.deletes),
-			},
+				inserts: publishQuads,
+				deletes: [],
+			}
 		]);
 	}
+}
+
+async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>, commonFilter: string): Promise<Array<Quad>> {
+	const quadsToPublish: Array<Quad> = [];
+	const uniqueSubjectUris = [...new Set(arrayOfQuads.map(q => q.subject.value))]
+	for (const subjectUri of uniqueSubjectUris) {
+		const typeSparqlResult = await querySudo(`
+				SELECT DISTINCT ?type
+				WHERE {
+					${sparqlEscapeUri(subjectUri)} a ?type .
+
+					FILTER(?type IN(${Object.keys(ldesInstances).map(type => sparqlEscapeUri(type)).join(',\n')}))
+
+					${commonFilter}
+				}	LIMIT 1
+			`)
+		const typeUri = typeSparqlResult?.results?.bindings[0]?.['type']?.value;
+		if (!Boolean(typeUri)) {
+			continue;
+		}
+
+		const ignoredPredicates = ldesInstances[typeUri]?.ignoredPredicates;
+		let predicateFilter = '';
+		if (ignoredPredicates && ignoredPredicates.length >= 1) {
+			predicateFilter = `FILTER(?p NOT IN(${ignoredPredicates.map(uri => sparqlEscapeUri(uri)).join(',\n')}))`;
+		}
+		const sparqlResult = await querySudo(`
+				SELECT DISTINCT ?s ?p ?o
+				WHERE {
+					?s a ${sparqlEscapeUri(typeUri)} .
+					?s ?p ?o .
+					${predicateFilter}
+					VALUES ?s { ${sparqlEscapeUri(subjectUri)} }
+				}	
+			`);
+		quadsToPublish.push(...transformSparqlResultToArrayOfQuads(sparqlResult));
+	}
+	return quadsToPublish;
 }
 
 function createTypeFilterUnion() {
@@ -56,4 +67,18 @@ function createTypeFilterUnion() {
 			}
 		`
 	}).join('\n UNION') // NOTE Expensive + even more when the filters grow
+}
+
+function transformSparqlResultToArrayOfQuads(sparqlResult: { results: { bindings: { s: Term; p: Term; o: Term; }[]; }; }): Array<Quad> {
+	if (!Boolean(sparqlResult.results?.bindings)) {
+		return []
+	}
+
+	return sparqlResult.results?.bindings.map((binding: { s: Term; p: Term; o: Term; }): Quad => {
+		return {
+			subject: binding.s,
+			predicate: binding.p,
+			object: binding.o,
+		}
+	})
 }
