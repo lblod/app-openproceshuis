@@ -6,6 +6,7 @@ import { sparqlEscapeUri } from "mu";
 
 import { createTombstoneQuads } from './create-tombstone';
 import { ldesInstances } from './ldes-instances';
+import { debug } from './logging';
 
 
 export default async function dispatch(changesets: Changeset[]) {
@@ -13,6 +14,7 @@ export default async function dispatch(changesets: Changeset[]) {
 	changesets.map(changeset => inserts.push(...changeset.inserts));
 
 	const publishQuads = await getQuadsForInterestingSubjects(inserts);
+	debug('DISPATCH', `Will add ${publishQuads.length} quads to the stream.`)
 	await moveTriples([
 		{
 			inserts: publishQuads,
@@ -24,6 +26,7 @@ export default async function dispatch(changesets: Changeset[]) {
 async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promise<Array<Quad>> {
 	const quadsToPublish: Array<Quad> = [];
 	const uniqueSubjectUris = [...new Set(arrayOfQuads.map(q => q.subject.value))];
+	debug('DISPATCH', `Found ${uniqueSubjectUris.length} subjects to check.`)
 	for (const subjectUri of uniqueSubjectUris) {
 		const typeSparqlResult = await querySudo(`
 				SELECT DISTINCT ?type ?isArchived
@@ -40,6 +43,7 @@ async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promis
 			`)
 		const typeUri = typeSparqlResult?.results?.bindings[0]?.['type']?.value;
 		if (!Boolean(typeUri)) {
+			debug('SUBJECT', `Not interested in type. (${typeUri})`)
 			continue;
 		}
 
@@ -48,6 +52,7 @@ async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promis
 			typeSparqlResult?.results?.bindings[0]?.['isArchived']?.value == 'true'
 		) {
 			quadsToPublish.push(...createTombstoneQuads(subjectUri, typeUri));
+			debug('TOMBSTONE', `Created quads for tombstone. (${subjectUri})`)
 		} else {
 			const typeFilter = ldesInstances[typeUri]?.filter;
 			const ignoredPredicates = ldesInstances[typeUri]?.ignoredPredicates;
@@ -66,6 +71,7 @@ async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promis
 				}	
 			`);
 			quadsToPublish.push(...transformSparqlResultToArrayOfQuads(sparqlResult));
+			debug('SUBJECT', `Fetched latest info for subject. (${subjectUri})`)
 		}
 
 	}
