@@ -1,4 +1,4 @@
-export type LdesInstances = Record<string, { filter?: string, ignoredPredicates?: Array<string> }>;
+export type LdesInstances = Record<string, { filter?: string, ignoredPredicates?: Array<string>, createTombstones?: boolean }>;
 
 export const ldesInstances: LdesInstances = {
   "https://w3id.org/dpv#Process": {
@@ -8,14 +8,17 @@ export const ldesInstances: LdesInstances = {
       }
     `,
     ignoredPredicates: [
-      'http://mu.semte.ch/vocabularies/ext/hasStatistics']
+      'http://mu.semte.ch/vocabularies/ext/hasStatistics'
+    ],
+    createTombstones: true,
   },
   "http://lblod.data.gift/vocabularies/openproceshuis/ConceptueelProces": {
     filter: `
       FILTER NOT EXISTS {
         ?s <http://www.w3.org/ns/adms#status> <http://lblod.data.gift/concepts/concept-status/gearchiveerd> .
       }
-    `
+    `,
+    createTombstones: true,
   },
   "http://www.w3.org/2004/02/skos/core#Concept": {
     filter: `
@@ -38,6 +41,7 @@ export const ldesInstances: LdesInstances = {
       FILTER NOT EXISTS {
         ?s <http://www.w3.org/ns/adms#status> <http://lblod.data.gift/concepts/concept-status/gearchiveerd> .
       }
-    `
+    `,
+    createTombstones: true,
   },
 }
