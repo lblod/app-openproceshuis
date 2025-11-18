@@ -1,4 +1,4 @@
-export type LdesInstances = Record<string, { filter?: string, ignoredPredicates?: Array<string> }>;
+export type LdesInstances = Record<string, { filter?: string, ignoredPredicates?: Array<string>, healingPredicates?: Array<string> }>;
 
 export const ldesInstances: LdesInstances = {
   "https://w3id.org/dpv#Process": {
@@ -10,6 +10,7 @@ export const ldesInstances: LdesInstances = {
     ignoredPredicates: [
       'http://mu.semte.ch/vocabularies/ext/hasStatistics'
     ],
+    healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://lblod.data.gift/vocabularies/openproceshuis/ConceptueelProces": {
     filter: `
@@ -17,6 +18,7 @@ export const ldesInstances: LdesInstances = {
         ?s <http://www.w3.org/ns/adms#status> <http://lblod.data.gift/concepts/concept-status/gearchiveerd> .
       }
     `,
+    healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://www.w3.org/2004/02/skos/core#Concept": {
     filter: `
@@ -31,7 +33,8 @@ export const ldesInstances: LdesInstances = {
             <http://lblod.data.gift/concept-schemes/4c0f0408-01b9-4902-9640-477b667bd086>  # information-asset
           )
         )
-      `
+      `,
+    healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {
     filter: `
@@ -40,5 +43,6 @@ export const ldesInstances: LdesInstances = {
         ?s <http://www.w3.org/ns/adms#status> <http://lblod.data.gift/concepts/concept-status/gearchiveerd> .
       }
     `,
+    healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
 }

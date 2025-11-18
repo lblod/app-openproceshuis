@@ -7,7 +7,6 @@ import { sparqlEscapeUri } from "mu";
 import { ldesInstances } from './ldes-instances';
 import { debug } from './logging';
 
-
 export default async function dispatch(changesets: Changeset[]) {
 	const inserts: Array<Quad> = [];
 	changesets.map(changeset => inserts.push(...changeset.inserts));
