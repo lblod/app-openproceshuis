@@ -40,7 +40,7 @@ async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promis
 			continue;
 		}
 
-		const typeFilter = ldesInstances[typeUri]?.filter;
+		const typeFilter = ldesInstances[typeUri]?.filter ?? '';
 		const ignoredPredicates = ldesInstances[typeUri]?.ignoredPredicates;
 		let predicateFilter = '';
 		if (ignoredPredicates && ignoredPredicates.length >= 1) {

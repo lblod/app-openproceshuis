@@ -2,29 +2,16 @@ export type LdesInstances = Record<string, { filter?: string, ignoredPredicates?
 
 export const ldesInstances: LdesInstances = {
   "https://w3id.org/dpv#Process": {
-    filter: `
-      FILTER NOT EXISTS {
-        ?s <http://www.w3.org/ns/adms#status> <http://lblod.data.gift/concepts/concept-status/gearchiveerd> .
-      }
-    `,
     ignoredPredicates: [
       'http://mu.semte.ch/vocabularies/ext/hasStatistics'
     ],
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://lblod.data.gift/vocabularies/openproceshuis/ConceptueelProces": {
-    filter: `
-      FILTER NOT EXISTS {
-        ?s <http://www.w3.org/ns/adms#status> <http://lblod.data.gift/concepts/concept-status/gearchiveerd> .
-      }
-    `,
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://www.w3.org/2004/02/skos/core#Concept": {
     filter: `
-        FILTER NOT EXISTS {
-          ?s <http://www.w3.org/ns/adms#status> <http://lblod.data.gift/concepts/concept-status/gearchiveerd> .
-        }
         ?s <http://www.w3.org/2004/02/skos/core#inScheme> ?scheme .
         FILTER (?scheme IN(
             <http://lblod.data.gift/concept-schemes/21fba7d7-d0f5-4133-a108-626d0eb62298>, # process-category
@@ -39,9 +26,6 @@ export const ldesInstances: LdesInstances = {
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {
     filter: `
       ?s <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#isPartOf> ?uploadedProcess .
-      FILTER NOT EXISTS {
-        ?s <http://www.w3.org/ns/adms#status> <http://lblod.data.gift/concepts/concept-status/gearchiveerd> .
-      }
     `,
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
