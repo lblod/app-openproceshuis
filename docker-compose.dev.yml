@@ -23,6 +23,6 @@ services:
   process:
     image: lblod/openproceshuis-process-service:latest
     restart: "no"
-  openapi:
+  swagger:
     restart: "no"
 

@@ -165,7 +165,7 @@ defmodule Dispatcher do
   # API
   ###############################################################
   get "/api/docs/*path", %{ accept: [:any], layer: :api } do
-    Proxy.forward conn, path, "http://openapi:8080"
+    Proxy.forward conn, path, "http://swagger:8080"
   end
 
   ###############################################################
