@@ -23,4 +23,6 @@ services:
   process:
     image: lblod/openproceshuis-process-service:latest
     restart: "no"
+  swagger:
+    restart: "no"
 

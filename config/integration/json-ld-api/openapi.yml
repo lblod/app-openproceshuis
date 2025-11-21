@@ -1,0 +1,29 @@
+openapi: 3.0.0
+info:
+  title: Open Proces Huis
+  description: Beheer van je eigen processen binnen OPH
+  version: 0.0.0
+paths:
+  /processes:
+    post:
+      operationId: createProcess
+      summary: Creating a new process in OPH for an organization.
+      tags:
+        - Processes
+      parameters:
+        - name: id
+          in: body
+          description: Id for the new process
+          required: true
+      responses:
+        '200':
+          description: 200 response
+          content:
+            application/json:
+              examples:
+                foo:
+                  value:
+                    {
+                      'id': '68E3D2B7F65C5315B8306E41',
+                      'uri': http://data.lblod.info/processes/68E3D2B7F65C5315B8306E41,
+                    }
