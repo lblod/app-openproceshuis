@@ -166,6 +166,7 @@ defmodule Dispatcher do
   ###############################################################
   get "/api/docs/*path", %{ accept: [:any], layer: :api } do
     Proxy.forward conn, path, "http://swagger:8080"
+  end
 
   ###############################################################
   # LDES
