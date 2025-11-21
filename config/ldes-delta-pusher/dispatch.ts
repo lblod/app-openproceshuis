@@ -41,18 +41,12 @@ async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promis
 		}
 
 		const typeFilter = ldesInstances[typeUri]?.filter ?? '';
-		const ignoredPredicates = ldesInstances[typeUri]?.ignoredPredicates;
-		let predicateFilter = '';
-		if (ignoredPredicates && ignoredPredicates.length >= 1) {
-			predicateFilter = `FILTER(?p NOT IN(${ignoredPredicates.map(uri => sparqlEscapeUri(uri)).join(',\n')}))`;
-		}
 		const sparqlResult = await querySudo(`
 				SELECT DISTINCT ?s ?p ?o
 				WHERE {
 					?s a ${sparqlEscapeUri(typeUri)} .
 					?s ?p ?o .
 					${typeFilter}
-					${predicateFilter}
 					VALUES ?s { ${sparqlEscapeUri(subjectUri)} }
 				}	
 			`);

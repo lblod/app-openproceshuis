@@ -2,9 +2,10 @@ export type LdesInstances = Record<string, { filter?: string, ignoredPredicates?
 
 export const ldesInstances: LdesInstances = {
   "https://w3id.org/dpv#Process": {
-    ignoredPredicates: [
-      'http://mu.semte.ch/vocabularies/ext/hasStatistics'
-    ],
+    filter: `
+      ?s ?p ?o .
+      FILTER(?p != <http://mu.semte.ch/vocabularies/ext/hasStatistics>)
+    `,
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://lblod.data.gift/vocabularies/openproceshuis/ConceptueelProces": {
