@@ -54,3 +54,44 @@ paths:
                     {
                       '@id': 'http://data.lblod.info/processes/68E3D2B7F65C5315B8306E41',
                     }
+    patch:
+      operationId: patchProcess
+      summary: 'Update a process in your administrative unit.'
+      tags:
+        - Processes
+      parameters:
+        - name: '@id'
+          in: body
+          description: 'Uri for the process.'
+          required: true
+        - name: title
+          in: body
+          description: 'Name for the process.'
+          required: false
+        - name: description
+          in: body
+          description: 'Describe what the process is about'
+          required: false
+        - name: contact
+          in: body
+          description: 'Email of person that can be contacted about the process.'
+          required: false
+        - name: linkedInventoryProcess
+          in: body
+          description: 'Inventory process URI that this process is related to.'
+          required: false
+        - name: users
+          in: body
+          description: 'List of administrative units that are also using this process. '
+          required: false
+        - name: diagrams
+          in: body
+          description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+          required: false
+        - name: attachments
+          in: body
+          description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
+          required: false
+      responses:
+        '200':
+          description: '200 response'
