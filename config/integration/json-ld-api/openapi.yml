@@ -22,6 +22,9 @@ paths:
           in: body
           description: 'Name for the process.'
           required: true
+          schema:
+            type: string
+            example: 'Facturatie'
         - name: description
           in: body
           description: 'Describe what the process is about.'
@@ -71,6 +74,9 @@ paths:
           in: body
           description: 'Name for the process.'
           required: false
+          schema:
+            type: string
+            example: 'Facturatie'
         - name: description
           in: body
           description: 'Describe what the process is about'
