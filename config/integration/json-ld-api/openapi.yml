@@ -206,15 +206,20 @@ paths:
       summary: 'Delete a process in your administrative unit.'
       tags:
         - Processes
-      parameters:
-        - name: '@id'
-          in: body
-          description: 'Uri of the process.'
-          required: true
-          schema:
-            type: string
-            example: 'http://data.lblod.info/processes/123456789'
-            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '@id':
+                  type: string
+                  description: 'Uri of the process.'
+                  required: true
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+            example:
+              '@id': 'http://data.lblod.info/processes/123456789'
       responses:
         '204':
           description: '204 response'
@@ -285,14 +290,20 @@ paths:
       summary: 'Delete a file in your administrative unit.'
       tags:
         - Files
-      parameters:
-        - name: '@id'
-          in: body
-          description: 'Uri of the file.'
-          required: true
-          schema:
-            type: string
-            example: 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '@id':
+                  type: string
+                  description: 'Uri of the file.'
+                  required: true
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+            example:
+              '@id': 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
       responses:
         '204':
           description: '204 response'
