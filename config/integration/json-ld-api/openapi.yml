@@ -43,18 +43,34 @@ paths:
           in: body
           description: 'Inventory process URI that this process is related to.'
           required: false
+          schema:
+            type: string
+            example: 'http://data.lblod.info/conceptual-processes/123456789'
         - name: users
           in: body
           description: 'List of administrative units that are also using this process.'
           required: false
+          schema:
+            type: array
+            example:
+              [
+                'http://data.lblod.info/id/bestuurseenheden/123456789',
+                'http://data.lblod.info/id/bestuurseenheden/987654321',
+              ]
         - name: diagrams
           in: body
           description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
           required: false
+          schema:
+            type: array
+            example: ['share://123456789.bpmn', 'share://987654321.bpmn']
         - name: attachments
           in: body
           description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
           required: false
+          schema:
+            type: array
+            example: ['share://123456789.pdf', 'share://987654321.csv']
       responses:
         '201':
           description: '201 response'
@@ -101,18 +117,34 @@ paths:
           in: body
           description: 'Inventory process URI that this process is related to.'
           required: false
+          schema:
+            type: string
+            example: 'http://data.lblod.info/conceptual-processes/123456789'
         - name: users
           in: body
           description: 'List of administrative units that are also using this process. '
           required: false
+          schema:
+            type: array
+            example:
+              [
+                'http://data.lblod.info/id/bestuurseenheden/123456789',
+                'http://data.lblod.info/id/bestuurseenheden/987654321',
+              ]
         - name: diagrams
           in: body
           description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
           required: false
+          schema:
+            type: array
+            example: ['share://123456789.bpmn', 'share://987654321.bpmn']
         - name: attachments
           in: body
           description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
           required: false
+          schema:
+            type: array
+            example: ['share://123456789.pdf', 'share://987654321.csv']
       responses:
         '200':
           description: '200 response'
