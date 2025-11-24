@@ -4,6 +4,13 @@ info:
   title: 'Open Proces Huis'
   description: 'Beheer van je eigen processen binnen OPH'
   version: 0.0.0
+  contact:
+    name: Support
+    email: loketlokaalbestuur@vlaanderen.be
+    url: https://abb-vlaanderen.gitbook.io/informatie-oph
+  externalDocs:
+    description: Find out more about the API on github
+    url: https://github.com/lblod/vendor-api-openproceshuis
 servers:
   - url: http://localhost/api/vendor
     description: Local server
