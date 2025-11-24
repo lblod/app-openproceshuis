@@ -108,3 +108,38 @@ paths:
       responses:
         '204':
           description: '204 response'
+  /files:
+    post:
+      operationId: postFile
+      summary: 'Uploading a new file'
+      tags:
+        - files
+      parameters:
+        - name: 'file'
+          in: body
+          description: 'The file that you want to upload.'
+          required: true
+      responses:
+        '201':
+          description: '201 response'
+          content:
+            application/json:
+              examples:
+                foo:
+                  value:
+                    {
+                      '@id': 'share://667562a852dcbc000d000007.bpmn',
+                    }
+    delete:
+      operationId: deleteFile
+      summary: 'Delete a file in your administrative unit.'
+      tags:
+        - files
+      parameters:
+        - name: '@id'
+          in: body
+          description: 'Uri of the file.'
+          required: true
+      responses:
+        '204':
+          description: '204 response'
