@@ -13,7 +13,7 @@ paths:
       parameters:
         - name: '@id'
           in: body
-          description: 'Uri for the process.'
+          description: 'Uri of the process.'
           required: true
         - name: title
           in: body
@@ -62,7 +62,7 @@ paths:
       parameters:
         - name: '@id'
           in: body
-          description: 'Uri for the process.'
+          description: 'Uri of the process.'
           required: true
         - name: title
           in: body
@@ -103,7 +103,25 @@ paths:
       parameters:
         - name: '@id'
           in: body
-          description: 'Uri for the process.'
+          description: 'Uri of the process.'
+          required: true
+      responses:
+        '204':
+          description: '204 response'
+  /processes/files:
+    delete:
+      operationId: deleteFileFromProcess
+      summary: 'Delete a file from a process'
+      tags:
+        - Processes
+      parameters:
+        - name: '@id'
+          in: body
+          description: 'Uri of the process.'
+          required: true
+        - name: 'fileUri'
+          in: body
+          description: 'Uri for the file'
           required: true
       responses:
         '204':
@@ -113,7 +131,7 @@ paths:
       operationId: postFile
       summary: 'Uploading a new file'
       tags:
-        - files
+        - Files
       parameters:
         - name: 'file'
           in: body
@@ -126,15 +144,12 @@ paths:
             application/json:
               examples:
                 foo:
-                  value:
-                    {
-                      '@id': 'share://667562a852dcbc000d000007.bpmn',
-                    }
+                  value: { '@id': 'share://667562a852dcbc000d000007.bpmn' }
     delete:
       operationId: deleteFile
       summary: 'Delete a file in your administrative unit.'
       tags:
-        - files
+        - Files
       parameters:
         - name: '@id'
           in: body
