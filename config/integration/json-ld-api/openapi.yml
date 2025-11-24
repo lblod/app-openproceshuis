@@ -194,14 +194,17 @@ paths:
       summary: 'Uploading a new file'
       tags:
         - Files
-      parameters:
-        - name: 'file'
-          in: body
-          description: 'The file that you want to upload.'
-          required: true
-          schema:
-            type: string
-            example: 'share://123456789.bpmn'
+      requestBody: 
+        required: true
+        content:
+          multipart/form-data: 
+            schema:
+              type: object
+              properties:
+                file: 
+                  type: string
+                  format: binary
+                  description: The file that you want to upload.
       responses:
         '201':
           description: '201 response'
