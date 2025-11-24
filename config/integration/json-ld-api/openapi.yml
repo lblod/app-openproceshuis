@@ -1,3 +1,4 @@
+# https://swagger.io/docs/specification/v3_0/data-models/data-models/
 openapi: 3.0.0
 info:
   title: 'Open Proces Huis'
@@ -21,6 +22,7 @@ paths:
                   type: string
                   description: 'Uri of the process.'
                   required: true
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                 title:
                   type: string
                   description: 'Name for the process.'
@@ -37,23 +39,27 @@ paths:
                   type: string
                   description: 'Inventory process URI that this process is related to.'
                   required: false
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                 users:
                   type: array
                   description: 'List of administrative units that are also using this process.'
                   items:
                     type: string
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                   required: false
                 diagrams:
                   type: array
                   description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
                   items:
                     type: string
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                   required: false
                 attachments:
                   type: array
                   description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
                   items:
                     type: string
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                   required: false
               example:
                 '@id': '[http://data.lblod.info/processes/123456789](http://data.lblod.info/processes/123456789)'
@@ -92,6 +98,7 @@ paths:
                   type: string
                   description: 'Uri of the process.'
                   required: true
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                 title:
                   type: string
                   description: 'Name for the process.'
@@ -108,23 +115,27 @@ paths:
                   type: string
                   description: 'Inventory process URI that this process is related to.'
                   required: false
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                 users:
                   type: array
                   description: 'List of administrative units that are also using this process.'
                   items:
                     type: string
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                   required: false
                 diagrams:
                   type: array
                   description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
                   items:
                     type: string
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                   required: false
                 attachments:
                   type: array
                   description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
                   items:
                     type: string
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                   required: false
               example:
                 '@id': '[http://data.lblod.info/processes/123456789](http://data.lblod.info/processes/123456789)'
@@ -155,6 +166,7 @@ paths:
           schema:
             type: string
             example: 'http://data.lblod.info/processes/123456789'
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
       responses:
         '204':
           description: '204 response'
@@ -175,6 +187,7 @@ paths:
                   type: string
                   description: 'Uri of the process.'
                   required: true
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                 fileUri:
                   type: string
                   description: 'Uri of the file.'
