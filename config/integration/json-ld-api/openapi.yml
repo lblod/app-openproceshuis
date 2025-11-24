@@ -1,29 +1,56 @@
 openapi: 3.0.0
 info:
-  title: Open Proces Huis
-  description: Beheer van je eigen processen binnen OPH
+  title: 'Open Proces Huis'
+  description: 'Beheer van je eigen processen binnen OPH'
   version: 0.0.0
 paths:
   /processes:
     post:
-      operationId: createProcess
-      summary: Creating a new process in OPH for an organization.
+      operationId: postProcess
+      summary: 'Adding a new process to your administrative unit.'
       tags:
         - Processes
       parameters:
-        - name: id
+        - name: '@id'
           in: body
-          description: Id for the new process
+          description: 'Uri for the process.'
           required: true
+        - name: title
+          in: body
+          description: 'Name for the process.'
+          required: true
+        - name: description
+          in: body
+          description: 'Describe what the process is about.'
+          required: false
+        - name: contact
+          in: body
+          description: 'Email of person that can be contacted about the process.'
+          required: false
+        - name: linkedInventoryProcess
+          in: body
+          description: 'Inventory process URI that this process is related to.'
+          required: false
+        - name: users
+          in: body
+          description: 'List of administrative units that are also using this process.'
+          required: false
+        - name: diagrams
+          in: body
+          description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+          required: false
+        - name: attachments
+          in: body
+          description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
+          required: false
       responses:
-        '200':
-          description: 200 response
+        '201':
+          description: '201 response'
           content:
             application/json:
               examples:
                 foo:
                   value:
                     {
-                      'id': '68E3D2B7F65C5315B8306E41',
-                      'uri': http://data.lblod.info/processes/68E3D2B7F65C5315B8306E41,
+                      '@id': 'http://data.lblod.info/processes/68E3D2B7F65C5315B8306E41',
                     }
