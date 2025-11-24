@@ -100,8 +100,16 @@ paths:
                     'http://data.lblod.info/id/bestuurseenheden/123456789',
                     'http://data.lblod.info/id/bestuurseenheden/987654321',
                   ]
-                diagrams: ['share://123456789.bpmn', 'share://987654321.bpmn']
-                attachments: ['share://123456789.pdf', 'share://987654321.csv']
+                diagrams:
+                  [
+                    'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
+                    'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+                  ]
+                attachments:
+                  [
+                    'http://mu.semte.ch/services/file-service/files/123456789.pdf',
+                    'http://mu.semte.ch/services/file-service/files/987654321.csv',
+                  ]
       responses:
         '201':
           description: '201 response'
@@ -111,7 +119,7 @@ paths:
                 foo:
                   value: { '@id': 'http://data.lblod.info/processes/123456789' }
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
     patch:
       operationId: patchProcess
       summary: 'Update a process in your administrative unit.'
@@ -178,13 +186,21 @@ paths:
                     'http://data.lblod.info/id/bestuurseenheden/123456789',
                     'http://data.lblod.info/id/bestuurseenheden/987654321',
                   ]
-                diagrams: ['share://123456789.bpmn', 'share://987654321.bpmn']
-                attachments: ['share://123456789.pdf', 'share://987654321.csv']
+                diagrams:
+                  [
+                    'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
+                    'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+                  ]
+                attachments:
+                  [
+                    'http://mu.semte.ch/services/file-service/files/123456789.pdf',
+                    'http://mu.semte.ch/services/file-service/files/987654321.csv',
+                  ]
       responses:
         '200':
           description: '200 response'
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
     delete:
       operationId: deleteProcess
       summary: 'Delete a process in your administrative unit.'
@@ -203,7 +219,7 @@ paths:
         '204':
           description: '204 response'
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
   /processes/files:
     delete:
       operationId: deleteFileFromProcess
@@ -228,12 +244,12 @@ paths:
                   required: true
           example:
             '@id': 'http://data.lblod.info/processes/123456789'
-            fileUri: 'share://123456789.bpmn'
+            fileUri: 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
       responses:
         '204':
           description: '204 response'
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
   /files:
     post:
       operationId: postFile
@@ -258,9 +274,12 @@ paths:
             application/json:
               examples:
                 foo:
-                  value: { '@id': 'share://123456789.bpmn' }
+                  value:
+                    {
+                      '@id': 'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
+                    }
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
     delete:
       operationId: deleteFile
       summary: 'Delete a file in your administrative unit.'
@@ -273,9 +292,9 @@ paths:
           required: true
           schema:
             type: string
-            example: 'share://123456789.bpmn'
+            example: 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
       responses:
         '204':
           description: '204 response'
         '401':
-          $ref: "#/components/responses/UnauthorizedError"
+          $ref: '#/components/responses/UnauthorizedError'
