@@ -197,6 +197,87 @@ paths:
           description: '200 response'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+    put:
+      operationId: putProcess
+      summary: 'Replace data of process in your administrative unit.'
+      tags:
+        - Processes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                '@id':
+                  type: string
+                  description: 'Uri of the process.'
+                  required: true
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                title:
+                  type: string
+                  description: 'Name for the process.'
+                  required: false
+                description:
+                  type: string
+                  description: 'Describe what the process is about.'
+                  required: false
+                contact:
+                  type: string
+                  description: 'Email of person that can be contacted about the process.'
+                  required: false
+                linkedInventoryProcess:
+                  type: string
+                  description: 'Inventory process URI that this process is related to.'
+                  required: false
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                users:
+                  type: array
+                  description: 'List of administrative units that are also using this process.'
+                  items:
+                    type: string
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                  required: false
+                diagrams:
+                  type: array
+                  description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+                  items:
+                    type: string
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                  required: false
+                attachments:
+                  type: array
+                  description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
+                  items:
+                    type: string
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                  required: false
+              example:
+                '@id': 'http://data.lblod.info/processes/123456789'
+                title: 'Rename of "Facturatie" process'
+                description: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
+                contact: 'contact@administrativeUnit.com'
+                linkedInventoryProcess: 'http://data.lblod.info/conceptual-processes/123456789'
+                users:
+                  [
+                    'http://data.lblod.info/id/bestuurseenheden/123456789',
+                    'http://data.lblod.info/id/bestuurseenheden/987654321',
+                  ]
+                diagrams:
+                  [
+                    'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
+                    'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+                  ]
+                attachments:
+                  [
+                    'http://mu.semte.ch/services/file-service/files/123456789.pdf',
+                    'http://mu.semte.ch/services/file-service/files/987654321.csv',
+                  ]
+      responses:
+        '200':
+          description: '200 response'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
     delete:
       operationId: deleteProcess
       summary: 'Delete a process in your administrative unit.'
