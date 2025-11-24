@@ -95,3 +95,16 @@ paths:
       responses:
         '200':
           description: '200 response'
+    delete:
+      operationId: deleteProcess
+      summary: 'Delete a process in your administrative unit.'
+      tags:
+        - Processes
+      parameters:
+        - name: '@id'
+          in: body
+          description: 'Uri for the process.'
+          required: true
+      responses:
+        '204':
+          description: '204 response'
