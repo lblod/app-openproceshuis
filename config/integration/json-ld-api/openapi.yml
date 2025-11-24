@@ -14,6 +14,24 @@ info:
 servers:
   - url: http://localhost/api/vendor
     description: Local server
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+  responses:
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+
+security:
+  - ApiKeyAuth: []
+
 paths:
   /processes:
     post:
@@ -72,7 +90,7 @@ paths:
                     pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                   required: false
               example:
-                '@id': '[http://data.lblod.info/processes/123456789](http://data.lblod.info/processes/123456789)'
+                '@id': 'http://data.lblod.info/processes/123456789'
                 title: 'Facturatie'
                 description: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
                 contact: 'contact@administrativeUnit.com'
@@ -92,6 +110,8 @@ paths:
               examples:
                 foo:
                   value: { '@id': 'http://data.lblod.info/processes/123456789' }
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
     patch:
       operationId: patchProcess
       summary: 'Update a process in your administrative unit.'
@@ -148,7 +168,7 @@ paths:
                     pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                   required: false
               example:
-                '@id': '[http://data.lblod.info/processes/123456789](http://data.lblod.info/processes/123456789)'
+                '@id': 'http://data.lblod.info/processes/123456789'
                 title: 'Rename of "Facturatie" process'
                 description: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
                 contact: 'contact@administrativeUnit.com'
@@ -163,6 +183,8 @@ paths:
       responses:
         '200':
           description: '200 response'
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
     delete:
       operationId: deleteProcess
       summary: 'Delete a process in your administrative unit.'
@@ -180,6 +202,8 @@ paths:
       responses:
         '204':
           description: '204 response'
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
   /processes/files:
     delete:
       operationId: deleteFileFromProcess
@@ -208,6 +232,8 @@ paths:
       responses:
         '204':
           description: '204 response'
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
   /files:
     post:
       operationId: postFile
@@ -233,6 +259,8 @@ paths:
               examples:
                 foo:
                   value: { '@id': 'share://123456789.bpmn' }
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
     delete:
       operationId: deleteFile
       summary: 'Delete a file in your administrative unit.'
@@ -249,3 +277,5 @@ paths:
       responses:
         '204':
           description: '204 response'
+        '401':
+          $ref: "#/components/responses/UnauthorizedError"
