@@ -29,10 +29,16 @@ paths:
           in: body
           description: 'Describe what the process is about.'
           required: false
+          schema:
+            type: string
+            example: 'De officiële factuur wordt gegenereerd op basis van deze gegevens en vervolgens naar de klant verzonden ter betaling, wat de standaardcyclus afsluit.'
         - name: contact
           in: body
           description: 'Email of person that can be contacted about the process.'
           required: false
+          schema:
+            type: string
+            example: 'contact@administrativeUnit.com'
         - name: linkedInventoryProcess
           in: body
           description: 'Inventory process URI that this process is related to.'
@@ -81,10 +87,16 @@ paths:
           in: body
           description: 'Describe what the process is about'
           required: false
+          schema:
+            type: string
+            example: 'De officiële factuur wordt gegenereerd op basis van deze gegevens en vervolgens naar de klant verzonden ter betaling, wat de standaardcyclus afsluit.'
         - name: contact
           in: body
           description: 'Email of person that can be contacted about the process.'
           required: false
+          schema:
+            type: string
+            example: 'contact@administrativeUnit.com'
         - name: linkedInventoryProcess
           in: body
           description: 'Inventory process URI that this process is related to.'
