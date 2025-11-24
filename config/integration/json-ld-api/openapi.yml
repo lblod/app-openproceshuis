@@ -15,6 +15,9 @@ paths:
           in: body
           description: 'Uri of the process.'
           required: true
+          schema:
+            type: string
+            example: 'http://data.lblod.info/processes/123456789'
         - name: title
           in: body
           description: 'Name for the process.'
@@ -50,10 +53,7 @@ paths:
             application/json:
               examples:
                 foo:
-                  value:
-                    {
-                      '@id': 'http://data.lblod.info/processes/68E3D2B7F65C5315B8306E41',
-                    }
+                  value: { '@id': 'http://data.lblod.info/processes/123456789' }
     patch:
       operationId: patchProcess
       summary: 'Update a process in your administrative unit.'
@@ -64,6 +64,9 @@ paths:
           in: body
           description: 'Uri of the process.'
           required: true
+          schema:
+            type: string
+            example: 'http://data.lblod.info/processes/123456789'
         - name: title
           in: body
           description: 'Name for the process.'
@@ -105,6 +108,9 @@ paths:
           in: body
           description: 'Uri of the process.'
           required: true
+          schema:
+            type: string
+            example: 'http://data.lblod.info/processes/123456789'
       responses:
         '204':
           description: '204 response'
@@ -119,10 +125,16 @@ paths:
           in: body
           description: 'Uri of the process.'
           required: true
+          schema:
+            type: string
+            example: 'http://data.lblod.info/processes/123456789'
         - name: 'fileUri'
           in: body
           description: 'Uri for the file'
           required: true
+          schema:
+            type: string
+            example: 'share://123456789.bpmn'
       responses:
         '204':
           description: '204 response'
@@ -137,6 +149,9 @@ paths:
           in: body
           description: 'The file that you want to upload.'
           required: true
+          schema:
+            type: string
+            example: 'share://123456789.bpmn'
       responses:
         '201':
           description: '201 response'
@@ -144,7 +159,7 @@ paths:
             application/json:
               examples:
                 foo:
-                  value: { '@id': 'share://667562a852dcbc000d000007.bpmn' }
+                  value: { '@id': 'share://123456789.bpmn' }
     delete:
       operationId: deleteFile
       summary: 'Delete a file in your administrative unit.'
@@ -155,6 +170,9 @@ paths:
           in: body
           description: 'Uri of the file.'
           required: true
+          schema:
+            type: string
+            example: 'share://123456789.bpmn'
       responses:
         '204':
           description: '204 response'
