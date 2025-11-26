@@ -88,6 +88,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - '@id'
               properties:
                 '@id':
                   type: string
@@ -113,6 +115,9 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - '@id'
+                - 'fileUri'
               properties:
                 '@id':
                   type: string
@@ -123,9 +128,9 @@ paths:
                   type: string
                   description: 'Uri of the file.'
                   required: true
-          example:
-            '@id': 'http://data.lblod.info/processes/123456789'
-            fileUri: 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
+            example:
+              '@id': 'http://data.lblod.info/processes/123456789'
+              fileUri: 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
       responses:
         '204':
           description: '204 response'
@@ -172,11 +177,12 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - '@id'
               properties:
                 '@id':
                   type: string
                   description: 'Uri of the file.'
-                  required: true
                   pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
             example:
               '@id': 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
