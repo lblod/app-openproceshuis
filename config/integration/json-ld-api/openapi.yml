@@ -8,13 +8,19 @@ info:
     name: Support
     email: loketlokaalbestuur@vlaanderen.be
     url: https://abb-vlaanderen.gitbook.io/informatie-oph
-  externalDocs:
-    description: Find out more about the API on github
-    url: https://github.com/lblod/vendor-api-openproceshuis
+externalDocs:
+  description: Find out more about the API on Github
+  url: https://github.com/lblod/vendor-api-openproceshuis
 servers:
   - url: http://localhost/api/vendor
     description: Local server
-
+  - url: https://dev.openproceshuis.lblod.info/api/vendor
+    description: Development server
+tags:
+  - name: Processes
+    description: Create and update actions on processes in Open Proces Huis
+  - name: Files
+    description: Uploading and deleting diagrams and attachments used in Open Proces Huis
 components:
   securitySchemes:
     ApiKeyAuth:

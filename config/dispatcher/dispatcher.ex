@@ -168,6 +168,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://swagger:8080"
   end
 
+  match "/api/vendor/*path", %{ accept: [:any], layer: :api } do
+    send_resp( conn, 418, "{\"status\": {\"message\": \"Not implemented\" }")
+  end
+
   ###############################################################
   # LDES
   ###############################################################
