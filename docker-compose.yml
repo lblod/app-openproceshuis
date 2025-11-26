@@ -280,7 +280,7 @@ services:
     image: lblod/ldes-serve-feed-service:0.1.1
     restart: always
     environment:
-      LDES_STREAM_PREFIX: "http://dev.openproceshuis.lblod.info/streams/ldes/"
+      LDES_STREAM_PREFIX: "https://dev.openproceshuis.lblod.info/streams/ldes/"
       TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
       PAGE_RESOURCES_COUNT: "50"
       DATA_FOLDER: "/data"
@@ -298,8 +298,8 @@ services:
       AUTO_HEALING: "true"
       FOLDER_DEPTH: "1"
       PAGE_RESOURCES_COUNT: "50"
-      LDES_STREAM_PREFIX: "http://dev.openproceshuis.lblod.info/streams/ldes/"
-      LDES_BASE: "http://dev.openproceshuis.lblod.info/streams/ldes/"
+      LDES_STREAM_PREFIX: "https://dev.openproceshuis.lblod.info/streams/ldes/"
+      LDES_BASE: "https://dev.openproceshuis.lblod.info/streams/ldes/"
       TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
       CACHE_SIZE: "1000"
       DATA_FOLDER: "/data"
