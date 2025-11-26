@@ -2,7 +2,7 @@
 openapi: 3.0.0
 info:
   title: 'Open Proces Huis'
-  description: 'Beheer van je eigen processen binnen OPH'
+  description: 'Manage your processes in OPH. Update existing or create processes in your administrative-unit.'
   version: 0.0.0
   contact:
     name: Support
@@ -37,7 +37,7 @@ paths:
               $ref: '#/components/schemas/CreateProcess'
       responses:
         '201':
-          description: '201 response'
+          description: 'Created'
           content:
             application/json:
               examples:
@@ -58,7 +58,7 @@ paths:
               $ref: '#/components/schemas/UpdateProcess'
       responses:
         '200':
-          description: '200 response'
+          description: 'Ok'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
     put:
@@ -74,7 +74,7 @@ paths:
               $ref: '#/components/schemas/UpdateProcess'
       responses:
         '200':
-          description: '200 response'
+          description: 'Ok'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
     delete:
@@ -100,7 +100,7 @@ paths:
               '@id': 'http://data.lblod.info/processes/123456789'
       responses:
         '204':
-          description: '204 response'
+          description: 'No content'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /processes/files:
@@ -133,7 +133,7 @@ paths:
               fileUri: 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
       responses:
         '204':
-          description: '204 response'
+          description: 'No content'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /files:
@@ -155,7 +155,7 @@ paths:
                   description: The file that you want to upload.
       responses:
         '201':
-          description: '201 response'
+          description: 'Created'
           content:
             application/json:
               examples:
@@ -188,7 +188,7 @@ paths:
               '@id': 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
       responses:
         '204':
-          description: '204 response'
+          description: 'No content'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 
