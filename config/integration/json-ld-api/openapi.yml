@@ -94,7 +94,6 @@ paths:
                 '@id':
                   type: string
                   description: 'Uri of the process.'
-                  required: true
                   pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
             example:
               '@id': 'http://data.lblod.info/processes/123456789'
@@ -122,12 +121,10 @@ paths:
                 '@id':
                   type: string
                   description: 'Uri of the process.'
-                  required: true
                   pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
                 fileUri:
                   type: string
                   description: 'Uri of the file.'
-                  required: true
             example:
               '@id': 'http://data.lblod.info/processes/123456789'
               fileUri: 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
