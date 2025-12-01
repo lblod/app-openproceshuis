@@ -117,6 +117,23 @@
           }
           LIMIT 1")
 
+(supply-allowed-group "m2m"
+  :query "PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+          PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+          PREFIX muSession: <http://mu.semte.ch/vocabularies/session/>
+          PREFIX adms: <http://www.w3.org/ns/adms#>
+          PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+          SELECT ?claim WHERE {
+            GRAPH <http://mu.semte.ch/graphs/sessions/> {
+              <SESSION_ID> muSession:account/^foaf:account/adms:identifier/skos:notation ?claim.
+            }
+          }"
+  :parameters ())
+
+(grant (read)
+       :to-graph shared
+       :for-allowed-group "m2m")
+
 (grant (read)
        :to-graph public
        :for-allowed-group "public")
