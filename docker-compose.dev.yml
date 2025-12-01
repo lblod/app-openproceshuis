@@ -35,3 +35,7 @@ services:
     restart: "no"
     environment:
       LDES_BASE: "http://localhost/streams/ldes/"
+  m2m:
+    restart: "no"
+    environment:
+      MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"

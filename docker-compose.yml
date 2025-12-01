@@ -210,6 +210,16 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  m2m:
+    image: lblod/m2m-login-service
+    environment:
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
+      MU_APPLICATION_AUTH_CLIENT_ID: "myClientID"
+      MU_APPLICATION_AUTH_CLIENT_SECRET: "mySecret"
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
   ################################################################################
   # IPDC PROXY
   ################################################################################
