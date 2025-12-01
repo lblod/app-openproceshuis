@@ -218,6 +218,12 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  vendor-api:
+    image: lblod/vendor-api-openproceshuis
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
   ################################################################################
   # IPDC PROXY
   ################################################################################
