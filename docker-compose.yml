@@ -212,8 +212,7 @@ services:
     image: lblod/m2m-login-service
     environment:
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
-      MU_APPLICATION_AUTH_CLIENT_ID: "myClientID"
-      MU_APPLICATION_AUTH_CLIENT_SECRET: "mySecret"
+      MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
     restart: always
     labels:
       - "logging=true"

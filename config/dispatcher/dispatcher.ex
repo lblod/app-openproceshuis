@@ -172,6 +172,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://vendor-api/"
   end
 
+  post "/m2msessions/*path", %{ accept: [:any], layer: :api} do
+    Proxy.forward conn, path, "http://m2m/sessions/"
+  end
+
   ###############################################################
   # LDES
   ###############################################################

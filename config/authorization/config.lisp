@@ -124,15 +124,15 @@
           PREFIX adms: <http://www.w3.org/ns/adms#>
           PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
           SELECT ?claim WHERE {
-            GRAPH <http://mu.semte.ch/graphs/sessions/> {
-              <SESSION_ID> muSession:account/^foaf:account/adms:identifier/skos:notation ?claim.
+            GRAPH <http://mu.semte.ch/graphs/sessions> {
+              <SESSION_ID> session:account ?account .
+              <SESSION_ID> ext:sessionGroup ?bestuurseenheid .
+              FILTER(?bestuurseenheid IN(
+                <http://data.lblod.info/id/bestuurseenheden/141d9d6b-54af-4d17-b313-8d1c30bc3f5b> # Vanden Broele
+              ))
             }
           }"
   :parameters ())
-
-(grant (read)
-       :to-graph shared
-       :for-allowed-group "m2m")
 
 (grant (read)
        :to-graph public
