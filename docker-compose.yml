@@ -220,6 +220,8 @@ services:
   vendor-api:
     image: lblod/vendor-api-openproceshuis
     restart: always
+    environment:
+      ALLOW_MU_AUTH_SUDO: true
     labels:
       - "logging=true"
     logging: *default-logging
@@ -298,6 +300,8 @@ services:
       PAGE_RESOURCES_COUNT: "50"
       DATA_FOLDER: "/data"
       LDES_FOLDER: "public"
+      AUTHENTICATED_LDES_FEED: false
+      ALLOW_MU_AUTH_SUDO: true
     volumes:
       - ./data/ldes-feed:/data
     logging: *default-logging
