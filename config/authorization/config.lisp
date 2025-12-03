@@ -118,14 +118,11 @@
           LIMIT 1")
 
 (supply-allowed-group "m2m"
-  :query "PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
-          PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>    
           PREFIX muSession: <http://mu.semte.ch/vocabularies/session/>
-          PREFIX adms: <http://www.w3.org/ns/adms#>
-          PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-          SELECT ?claim WHERE {
+          SELECT ?account WHERE {
             GRAPH <http://mu.semte.ch/graphs/sessions> {
-              <SESSION_ID> session:account ?account .
+              <SESSION_ID> muSession:account ?account .
               <SESSION_ID> ext:sessionGroup ?bestuurseenheid .
               FILTER(?bestuurseenheid IN(
                 <http://data.lblod.info/id/bestuurseenheden/141d9d6b-54af-4d17-b313-8d1c30bc3f5b> # Vanden Broele
