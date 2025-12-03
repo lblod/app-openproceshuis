@@ -134,6 +134,22 @@
           }"
   :parameters ())
 
+(grant (read write)
+       :to-graph sessions
+       :for-allowed-group "m2m")
+
+(grant (read write)
+       :to-graph public
+       :for-allowed-group "m2m")
+
+(grant (read write)
+       :to-graph organizations
+       :for-allowed-group "m2m")
+
+(grant (read write)
+       :to-graph shared
+       :for-allowed-group "m2m")
+
 (grant (read)
        :to-graph public
        :for-allowed-group "public")
