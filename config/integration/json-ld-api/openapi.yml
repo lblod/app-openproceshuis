@@ -189,12 +189,16 @@ paths:
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 
+security:
+  - CookieHeader: []
+
 components:
   securitySchemes:
-    ApiKeyAuth:
+    CookieHeader:
       type: apiKey
       in: header
-      name: X-API-KEY
+      name: cookie
+      description: Required cookie header for API access
   responses:
     UnauthorizedError:
       description: Unauthorized
@@ -320,6 +324,3 @@ components:
               'http://mu.semte.ch/services/file-service/files/123456789.pdf',
               'http://mu.semte.ch/services/file-service/files/987654321.csv',
             ]
-
-security:
-  - ApiKeyAuth: []
