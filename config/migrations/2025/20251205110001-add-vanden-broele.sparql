@@ -1,0 +1,15 @@
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX org: <http://www.w3.org/ns/org#>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    <http://data.lblod.info/id/bestuurseenheden/973a571a-2944-482f-88f2-d0491aca9859> a besluit:Bestuurseenheid ;
+      mu:uuid "973a571a-2944-482f-88f2-d0491aca9859" ;
+      skos:prefLabel "Vanden Broele" ;
+      dct:identifier "0451355351" ;
+      org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/c4483583-f9fe-4d2f-96f4-47ddb3440d71> . # Leverancier
+  }
+}
