@@ -117,7 +117,7 @@
           }
           LIMIT 1")
 
-(supply-allowed-group "m2m"
+(supply-allowed-group "m2m-json-api"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>    
           PREFIX muSession: <http://mu.semte.ch/vocabularies/session/>
           SELECT ?account WHERE {
@@ -125,7 +125,8 @@
               <SESSION_ID> muSession:account ?account .
               <SESSION_ID> ext:sessionGroup ?bestuurseenheid .
               FILTER(?bestuurseenheid IN(
-                <http://data.lblod.info/id/bestuurseenheden/141d9d6b-54af-4d17-b313-8d1c30bc3f5b> # Vanden Broele
+                <http://data.lblod.info/id/bestuurseenheden/141d9d6b-54af-4d17-b313-8d1c30bc3f5b>, # ABB - OVO001835
+                <http://data.lblod.info/id/bestuurseenheden/973a571a-2944-482f-88f2-d0491aca9859>  # Vanden Broele - 0451355351
               ))
             }
           }"
@@ -133,7 +134,15 @@
 
 (grant (read write)
        :to-graph sessions
-       :for-allowed-group "m2m")
+       :for-allowed-group "m2m-json-api")
+
+(grant (read write)
+       :to-graph organizations-json-api
+       :for-allowed-group "m2m-json-api")
+
+(grant (read write)
+       :to-graph shared-json-api
+       :for-allowed-group "m2m-json-api")
 
 (grant (read)
        :to-graph public
@@ -306,3 +315,15 @@
 (define-graph statistics ("http://mu.semte.ch/graphs/statistics")
   ("ext:ProcessStatistic" -> _)
   ("dpv:Process" -> "ext:hasStatistics"))
+
+(define-graph organizations-json-api ("http://mu.semte.ch/graphs/organizations/")
+  ("dpv:Process" x> "ext:hasStatistics")
+  ("nfo:FileDataObject" -> _)
+  ("skos:Concept" -> _)
+  ("nfo:Bookmark" -> _))
+
+(define-graph shared-json-api ("http://mu.semte.ch/graphs/shared")
+  ("dpv:Process" x> "ext:hasStatistics")
+  ("nfo:FileDataObject" -> _)
+  ("skos:Concept" -> _)
+  ("nfo:Bookmark" -> _))
