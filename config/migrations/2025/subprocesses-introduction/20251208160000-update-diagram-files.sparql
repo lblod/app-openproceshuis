@@ -3,21 +3,31 @@ PREFIX nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
 PREFIX dpv:     <https://w3id.org/dpv#>
 PREFIX dbpedia: <http://dbpedia.org/ontology/>
 PREFIX schema:  <http://schema.org/>
+PREFIX dct:     <http://purl.org/dc/terms/>
 
 INSERT {
   GRAPH ?g {
     ?process schema:hasPart ?list .
+
     ?list a schema:ItemList ;
-          schema:itemListElement ?item .
+          schema:itemListElement ?item ;
+          schema:itemListOrder schema:ItemListUnordered ;
+          dct:created ?created ;
+          dct:modified ?modified .
+
     ?item a schema:ListItem ;
-          schema:item ?diagramFile .
+          schema:item ?diagramFile ;
+          dct:created ?created ;
+          dct:modified ?modified .
   }
 }
 WHERE {
   GRAPH ?g {
     ?diagramFile a nfo:FileDataObject ;
                  dbpedia:fileExtension ?ext ;
-                 nie:isPartOf ?process .
+                 nie:isPartOf ?process ;
+                 dct:created ?created ;
+                 dct:modified ?modified .
     ?process a dpv:Process .
   }
 
