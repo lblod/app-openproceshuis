@@ -1,0 +1,28 @@
+PREFIX nfo:     <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
+PREFIX nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+PREFIX dpv:     <https://w3id.org/dpv#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema:  <http://schema.org/>
+
+INSERT {
+  GRAPH ?g {
+    ?process schema:hasPart ?list .
+    ?list a schema:ItemList ;
+          schema:itemListElement ?item .
+    ?item a schema:ListItem ;
+          schema:item ?diagramFile .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?diagramFile a nfo:FileDataObject ;
+                 dbpedia:fileExtension ?ext ;
+                 nie:isPartOf ?process .
+    ?process a dpv:Process .
+  }
+
+  FILTER(LCASE(?ext) IN ("bpmn", "vsdx"))
+
+  BIND(IRI(CONCAT("http://data.lblod.info/lists/", STRUUID())) AS ?list)
+  BIND(IRI(CONCAT("http://data.lblod.info/list-items/", STRUUID())) AS ?item)
+}
