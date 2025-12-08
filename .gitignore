@@ -1,4 +1,5 @@
 # Virtuoso files /data/db
+/data/authorization/*
 /data/db/*
 !/data/db/toLoad
 !/data/db/toLoad/*

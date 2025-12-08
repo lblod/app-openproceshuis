@@ -1,5 +1,3 @@
-version: "3.4"
-
 x-logging: &default-logging
   driver: "json-file"
   options:
@@ -210,6 +208,23 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  m2m:
+    image: lblod/m2m-login-service
+    environment:
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
+      MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
+  vendor-api:
+    image: lblod/vendor-api-openproceshuis
+    restart: always
+    environment:
+      ALLOW_MU_AUTH_SUDO: true
+    labels:
+      - "logging=true"
+    logging: *default-logging
   ################################################################################
   # IPDC PROXY
   ################################################################################
@@ -285,6 +300,8 @@ services:
       PAGE_RESOURCES_COUNT: "50"
       DATA_FOLDER: "/data"
       LDES_FOLDER: "public"
+      AUTHENTICATED_LDES_FEED: false
+      ALLOW_MU_AUTH_SUDO: true
     volumes:
       - ./data/ldes-feed:/data
     logging: *default-logging

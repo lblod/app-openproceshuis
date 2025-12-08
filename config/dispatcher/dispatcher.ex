@@ -169,7 +169,11 @@ defmodule Dispatcher do
   end
 
   match "/api/vendor/*path", %{ accept: [:any], layer: :api } do
-    send_resp( conn, 418, "{\"status\": {\"message\": \"Not implemented\" }")
+    Proxy.forward conn, path, "http://vendor-api/"
+  end
+
+  post "/m2msessions/*path", %{ accept: [:any], layer: :api} do
+    Proxy.forward conn, path, "http://m2m/sessions/"
   end
 
   ###############################################################
