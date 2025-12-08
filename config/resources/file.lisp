@@ -6,6 +6,7 @@
                 (:format :string ,(s-prefix "dct:format"))
                 (:size :number ,(s-prefix "nfo:fileSize"))
                 (:extension :string ,(s-prefix "dbpedia:fileExtension"))
+                (:version :string ,(s-prefix "schema:version"))
                 (:created :datetime ,(s-prefix "dct:created"))
                 (:modified :datetime ,(s-prefix "dct:modified"))
                 (:status :url ,(s-prefix "adms:status")))
@@ -15,7 +16,7 @@
               (informationAsset :via ,(s-prefix "schema:associatedMedia")
                   :as "information-asset"))
   :has-many `((process :via ,(s-prefix "nie:isPartOf")
-                       :as "processes"))
+                       :as "processes")) ; TODO: remove after finising implementation subprocesses
   :resource-base (s-url "http://data.lblod.info/files/")
   :features `(include-uri)
   :on-path "files")
