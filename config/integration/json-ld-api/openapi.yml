@@ -135,6 +135,11 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
   /files:
     post:
+      servers:
+        - url: http://localhost/files
+          description: Upload a file to your local setup
+        - url: https://dev.openproceshuis.lblod.info
+          description: Upload a file to to the development environment
       operationId: postFile
       summary: 'Uploading a new file'
       tags:
@@ -163,26 +168,25 @@ paths:
                     }
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+  /files/{fileId}:
     delete:
+      servers:
+        - url: http://localhost/files
+          description: Upload a file to your local setup
+        - url: https://dev.openproceshuis.lblod.info
+          description: Upload a file to to the development environment
       operationId: deleteFile
       summary: 'Delete a file in your administrative unit.'
       tags:
         - Files
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - '@id'
-              properties:
-                '@id':
-                  type: string
-                  description: 'Uri of the file.'
-                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
-            example:
-              '@id': 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
+      parameters:
+        - in: path
+          name: fileId
+          schema:
+            type: string
+          required: true
+          description: Id of the file you wan to delete.
+          example: 6936e48d72b9d2000c000002
       responses:
         '204':
           description: 'No content'
