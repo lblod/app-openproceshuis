@@ -55,7 +55,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateProcess'
+              $ref: '#/components/schemas/PatchProcess'
       responses:
         '200':
           description: 'Ok'
@@ -71,7 +71,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateProcess'
+              $ref: '#/components/schemas/PutProcess'
       responses:
         '200':
           description: 'Ok'
@@ -79,7 +79,7 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
     delete:
       operationId: deleteProcess
-      summary: 'Delete a process in your administrative unit.'
+      summary: 'Archived a process in your administrative unit. Deleting a process in OPH actually means that we add the status archived to it.'
       tags:
         - Processes
       requestBody:
@@ -264,9 +264,76 @@ components:
               'http://mu.semte.ch/services/file-service/files/123456789.pdf',
               'http://mu.semte.ch/services/file-service/files/987654321.csv',
             ]
-    UpdateProcess:
+    PatchProcess:
       required:
         - '@id'
+      type: object
+      properties:
+        '@id':
+          type: string
+          description: 'Uri of the process.'
+          example: 'http://data.lblod.info/processes/123456789'
+          pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+        title:
+          type: string
+          description: 'Name for the process.'
+          example: 'Facturatie'
+        description:
+          type: string
+          description: 'Describe what the process is about.'
+          example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
+        contact:
+          type: string
+          description: 'Email of person that can be contacted about the process.'
+          example: 'contact@administrativeUnit.com'
+        linkedInventoryProcess:
+          type: string
+          description: 'Inventory process URI that this process is related to.'
+          example: 'http://data.lblod.info/conceptual-processes/123456789'
+          pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+        users:
+          type: array
+          description: 'List of administrative units that are also using this process.'
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://data.lblod.info/id/bestuurseenheden/123456789',
+              'http://data.lblod.info/id/bestuurseenheden/987654321',
+            ]
+        diagrams:
+          type: array
+          description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
+              'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+            ]
+        attachments:
+          type: array
+          description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://mu.semte.ch/services/file-service/files/123456789.pdf',
+              'http://mu.semte.ch/services/file-service/files/987654321.csv',
+            ]
+    PutProcess:
+      required:
+        - '@id'
+        - 'title'
+        - 'description'
+        - 'contact'
+        - 'linkedInventoryProcess'
+        - 'users'
+        - 'diagrams'
+        - 'attachments'
       type: object
       properties:
         '@id':
