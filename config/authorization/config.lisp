@@ -206,6 +206,8 @@
   ("bboext:Participant" -> _)
   ;; process-type
   ("dpv:Process" x> "ext:hasStatistics")
+  ("schema:ItemList" -> _)
+  ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
@@ -257,6 +259,8 @@
   ("bboext:Participant" -> _)
   ;; process-type
   ("dpv:Process" x> "ext:hasStatistics")
+  ("schema:ItemList" -> _)
+  ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
