@@ -25,7 +25,11 @@
                                :as "linked-concept"))
   :has-many `((file :via ,(s-prefix "nie:isPartOf")
                     :inverse t
-                    :as "files")
+                    :as "files") ; TODO: remove after finising implementation subprocesses
+              (list :via ,(s-prefix "schema:hasPart")
+                    :as "diagram-lists")
+              (file :via ,(s-prefix "schema:associatedMedia")
+                    :as "attachments")
               (ipdcProduct :via ,(s-prefix "cpsv:follows")
                            :inverse t
                            :as "ipdc-products")
@@ -42,6 +46,26 @@
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
+(define-resource list()
+  :class (s-prefix "schema:ItemList")
+  :properties `((:order :url ,(s-prefix "schema:itemListOrder"))
+                (:version :string ,(s-prefix "schema:version"))
+                (:created :datetime ,(s-prefix "dct:created"))
+                (:modified :datetime ,(s-prefix "dct:modified")))
+  :has-many `((listItem :via ,(s-prefix "schema:itemListElement")
+                        :as "diagrams"))
+  :resource-base (s-url "http://data.lblod.info/lists/")
+  :on-path "lists")
+
+(define-resource listItem()
+  :class (s-prefix "schema:ListItem")
+  :properties `((:position :number ,(s-prefix "schema:position"))
+                (:created :datetime ,(s-prefix "dct:created"))
+                (:modified :datetime ,(s-prefix "dct:modified")))
+  :has-one `((file :via ,(s-prefix "schema:item")
+                   :as "diagram-file"))
+  :resource-base (s-url "http://data.lblod.info/list-items/")
+  :on-path "list-items")
 
 (define-resource informationAsset()
   :class (s-prefix "skos:Concept")
