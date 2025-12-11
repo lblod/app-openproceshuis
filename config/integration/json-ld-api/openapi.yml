@@ -164,8 +164,20 @@ paths:
                 foo:
                   value:
                     {
-                      '@id': 'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
+                    "data": {
+                      "type": "files",
+                      "id": "693adbc24426fd000d000000",
+                      "attributes": {
+                        "name": "my-diagram.bpmn",
+                        "format": "text/plain; charset=utf-8",
+                        "size": 3156,
+                        "extension": "bpmn"
+                      }
+                    },
+                    "links": {
+                      "self": "/files/693adbc24426fd000d000000"
                     }
+                  }
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /files/{fileId}:
