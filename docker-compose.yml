@@ -213,6 +213,7 @@ services:
     environment:
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
       MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
+      BH_APPLICATION_NAME: LoketLB-OpenProcesHuisAfnemer
     restart: always
     labels:
       - "logging=true"
