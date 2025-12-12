@@ -1,3 +1,4 @@
+PREFIX mu:      <http://mu.semte.ch/vocabularies/core/>
 PREFIX nfo:     <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
 PREFIX nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
 PREFIX dpv:     <https://w3id.org/dpv#>
@@ -10,12 +11,14 @@ INSERT {
     ?process schema:hasPart ?list .
 
     ?list a schema:ItemList ;
+          mu:uuid ?listUuid ;
           schema:itemListElement ?item ;
           schema:itemListOrder schema:ItemListUnordered ;
           dct:created ?created ;
           dct:modified ?modified .
 
     ?item a schema:ListItem ;
+          mu:uuid ?itemUuid ;
           schema:item ?diagramFile ;
           dct:created ?created ;
           dct:modified ?modified .
@@ -33,6 +36,9 @@ WHERE {
 
   FILTER(LCASE(?ext) IN ("bpmn", "vsdx"))
 
-  BIND(IRI(CONCAT("http://data.lblod.info/lists/", STRUUID())) AS ?list)
-  BIND(IRI(CONCAT("http://data.lblod.info/list-items/", STRUUID())) AS ?item)
+  BIND(STRUUID() AS ?listUuid)
+  BIND(STRUUID() AS ?itemUuid)
+
+  BIND(IRI(CONCAT("http://data.lblod.info/lists/", ?listUuid)) AS ?list)
+  BIND(IRI(CONCAT("http://data.lblod.info/list-items/", ?itemUuid)) AS ?item)
 }
