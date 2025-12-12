@@ -34,7 +34,7 @@ WHERE {
     ?process a dpv:Process .
   }
 
-  FILTER(LCASE(?ext) IN ("bpmn", "vsdx"))
+  FILTER(LCASE(STR(?ext)) IN ("bpmn", "vsdx"))
 
   BIND(STRUUID() AS ?listUuid)
   BIND(STRUUID() AS ?itemUuid)

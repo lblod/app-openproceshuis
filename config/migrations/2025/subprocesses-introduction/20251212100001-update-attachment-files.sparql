@@ -17,5 +17,5 @@ WHERE {
     ?process a dpv:Process .
   }
 
-  FILTER( !(LCASE(?ext) IN ("bpmn", "vsdx")) )
+  FILTER( !(LCASE(STR(?ext)) IN ("bpmn", "vsdx")) )
 }
