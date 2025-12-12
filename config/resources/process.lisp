@@ -64,6 +64,8 @@
                 (:modified :datetime ,(s-prefix "dct:modified")))
   :has-one `((file :via ,(s-prefix "schema:item")
                    :as "diagram-file"))
+  :has-many `((listItem :via ,(s-prefix "schema:hasPart")
+                        :as "sub-items"))
   :resource-base (s-url "http://data.lblod.info/list-items/")
   :on-path "list-items")
 
