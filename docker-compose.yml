@@ -219,7 +219,7 @@ services:
       - "logging=true"
     logging: *default-logging
   vendor-api:
-    image: lblod/vendor-api-openproceshuis
+    image: lblod/vendor-api-openproceshuis-service:0.0.0
     restart: always
     environment:
       ALLOW_MU_AUTH_SUDO: true
