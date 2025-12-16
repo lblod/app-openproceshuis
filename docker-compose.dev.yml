@@ -32,6 +32,7 @@ services:
   ldes-delta-pusher:
     restart: "no"
     environment:
+      LDES_STREAM_PREFIX: "http://localhost/streams/ldes/"
       LDES_BASE: "http://localhost/streams/ldes/"
   m2m:
     restart: "no"
