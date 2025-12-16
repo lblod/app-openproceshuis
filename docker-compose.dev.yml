@@ -37,10 +37,6 @@ services:
     restart: "no"
     environment:
       MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
-    profiles:
-      - vendor
   vendor-api:
-    image: local-vendor-api-oph
+    image: lblod/vendor-api-openproceshuis-service:latest
     restart: no
-    profiles:
-      - vendor

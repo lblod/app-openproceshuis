@@ -117,24 +117,6 @@
           }
           LIMIT 1")
 
-(supply-allowed-group "m2m"
-  :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>    
-          PREFIX muSession: <http://mu.semte.ch/vocabularies/session/>
-          SELECT ?account WHERE {
-            GRAPH <http://mu.semte.ch/graphs/sessions> {
-              <SESSION_ID> muSession:account ?account .
-              <SESSION_ID> ext:sessionGroup ?bestuurseenheid .
-              FILTER(?bestuurseenheid IN(
-                <http://data.lblod.info/id/bestuurseenheden/141d9d6b-54af-4d17-b313-8d1c30bc3f5b> # Vanden Broele
-              ))
-            }
-          }"
-  :parameters ())
-
-(grant (read write)
-       :to-graph sessions
-       :for-allowed-group "m2m")
-
 (grant (read)
        :to-graph public
        :for-allowed-group "public")
