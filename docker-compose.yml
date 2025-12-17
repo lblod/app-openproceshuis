@@ -277,7 +277,6 @@ services:
     labels:
       - 'logging=true'
     logging: *default-logging
-  # Modified only used for cleanup as we do not have services that modify resources
   modified:
     image: lblod/track-modified-service:0.2.0
     environment:
