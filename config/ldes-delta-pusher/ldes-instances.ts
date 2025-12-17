@@ -1,4 +1,4 @@
-export type LdesInstances = Record<string, { filter?: string, ignoredPredicates?: Array<string>, healingPredicates?: Array<string> }>;
+export type LdesInstances = Record<string, { filter?: string, graphFilter?: string, ignoredPredicates?: Array<string>, healingPredicates?: Array<string> }>;
 
 export const ldesInstances: LdesInstances = {
   "https://w3id.org/dpv#Process": {
@@ -6,9 +6,11 @@ export const ldesInstances: LdesInstances = {
       ?s ?p ?o .
       FILTER(?p != <http://mu.semte.ch/vocabularies/ext/hasStatistics>)
     `,
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://lblod.data.gift/vocabularies/openproceshuis/ConceptueelProces": {
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://www.w3.org/2004/02/skos/core#Concept": {
@@ -22,12 +24,12 @@ export const ldesInstances: LdesInstances = {
           )
         )
       `,
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {
-    filter: `
-      ?s <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#isPartOf> ?uploadedProcess .
-    `,
+    filter: `?s <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#isPartOf> ?uploadedProcess .`,
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
 }

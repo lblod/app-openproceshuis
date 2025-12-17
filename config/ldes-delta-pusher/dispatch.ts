@@ -41,13 +41,17 @@ async function getQuadsForInterestingSubjects(arrayOfQuads: Array<Quad>): Promis
 		}
 
 		const typeFilter = ldesInstances[typeUri]?.filter ?? '';
+		const graphFilter = ldesInstances[typeUri]?.graphFilter ?? '';
 		const sparqlResult = await querySudo(`
 				SELECT DISTINCT ?s ?p ?o
 				WHERE {
-					?s a ${sparqlEscapeUri(typeUri)} .
-					?s ?p ?o .
-					${typeFilter}
-					VALUES ?s { ${sparqlEscapeUri(subjectUri)} }
+					GRAPH ?g {
+						?s a ${sparqlEscapeUri(typeUri)} .
+						?s ?p ?o .
+						${typeFilter}
+						VALUES ?s { ${sparqlEscapeUri(subjectUri)} }
+					}
+					${graphFilter}
 				}	
 			`);
 		quadsToPublish.push(...transformSparqlResultToArrayOfQuads(sparqlResult));
