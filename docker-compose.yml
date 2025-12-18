@@ -280,11 +280,11 @@ services:
     labels:
       - 'logging=true'
     logging: *default-logging
-  # Modified only used for cleanup as we do not have services that modify resources
   modified:
     image: lblod/track-modified-service:0.2.0
     environment:
       CLEANUP_DUPLICATES_CRON: 16 * * * *
+      CLEANUP_AT_START: "true"
     labels:
       - "logging=true"
     volumes:
@@ -301,7 +301,6 @@ services:
     environment:
       LDES_STREAM_PREFIX: "https://dev.openproceshuis.lblod.info/streams/ldes/"
       TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
-      PAGE_RESOURCES_COUNT: "50"
       DATA_FOLDER: "/data"
       LDES_FOLDER: "public"
       AUTHENTICATED_LDES_FEED: false
@@ -318,7 +317,7 @@ services:
       CRON_HEALING: "0 0 0 * * *" # Every day at midnight
       AUTO_HEALING: "true"
       FOLDER_DEPTH: "1"
-      PAGE_RESOURCES_COUNT: "50"
+      PAGE_RESOURCES_COUNT: "10"
       LDES_STREAM_PREFIX: "https://dev.openproceshuis.lblod.info/streams/ldes/"
       LDES_BASE: "https://dev.openproceshuis.lblod.info/streams/ldes/"
       TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
@@ -328,7 +327,7 @@ services:
       CRON_CHECKPOINT: "0 5 1 * *" # At 05:00 on day-of-month 1
       SUDO_QUERY_RETRY_TIMEOUT_INCREMENT_FACTOR: 0.003
       SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: 429,500,502,503,504
-      MAX_PAGE_SIZE_BYTES: 10000000
+      MAX_PAGE_SIZE_BYTES: 2500000
       INITIAL_STATE_LIMIT: 10000
       DIRECT_DB_ENDPOINT: "http://virtuoso:8890/sparql"
       WRITE_INITIAL_STATE: "false"
