@@ -2,7 +2,7 @@
 openapi: 3.0.0
 info:
   title: 'Open Proces Huis'
-  description: 'Manage your processes in OPH. Update existing or create processes in your administrative-unit.'
+  description: 'Manage your processes in OPH. Update existing or create processes in your administrative-unit. For using this swagger documentation with the try it out button you will first have to login in into the correct environment to receive session-token. '
   version: 0.0.0
   contact:
     name: Support
@@ -136,7 +136,7 @@ paths:
   /files:
     post:
       servers:
-        - url: http://localhost/files
+        - url: http://localhost
           description: Upload a file to your local setup
         - url: https://dev.openproceshuis.lblod.info
           description: Upload a file to to the development environment
@@ -164,26 +164,26 @@ paths:
                 foo:
                   value:
                     {
-                    "data": {
-                      "type": "files",
-                      "id": "693adbc24426fd000d000000",
-                      "attributes": {
-                        "name": "my-diagram.bpmn",
-                        "format": "text/plain; charset=utf-8",
-                        "size": 3156,
-                        "extension": "bpmn"
-                      }
-                    },
-                    "links": {
-                      "self": "/files/693adbc24426fd000d000000"
+                      'data':
+                        {
+                          'type': 'files',
+                          'id': '693adbc24426fd000d000000',
+                          'attributes':
+                            {
+                              'name': 'my-diagram.bpmn',
+                              'format': 'text/plain; charset=utf-8',
+                              'size': 3156,
+                              'extension': 'bpmn',
+                            },
+                        },
+                      'links': { 'self': '/files/693adbc24426fd000d000000' },
                     }
-                  }
         '401':
           $ref: '#/components/responses/UnauthorizedError'
   /files/{fileId}:
     delete:
       servers:
-        - url: http://localhost/files
+        - url: http://localhost
           description: Upload a file to your local setup
         - url: https://dev.openproceshuis.lblod.info
           description: Upload a file to to the development environment
