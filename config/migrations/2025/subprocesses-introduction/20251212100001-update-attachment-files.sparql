@@ -1,7 +1,6 @@
 PREFIX nfo:     <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
 PREFIX nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
 PREFIX dpv:     <https://w3id.org/dpv#>
-PREFIX dbpedia: <http://dbpedia.org/ontology/>
 PREFIX schema:  <http://schema.org/>
 
 INSERT {
@@ -11,11 +10,14 @@ INSERT {
 }
 WHERE {
   GRAPH ?g {
-    ?attachmentFile a nfo:FileDataObject ;
-                    dbpedia:fileExtension ?ext ;
-                    nie:isPartOf ?process .
+    ?attachmentFile a nfo:FileDataObject .
     ?process a dpv:Process .
-  }
 
-  FILTER( !(LCASE(STR(?ext)) IN ("bpmn", "vsdx")) )
+    ?attachmentFile nie:isPartOf ?process .
+
+    FILTER NOT EXISTS {
+      ?item a schema:ListItem .
+      ?item schema:item ?attachmentFile .
+    }
+  }
 }
