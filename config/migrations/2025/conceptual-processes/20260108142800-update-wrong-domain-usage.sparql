@@ -1,0 +1,15 @@
+DELETE {
+  GRAPH ?g {
+    ?s ?p <http://data.lblod.info/process-domains/0bf30c65-cbe2-4c79-a1c1-2abf4ab0ca21> .
+  }
+}
+INSERT {
+  GRAPH ?g {
+    ?s ?p <http://data.lblod.info/process-domains/423d166a-6278-4a38-a47a-54bc74f7e491> .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?s ?p <http://data.lblod.info/process-domains/0bf30c65-cbe2-4c79-a1c1-2abf4ab0ca21> .
+  }
+}
