@@ -238,11 +238,11 @@ components:
           type: string
           description: 'Describe what the process is about.'
           example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
-        contact:
+        email:
           type: string
           description: 'Email of person that can be contacted about the process.'
           example: 'contact@administrativeUnit.com'
-        linkedInventoryProcess:
+        linked-concept:
           type: string
           description: 'Inventory process URI that this process is related to.'
           example: 'http://data.lblod.info/conceptual-processes/123456789'
@@ -298,11 +298,11 @@ components:
           type: string
           description: 'Describe what the process is about.'
           example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
-        contact:
+        email:
           type: string
           description: 'Email of person that can be contacted about the process.'
           example: 'contact@administrativeUnit.com'
-        linkedInventoryProcess:
+        linked-concept:
           type: string
           description: 'Inventory process URI that this process is related to.'
           example: 'http://data.lblod.info/conceptual-processes/123456789'
@@ -345,8 +345,8 @@ components:
         - '@id'
         - 'title'
         - 'description'
-        - 'contact'
-        - 'linkedInventoryProcess'
+        - 'email'
+        - 'linked-concept'
         - 'users'
         - 'diagrams'
         - 'attachments'
@@ -365,11 +365,11 @@ components:
           type: string
           description: 'Describe what the process is about.'
           example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
-        contact:
+        email:
           type: string
           description: 'Email of person that can be contacted about the process.'
           example: 'contact@administrativeUnit.com'
-        linkedInventoryProcess:
+        linked-concept:
           type: string
           description: 'Inventory process URI that this process is related to.'
           example: 'http://data.lblod.info/conceptual-processes/123456789'
