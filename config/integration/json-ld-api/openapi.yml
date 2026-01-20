@@ -150,7 +150,7 @@ paths:
                   description: 'Uri of the file.'
             example:
               '@id': 'http://data.lblod.info/processes/123456789'
-              fileUri: 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
+              fileUri: 'http://mu.semte.ch/services/file-service/files/123456789'
       responses:
         '204':
           description: 'No content'
@@ -289,8 +289,8 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
-              'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
         attachments:
           type: array
@@ -300,8 +300,8 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.pdf',
-              'http://mu.semte.ch/services/file-service/files/987654321.csv',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
     PatchProcess:
       required:
@@ -349,8 +349,8 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
-              'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
         attachments:
           type: array
@@ -360,8 +360,8 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.pdf',
-              'http://mu.semte.ch/services/file-service/files/987654321.csv',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
     PutProcess:
       required:
@@ -416,8 +416,8 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
-              'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
         attachments:
           type: array
@@ -427,6 +427,6 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.pdf',
-              'http://mu.semte.ch/services/file-service/files/987654321.csv',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
