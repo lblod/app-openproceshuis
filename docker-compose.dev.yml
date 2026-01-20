@@ -41,3 +41,5 @@ services:
   vendor-api:
     image: lblod/vendor-api-openproceshuis-service:latest
     restart: no
+    environment:
+      LOG_LEVEL: 'debug'
