@@ -21,8 +21,31 @@ tags:
     description: Create and update actions on processes in Open Proces Huis
   - name: Files
     description: Uploading and deleting diagrams and attachments used in Open Proces Huis
+  - name: Act on behalf of
+    description: As a vendor you can manage the data in other organizations by impersonating.
 
 paths:
+  /act-on-behalf-of:
+    post:
+      operationId: impersonate
+      summary: 'Manage an organization as the vendor.'
+      tags:
+        - Act on behalf of
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              foo:
+                value:
+                  {
+                    'bestuurseenheidUri': 'http://data.lblod.info/id/bestuurseenheden/123456789',
+                  }
+      responses:
+        '201':
+          description: 'Created'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
   /processes:
     post:
       operationId: postProcess
