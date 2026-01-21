@@ -49,7 +49,9 @@
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
   :dpv "https://w3id.org/dpv#"
-  :oph "http://lblod.data.gift/vocabularies/openproceshuis/")
+  :oph "http://lblod.data.gift/vocabularies/openproceshuis/"
+  :icr "http://example.org/icr/"
+  :prov "http://www.w3.org/ns/prov#")
 
 ;;;;;;;;;;;;;
 ;;; User roles
@@ -102,7 +104,7 @@
               FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             }
           }")
-          
+
 (supply-allowed-group "admin"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           SELECT DISTINCT ?session_role WHERE {
@@ -120,7 +122,7 @@
 (grant (read)
        :to-graph public
        :for-allowed-group "public")
-       
+
 (grant (read)
        :to-graph shared
        :for-allowed-group "shared-processes-reader")
@@ -207,7 +209,9 @@
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
   ("skos:Concept" -> _)
-  ("nfo:Bookmark" -> _))
+  ("nfo:Bookmark" -> _)
+  ("icr:InformationAsset" -> _))
+
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
   ;; bpmn-element-type
