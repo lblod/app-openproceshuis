@@ -259,6 +259,7 @@
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
+  ("skos:Concept" -> _)
   ("nfo:Bookmark" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
@@ -275,7 +276,8 @@
   ("skos:ConceptScheme" -> _))
 
 (define-graph inventory ("http://mu.semte.ch/graphs/inventory")
-  ("oph:ConceptueelProces" -> _))
+  ("oph:ConceptueelProces" -> _)
+  ("skos:Concept" -> _))
 
 (define-graph job ("http://mu.semte.ch/graphs/bpmn-job")
   ("cogs:Job" -> _))
