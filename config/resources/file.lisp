@@ -13,8 +13,6 @@
   :has-one `((file :via ,(s-prefix "nie:dataSource")
                    :inverse t
                    :as "download"))
-  :has-many `((process :via ,(s-prefix "nie:isPartOf")
-                       :as "processes")) ; TODO: remove after finising implementation subprocesses
   :resource-base (s-url "http://data.lblod.info/files/")
   :features `(include-uri)
   :on-path "files")
