@@ -23,7 +23,7 @@
                                :as "process-statistics")
              (conceptualProcess :via ,(s-prefix "dct:source")
                                :as "linked-concept"))
-  :has-many `((diagram-lists :via ,(s-prefix "schema:hasPart")
+  :has-many `((diagram-list :via ,(s-prefix "schema:hasPart")
                     :as "diagram-lists")
               (file :via ,(s-prefix "schema:associatedMedia")
                     :as "attachments")
@@ -43,7 +43,7 @@
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
-(define-resource diagram-lists()
+(define-resource diagram-list()
   :class (s-prefix "schema:ItemList")
   :properties `((:order :url ,(s-prefix "schema:itemListOrder"))
                 (:version :string ,(s-prefix "schema:version"))
@@ -51,8 +51,8 @@
                 (:modified :datetime ,(s-prefix "dct:modified")))
   :has-many `((list-item :via ,(s-prefix "schema:itemListElement")
                         :as "diagrams"))
-  :resource-base (s-url "http://data.lblod.info/lists/")
-  :on-path "lists")
+  :resource-base (s-url "http://data.lblod.info/diagram-lists/")
+  :on-path "diagram-lists")
 
 (define-resource list-item()
   :class (s-prefix "schema:ListItem")
