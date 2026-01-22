@@ -1,36 +1,36 @@
-PREFIX mu:      <http://mu.semte.ch/vocabularies/core/>
-PREFIX nfo:     <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
-PREFIX nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
-PREFIX dpv:     <https://w3id.org/dpv#>
+PREFIX mu:<http://mu.semte.ch/vocabularies/core/>
+PREFIX nfo:<http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
+PREFIX nie:<http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+PREFIX dpv:<https://w3id.org/dpv#>
 PREFIX dbpedia: <http://dbpedia.org/ontology/>
-PREFIX schema:  <http://schema.org/>
-PREFIX dct:     <http://purl.org/dc/terms/>
+PREFIX schema: <https://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
 
 INSERT {
   GRAPH ?g {
     ?process schema:hasPart ?list .
 
     ?list a schema:ItemList ;
-          mu:uuid ?listUuid ;
-          schema:itemListElement ?item ;
-          schema:itemListOrder schema:ItemListUnordered ;
-          dct:created ?created ;
-          dct:modified ?modified .
+      mu:uuid ?listUuid ;
+      schema:itemListElement ?item ;
+      schema:itemListOrder schema:ItemListUnordered ;
+      dct:created ?created ;
+      dct:modified ?modified .
 
     ?item a schema:ListItem ;
-          mu:uuid ?itemUuid ;
-          schema:item ?diagramFile ;
-          dct:created ?created ;
-          dct:modified ?modified .
+      mu:uuid ?itemUuid ;
+      schema:item ?diagramFile ;
+      dct:created ?created ;
+      dct:modified ?modified .
   }
 }
 WHERE {
   GRAPH ?g {
     ?diagramFile a nfo:FileDataObject ;
-                 dbpedia:fileExtension ?ext ;
-                 nie:isPartOf ?process ;
-                 dct:created ?created ;
-                 dct:modified ?modified .
+      dbpedia:fileExtension ?ext ;
+      nie:isPartOf ?process ;
+      dct:created ?created ;
+      dct:modified ?modified .
     ?process a dpv:Process .
   }
 
