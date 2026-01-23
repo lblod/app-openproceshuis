@@ -50,7 +50,7 @@
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
   :dpv "https://w3id.org/dpv#"
   :oph "http://lblod.data.gift/vocabularies/openproceshuis/"
-  :icr "http://example.org/icr/"
+  :icr "http://lblod.data.gift/vocabularies/informationclassification/"
   :prov "http://www.w3.org/ns/prov#")
 
 ;;;;;;;;;;;;;
@@ -260,7 +260,8 @@
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
   ("skos:Concept" -> _)
-  ("nfo:Bookmark" -> _))
+  ("nfo:Bookmark" -> _)
+  ("icr:InformationAsset" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("besluit:Bestuurseenheid" -> _)
