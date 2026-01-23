@@ -209,7 +209,7 @@ services:
       - "logging=true"
     logging: *default-logging
   m2m:
-    image: lblod/m2m-login-service
+    image: lblod/m2m-login-service:0.1.0
     environment:
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
       MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
@@ -219,7 +219,7 @@ services:
       - "logging=true"
     logging: *default-logging
   vendor-api:
-    image: lblod/vendor-api-openproceshuis-service:0.0.0
+    image: lblod/vendor-api-openproceshuis-service:0.0.1
     restart: always
     environment:
       ALLOW_MU_AUTH_SUDO: true

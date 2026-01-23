@@ -21,8 +21,31 @@ tags:
     description: Create and update actions on processes in Open Proces Huis
   - name: Files
     description: Uploading and deleting diagrams and attachments used in Open Proces Huis
+  - name: Act on behalf of
+    description: As a vendor you can manage the data in other organizations by impersonating.
 
 paths:
+  /act-on-behalf-of:
+    post:
+      operationId: impersonate
+      summary: 'Manage an organization as the vendor.'
+      tags:
+        - Act on behalf of
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              foo:
+                value:
+                  {
+                    'bestuurseenheidUri': 'http://data.lblod.info/id/bestuurseenheden/123456789',
+                  }
+      responses:
+        '201':
+          description: 'Created'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
   /processes:
     post:
       operationId: postProcess
@@ -127,7 +150,7 @@ paths:
                   description: 'Uri of the file.'
             example:
               '@id': 'http://data.lblod.info/processes/123456789'
-              fileUri: 'http://mu.semte.ch/services/file-service/files/123456789.bpmn'
+              fileUri: 'http://mu.semte.ch/services/file-service/files/123456789'
       responses:
         '204':
           description: 'No content'
@@ -238,11 +261,11 @@ components:
           type: string
           description: 'Describe what the process is about.'
           example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
-        contact:
+        email:
           type: string
           description: 'Email of person that can be contacted about the process.'
           example: 'contact@administrativeUnit.com'
-        linkedInventoryProcess:
+        linked-concept:
           type: string
           description: 'Inventory process URI that this process is related to.'
           example: 'http://data.lblod.info/conceptual-processes/123456789'
@@ -266,8 +289,8 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
-              'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
         attachments:
           type: array
@@ -277,8 +300,8 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.pdf',
-              'http://mu.semte.ch/services/file-service/files/987654321.csv',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
     PatchProcess:
       required:
@@ -298,11 +321,11 @@ components:
           type: string
           description: 'Describe what the process is about.'
           example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
-        contact:
+        email:
           type: string
           description: 'Email of person that can be contacted about the process.'
           example: 'contact@administrativeUnit.com'
-        linkedInventoryProcess:
+        linked-concept:
           type: string
           description: 'Inventory process URI that this process is related to.'
           example: 'http://data.lblod.info/conceptual-processes/123456789'
@@ -326,8 +349,8 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
-              'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
         attachments:
           type: array
@@ -337,16 +360,16 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.pdf',
-              'http://mu.semte.ch/services/file-service/files/987654321.csv',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
     PutProcess:
       required:
         - '@id'
         - 'title'
         - 'description'
-        - 'contact'
-        - 'linkedInventoryProcess'
+        - 'email'
+        - 'linked-concept'
         - 'users'
         - 'diagrams'
         - 'attachments'
@@ -365,11 +388,11 @@ components:
           type: string
           description: 'Describe what the process is about.'
           example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
-        contact:
+        email:
           type: string
           description: 'Email of person that can be contacted about the process.'
           example: 'contact@administrativeUnit.com'
-        linkedInventoryProcess:
+        linked-concept:
           type: string
           description: 'Inventory process URI that this process is related to.'
           example: 'http://data.lblod.info/conceptual-processes/123456789'
@@ -393,8 +416,8 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.bpmn',
-              'http://mu.semte.ch/services/file-service/files/987654321.bpmn',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
         attachments:
           type: array
@@ -404,6 +427,6 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789.pdf',
-              'http://mu.semte.ch/services/file-service/files/987654321.csv',
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
             ]
