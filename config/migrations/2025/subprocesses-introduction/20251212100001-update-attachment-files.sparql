@@ -1,23 +1,43 @@
-PREFIX nfo:     <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
-PREFIX nie:     <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
-PREFIX dpv:     <https://w3id.org/dpv#>
-PREFIX schema:  <http://schema.org/>
+PREFIX mu:<http://mu.semte.ch/vocabularies/core/>
+PREFIX nfo:<http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
+PREFIX nie:<http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+PREFIX dpv:<https://w3id.org/dpv#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
 
-INSERT {
-  GRAPH ?g {
-    ?process schema:associatedMedia ?attachmentFile .
+delete {
+  graph ?g {
+    ?file nie:isPartOf ?process .
   }
 }
-WHERE {
-  GRAPH ?g {
-    ?attachmentFile a nfo:FileDataObject .
-    ?process a dpv:Process .
-
-    ?attachmentFile nie:isPartOf ?process .
-
-    FILTER NOT EXISTS {
-      ?item a schema:ListItem .
-      ?item schema:item ?attachmentFile .
-    }
+insert {
+  graph ?g {
+    ?process schema:associatedMedia ?file .
   }
+}
+where {
+  {{
+    graph <http://mu.semte.ch/graphs/shared> {
+      ?file a nfo:FileDataObject .
+      ?file dbpedia:fileExtension ?fileExtension .
+      ?file nie:isPartOf ?process .
+      FILTER(LCASE(STR(?fileExtension)) NOT IN ("bpmn", "vsdx"))
+      {
+        select distinct ?process ?g
+        where {
+          GRAPH ?g {
+            ?process a dpv:Process .
+            ?process mu:uuid ?processId .
+          }
+          FILTER (?g NOT IN(
+            <http://mu.semte.ch/graphs/transformed-ldes-data>,
+            <http://mu.semte.ch/graphs/ldes-dump>
+          ))
+        }
+      }
+      ?file dct:created ?created .
+      ?file dct:modified ?modified .
+    }
+  }}
 }
