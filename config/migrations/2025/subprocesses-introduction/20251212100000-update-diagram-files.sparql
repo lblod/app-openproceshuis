@@ -45,7 +45,7 @@ where {
           BIND(SHA256(CONCAT(?processId, STRUUID())) AS ?listId)
           BIND(IRI(CONCAT("http://data.lblod.info/diagram-lists/", ?listId)) AS ?list)
           BIND(SHA256(CONCAT(?listId, STRUUID())) AS ?listItemId)
-          BIND(IRI(CONCAT("http://data.lblod.info/list-items/", ?listItemId)) AS ?listItem)
+          BIND(IRI(CONCAT("http://data.lblod.info/diagram-list-items/", ?listItemId)) AS ?listItem)
         }
       }
       ?file dct:created ?created .

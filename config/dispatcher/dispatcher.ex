@@ -105,8 +105,8 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/diagram-lists/"
   end
 
-  match "/list-items/*path", %{ accept: [:json], layer: :api } do
-    Proxy.forward conn, path, "http://cache/list-items/"
+  match "/diagram-list-items/*path", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, path, "http://cache/diagram-list-items/"
   end
 
   ###############################################################
