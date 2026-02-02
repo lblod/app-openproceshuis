@@ -9,14 +9,9 @@
                 (:version :string ,(s-prefix "schema:version"))
                 (:created :datetime ,(s-prefix "dct:created"))
                 (:modified :datetime ,(s-prefix "dct:modified"))
-                (:status :url ,(s-prefix "adms:status")))
-  :has-one `((file :via ,(s-prefix "nie:dataSource")
-                   :inverse t
-                   :as "download")
-              (informationAsset :via ,(s-prefix "schema:associatedMedia")
+                (:status :url ,(s-prefix "adms:status"))) 
+  :has-one `((informationAsset :via ,(s-prefix "schema:associatedMedia")
                   :as "information-asset"))
-  :has-many `((process :via ,(s-prefix "nie:isPartOf")
-                       :as "processes")) ; TODO: remove after finising implementation subprocesses
   :resource-base (s-url "http://data.lblod.info/files/")
   :features `(include-uri)
   :on-path "files")
