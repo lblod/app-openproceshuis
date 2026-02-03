@@ -96,16 +96,25 @@
             (process
              :via ,(s-prefix "icr:hasInformationAsset")
              :inverse t
-             :as "processes"))
+             :as "processes")
+    (file :via ,(s-prefix "schema:associatedMedia")
+                    :inverse t
+                    :as "attachments")
+    (link :via ,(s-prefix "rdfs:seeAlso")
+                    :as "links"))
   :resource-base (s-url "http://data.lblod.info/information-assets/")
   :on-path "information-assets")
+
   (define-resource link ()
   :class (s-prefix "nfo:Bookmark")
   :properties `((:label :string ,(s-prefix "skos:prefLabel"))
                 (:href :string ,(s-prefix "nie:links")))
   :has-one `((process :via ,(s-prefix "rdfs:seeAlso")
                       :inverse t
-                      :as "process"))
+                      :as "process")
+            (informationAsset :via ,(s-prefix "rdfs:seeAlso")
+                      :inverse t
+                      :as "information-asset"))
   :resource-base (s-url "http://data.lblod.info/links/")
   :on-path "links")
 ;; -------------------------------------------------------------------------------------
