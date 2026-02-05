@@ -236,7 +236,7 @@ services:
     environment:
       API_URL: "https://api.ipdc.tni-vlaanderen.be"
       API_KEY: "secret"
-      REQUIRED_ROLES: ""
+      REQUIRED_ROLES: "LoketLB-OpenProcesHuisGebruiker,LoketLB-OpenProcesHuisAfnemer"
       ALLOWED_ORIGIN: "*"
     restart: always
     labels:
