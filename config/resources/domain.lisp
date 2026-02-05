@@ -85,18 +85,16 @@
   :has-one `((informationAsset :via ,(s-prefix "prov:wasRevisionOf")
                               :as "previous-version")
             (group :via ,(s-prefix "dct:creator")
-            :as "creator"))
+                              :as "creator"))
   :has-many `(
     (informationAsset :via ,(s-prefix "prov:wasRevisionOf")
-                              :as "previous-versions")
-    (informationAsset
-             :via ,(s-prefix "prov:wasRevisionOf")
-             :inverse t
-             :as "next-versions")
-            (process
-             :via ,(s-prefix "icr:hasInformationAsset")
-             :inverse t
-             :as "processes")
+                    :as "previous-versions")
+    (informationAsset :via ,(s-prefix "prov:wasRevisionOf")
+                    :inverse t
+                    :as "next-versions")
+    (process :via ,(s-prefix "icr:hasInformationAsset")
+                    :inverse t
+                    :as "processes")
     (file :via ,(s-prefix "schema:associatedMedia")
                     :inverse t
                     :as "attachments")
