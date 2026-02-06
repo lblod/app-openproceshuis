@@ -74,6 +74,7 @@
   :properties `((:title :string ,(s-prefix "dct:title"))
                 (:description :string ,(s-prefix "dct:description"))
                 (:created :datetime ,(s-prefix "dct:created"))
+                (:modified :datetime ,(s-prefix "dct:modified"))
                 (:status :url ,(s-prefix "adms:status"))
                 (:confidentiality-score :number ,(s-prefix "icr:confidentialityScore"))
                 (:integrity-score :number ,(s-prefix "icr:integrityScore"))
@@ -84,19 +85,34 @@
   :has-one `((informationAsset :via ,(s-prefix "prov:wasRevisionOf")
                               :as "previous-version")
             (group :via ,(s-prefix "dct:creator")
-            :as "creator"))
-  :has-many `((process :via ,(s-prefix "icr:hasInformationAsset")
-                       :inverse t
-                       :as "processes"))
+                              :as "creator"))
+  :has-many `(
+    (informationAsset :via ,(s-prefix "prov:wasRevisionOf")
+                    :as "previous-versions")
+    (informationAsset :via ,(s-prefix "prov:wasRevisionOf")
+                    :inverse t
+                    :as "next-versions")
+    (process :via ,(s-prefix "icr:hasInformationAsset")
+                    :inverse t
+                    :as "processes")
+    (file :via ,(s-prefix "schema:associatedMedia")
+                    :inverse t
+                    :as "attachments")
+    (link :via ,(s-prefix "rdfs:seeAlso")
+                    :as "links"))
   :resource-base (s-url "http://data.lblod.info/information-assets/")
   :on-path "information-assets")
+
   (define-resource link ()
   :class (s-prefix "nfo:Bookmark")
   :properties `((:label :string ,(s-prefix "skos:prefLabel"))
                 (:href :string ,(s-prefix "nie:links")))
   :has-one `((process :via ,(s-prefix "rdfs:seeAlso")
                       :inverse t
-                      :as "process"))
+                      :as "process")
+            (informationAsset :via ,(s-prefix "rdfs:seeAlso")
+                      :inverse t
+                      :as "information-asset"))
   :resource-base (s-url "http://data.lblod.info/links/")
   :on-path "links")
 ;; -------------------------------------------------------------------------------------
