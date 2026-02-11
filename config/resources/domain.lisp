@@ -109,10 +109,11 @@
                 (:href :string ,(s-prefix "nie:links")))
   :has-one `((process :via ,(s-prefix "rdfs:seeAlso")
                       :inverse t
-                      :as "process")
-            (informationAsset :via ,(s-prefix "rdfs:seeAlso")
+                      :as "process"))
+  :has-many `(
+      (informationAsset :via ,(s-prefix "rdfs:seeAlso")
                       :inverse t
-                      :as "information-asset"))
+                      :as "information-assets"))
   :resource-base (s-url "http://data.lblod.info/links/")
   :on-path "links")
 ;; -------------------------------------------------------------------------------------
