@@ -3,11 +3,11 @@ openapi: 3.0.0
 info:
   title: 'Open Proces Huis'
   description: 'Manage your processes in OPH. Update existing or create processes in your administrative-unit. For using this swagger documentation with the try it out button you will first have to login in into the correct environment to receive session-token. '
-  version: 0.0.0
+  version: 0.0.3
   contact:
     name: Support
     email: loketlokaalbestuur@vlaanderen.be
-    url: https://abb-vlaanderen.gitbook.io/informatie-oph
+    url: https://abb-vlaanderen.gitbook.io/informatie-oph/technische-integratie-met-open-proces-huis/technische-integratie-met-open-proces-huis
 externalDocs:
   description: Find out more about the API on Github
   url: https://github.com/lblod/vendor-api-openproceshuis
@@ -23,8 +23,24 @@ tags:
     description: Uploading and deleting diagrams and attachments used in Open Proces Huis
   - name: Act on behalf of
     description: As a vendor you can manage the data in other organizations by impersonating.
+  - name: Authentication
+    description: Validate the authentication status
 
 paths:
+  /auth/has-valid-session:
+    get:
+      operationId: hasValidSession
+      summary: 'Validate if the session is still active.'
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: 'Ok'
+          content:
+            application/json:
+              examples:
+                foo:
+                  value: { isValid: true }
   /act-on-behalf-of:
     post:
       operationId: impersonate

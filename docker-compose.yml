@@ -6,7 +6,7 @@ x-logging: &default-logging
 
 services:
   frontend:
-    image: lblod/frontend-openproceshuis:1.5.0
+    image: lblod/frontend-openproceshuis:1.5.1
     environment:
       EMBER_OAUTH_API_REDIRECT_URL: "https://openproceshuis.lblod.info/authorization/callback"
       EMBER_OAUTH_API_KEY: "aaf8877c-0975-4003-8db8-a9986355b80b"
@@ -219,7 +219,7 @@ services:
       - "logging=true"
     logging: *default-logging
   vendor-api:
-    image: lblod/vendor-api-openproceshuis-service:0.0.2
+    image: lblod/vendor-api-openproceshuis-service:0.0.3
     restart: always
     environment:
       ALLOW_MU_AUTH_SUDO: true
