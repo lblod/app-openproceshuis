@@ -1,0 +1,68 @@
+  PREFIX dpv: <https://w3id.org/dpv#>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
+  PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+  PREFIX dct: <http://purl.org/dc/terms/>
+
+  DELETE {
+    GRAPH ?userGraphs {
+      ?process ?icrPredicate ?icrValue .
+      ?process icr:hasControlMeasure ?icrHasControl .
+      ?process icr:additionalInformation ?icrDescription .
+      ?skosIcr ?skosIcrPredicate ?skosIcrValue .
+    }
+  }
+  INSERT {
+    GRAPH ?userGraphs {
+      ?icrUri a icr:InformationAsset .
+      ?icrUri dct:title ?icrTitle .
+      ?icrUri dct:description ?icrDescription .
+      ?icrUri dct:created ?now .
+      ?icrUri dct:modified ?now .
+      ?icrUri ?icrPredicate ?icrValue .
+      ?icrUri dct:creator ?processCreator .
+
+      ?process icr:hasInformationAsset ?icrUri .
+    }
+  }
+  WHERE {
+    GRAPH <http://mu.semte.ch/graphs/shared> {
+      ?process a dpv:Process .
+      ?process mu:uuid ?processId .
+      ?process icr:isBlueprint "true"^^xsd:boolean .
+      ?process icr:hasInformationAsset ?skosIcr .
+      ?process dct:publisher ?processCreator .
+      OPTIONAL {
+        ?process ?icrPredicate ?icrValue .
+      }
+      FILTER(?icrPredicate IN(
+                              icr:confidentialityScore,
+                              icr:integrityScore,
+                              icr:availabilityScore,
+                              icr:containsPersonalData,
+                              icr:containsProfessionalData,
+                              icr:containsSensitivePersonalData
+                              )
+             )
+      OPTIONAL {
+        ?process icr:additionalInformation ?icrDescription .
+      }
+      OPTIONAL {
+        ?process icr:hasControlMeasure ?icrHasControl .
+      }
+
+      ?skosIcr skos:prefLabel ?icrTitle .
+      ?skosIcr ?skosIcrPredicate ?skosIcrValue .
+    }
+    GRAPH ?userGraphs {
+      ?process a dpv:Process .
+    }
+    FILTER(?userGraphs NOT IN(
+                              <http://mu.semte.ch/graphs/transformed-ldes-data>,
+                              <http://mu.semte.ch/graphs/ldes-dump>
+                              )
+           )
+    BIND(SHA256(CONCAT(?processId, STRUUID())) AS ?icrId)
+    BIND(IRI(CONCAT("http://data.lblod.info/information-assets/", ?icrId)) AS ?icrUri)
+    BIND(NOW() AS ?now)
+  }
