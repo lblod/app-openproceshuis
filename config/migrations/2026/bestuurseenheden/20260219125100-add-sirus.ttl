@@ -1,0 +1,13 @@
+@prefix mu: <http://mu.semte.ch/vocabularies/core/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix besluit: <http://data.vlaanderen.be/ns/besluit#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+
+<http://data.lblod.info/id/bestuurseenheden/87c3df12-7f01-4897-bf41-6f577b090513>
+  mu:uuid "87c3df12-7f01-4897-bf41-6f577b090513" ;
+  rdf:type besluit:Bestuurseenheid ;
+  skos:prefLabel "Sirus" ;
+  dct:identifier "0841451739" ;
+  org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/c4483583-f9fe-4d2f-96f4-47ddb3440d71> . # Leverancier
