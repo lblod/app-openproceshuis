@@ -21,6 +21,7 @@ Mock accounts are generated for each bestuur. Depending on `rules.json`, account
 | Digitaal Vlaanderen                        | http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/4d79a18a-7a46-4b03-8712-3bcf3467787b |
 | Leverancier                                | http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/c4483583-f9fe-4d2f-96f4-47ddb3440d71 |
 | Vereniging van Vlaamse Steden en Gemeenten | http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/fd4dda91-a6a5-485a-9d49-1378c94a5ff0 |
+| Agentschap Facilitair Bedrijf              | http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/548ce228-22ac-491f-9481-9dc31c8a5836 |
 
 ### `OpenProcesHuis-Procesbeheerder`
 
@@ -34,6 +35,7 @@ Mock accounts are generated for each bestuur. Depending on `rules.json`, account
 | Digitaal Vlaanderen                        | http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/4d79a18a-7a46-4b03-8712-3bcf3467787b |
 | Leverancier                                | http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/c4483583-f9fe-4d2f-96f4-47ddb3440d71 |
 | Vereniging van Vlaamse Steden en Gemeenten | http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/fd4dda91-a6a5-485a-9d49-1378c94a5ff0 |
+| Agentschap Facilitair Bedrijf              | http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/548ce228-22ac-491f-9481-9dc31c8a5836 |
 
 ### `LoketLB-admin`
 
