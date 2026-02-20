@@ -61,9 +61,8 @@
 (supply-allowed-group "shared-processes-reader"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
-          PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
           SELECT DISTINCT ?session_group WHERE {
-            <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
+            <SESSION_ID> ext:sessionGroup / mu:uuid ?session_group;
                          ext:sessionRole ?role.
             FILTER(?role IN (\"Medewerker-fixed\", \"OpenProcesHuis-Lezer\"))
           }")
@@ -98,10 +97,10 @@
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
           SELECT DISTINCT ?session_group WHERE {
             {
-              <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
+              <SESSION_ID> ext:sessionGroup / mu:uuid ?session_group;
                            ext:sessionRole ?role.
             } UNION {
-              <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
+              <SESSION_ID> ext:originalSessionGroup / mu:uuid ?session_group;
                            ext:originalSessionRole ?role.
             }
             FILTER(?role IN (\"OpenProcesHuis-Procesbeheerder\", \"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
