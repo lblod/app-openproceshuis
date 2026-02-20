@@ -7,45 +7,24 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 
 DELETE {
   graph ?userGraphs {
-    ?process icr:confidentialityScore ?confidentialityScore .
-    ?process icr:integrityScore ?integrityScore .
-    ?process icr:availabilityScore ?availabilityScore .
-    ?process icr:containsPersonalData ?containsPersonalData .
-    ?process icr:containsProfessionalData ?containsProfessionalData .
-    ?process icr:containsSensitivePersonalData ?containsSensitivePersonalData .
-    ?process icr:additionalInformation ?additionalInformation .
-    ?process icr:hasControlMeasure ?hasControlMeasure .
+    ?process ?icrPredicate ?icrValue .
   }
 }
 where {
+  values ?icrPredicate {
+    icr:confidentialityScore
+    icr:integrityScore
+    icr:availabilityScore
+    icr:containsPersonalData
+    icr:containsProfessionalData
+    icr:containsSensitivePersonalData
+    icr:additionalInformation
+    icr:hasControlMeasure
+  }
   graph <http://mu.semte.ch/graphs/shared> {
     ?process a dpv:Process .
     OPTIONAL {
-      ?process icr:confidentialityScore ?confidentialityScore .
-    }
-    OPTIONAL {
-      ?process icr:integrityScore ?integrityScore .
-    }
-    OPTIONAL {
-      ?process icr:availabilityScore ?availabilityScore .
-    }
-    OPTIONAL {
-      ?process icr:containsPersonalData ?containsPersonalData .
-    }
-    OPTIONAL {
-      ?process icr:containsProfessionalData ?containsProfessionalData .
-    }
-    OPTIONAL {
-      ?process icr:containsProfessionalData ?containsProfessionalData .
-    }
-    OPTIONAL {
-      ?process icr:containsSensitivePersonalData ?containsSensitivePersonalData .
-    }
-    OPTIONAL {
-      ?process icr:additionalInformation ?additionalInformation .
-    }
-    OPTIONAL {
-      ?process icr:hasControlMeasure ?hasControlMeasure .
+      ?process ?icrPredicate ?icrValue .
     }
   }
   GRAPH ?userGraphs {
