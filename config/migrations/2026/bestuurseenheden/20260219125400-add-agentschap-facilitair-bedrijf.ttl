@@ -1,7 +1,0 @@
-@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix skos:	<http://www.w3.org/2004/02/skos/core#> .
-
-<http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/548ce228-22ac-491f-9481-9dc31c8a5836>
-	rdf:type	<http://lblod.data.gift/vocabularies/organisatie/BestuurseenheidClassificatieCode> , <http://mu.semte.ch/vocabularies/ext/OrganizationClassificationCode> ;
-	skos:prefLabel	"Agentschap Facilitair Bedrijf" ;
-	<http://mu.semte.ch/vocabularies/core/uuid>	"548ce228-22ac-491f-9481-9dc31c8a5836" .
