@@ -10,3 +10,6 @@ docker-compose.override.yml
 /data/ldes-feed/*
 /backups/*
 update-handler.store
+
+.vscode
+.vscode/*

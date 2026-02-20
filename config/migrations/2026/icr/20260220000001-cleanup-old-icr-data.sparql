@@ -1,0 +1,58 @@
+PREFIX dpv: <https://w3id.org/dpv#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+DELETE {
+  graph ?userGraphs {
+    ?process ?icrPredicate ?icrValue .
+  }
+}
+where {
+  values ?icrPredicate {
+    icr:confidentialityScore
+    icr:integrityScore
+    icr:availabilityScore
+    icr:containsPersonalData
+    icr:containsProfessionalData
+    icr:containsSensitivePersonalData
+    icr:additionalInformation
+    icr:hasControlMeasure
+  }
+  graph <http://mu.semte.ch/graphs/shared> {
+    ?process a dpv:Process .
+    OPTIONAL {
+      ?process ?icrPredicate ?icrValue .
+    }
+  }
+  GRAPH ?userGraphs {
+    ?process a dpv:Process .
+  }
+  FILTER(?userGraphs NOT IN(
+                            <http://mu.semte.ch/graphs/transformed-ldes-data>,
+                            <http://mu.semte.ch/graphs/ldes-dump>
+                            )
+          )
+}
+
+;
+
+DELETE {
+  GRAPH ?userGraphs {
+    ?icr ?icrPredicate ?icrValue .
+  }
+}
+WHERE {
+  GRAPH ?userGraphs {
+    ?icr a skos:Concept .
+    ?icr ?icrPredicate ?icrValue .
+    FILTER(STRSTARTS(STR(?icr), "http://data.lblod.info/information-assets/"))
+  }
+  FILTER(?userGraphs NOT IN(
+                            <http://mu.semte.ch/graphs/transformed-ldes-data>,
+                            <http://mu.semte.ch/graphs/ldes-dump>
+                            )
+          )
+}
