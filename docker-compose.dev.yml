@@ -35,6 +35,7 @@ services:
       LDES_STREAM_PREFIX: "http://localhost/streams/ldes/"
       LDES_BASE: "http://localhost/streams/ldes/"
   m2m:
+    image: lblod/m2m-login-service:latest
     restart: "no"
     environment:
       MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"

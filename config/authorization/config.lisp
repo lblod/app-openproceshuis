@@ -44,7 +44,6 @@
   :org "http://www.w3.org/ns/org#"
   :foaf "http://xmlns.com/foaf/0.1/"
   :bbo "https://www.irit.fr/recherches/MELODI/ontologies/BBO#"
-  :nfo "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
   :bboext "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
@@ -206,6 +205,8 @@
   ("bboext:Participant" -> _)
   ;; process-type
   ("dpv:Process" x> "ext:hasStatistics")
+  ("schema:ItemList" -> _)
+  ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
@@ -257,6 +258,8 @@
   ("bboext:Participant" -> _)
   ;; process-type
   ("dpv:Process" x> "ext:hasStatistics")
+  ("schema:ItemList" -> _)
+  ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
