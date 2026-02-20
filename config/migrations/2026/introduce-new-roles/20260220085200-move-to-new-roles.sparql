@@ -1,0 +1,31 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX ext:  <http://mu.semte.ch/vocabularies/ext/>
+
+DELETE {
+  GRAPH ?g {
+    ?account ext:sessionRole "LoketLB-OpenProcesHuisAfnemer" .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?account a foaf:OnlineAccount ;
+             ext:sessionRole "LoketLB-OpenProcesHuisAfnemer" .
+  }
+};
+
+DELETE {
+  GRAPH ?g {
+    ?account ext:sessionRole "LoketLB-OpenProcesHuisGebruiker" .
+  }
+}
+INSERT {
+  GRAPH ?g {
+    ?account ext:sessionRole "OpenProcesHuis-Procesbeheerder" .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?account a foaf:OnlineAccount ;
+             ext:sessionRole "LoketLB-OpenProcesHuisGebruiker" .
+  }
+}

@@ -1,0 +1,37 @@
+PREFIX mu:     <http://mu.semte.ch/vocabularies/core/>
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX besluit:<http://data.vlaanderen.be/ns/besluit#>
+PREFIX skos:   <http://www.w3.org/2004/02/skos/core#>
+PREFIX dct:    <http://purl.org/dc/terms/>
+PREFIX org:    <http://www.w3.org/ns/org#>
+PREFIX orglbl: <http://lblod.data.gift/vocabularies/organisatie/>
+PREFIX ext:    <http://mu.semte.ch/vocabularies/ext/>
+
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+
+    # Bestuurseenheid - Sirus
+    <http://data.lblod.info/id/bestuurseenheden/87c3df12-7f01-4897-bf41-6f577b090513>
+      mu:uuid "87c3df12-7f01-4897-bf41-6f577b090513" ;
+      rdf:type besluit:Bestuurseenheid ;
+      skos:prefLabel "Sirus" ;
+      dct:identifier "0841451739" ;
+      org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/c4483583-f9fe-4d2f-96f4-47ddb3440d71> . # Leverancier
+
+    # Bestuurseenheid - Agentschap Facilitair Bedrijf
+    <http://data.lblod.info/id/bestuurseenheden/60309385-49f3-4136-b349-fec2bcac9433>
+      mu:uuid "60309385-49f3-4136-b349-fec2bcac9433" ;
+      rdf:type besluit:Bestuurseenheid ;
+      skos:prefLabel "Agentschap Facilitair Bedrijf" ;
+      dct:identifier "OVO001834" ;
+      org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/548ce228-22ac-491f-9481-9dc31c8a5836> . # Agentschap Facilitair Bedrijf
+
+    # Classification - Agentschap Facilitair Bedrijf
+    <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/548ce228-22ac-491f-9481-9dc31c8a5836>
+      rdf:type orglbl:BestuurseenheidClassificatieCode ,
+               ext:OrganizationClassificationCode ;
+      skos:prefLabel "Agentschap Facilitair Bedrijf" ;
+      mu:uuid "548ce228-22ac-491f-9481-9dc31c8a5836" .
+
+  }
+}
