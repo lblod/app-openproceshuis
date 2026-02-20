@@ -213,7 +213,7 @@ services:
     environment:
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
       MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
-      BH_APPLICATION_NAME: LoketLB-OpenProcesHuisAfnemer
+      BH_APPLICATION_NAME: OpenProcesHuis-Procesbeheerder
     restart: always
     labels:
       - "logging=true"
@@ -236,7 +236,7 @@ services:
     environment:
       API_URL: "https://api.ipdc.tni-vlaanderen.be"
       API_KEY: "secret"
-      REQUIRED_ROLES: "LoketLB-OpenProcesHuisGebruiker,LoketLB-OpenProcesHuisAfnemer"
+      REQUIRED_ROLES: "OpenProcesHuis-Procesbeheerder,LoketLB-OpenProcesHuisGebruiker,LoketLB-OpenProcesHuisAfnemer" # TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
     restart: always
     labels:
       - "logging=true"

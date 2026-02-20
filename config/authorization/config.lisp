@@ -61,12 +61,13 @@
 (supply-allowed-group "shared-processes-reader"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
-          PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
           SELECT DISTINCT ?session_group WHERE {
-            <SESSION_ID> ext:sessionGroup ?session_group.
-            ?session_group mu:uuid ?uuid.
+            <SESSION_ID> ext:sessionGroup / mu:uuid ?session_group;
+                         ext:sessionRole ?role.
+            FILTER(?role IN (\"Medewerker-fixed\", \"OpenProcesHuis-Lezer\"))
           }")
 
+;; TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
 (supply-allowed-group "organization-processes-editor"
   :parameters ("graph_extension")
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -84,25 +85,25 @@
               ?group mu:uuid ?group_id ;
                      dct:identifier ?identifier .
             }
-            FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
+            FILTER(?role IN (\"OpenProcesHuis-Procesbeheerder\", \"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             BIND(IF(?identifier IN (\"OVO001835\", \"OVO002949\"),
                     \"agentschap-binnenlands-bestuur-digitaal-vlaanderen\",
                     ?group_id) AS ?graph_extension)
           }")
 
+;; TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
 (supply-allowed-group "shared-processes-editor"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
           SELECT DISTINCT ?session_group WHERE {
             {
-              <SESSION_ID> ext:sessionGroup/mu:uuid ?session_group;
+              <SESSION_ID> ext:sessionGroup / mu:uuid ?session_group;
                            ext:sessionRole ?role.
-              FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             } UNION {
-              <SESSION_ID> ext:originalSessionGroup/mu:uuid ?session_group;
+              <SESSION_ID> ext:originalSessionGroup / mu:uuid ?session_group;
                            ext:originalSessionRole ?role.
-              FILTER(?role IN (\"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
             }
+            FILTER(?role IN (\"OpenProcesHuis-Procesbeheerder\", \"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
           }")
 
 (supply-allowed-group "admin"
