@@ -26,7 +26,7 @@ INSERT DATA {
       dct:identifier "OVO001834" ;
       org:classification <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/548ce228-22ac-491f-9481-9dc31c8a5836> . # Agentschap Facilitair Bedrijf
 
-    # Classification - # Agentschap Facilitair Bedrijf
+    # Classification - Agentschap Facilitair Bedrijf
     <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/548ce228-22ac-491f-9481-9dc31c8a5836>
       rdf:type orglbl:BestuurseenheidClassificatieCode ,
                ext:OrganizationClassificationCode ;
