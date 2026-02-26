@@ -32,4 +32,8 @@ export const ldesInstances: LdesInstances = {
     graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
+  "http://lblod.data.gift/vocabularies/informationclassification/InformationAsset": {
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    healingPredicates: ["http://purl.org/dc/terms/modified"],
+  },
 }
