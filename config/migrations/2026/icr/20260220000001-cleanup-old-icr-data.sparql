@@ -18,8 +18,6 @@ where {
     icr:containsPersonalData
     icr:containsProfessionalData
     icr:containsSensitivePersonalData
-    icr:additionalInformation
-    icr:hasControlMeasure
   }
   graph <http://mu.semte.ch/graphs/shared> {
     ?process a dpv:Process .
