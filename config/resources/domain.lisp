@@ -54,9 +54,7 @@
               (group :via ,(s-prefix "prov:usedBy")
                       :as "users")
               (link :via ,(s-prefix "rdfs:seeAlso")
-                      :as "links")
-              (group :via ,(s-prefix "dct:contributor")
-                      :as "contributors"))
+                      :as "links"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
