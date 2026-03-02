@@ -29,7 +29,7 @@ export const ldesInstances: LdesInstances = {
   },
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {
     filter: `
-      ?o ?pp ?oo .
+      ?processOrDiagram ?pp ?s .
       FILTER(?pp IN(<http://schema.org/item>, <http://schema.org/associatedMedia>))
     `,
     graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
