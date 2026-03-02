@@ -329,8 +329,7 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789',
-              'http://mu.semte.ch/services/file-service/files/987654321',
+              'http://mu.semte.ch/services/file-service/files/123456789'
             ]
         attachments:
           type: array
@@ -389,8 +388,7 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789',
-              'http://mu.semte.ch/services/file-service/files/987654321',
+              'http://mu.semte.ch/services/file-service/files/123456789'
             ]
         attachments:
           type: array
@@ -456,8 +454,7 @@ components:
             pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
           example:
             [
-              'http://mu.semte.ch/services/file-service/files/123456789',
-              'http://mu.semte.ch/services/file-service/files/987654321',
+              'http://mu.semte.ch/services/file-service/files/123456789'
             ]
         attachments:
           type: array
