@@ -192,6 +192,8 @@ paths:
           description: 'No content'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
   /files:
     post:
       servers:
