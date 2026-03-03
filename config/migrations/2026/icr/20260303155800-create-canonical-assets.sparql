@@ -1,0 +1,99 @@
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mu:   <http://mu.semte.ch/vocabularies/core/>
+PREFIX dct:  <http://purl.org/dc/terms/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX icr:  <http://lblod.data.gift/vocabularies/informationclassification/>
+PREFIX ext:  <http://mu.semte.ch/vocabularies/ext/>
+
+############################################################
+# 1) Create canonical assets in org graphs
+############################################################
+INSERT {
+  GRAPH ?g {
+    ?canonical a icr:InformationAsset ;
+               a ext:newAsset ;
+               mu:uuid ?newUuid .
+    ?latest dct:isVersionOf ?canonical .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?latest a ext:VersionedInformationAsset .
+
+    # make sure we have latest asset version
+    FILTER NOT EXISTS {
+      ?newer a ext:VersionedInformationAsset ;
+             prov:wasRevisionOf ?latest .
+    }
+
+    # idempotency: don't create again if already linked
+    FILTER NOT EXISTS {
+      ?latest dct:isVersionOf ?anyCanonical .
+    }
+
+    BIND(STRUUID() AS ?newUuid)
+    BIND(IRI(CONCAT("http://data.lblod.info/information-assets/", ?newUuid)) AS ?canonical)
+  }
+  FILTER(?g != <http://mu.semte.ch/graphs/shared>)
+}
+;
+
+############################################################
+# 2) Populate canonical assets in org graphs
+############################################################
+INSERT {
+  GRAPH ?g {
+    ?canonical ?p ?o .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?canonical a ext:newAsset .
+    ?latest dct:isVersionOf ?canonical .
+
+    ?latest ?p ?o .
+    FILTER(?p != rdf:type)
+    FILTER(?p != mu:uuid)
+    FILTER(?p != prov:wasRevisionOf)
+    FILTER(?p != dct:isVersionOf)
+  }
+  FILTER(?g != <http://mu.semte.ch/graphs/shared>)
+}
+;
+
+############################################################
+# 3) Copy to shared graph
+############################################################
+INSERT {
+  GRAPH <http://mu.semte.ch/graphs/shared> {
+    ?canonical ?p ?o .
+    ?latest dct:isVersionOf ?canonical .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?canonical a ext:newAsset ;
+               ?p ?o .
+
+    OPTIONAL {
+      ?latest dct:isVersionOf ?canonical .
+    }
+  }
+
+  FILTER(?g != <http://mu.semte.ch/graphs/shared>)
+}
+;
+
+############################################################
+# 4) Remove ext:newAsset markers
+############################################################
+DELETE {
+  GRAPH ?g {
+    ?canonical rdf:type ext:newAsset .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?canonical rdf:type ext:newAsset .
+  }
+}
