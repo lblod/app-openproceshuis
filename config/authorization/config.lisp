@@ -211,7 +211,8 @@
   ("ipdc:ConceptualPublicService" -> _)
   ("skos:Concept" -> _)
   ("nfo:Bookmark" -> _)
-  ("icr:InformationAsset" -> _))
+  ("icr:InformationAsset" -> _)
+  ("ext:VersionedInformationAsset" -> _))
 
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
@@ -262,7 +263,8 @@
   ("ipdc:ConceptualPublicService" -> _)
   ("skos:Concept" -> _)
   ("nfo:Bookmark" -> _)
-  ("icr:InformationAsset" -> _))
+  ("icr:InformationAsset" -> _)
+  ("ext:VersionedInformationAsset" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("besluit:Bestuurseenheid" -> _)
