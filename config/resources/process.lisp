@@ -13,7 +13,7 @@
                 (:has-control-measure :url ,(s-prefix "icr:hasControlMeasure")))
   :has-one `((group :via ,(s-prefix "dct:publisher")
                     :as "publisher")
-            ((group :via ,(s-prefix "dct:creator")
+             (group :via ,(s-prefix "dct:creator")
                     :as "creator")
              (processStatistic :via ,(s-prefix "ext:hasStatistics")
                                :as "process-statistics")
