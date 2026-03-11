@@ -7,7 +7,7 @@
   "author": "redpencil.io",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.12.10",
+    "@types/node": "^20.19.37",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@lblod/mu-auth-sudo": "^0.6.1",
+    "@traqula/parser-sparql-1-1": "^1.0.3",
     "body-parser": "^1.19.0",
     "express-promise-router": "^4.1.1"
   }
