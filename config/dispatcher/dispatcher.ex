@@ -163,7 +163,7 @@ defmodule Dispatcher do
   # end
 
   # Sparql endpoint with auth scope added for limited access 
-  post "/vendor/sparql/*path", %{ accept: [:sparql_json], layer: :api } do
+  post "/sparql/*path", %{ accept: [:sparql_json], layer: :api } do
     Proxy.forward conn, path, "http://sparql-endpoint/"
   end
 
