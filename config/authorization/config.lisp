@@ -58,6 +58,12 @@
 
 (supply-allowed-group "public")
 
+(supply-allowed-group "authenticated"
+  :query "PREFIX session: <http://mu.semte.ch/vocabularies/session/>
+          SELECT DISTINCT ?account WHERE {
+            <SESSION_ID> session:account ?account.
+          }")
+
 (supply-allowed-group "shared-processes-reader"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
@@ -127,6 +133,11 @@
 (grant (read)
        :to-graph shared
        :for-allowed-group "shared-processes-reader")
+
+(with-scope "http://services.semantic.works/sparql-endpoint"
+  (grant (read)
+         :to shared
+         :for "authenticated"))
 
 (grant (read)
        :to-graph job

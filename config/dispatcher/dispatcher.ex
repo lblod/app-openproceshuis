@@ -157,10 +157,12 @@ defmodule Dispatcher do
   # sparql endpoint
   ###############################################################
 
-  post "/sparql/*path", %{ accept: [:sparql_json], layer: :api } do
-    Proxy.forward conn, path, "http://database:8890/sparql/"
-  end
+  # OG way
+  # post "/sparql/*path", %{ accept: [:sparql_json], layer: :api } do
+  #   Proxy.forward conn, path, "http://database:8890/sparql/"
+  # end
 
+  # Sparql endpoint with auth scope added for limited access 
   post "/vendor/sparql/*path", %{ accept: [:sparql_json], layer: :api } do
     Proxy.forward conn, path, "http://sparql-endpoint/"
   end
