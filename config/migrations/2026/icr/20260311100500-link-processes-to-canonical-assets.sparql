@@ -1,4 +1,3 @@
-PREFIX dpv: <http://www.w3.org/ns/dpv#>
 PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
 PREFIX dct: <http://purl.org/dc/terms/>
 
@@ -14,8 +13,7 @@ INSERT {
 }
 WHERE {
   GRAPH ?g {
-    ?process a dpv:Process ;
-             icr:hasInformationAsset ?versionedAsset .
+    ?process icr:hasInformationAsset ?versionedAsset .
     
     ?versionedAsset dct:isVersionOf ?canonicalAsset .
     FILTER(?versionedAsset != ?canonicalAsset)
