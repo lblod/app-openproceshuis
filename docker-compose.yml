@@ -65,6 +65,13 @@ services:
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
     restart: always
+  sparql-endpoint:
+    logging: *default-logging
+    labels:
+      - "logging=true"
+    build:
+      context: ./config/sparql-endpoint
+      dockerfile: Dockerfile
   migrations:
     logging: *default-logging
     labels:

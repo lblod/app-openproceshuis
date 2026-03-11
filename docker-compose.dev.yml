@@ -21,6 +21,8 @@ services:
   process:
     image: lblod/openproceshuis-process-service:latest
     restart: "no"
+  sparql-endpoint:
+    restart: "no"
   swagger:
     restart: "no"
   modified:

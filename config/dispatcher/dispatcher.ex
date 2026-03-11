@@ -161,6 +161,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://database:8890/sparql/"
   end
 
+  post "/vendor/sparql/*path", %{ accept: [:sparql_json], layer: :api } do
+    Proxy.forward conn, path, "http://sparql-endpoint/"
+  end
+
   ###############################################################
   # API
   ###############################################################
