@@ -92,7 +92,6 @@
                        :inverse t
                        :as "processes")
               (file :via ,(s-prefix "schema:associatedMedia")
-                    :inverse t
                     :as "attachments")
               (link :via ,(s-prefix "rdfs:seeAlso")
                     :as "links")
