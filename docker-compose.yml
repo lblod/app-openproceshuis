@@ -69,9 +69,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    build:
-      context: ./config/sparql-endpoint
-      dockerfile: Dockerfile
+    image: local-sparql-endpoint
     environment:
       DEFAULT_MU_AUTH_SCOPE: "http://services.semantic.works/sparql-endpoint"
   migrations:
