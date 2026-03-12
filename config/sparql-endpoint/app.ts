@@ -4,6 +4,7 @@ import express, { Request, ErrorRequestHandler } from 'express';
 import bodyParser from 'body-parser';
 
 import { sparqlRouter } from './routes/sparql';
+import { HttpError } from './util/http-error';
 
 app.use(
   bodyParser.json({
@@ -23,10 +24,10 @@ app.get('/', async (_req, res) => {
 app.use('/', sparqlRouter);
 
 const errorHandler: ErrorRequestHandler = function (err, _req, res, _next) {
-  // custom error handler to have a default 500 error code instead of 400 as in the template
-  res.status(err.status || 500);
+  const errorResponse = HttpError.caughtErrorJsonResponse(err);
+  res.status(errorResponse.status);
   res.json({
-    errors: [{ title: err.message, description: err.description?.join('\n') }],
+    errors: [errorResponse],
   });
 };
 
