@@ -52,10 +52,7 @@ WHERE {
     ?latest dct:isVersionOf ?canonical .
 
     ?latest ?p ?o .
-    FILTER(?p != rdf:type)
-    FILTER(?p != mu:uuid)
-    FILTER(?p != prov:wasRevisionOf)
-    FILTER(?p != dct:isVersionOf)
+    FILTER(?p NOT IN(rdf:type, mu:uuid, prov:wasRevisionOf, dct:isVersionOf))
   }
   FILTER(?g != <http://mu.semte.ch/graphs/shared>)
 }
