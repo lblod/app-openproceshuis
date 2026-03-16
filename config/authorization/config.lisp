@@ -134,7 +134,7 @@
        :to-graph shared
        :for-allowed-group "shared-processes-reader")
 
-(with-scope "http://services.semantic.works/sparql-endpoint"
+(with-scope "http://services.semantic.works/sparql-endpoint-proxy"
   (grant (read)
          :to shared
          :for "authenticated"))

@@ -21,8 +21,11 @@ services:
   process:
     image: lblod/openproceshuis-process-service:latest
     restart: "no"
-  sparql-endpoint:
+  sparql-endpoint-proxy:
     restart: "no"
+    environment:
+      LOGLEVEL: 'error'
+      PROXY_LOGLEVEL: 'debug'
   swagger:
     restart: "no"
   modified:
