@@ -22,6 +22,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/information-assets/"
   end
 
+  match "/versioned-information-assets/*path", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, path, "http://cache/versioned-information-assets/"
+  end
+
   match "/administrative-unit-classification-codes", %{ accept: [:json], layer: :api } do
     Proxy.forward conn, [], "http://cache/administrative-unit-classification-codes/"
   end

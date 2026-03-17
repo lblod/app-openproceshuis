@@ -86,26 +86,29 @@
                 (:contains-personal-data :boolean ,(s-prefix "icr:containsPersonalData"))
                 (:contains-professional-data :boolean ,(s-prefix "icr:containsProfessionalData"))
                 (:contains-sensitive-personal-data :boolean ,(s-prefix "icr:containsSensitivePersonalData")))
-  :has-one `((informationAsset :via ,(s-prefix "prov:wasRevisionOf")
-                              :as "previous-version")
-            (group :via ,(s-prefix "dct:creator")
-                              :as "creator"))
-  :has-many `(
-    (informationAsset :via ,(s-prefix "prov:wasRevisionOf")
-                    :as "previous-versions")
-    (informationAsset :via ,(s-prefix "prov:wasRevisionOf")
-                    :inverse t
-                    :as "next-versions")
-    (process :via ,(s-prefix "icr:hasInformationAsset")
-                    :inverse t
-                    :as "processes")
-    (file :via ,(s-prefix "schema:associatedMedia")
-                    :inverse t
+  :has-one `((group :via ,(s-prefix "dct:creator")
+                    :as "creator"))
+  :has-many `((process :via ,(s-prefix "icr:hasInformationAsset")
+                       :inverse t
+                       :as "processes")
+              (file :via ,(s-prefix "schema:associatedMedia")
                     :as "attachments")
-    (link :via ,(s-prefix "rdfs:seeAlso")
-                    :as "links"))
+              (link :via ,(s-prefix "rdfs:seeAlso")
+                    :as "links")
+              (versionedInformationAsset :via ,(s-prefix "dct:isVersionOf")
+                                         :inverse t
+                                         :as "versions"))
   :resource-base (s-url "http://data.lblod.info/information-assets/")
   :on-path "information-assets")
+
+(define-resource versionedInformationAsset(informationAsset)
+  :class (s-prefix "ext:VersionedInformationAsset")
+  :has-one `((informationAsset :via ,(s-prefix "dct:isVersionOf")
+                               :as "canonical")
+             (versionedInformationAsset :via ,(s-prefix "prov:wasRevisionOf")
+                                        :as "previous-version"))
+  :resource-base (s-url "http://data.lblod.info/information-assets/versions/")
+  :on-path "versioned-information-assets")
 
   (define-resource link ()
   :class (s-prefix "nfo:Bookmark")

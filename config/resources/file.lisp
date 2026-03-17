@@ -15,7 +15,8 @@
   :has-many `((process :via ,(s-prefix "nie:isPartOf")
                        :as "processes")
               (informationAsset :via ,(s-prefix "schema:associatedMedia")
-                        :as "information-assets"))
+                                :inverse t
+                                :as "information-assets"))
   :resource-base (s-url "http://data.lblod.info/files/")
   :features `(include-uri)
   :on-path "files")
