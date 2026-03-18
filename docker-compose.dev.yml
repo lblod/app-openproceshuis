@@ -34,6 +34,9 @@ services:
     environment:
       LDES_STREAM_PREFIX: "http://localhost/streams/ldes/"
       LDES_BASE: "http://localhost/streams/ldes/"
+  ################################################################################
+  # Integration services
+  ################################################################################ 
   m2m:
     restart: "no"
     environment:
@@ -43,3 +46,10 @@ services:
     restart: no
     environment:
       LOG_LEVEL: 'debug'
+  shared-processes-consumer:
+    restart: no
+    environment:
+      SPARQL_BATCH_SIZE: 500
+      LDES_POLLING_INTERVAL: 15000 # milliseconds
+      LOG_LEVEL: debug
+      LOG_SPARQL_ALL: true

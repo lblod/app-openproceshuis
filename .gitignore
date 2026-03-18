@@ -8,6 +8,7 @@ docker-compose.override.yml
 .env
 /data/files/*
 /data/ldes-feed/*
+/data/consumer-files/*
 /backups/*
 update-handler.store
 
