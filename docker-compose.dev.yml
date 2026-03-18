@@ -49,7 +49,6 @@ services:
   shared-processes-consumer:
     restart: no
     environment:
-      SPARQL_BATCH_SIZE: 500
-      LDES_POLLING_INTERVAL: 15000 # milliseconds
+      BATCH_SIZE: 100
+      CRON_PATTERN: "*/32 * * * * *" # Every 32 seconds
       LOG_LEVEL: debug
-      LOG_SPARQL_ALL: true
