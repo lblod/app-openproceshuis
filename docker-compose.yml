@@ -69,7 +69,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    image: lblod/sparql-authorization-wrapper-service:feature-bump-javascript-template
+    image: lblod/sparql-authorization-wrapper-service:1.1.1
     volumes:
       - ./config/sparql-endpoint-proxy:/config
     environment:
