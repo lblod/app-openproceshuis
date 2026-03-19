@@ -11,10 +11,8 @@ export const consumedInstances = {
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#Bookmark": {},
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {
     filter: `
-      FILTER(?pNew IN (
-        <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#isPartOf>,
-        <https://schema.org/associatedMedia>
-      )) 
+      ?resource <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#isPartOf> ?s .
+      ?resource <https://schema.org/associatedMedia> ?s .
     `,
   },
   "http://lblod.data.gift/vocabularies/informationclassification/InformationAsset": {},
