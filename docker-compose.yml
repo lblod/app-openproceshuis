@@ -239,6 +239,7 @@ services:
       CRON_PATTERN: "3 * * * *" # Every hour at minute 3
       LDES_BASE: https://dev.openproceshuis.lblod.info/streams/ldes/public/
       FIRST_PAGE: https://dev.openproceshuis.lblod.info/streams/ldes/public/1
+      STATUS_GRAPH: http://mu.semte.ch/graphs/shared-processes/status
       TARGET_GRAPH: http://mu.semte.ch/graphs/shared-processes
       WORKING_GRAPH: http://mu.semte.ch/graphs/shared-processes-tmp
       DIRECT_DATABASE_CONNECTION: 'http://virtuoso:8890/sparql'
