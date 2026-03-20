@@ -96,7 +96,16 @@
   :resource-base (s-url "http://data.lblod.info/information-assets/")
   :on-path "information-assets")
 
-  (define-resource link ()
+(define-resource versionedInformationAsset(informationAsset)
+  :class (s-prefix "ext:VersionedInformationAsset")
+  :has-one `((informationAsset :via ,(s-prefix "dct:isVersionOf")
+                               :as "canonical")
+             (versionedInformationAsset :via ,(s-prefix "prov:wasRevisionOf")
+                                        :as "previous-version"))
+  :resource-base (s-url "http://data.lblod.info/information-assets/versions/")
+  :on-path "versioned-information-assets")
+
+(define-resource link ()
   :class (s-prefix "nfo:Bookmark")
   :properties `((:label :string ,(s-prefix "skos:prefLabel"))
                 (:href :string ,(s-prefix "nie:links")))
