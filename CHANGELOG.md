@@ -1,3 +1,59 @@
+## v2.6.0
+
+#### :rocket: Enhancement
+
+- [#128](https://github.com/lblod/app-openproceshuis/pull/128) Update ICR versioning system [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#127](https://github.com/lblod/app-openproceshuis/pull/127) OPH-963 | Only read for sparql endpoint [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#125](https://github.com/lblod/app-openproceshuis/pull/125) OPH-965 | Vendor can only crud items created by them [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#123](https://github.com/lblod/app-openproceshuis/pull/123) OPH-892 | add creator top the process resource domain [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#122](https://github.com/lblod/app-openproceshuis/pull/122) OPH-946 |Add the ICR resource to the ldes instances config [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#120](https://github.com/lblod/app-openproceshuis/pull/120) OPH-887 | create migration to create new ICR resources + cleanup old [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#119](https://github.com/lblod/app-openproceshuis/pull/119) Support new OPH user rights [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#117](https://github.com/lblod/app-openproceshuis/pull/117) OPH-923 | Update swagger doc for new validate session endpoint [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#115](https://github.com/lblod/app-openproceshuis/pull/115) Restrict IPDC API use [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#114](https://github.com/lblod/app-openproceshuis/pull/114) Feature/refactor data model icr changes [@Andresdev02](https://github.com/Andresdev02)
+- [#113](https://github.com/lblod/app-openproceshuis/pull/113) Feature/refactor data model icr changes [@Andresdev02](https://github.com/Andresdev02)
+- [#111](https://github.com/lblod/app-openproceshuis/pull/111) Feature/refactor data model icr changes [@Andresdev02](https://github.com/Andresdev02)
+- [#110](https://github.com/lblod/app-openproceshuis/pull/110) OPH-858 | Create json context [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#109](https://github.com/lblod/app-openproceshuis/pull/109) OPH-852 | Api docs is updated with act on behalf of [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#107](https://github.com/lblod/app-openproceshuis/pull/107) OPH-854 | Domain is changed to support sub-processes [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#106](https://github.com/lblod/app-openproceshuis/pull/106) CPD-day-1 | Let the swagger try it out button work [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#103](https://github.com/lblod/app-openproceshuis/pull/103) OPH-772 | Implement api endpoints [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#101](https://github.com/lblod/app-openproceshuis/pull/101) OPH-833 | Add the M2M login to the app [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#98](https://github.com/lblod/app-openproceshuis/pull/98) OPH-773 | json ld api swagger [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#97](https://github.com/lblod/app-openproceshuis/pull/97) OPH-755 | add swagger ui service to host the api docs [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#96](https://github.com/lblod/app-openproceshuis/pull/96) OPH-771 | setup ldes stream for processes [@JonasVanHoof](https://github.com/JonasVanHoof)
+
+#### :wrench: Maintenance
+
+- [#126](https://github.com/lblod/app-openproceshuis/pull/126) fix: change informationAsset to hasMany relation [@Andresdev02](https://github.com/Andresdev02)
+- [#105](https://github.com/lblod/app-openproceshuis/pull/105) OPH-835 | Cleanup ldes data [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#100](https://github.com/lblod/app-openproceshuis/pull/100) OPH-773 | Refine swagger doc [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#95](https://github.com/lblod/app-openproceshuis/pull/95) OPH-807 | Add virtuoso restart script to the app [@JonasVanHoof](https://github.com/JonasVanHoof)
+
+#### :bug: Bug Fixes
+
+- [#121](https://github.com/lblod/app-openproceshuis/pull/121) Reinstate ICR properties on process level [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#116](https://github.com/lblod/app-openproceshuis/pull/116) fix: links can have multiple informationassets [@Andresdev02](https://github.com/Andresdev02)
+- [#108](https://github.com/lblod/app-openproceshuis/pull/108) Repair duplicate process domain [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#102](https://github.com/lblod/app-openproceshuis/pull/102) Hotfix | OPH-849 | Custom organization accounts [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#99](https://github.com/lblod/app-openproceshuis/pull/99) Oph-771 | fix urls dispatcher [@JonasVanHoof](https://github.com/JonasVanHoof)
+
+## Deploy instructions
+
+Pull image for the following services:
+
+- frontend
+- vendor-api
+
+Service actions:
+
+- Run the migrations
+- Restart resources & cache | Domain
+- Initialize ldes-delta-pusher | Config
+- Restart the database | Auth roles
+- Restart swagger | Updated documentation
+
 ## v2.5.0
 
 #### :rocket: Enhancement
@@ -137,13 +193,13 @@ docker compose logs -f virtuoso
 services:
   op-public-consumer:
     environment:
-      DCR_LANDING_ZONE_DATABASE: "virtuoso" # Only on first run
-      DCR_REMAPPING_DATABASE: "virtuoso" # Only on first run
-      DCR_DISABLE_INITIAL_SYNC: "false" # Only on first run
-      DCR_DISABLE_DELTA_INGEST: "true" # Only on first run
+      DCR_LANDING_ZONE_DATABASE: 'virtuoso' # Only on first run
+      DCR_REMAPPING_DATABASE: 'virtuoso' # Only on first run
+      DCR_DISABLE_INITIAL_SYNC: 'false' # Only on first run
+      DCR_DISABLE_DELTA_INGEST: 'true' # Only on first run
   mock-bestuurseenheid-generator:
     environment:
-      MU_SPARQL_ENDPOINT: "http://virtuoso:8890/sparql" # Only on first run
+      MU_SPARQL_ENDPOINT: 'http://virtuoso:8890/sparql' # Only on first run
 ```
 
 2. Run and wait for the migrations to finish

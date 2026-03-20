@@ -13,9 +13,12 @@ externalDocs:
   url: https://github.com/lblod/vendor-api-openproceshuis
 servers:
   - url: http://localhost/api/vendor
-    description: Local server
+    description: Local
   - url: https://dev.openproceshuis.lblod.info/api/vendor
-    description: Development server
+    description: Development
+  - url: https://openproceshuis.lblod.info/api/vendor
+    description: QA
+
 tags:
   - name: Processes
     description: Create and update actions on processes in Open Proces Huis
@@ -201,6 +204,8 @@ paths:
           description: Upload a file to your local setup
         - url: https://dev.openproceshuis.lblod.info
           description: Upload a file to to the development environment
+        - url: https://openproceshuis.lblod.info
+          description: Upload a file to to the QA environment
       operationId: postFile
       summary: 'Uploading a new file'
       tags:
