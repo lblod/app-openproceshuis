@@ -218,6 +218,9 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  ################################################################################
+  # Integration services
+  ################################################################################  
   m2m:
     image: lblod/m2m-login-service:0.1.0
     environment:
@@ -233,6 +236,26 @@ services:
     restart: always
     environment:
       ALLOW_MU_AUTH_SUDO: true
+    labels:
+      - "logging=true"
+    logging: *default-logging
+  shared-processes-consumer:
+    image: lblod/ldes-client:0.0.4
+    profiles:
+      - futureIntegrationFeature
+    volumes:
+      - ./config/shared-processes-consumer:/config
+    restart: always
+    environment:
+      BATCH_SIZE: 100
+      CRON_PATTERN: "3 * * * *" # Every hour at minute 3
+      LDES_BASE: https://dev.openproceshuis.lblod.info/streams/ldes/public/
+      FIRST_PAGE: https://dev.openproceshuis.lblod.info/streams/ldes/public/1
+      STATUS_GRAPH: http://mu.semte.ch/graphs/shared-processes/status
+      TARGET_GRAPH: http://mu.semte.ch/graphs/shared-processes
+      WORKING_GRAPH: http://mu.semte.ch/graphs/shared-processes-tmp
+      DIRECT_DATABASE_CONNECTION: 'http://virtuoso:8890/sparql'
+      RANDOMIZE_GRAPHS: true
     labels:
       - "logging=true"
     logging: *default-logging

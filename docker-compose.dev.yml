@@ -39,6 +39,9 @@ services:
     environment:
       LDES_STREAM_PREFIX: "http://localhost/streams/ldes/"
       LDES_BASE: "http://localhost/streams/ldes/"
+  ################################################################################
+  # Integration services
+  ################################################################################ 
   m2m:
     restart: "no"
     environment:
@@ -48,3 +51,9 @@ services:
     restart: no
     environment:
       LOG_LEVEL: 'debug'
+  shared-processes-consumer:
+    restart: no
+    environment:
+      BATCH_SIZE: 100
+      CRON_PATTERN: "*/32 * * * * *" # Every 32 seconds
+      LOG_LEVEL: debug
