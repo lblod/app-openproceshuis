@@ -231,6 +231,8 @@ services:
     logging: *default-logging
   shared-processes-consumer:
     image: lblod/ldes-client:0.0.4
+    profiles:
+      - futureIntegrationFeature
     volumes:
       - ./config/shared-processes-consumer:/config
     restart: always
