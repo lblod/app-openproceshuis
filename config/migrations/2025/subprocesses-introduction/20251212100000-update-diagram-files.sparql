@@ -1,0 +1,55 @@
+PREFIX mu:<http://mu.semte.ch/vocabularies/core/>
+PREFIX nfo:<http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
+PREFIX nie:<http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>
+PREFIX dpv:<https://w3id.org/dpv#>
+PREFIX dbpedia: <http://dbpedia.org/ontology/>
+PREFIX schema: <http://schema.org/>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+insert {
+  graph ?g {
+    ?list a schema:ItemList .
+    ?list mu:uuid ?listId .
+    ?list schema:itemListOrder schema:ItemListUnordered .
+    ?list dct:created ?created .
+    ?list dct:modified ?modified .
+
+    ?listItem a schema:ListItem .
+    ?listItem mu:uuid ?listItemId .
+    ?listItem schema:item ?file .
+    ?listItem dct:created ?created .
+    ?listItem dct:modified ?modified .
+
+    ?list schema:itemListElement ?listItem .
+    ?process schema:hasPart ?list .
+  }
+}
+where {
+  {{
+    graph <http://mu.semte.ch/graphs/shared> {
+      ?file a nfo:FileDataObject .
+      ?file dbpedia:fileExtension ?fileExtension .
+      ?file nie:isPartOf ?process .
+      FILTER(LCASE(STR(?fileExtension)) IN ("bpmn", "vsdx"))
+      {
+        select distinct ?process ?list ?listId ?listItem ?listItemId ?g
+        where {
+          GRAPH ?g {
+            ?process a dpv:Process .
+            ?process mu:uuid ?processId .
+          }
+          FILTER (?g NOT IN(
+            <http://mu.semte.ch/graphs/transformed-ldes-data>,
+            <http://mu.semte.ch/graphs/ldes-dump>
+          ))
+          BIND(SHA256(CONCAT(?processId, STRUUID())) AS ?listId)
+          BIND(IRI(CONCAT("http://data.lblod.info/diagram-lists/", ?listId)) AS ?list)
+          BIND(SHA256(CONCAT(?listId, STRUUID())) AS ?listItemId)
+          BIND(IRI(CONCAT("http://data.lblod.info/diagram-list-items/", ?listItemId)) AS ?listItem)
+        }
+      }
+      ?file dct:created ?created .
+      ?file dct:modified ?modified .
+    }
+  }}
+}
