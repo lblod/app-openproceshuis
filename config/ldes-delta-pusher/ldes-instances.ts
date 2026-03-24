@@ -48,6 +48,14 @@ export const ldesInstances: LdesInstances = {
     graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
+  "http://schema.org/ItemList": {
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    healingPredicates: ["http://purl.org/dc/terms/modified"],
+  },
+  "http://schema.org/ListItem": {
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    healingPredicates: ["http://purl.org/dc/terms/modified"],
+  },
   "http://lblod.data.gift/vocabularies/informationclassification/InformationAsset": {
     filter: `
       ?s ?p ?o .
