@@ -29,14 +29,6 @@
   dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
   skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
   skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
-<http://data.lblod.info/process-domains/0bf30c65-cbe2-4c79-a1c1-2abf4ab0ca21>
-  mu:uuid "0bf30c65-cbe2-4c79-a1c1-2abf4ab0ca21" ;
-  rdf:type skos:Concept ;
-  skos:prefLabel "Zorg en welzijn"@nl ;
-  dct:created "2025-07-24T09:23:34Z"^^xsd:dateTime ;
-  dct:modified "2025-07-24T09:23:34Z"^^xsd:dateTime ;
-  skos:relatedMatch <http://data.lblod.info/process-categories/33108ddb-b83c-4aca-ab96-4cacca83db0c> ;
-  skos:inScheme <http://lblod.data.gift/concept-schemes/a8108a43-44fa-4b08-9794-064941f00dc1> .
 <http://data.lblod.info/process-domains/367f7dd5-dde6-4835-8c3a-463ebd4374e8>
   mu:uuid "367f7dd5-dde6-4835-8c3a-463ebd4374e8" ;
   rdf:type skos:Concept ;

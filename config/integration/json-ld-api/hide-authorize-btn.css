@@ -1,0 +1,13 @@
+button.btn.authorize {
+  display: none !important;
+}
+.authorization__btn {
+  display: none !important;
+}
+#download-url-input {
+  display: none !important;
+}
+
+button.download-url-button.button {
+  display: none !important;
+}

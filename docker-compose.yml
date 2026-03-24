@@ -1,5 +1,3 @@
-version: "3.4"
-
 x-logging: &default-logging
   driver: "json-file"
   options:
@@ -8,7 +6,7 @@ x-logging: &default-logging
 
 services:
   frontend:
-    image: lblod/frontend-openproceshuis:1.5.3
+    image: lblod/frontend-openproceshuis:1.5.4
     environment:
       EMBER_OAUTH_API_REDIRECT_URL: "https://openproceshuis.lblod.info/authorization/callback"
       EMBER_OAUTH_API_KEY: "aaf8877c-0975-4003-8db8-a9986355b80b"
@@ -67,6 +65,16 @@ services:
       - ./data/db:/data
       - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
     restart: always
+  sparql-endpoint-proxy:
+    logging: *default-logging
+    labels:
+      - "logging=true"
+    image: lblod/sparql-authorization-wrapper-service:1.1.1
+    volumes:
+      - ./config/sparql-endpoint-proxy:/config
+    environment:
+      DEFAULT_MU_AUTH_SCOPE: "http://services.semantic.works/sparql-endpoint-proxy"
+      DATABASE_HOST: "http://database:8890"
   migrations:
     logging: *default-logging
     labels:
@@ -211,6 +219,47 @@ services:
       - "logging=true"
     logging: *default-logging
   ################################################################################
+  # Integration services
+  ################################################################################  
+  m2m:
+    image: lblod/m2m-login-service:0.1.0
+    environment:
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
+      MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
+      BH_APPLICATION_NAME: OpenProcesHuis-Procesbeheerder
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
+  vendor-api:
+    image: lblod/vendor-api-openproceshuis-service:0.0.4
+    restart: always
+    environment:
+      ALLOW_MU_AUTH_SUDO: true
+    labels:
+      - "logging=true"
+    logging: *default-logging
+  shared-processes-consumer:
+    image: lblod/ldes-client:0.0.4
+    profiles:
+      - futureIntegrationFeature
+    volumes:
+      - ./config/shared-processes-consumer:/config
+    restart: always
+    environment:
+      BATCH_SIZE: 100
+      CRON_PATTERN: "3 * * * *" # Every hour at minute 3
+      LDES_BASE: https://dev.openproceshuis.lblod.info/streams/ldes/public/
+      FIRST_PAGE: https://dev.openproceshuis.lblod.info/streams/ldes/public/1
+      STATUS_GRAPH: http://mu.semte.ch/graphs/shared-processes/status
+      TARGET_GRAPH: http://mu.semte.ch/graphs/shared-processes
+      WORKING_GRAPH: http://mu.semte.ch/graphs/shared-processes-tmp
+      DIRECT_DATABASE_CONNECTION: 'http://virtuoso:8890/sparql'
+      RANDOMIZE_GRAPHS: true
+    labels:
+      - "logging=true"
+    logging: *default-logging
+  ################################################################################
   # IPDC PROXY
   ################################################################################
   ipdc-proxy:
@@ -220,8 +269,7 @@ services:
     environment:
       API_URL: "https://api.ipdc.tni-vlaanderen.be"
       API_KEY: "secret"
-      REQUIRED_ROLES: ""
-      ALLOWED_ORIGIN: "*"
+      REQUIRED_ROLES: "OpenProcesHuis-Procesbeheerder,LoketLB-OpenProcesHuisGebruiker,LoketLB-OpenProcesHuisAfnemer" # TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
     restart: always
     labels:
       - "logging=true"
@@ -247,3 +295,78 @@ services:
   anonymization:
     image: lblod/pii-identification-anonymization-service
     restart: always
+
+  ################################################################################
+  # JSON-LD API
+  ################################################################################
+  swagger:
+    image: swaggerapi/swagger-ui:latest
+    restart: always
+    environment:
+      SWAGGER_JSON: /spec/openapi.yml
+    volumes:
+      - ./config/integration/json-ld-api/openapi.yml:/spec/openapi.yml:ro
+      # Override as we do not want the user to set authorize, they have to do this by login in into our OPH environment!
+      - ./config/integration/json-ld-api/index.html:/usr/share/nginx/html/index.html
+      - ./config/integration/json-ld-api/hide-authorize-btn.css:/usr/share/nginx/html/hide-authorize-btn.css
+    labels:
+      - 'logging=true'
+    logging: *default-logging
+  modified:
+    image: lblod/track-modified-service:0.2.0
+    environment:
+      CLEANUP_DUPLICATES_CRON: 16 * * * *
+      CLEANUP_AT_START: "true"
+    labels:
+      - "logging=true"
+    volumes:
+      - ./config/modified:/config
+    restart: always
+    logging: *default-logging
+
+  ################################################################################
+  # LDES
+  ################################################################################
+  ldes-serve-feed:
+    image: lblod/ldes-serve-feed-service:0.1.1
+    restart: always
+    environment:
+      LDES_STREAM_PREFIX: "https://dev.openproceshuis.lblod.info/streams/ldes/"
+      TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
+      DATA_FOLDER: "/data"
+      LDES_FOLDER: "public"
+      AUTHENTICATED_LDES_FEED: false
+      ALLOW_MU_AUTH_SUDO: true
+    volumes:
+      - ./data/ldes-feed:/data
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  ldes-delta-pusher:
+    image: redpencil/ldes-delta-pusher:1.2.9
+    restart: always
+    environment:
+      CRON_HEALING: "0 0 0 * * *" # Every day at midnight
+      AUTO_HEALING: "true"
+      FOLDER_DEPTH: "1"
+      PAGE_RESOURCES_COUNT: "10"
+      LDES_STREAM_PREFIX: "https://dev.openproceshuis.lblod.info/streams/ldes/"
+      LDES_BASE: "https://dev.openproceshuis.lblod.info/streams/ldes/"
+      TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
+      CACHE_SIZE: "1000"
+      DATA_FOLDER: "/data"
+      LDES_FOLDER: "public"
+      CRON_CHECKPOINT: "0 5 1 * *" # At 05:00 on day-of-month 1
+      SUDO_QUERY_RETRY_TIMEOUT_INCREMENT_FACTOR: 0.003
+      SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: 429,500,502,503,504
+      MAX_PAGE_SIZE_BYTES: 2500000
+      INITIAL_STATE_LIMIT: 10000
+      DIRECT_DB_ENDPOINT: "http://virtuoso:8890/sparql"
+      WRITE_INITIAL_STATE: "false"
+    volumes:
+      - ./config/ldes-delta-pusher/:/config/
+      - ./data/ldes-feed/:/data/
+    logging: *default-logging
+    labels:
+      - "logging=true"
+

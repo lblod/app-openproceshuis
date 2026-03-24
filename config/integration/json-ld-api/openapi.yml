@@ -1,0 +1,476 @@
+# https://swagger.io/docs/specification/v3_0/data-models/data-models/
+openapi: 3.0.0
+info:
+  title: 'Open Proces Huis'
+  description: 'Manage your processes in OPH. Update existing or create processes in your administrative-unit. For using this swagger documentation with the try it out button you will first have to login in into the correct environment to receive session-token. '
+  version: 0.0.3
+  contact:
+    name: Support
+    email: loketlokaalbestuur@vlaanderen.be
+    url: https://abb-vlaanderen.gitbook.io/informatie-oph/technische-integratie-met-open-proces-huis/technische-integratie-met-open-proces-huis
+externalDocs:
+  description: Find out more about the API on Github
+  url: https://github.com/lblod/vendor-api-openproceshuis
+servers:
+  - url: http://localhost/api/vendor
+    description: Local
+  - url: https://dev.openproceshuis.lblod.info/api/vendor
+    description: Development
+  - url: https://openproceshuis.lblod.info/api/vendor
+    description: QA
+
+tags:
+  - name: Processes
+    description: Create and update actions on processes in Open Proces Huis
+  - name: Files
+    description: Uploading and deleting diagrams and attachments used in Open Proces Huis
+  - name: Act on behalf of
+    description: As a vendor you can manage the data in other organizations by impersonating.
+  - name: Authentication
+    description: Validate the authentication status
+
+paths:
+  /auth/has-valid-session:
+    get:
+      operationId: hasValidSession
+      summary: 'Validate if the session is still active.'
+      tags:
+        - Authentication
+      responses:
+        '200':
+          description: 'Ok'
+          content:
+            application/json:
+              examples:
+                foo:
+                  value: { isValid: true }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /act-on-behalf-of:
+    post:
+      operationId: impersonate
+      summary: 'Manage an organization as the vendor.'
+      tags:
+        - Act on behalf of
+      requestBody:
+        required: true
+        content:
+          application/json:
+            examples:
+              foo:
+                value:
+                  {
+                    'bestuurseenheidUri': 'http://data.lblod.info/id/bestuurseenheden/123456789',
+                  }
+      responses:
+        '201':
+          description: 'Created'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /processes:
+    post:
+      operationId: postProcess
+      summary: 'Adding a new process to your administrative unit.'
+      tags:
+        - Processes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProcess'
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              examples:
+                foo:
+                  value: { '@id': 'http://data.lblod.info/processes/123456789' }
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '409':
+          description: 'Conflict'
+    patch:
+      operationId: patchProcess
+      summary: 'Update a process in your administrative unit.'
+      tags:
+        - Processes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchProcess'
+      responses:
+        '200':
+          description: 'Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    put:
+      operationId: putProcess
+      summary: 'Replace data of process in your administrative unit.'
+      tags:
+        - Processes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutProcess'
+      responses:
+        '200':
+          description: 'Ok'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    delete:
+      operationId: deleteProcess
+      summary: 'Archived a process in your administrative unit. Deleting a process in OPH actually means that we add the status archived to it.'
+      tags:
+        - Processes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - '@id'
+              properties:
+                '@id':
+                  type: string
+                  description: 'Uri of the process.'
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+            example:
+              '@id': 'http://data.lblod.info/processes/123456789'
+      responses:
+        '204':
+          description: 'No content'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /processes/files:
+    delete:
+      operationId: deleteFileFromProcess
+      summary: 'Delete a file from a process'
+      tags:
+        - Processes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - '@id'
+                - 'fileUri'
+              properties:
+                '@id':
+                  type: string
+                  description: 'Uri of the process.'
+                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                fileUri:
+                  type: string
+                  description: 'Uri of the file.'
+            example:
+              '@id': 'http://data.lblod.info/processes/123456789'
+              fileUri: 'http://mu.semte.ch/services/file-service/files/123456789'
+      responses:
+        '204':
+          description: 'No content'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /files:
+    post:
+      servers:
+        - url: http://localhost
+          description: Upload a file to your local setup
+        - url: https://dev.openproceshuis.lblod.info
+          description: Upload a file to to the development environment
+        - url: https://openproceshuis.lblod.info
+          description: Upload a file to to the QA environment
+      operationId: postFile
+      summary: 'Uploading a new file'
+      tags:
+        - Files
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file that you want to upload.
+      responses:
+        '201':
+          description: 'Created'
+          content:
+            application/json:
+              examples:
+                foo:
+                  value:
+                    {
+                      'data':
+                        {
+                          'type': 'files',
+                          'id': '693adbc24426fd000d000000',
+                          'attributes':
+                            {
+                              'name': 'my-diagram.bpmn',
+                              'format': 'text/plain; charset=utf-8',
+                              'size': 3156,
+                              'extension': 'bpmn',
+                            },
+                        },
+                      'links': { 'self': '/files/693adbc24426fd000d000000' },
+                    }
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /files/{fileId}:
+    delete:
+      servers:
+        - url: http://localhost
+          description: Upload a file to your local setup
+        - url: https://dev.openproceshuis.lblod.info
+          description: Upload a file to to the development environment
+      operationId: deleteFile
+      summary: 'Delete a file in your administrative unit.'
+      tags:
+        - Files
+      parameters:
+        - in: path
+          name: fileId
+          schema:
+            type: string
+          required: true
+          description: Id of the file you wan to delete.
+          example: 6936e48d72b9d2000c000002
+      responses:
+        '204':
+          description: 'No content'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+security:
+  - CookieHeader: []
+
+components:
+  securitySchemes:
+    CookieHeader:
+      type: apiKey
+      in: header
+      name: cookie
+      description: Required cookie header for API access
+  responses:
+    UnauthorizedError:
+      description: Unauthorized
+    Forbidden:
+      description: "Forbidden"
+    BadRequest:
+      description: "Bad request"
+  schemas:
+    CreateProcess:
+      required:
+        - '@id'
+        - title
+      type: object
+      properties:
+        '@id':
+          type: string
+          description: 'Uri of the process.'
+          example: 'http://data.lblod.info/processes/123456789'
+          pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+        title:
+          type: string
+          description: 'Name for the process.'
+          example: 'Facturatie'
+        description:
+          type: string
+          description: 'Describe what the process is about.'
+          example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
+        email:
+          type: string
+          description: 'Email of person that can be contacted about the process.'
+          example: 'contact@administrativeUnit.com'
+        linked-concept:
+          type: string
+          description: 'Inventory process URI that this process is related to.'
+          example: 'http://data.lblod.info/conceptual-processes/123456789'
+          pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+        users:
+          type: array
+          description: 'List of administrative units that are also using this process.'
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://data.lblod.info/id/bestuurseenheden/123456789',
+              'http://data.lblod.info/id/bestuurseenheden/987654321',
+            ]
+        diagrams:
+          type: array
+          description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://mu.semte.ch/services/file-service/files/123456789'
+            ]
+        attachments:
+          type: array
+          description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
+            ]
+    PatchProcess:
+      required:
+        - '@id'
+      type: object
+      properties:
+        '@id':
+          type: string
+          description: 'Uri of the process.'
+          example: 'http://data.lblod.info/processes/123456789'
+          pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+        title:
+          type: string
+          description: 'Name for the process.'
+          example: 'Facturatie'
+        description:
+          type: string
+          description: 'Describe what the process is about.'
+          example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
+        email:
+          type: string
+          description: 'Email of person that can be contacted about the process.'
+          example: 'contact@administrativeUnit.com'
+        linked-concept:
+          type: string
+          description: 'Inventory process URI that this process is related to.'
+          example: 'http://data.lblod.info/conceptual-processes/123456789'
+          pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+        users:
+          type: array
+          description: 'List of administrative units that are also using this process.'
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://data.lblod.info/id/bestuurseenheden/123456789',
+              'http://data.lblod.info/id/bestuurseenheden/987654321',
+            ]
+        diagrams:
+          type: array
+          description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://mu.semte.ch/services/file-service/files/123456789'
+            ]
+        attachments:
+          type: array
+          description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
+            ]
+    PutProcess:
+      required:
+        - '@id'
+        - 'title'
+        - 'description'
+        - 'email'
+        - 'linked-concept'
+        - 'users'
+        - 'diagrams'
+        - 'attachments'
+      type: object
+      properties:
+        '@id':
+          type: string
+          description: 'Uri of the process.'
+          example: 'http://data.lblod.info/processes/123456789'
+          pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+        title:
+          type: string
+          description: 'Name for the process.'
+          example: 'Facturatie'
+        description:
+          type: string
+          description: 'Describe what the process is about.'
+          example: 'The official invoice is generated based on this data and subsequently sent to the customer for payment, which concludes the standard cycle.'
+        email:
+          type: string
+          description: 'Email of person that can be contacted about the process.'
+          example: 'contact@administrativeUnit.com'
+        linked-concept:
+          type: string
+          description: 'Inventory process URI that this process is related to.'
+          example: 'http://data.lblod.info/conceptual-processes/123456789'
+          pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+        users:
+          type: array
+          description: 'List of administrative units that are also using this process.'
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://data.lblod.info/id/bestuurseenheden/123456789',
+              'http://data.lblod.info/id/bestuurseenheden/987654321',
+            ]
+        diagrams:
+          type: array
+          description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://mu.semte.ch/services/file-service/files/123456789'
+            ]
+        attachments:
+          type: array
+          description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
+          items:
+            type: string
+            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+          example:
+            [
+              'http://mu.semte.ch/services/file-service/files/123456789',
+              'http://mu.semte.ch/services/file-service/files/987654321',
+            ]

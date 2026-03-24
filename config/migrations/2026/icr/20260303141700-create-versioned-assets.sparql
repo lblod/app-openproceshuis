@@ -1,0 +1,75 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX mu:  <http://mu.semte.ch/vocabularies/core/>
+
+############################################################
+# 1) Add ext:VersionedInformationAsset + ext:updatedAsset
+############################################################
+INSERT {
+  GRAPH ?g {
+    ?asset rdf:type ext:VersionedInformationAsset ;
+           rdf:type ext:updatedAsset .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?asset rdf:type icr:InformationAsset .
+    FILTER NOT EXISTS { ?asset rdf:type ext:VersionedInformationAsset . }
+  }
+}
+;
+
+############################################################
+# 2) Rewrite asset URIs where asset is OBJECT:
+############################################################
+DELETE {
+  GRAPH ?g { ?s ?p ?asset . }
+}
+INSERT {
+  GRAPH ?g { ?s ?p ?assetNew . }
+}
+WHERE {
+  GRAPH ?gAsset {
+    ?asset rdf:type ext:updatedAsset ;
+           mu:uuid ?uuid .
+  }
+  BIND( IRI(CONCAT("http://data.lblod.info/information-assets/versions/", STR(?uuid))) AS ?assetNew )
+
+  GRAPH ?g {
+    ?s ?p ?asset .
+  }
+}
+;
+
+############################################################
+# 3) Rewrite asset URIs where asset is SUBJECT:
+############################################################
+DELETE {
+  GRAPH ?g { ?asset ?p ?o . }
+}
+INSERT {
+  GRAPH ?g { ?assetNew ?p ?o . }
+}
+WHERE {
+  GRAPH ?gAsset {
+    ?asset rdf:type ext:updatedAsset ;
+           mu:uuid ?uuid .
+  }
+  BIND( IRI(CONCAT("http://data.lblod.info/information-assets/versions/", STR(?uuid))) AS ?assetNew )
+
+  GRAPH ?g {
+    ?asset ?p ?o .
+  }
+}
+;
+
+############################################################
+# 4) Remove ext:updatedAsset markers
+############################################################
+DELETE {
+  GRAPH ?g { ?x rdf:type ext:updatedAsset . }
+}
+WHERE {
+  GRAPH ?g { ?x rdf:type ext:updatedAsset . }
+}

@@ -49,12 +49,20 @@
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
   :dpv "https://w3id.org/dpv#"
-  :oph "http://lblod.data.gift/vocabularies/openproceshuis/")
+  :oph "http://lblod.data.gift/vocabularies/openproceshuis/"
+  :icr "http://lblod.data.gift/vocabularies/informationclassification/"
+  :prov "http://www.w3.org/ns/prov#")
 
 ;;;;;;;;;;;;;
 ;;; User roles
 
 (supply-allowed-group "public")
+
+(supply-allowed-group "authenticated"
+  :query "PREFIX session: <http://mu.semte.ch/vocabularies/session/>
+          SELECT DISTINCT ?account WHERE {
+            <SESSION_ID> session:account ?account.
+          }")
 
 (supply-allowed-group "shared-processes-reader"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -103,7 +111,7 @@
             }
             FILTER(?role IN (\"OpenProcesHuis-Procesbeheerder\", \"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
           }")
-          
+
 (supply-allowed-group "admin"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           SELECT DISTINCT ?session_role WHERE {
@@ -121,10 +129,15 @@
 (grant (read)
        :to-graph public
        :for-allowed-group "public")
-       
+
 (grant (read)
        :to-graph shared
        :for-allowed-group "shared-processes-reader")
+
+(with-scope "http://services.semantic.works/sparql-endpoint-proxy"
+  (grant (read)
+         :to shared
+         :for "authenticated"))
 
 (grant (read)
        :to-graph job
@@ -208,7 +221,10 @@
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
   ("skos:Concept" -> _)
-  ("nfo:Bookmark" -> _))
+  ("nfo:Bookmark" -> _)
+  ("icr:InformationAsset" -> _)
+  ("ext:VersionedInformationAsset" -> _))
+
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
   ;; bpmn-element-type
@@ -257,7 +273,9 @@
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
   ("skos:Concept" -> _)
-  ("nfo:Bookmark" -> _))
+  ("nfo:Bookmark" -> _)
+  ("icr:InformationAsset" -> _)
+  ("ext:VersionedInformationAsset" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("besluit:Bestuurseenheid" -> _)
