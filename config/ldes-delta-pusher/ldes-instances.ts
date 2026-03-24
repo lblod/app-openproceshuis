@@ -29,12 +29,17 @@ export const ldesInstances: LdesInstances = {
   },
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {
     filter: `
-      ?s ?p ?o .
-      FILTER(?p IN (
-        <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#isPartOf>,
-        <https://schema.org/associatedMedia>
-      )) 
+      ?processOrDiagram ?pp ?s .
+      FILTER(?pp IN(<http://schema.org/item>, <http://schema.org/associatedMedia>))
     `,
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    healingPredicates: ["http://purl.org/dc/terms/modified"],
+  },
+  "http://schema.org/ItemList": {
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    healingPredicates: ["http://purl.org/dc/terms/modified"],
+  },
+  "http://schema.org/ListItem": {
     graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
