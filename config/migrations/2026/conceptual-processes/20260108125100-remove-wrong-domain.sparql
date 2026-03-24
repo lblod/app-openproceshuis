@@ -1,0 +1,5 @@
+DELETE WHERE {
+  GRAPH <http://mu.semte.ch/graphs/inventory> {
+    <http://data.lblod.info/process-domains/0bf30c65-cbe2-4c79-a1c1-2abf4ab0ca21> ?p ?o .
+  }
+}

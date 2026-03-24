@@ -1,0 +1,45 @@
+PREFIX dct:  <http://purl.org/dc/terms/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX ext:  <http://mu.semte.ch/vocabularies/ext/>
+
+INSERT {
+  GRAPH ?g {
+    ?version dct:isVersionOf ?canonical .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    FILTER(?g != <http://mu.semte.ch/graphs/shared>)
+    
+    # latest version (the only one that currently has isVersionOf)
+    ?latest a ext:VersionedInformationAsset ;
+            dct:isVersionOf ?canonical .
+
+    # all versions in the chain
+    ?latest (prov:wasRevisionOf)* ?version .
+    ?version a ext:VersionedInformationAsset .
+
+    FILTER NOT EXISTS {
+      ?version dct:isVersionOf ?canonical .
+    }
+  }
+}
+;
+
+INSERT {
+  GRAPH <http://mu.semte.ch/graphs/shared> {
+    ?version dct:isVersionOf ?canonical .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    FILTER(?g != <http://mu.semte.ch/graphs/shared>)
+    ?version dct:isVersionOf ?canonical .
+  }
+
+  FILTER NOT EXISTS {
+    GRAPH <http://mu.semte.ch/graphs/shared> {
+      ?version dct:isVersionOf ?canonical .
+    }
+  }
+}

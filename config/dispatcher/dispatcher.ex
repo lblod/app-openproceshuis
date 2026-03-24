@@ -22,6 +22,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/information-assets/"
   end
 
+  match "/versioned-information-assets/*path", %{ accept: [:json], layer: :api } do
+    Proxy.forward conn, path, "http://cache/versioned-information-assets/"
+  end
+
   match "/administrative-unit-classification-codes", %{ accept: [:json], layer: :api } do
     Proxy.forward conn, [], "http://cache/administrative-unit-classification-codes/"
   end
@@ -157,8 +161,30 @@ defmodule Dispatcher do
   # sparql endpoint
   ###############################################################
 
-  post "/sparql/*path", %{ accept: [:sparql_json], layer: :api } do
-    Proxy.forward conn, path, "http://database:8890/sparql/"
+  match "/sparql/*path", %{ accept: [:sparql_json], layer: :api } do
+    Proxy.forward conn, path, "http://sparql-endpoint-proxy/sparql"
+  end
+
+  ###############################################################
+  # API
+  ###############################################################
+  get "/api/docs/*path", %{ accept: [:any], layer: :api } do
+    Proxy.forward conn, path, "http://swagger:8080"
+  end
+
+  match "/api/vendor/*path", %{ accept: [:any], layer: :api } do
+    Proxy.forward conn, path, "http://vendor-api/"
+  end
+
+  post "/m2msessions/*path", %{ accept: [:any], layer: :api} do
+    Proxy.forward conn, path, "http://m2m/sessions/"
+  end
+
+  ###############################################################
+  # LDES
+  ###############################################################
+  match "/streams/ldes/*path", %{ accept: %{any: true}, layer: :api} do
+    Proxy.forward conn, path, "http://ldes-serve-feed/"
   end
 
   ###############################################################

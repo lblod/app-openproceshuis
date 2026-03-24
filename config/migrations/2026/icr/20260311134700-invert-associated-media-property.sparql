@@ -1,0 +1,19 @@
+PREFIX schema: <https://schema.org/>
+PREFIX nfo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
+
+DELETE {
+  GRAPH ?g {
+    ?attachment schema:associatedMedia ?asset .
+  }
+}
+INSERT {
+  GRAPH ?g {
+    ?asset schema:associatedMedia ?attachment .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?attachment a nfo:FileDataObject ;
+                schema:associatedMedia ?asset .
+  }
+}

@@ -1,0 +1,38 @@
+PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+INSERT {
+  GRAPH ?orgGraphs {
+    ?icrResource a icr:InformationAsset .
+    ?icrResource mu:uuid ?icrResourceId .
+    ?icrResource dct:title ?label .
+    ?icrResource dct:modified ?now .
+    ?icrResource dct:created ?now .
+    ?icrResource dct:creator ?processCreator .
+    ?process icr:hasInformationAsset ?icrResource .
+  }
+}
+WHERE {
+  GRAPH <http://mu.semte.ch/graphs/shared> {
+    ?icr a skos:Concept .
+    ?icr mu:uuid ?icrId .
+    OPTIONAL {
+      ?icr skos:prefLabel ?label .
+    }
+    FILTER(STRSTARTS(STR(?icr), "http://data.lblod.info/information-assets/"))
+    {{
+      SELECT DISTINCT ?icr ?process ?processCreator ?orgGraphs
+      WHERE {
+        GRAPH ?orgGraphs {
+          ?process icr:hasInformationAsset ?icr .
+          ?process dct:publisher ?processCreator .
+        }
+      }
+    }}
+  }
+  BIND(SHA256(?icrId) AS ?icrResourceId)
+  BIND(IRI(CONCAT("http://data.lblod.info/information-assets/", ?icrResourceId)) AS ?icrResource)
+  BIND(NOW() AS ?now)
+}

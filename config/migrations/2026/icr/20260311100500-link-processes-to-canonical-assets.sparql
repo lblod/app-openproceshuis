@@ -1,0 +1,25 @@
+PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+DELETE {
+  GRAPH ?g {
+    ?process icr:hasInformationAsset ?versionedAsset .
+  }
+}
+INSERT {
+  GRAPH ?g {
+    ?process icr:hasInformationAsset ?canonicalAsset .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?process icr:hasInformationAsset ?versionedAsset .
+    
+    ?versionedAsset dct:isVersionOf ?canonicalAsset .
+    FILTER(?versionedAsset != ?canonicalAsset)
+
+    FILTER NOT EXISTS {
+        ?process icr:hasInformationAsset ?canonicalAsset .
+    }
+  }
+}
