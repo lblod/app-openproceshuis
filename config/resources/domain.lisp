@@ -19,4 +19,5 @@
 (read-domain-file "conceptual-process.lisp")
 (read-domain-file "process.lisp")
 (read-domain-file "process-step.lisp")
+(read-domain-file "icr.lisp")
 (read-domain-file "statistic.lisp")
