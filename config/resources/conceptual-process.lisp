@@ -12,6 +12,15 @@
   :resource-base (s-url "http://data.lblod.info/conceptual-processes/")
   :on-path "conceptual-processes")
 
+(define-resource versionedConceptualProcess (conceptualProcess)
+  :class (s-prefix "ext:VersionedConceptualProcess")
+  :has-one `((conceptualProcess :via ,(s-prefix "dct:isVersionOf")
+                               :as "canonical")
+             (versionedConceptualProcess :via ,(s-prefix "prov:wasRevisionOf")
+                                        :as "previous-version"))
+  :resource-base (s-url "http://data.lblod.info/conceptual-processes/versions/")
+  :on-path "versioned-conceptual-processes")
+
 (define-resource processGroup ()
   :class (s-prefix "skos:Concept")
   :properties `((:label :string ,(s-prefix "skos:prefLabel"))
