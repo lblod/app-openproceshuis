@@ -216,6 +216,7 @@
   ("bboext:Participant" -> _)
   ;; process-type
   ("dpv:Process" x> "ext:hasStatistics")
+  ("ext:VersionedProcess" x> "ext:hasStatistics")
   ("schema:ItemList" -> _)
   ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
@@ -270,6 +271,7 @@
   ("bboext:Participant" -> _)
   ;; process-type
   ("dpv:Process" x> "ext:hasStatistics")
+  ("ext:VersionedProcess" x> "ext:hasStatistics")
   ("schema:ItemList" -> _)
   ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
