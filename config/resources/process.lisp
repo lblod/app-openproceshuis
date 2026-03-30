@@ -39,6 +39,15 @@
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
+(define-resource versionedProcess(process)
+  :class (s-prefix "ext:VersionedProcess")
+  :has-one `((process :via, (s-prefix "dct:isVersionOf")
+                      :as canonical)
+             (versionedProcess :via ,(s-prefix "prov:wasRevisionOf")
+                               :as "previous-version"))
+  :resource-base (s-url "http://data.lblod.info/processes/versions/")
+  :on-path "versioned-processes")
+
 (define-resource diagram-list()
   :class (s-prefix "schema:ItemList")
   :properties `((:order :url ,(s-prefix "schema:itemListOrder"))
