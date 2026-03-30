@@ -297,6 +297,7 @@
 
 (define-graph inventory ("http://mu.semte.ch/graphs/inventory")
   ("oph:ConceptueelProces" -> _)
+  ("ext:VersionedConceptualProcess" -> _)
   ("skos:Concept" -> _))
 
 (define-graph job ("http://mu.semte.ch/graphs/bpmn-job")
