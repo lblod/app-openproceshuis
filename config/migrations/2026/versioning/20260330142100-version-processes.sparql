@@ -1,0 +1,36 @@
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mu:   <http://mu.semte.ch/vocabularies/core/>
+PREFIX dct:  <http://purl.org/dc/terms/>
+PREFIX dpv:  <http://www.w3.org/ns/dpv#>
+PREFIX ext:  <http://mu.semte.ch/vocabularies/ext/>
+
+INSERT {
+  GRAPH ?g {
+    ?versionedProcess a dpv:Process ;
+                      a ext:VersionedProcess ;
+                      mu:uuid ?newUuid ;
+                      dct:isVersionOf ?process .
+
+    ?versionedProcess ?p ?o .
+  }
+}
+WHERE {
+  GRAPH ?g {
+    ?process a dpv:Process .
+
+    FILTER NOT EXISTS {
+      ?existingVersion a ext:VersionedProcess ;
+                       dct:isVersionOf ?process .
+    }
+
+    BIND(STRUUID() AS ?newUuid)
+    BIND(IRI(CONCAT("http://data.lblod.info/processes/versions/", ?newUuid)) AS ?versionedProcess)
+
+    ?process ?p ?o .
+
+    FILTER(?p != rdf:type)
+    FILTER(?p != mu:uuid)
+    FILTER(?p != dct:isVersionOf)
+    FILTER(?p != ext:hasStatistics)
+  }
+}
