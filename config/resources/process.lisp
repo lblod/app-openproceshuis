@@ -67,7 +67,8 @@
 (define-resource link ()
   :class (s-prefix "nfo:Bookmark")
   :properties `((:label :string ,(s-prefix "skos:prefLabel"))
-                (:href :string ,(s-prefix "nie:links")))
+                (:href :string ,(s-prefix "nie:links"))
+                (:status :url ,(s-prefix "adms:status")))
   :has-one `((process :via ,(s-prefix "rdfs:seeAlso")
                       :inverse t
                       :as "process"))
