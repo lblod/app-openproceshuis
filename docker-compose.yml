@@ -236,6 +236,8 @@ services:
     restart: always
     environment:
       ALLOW_MU_AUTH_SUDO: true
+      ERROR_RESOURCE_TYPE_URI: "http://open-services.net/ns/core#Error" # Same as the delta rule error-alert
+      ERROR_GRAPH_URI: "http://mu.semte.ch/graphs/integration/vendor-api/errors"
     labels:
       - "logging=true"
     logging: *default-logging
@@ -263,7 +265,7 @@ services:
     image: lblod/loket-error-alert-service:1.0.1
     environment:
       APP_NAME: 'Open Proces Huis'
-      EMAIL_FROM: "LoketLokaalBestuur@vlaanderen.be"
+      EMAIL_FROM: "loketlokaalbestuur@vlaanderen.be"
       EMAIL_TO: "123@example.com"
     volumes:
       - ./config/error-alert:/config/
@@ -280,12 +282,13 @@ services:
       MAILBOX_URI: "http://data.lblod.info/id/mailboxes/1"
       SECURE_CONNECTION: "true"
       EMAIL_PROTOCOL: "smtp"
-      EMAIL_ADDRESS: "LoketLokaalBestuur@vlaanderen.be"
+      EMAIL_ADDRESS: "loketlokaalbestuur@vlaanderen.be"
       EMAIL_PASSWORD: "myemailpassword"
       FROM_NAME: "Open Proces Huis"
       WELL_KNOWN_SERVICE: "Outlook365"
       NODE_ENV: "production"
-      EMAIL_CRON_PATTERN: "0 8 * * 1-5" # Every weekday at 8am
+      EMAIL_CRON_PATTERN: "*/5 * * * *" # Every 5 minutes
+      LOG_ERRORS: true
     volumes:
       - ./data/mail:/share
     labels:
