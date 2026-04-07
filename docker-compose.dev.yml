@@ -65,7 +65,6 @@ services:
       NODE_ENV: "development"
       WELL_KNOWN_SERVICE: "test"
       EMAIL_CRON_PATTERN: "* * * * *" # Every minute
-      LOG_ERRORS: true
     restart: "no"
   shared-processes-consumer:
     restart: no

@@ -1,9 +1,11 @@
 {
   "base": "http://lblod.data.gift",
   "service": {
-    "uri": "http://lblod.data.gift/services/loket-error-alert-service"
+    "uri": "http://lblod.data.gift/services/oph-error-alert-service"
   },
-  "creators": [],
+  "creators": [
+    "http://lblod.data.gift/services/vendor-api"
+  ],
   "email": {
     "folder": "http://data.lblod.info/id/mail-folders/2"
   },
