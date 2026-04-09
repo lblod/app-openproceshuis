@@ -282,8 +282,10 @@ services:
       APP_NAME: 'Open Proces Huis'
       EMAIL_FROM: "loketlokaalbestuur@vlaanderen.be"
       EMAIL_TO: "123@example.com"
+      ERROR_TEMPLATE: "/mnt/templates/error.hbs"
     volumes:
-      - ./config/error-alert:/config/
+      - ./config/error-alert/config.json:/config/config.json
+      - ./config/error-alert/error.hbs:/mnt/templates/error.hbs:ro
     labels:
       - "logging=true"
     restart: always
