@@ -49,8 +49,11 @@ services:
       LOG_LEVEL: 'debug'
   error-alert:
     environment:
+      NODE_ENV: "development"
       EMAIL_FROM: "test@example.com"
       EMAIL_TO: "123@example.com"
+    # ports:
+    #   - "9998:9229"
     restart: "no"
 
   deliver-email:
