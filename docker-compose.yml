@@ -236,8 +236,26 @@ services:
     restart: always
     environment:
       ALLOW_MU_AUTH_SUDO: true
+      ERROR_RESOURCE_TYPE_URI: "http://open-services.net/ns/core#Error" # Same as the delta rule error-alert
+      ERROR_GRAPH_URI: "http://mu.semte.ch/graphs/integration/vendor-api/errors"
+      SEND_MAIL_ON_THRESHOLD: false
+      ERROR_GRACE_PERIOD_IN_MINUTES: 5
+      ERROR_THRESHOLD_OCCURRENCES: 2
     labels:
       - "logging=true"
+    logging: *default-logging
+  swagger:
+    image: swaggerapi/swagger-ui:latest
+    restart: always
+    environment:
+      SWAGGER_JSON: /spec/openapi.yml
+    volumes:
+      - ./config/integration/json-ld-api/openapi.yml:/spec/openapi.yml:ro
+      # Override as we do not want the user to set authorize, they have to do this by login in into our OPH environment!
+      - ./config/integration/json-ld-api/index.html:/usr/share/nginx/html/index.html
+      - ./config/integration/json-ld-api/hide-authorize-btn.css:/usr/share/nginx/html/hide-authorize-btn.css
+    labels:
+      - 'logging=true'
     logging: *default-logging
   shared-processes-consumer:
     image: lblod/ldes-client:0.0.4
@@ -258,6 +276,43 @@ services:
       RANDOMIZE_GRAPHS: true
     labels:
       - "logging=true"
+    logging: *default-logging
+  error-alert:
+    image: lblod/loket-error-alert-service:1.0.1
+    environment:
+      APP_NAME: 'Open Proces Huis'
+      EMAIL_HELP: "loketlokaalbestuur@vlaanderen.be"
+      EMAIL_FROM: "loketlokaalbestuur@vlaanderen.be"
+      EMAIL_TO: "123@example.com"
+      ERROR_TEMPLATE: "/mnt/templates/error.hbs"
+    volumes:
+      - ./config/error-alert/config.json:/config/config.json
+      - ./config/error-alert/error.hbs:/mnt/templates/error.hbs:ro
+    labels:
+      - "logging=true"
+    restart: always
+    logging: *default-logging
+
+  deliver-email:
+    image: redpencil/deliver-email-service:1.0.0
+    profiles:
+      - sendEmails
+    environment:
+      MAILBOX_URI: "http://data.lblod.info/id/mailboxes/1"
+      SECURE_CONNECTION: "true"
+      EMAIL_PROTOCOL: "smtp"
+      EMAIL_ADDRESS: "loketlokaalbestuur@vlaanderen.be"
+      EMAIL_PASSWORD: "myemailpassword"
+      FROM_NAME: "Open Proces Huis"
+      WELL_KNOWN_SERVICE: "Outlook365"
+      NODE_ENV: "production"
+      EMAIL_CRON_PATTERN: "*/5 * * * *" # Every 5 minutes
+      LOG_ERRORS: true
+    volumes:
+      - ./data/mail:/share
+    labels:
+      - "logging=true"
+    restart: always
     logging: *default-logging
   ################################################################################
   # IPDC PROXY
@@ -295,23 +350,6 @@ services:
   anonymization:
     image: lblod/pii-identification-anonymization-service
     restart: always
-
-  ################################################################################
-  # JSON-LD API
-  ################################################################################
-  swagger:
-    image: swaggerapi/swagger-ui:latest
-    restart: always
-    environment:
-      SWAGGER_JSON: /spec/openapi.yml
-    volumes:
-      - ./config/integration/json-ld-api/openapi.yml:/spec/openapi.yml:ro
-      # Override as we do not want the user to set authorize, they have to do this by login in into our OPH environment!
-      - ./config/integration/json-ld-api/index.html:/usr/share/nginx/html/index.html
-      - ./config/integration/json-ld-api/hide-authorize-btn.css:/usr/share/nginx/html/hide-authorize-btn.css
-    labels:
-      - 'logging=true'
-    logging: *default-logging
   modified:
     image: lblod/track-modified-service:0.2.0
     environment:

@@ -50,7 +50,8 @@
   :dpv "https://w3id.org/dpv#"
   :oph "http://lblod.data.gift/vocabularies/openproceshuis/"
   :icr "http://lblod.data.gift/vocabularies/informationclassification/"
-  :prov "http://www.w3.org/ns/prov#")
+  :prov "http://www.w3.org/ns/prov#"
+  :os "http://open-services.net/ns/core#")
 
 ;;;;;;;;;;;;;
 ;;; User roles
@@ -169,6 +170,10 @@
 (grant (read)
        :to-graph inventory
        :for-allowed-group "public")
+
+(grant (read)
+       :to-graph error
+       :for-allowed-group "admin")
 
 ;;;;;;;;;
 ;;; Graphs
@@ -310,3 +315,7 @@
 (define-graph statistics ("http://mu.semte.ch/graphs/statistics")
   ("ext:ProcessStatistic" -> _)
   ("dpv:Process" -> "ext:hasStatistics"))
+
+(define-graph error ("http://mu.semte.ch/graphs/errors")
+  ("os:Error" -> _)
+  ("oph:Error" -> _))
