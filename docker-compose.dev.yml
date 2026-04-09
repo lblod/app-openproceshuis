@@ -23,13 +23,6 @@ services:
   process:
     image: lblod/openproceshuis-process-service:latest
     restart: "no"
-  sparql-endpoint-proxy:
-    restart: "no"
-    environment:
-      LOGLEVEL: 'error'
-      PROXY_LOGLEVEL: 'debug'
-  swagger:
-    restart: "no"
   modified:
     restart: "no"
   ldes-serve-feed:
@@ -72,3 +65,10 @@ services:
       BATCH_SIZE: 100
       CRON_PATTERN: "*/32 * * * * *" # Every 32 seconds
       LOG_LEVEL: debug
+  sparql-endpoint-proxy:
+    restart: "no"
+    environment:
+      LOGLEVEL: 'error'
+      PROXY_LOGLEVEL: 'debug'
+  swagger:
+    restart: "no"

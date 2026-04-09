@@ -243,6 +243,19 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  swagger:
+    image: swaggerapi/swagger-ui:latest
+    restart: always
+    environment:
+      SWAGGER_JSON: /spec/openapi.yml
+    volumes:
+      - ./config/integration/json-ld-api/openapi.yml:/spec/openapi.yml:ro
+      # Override as we do not want the user to set authorize, they have to do this by login in into our OPH environment!
+      - ./config/integration/json-ld-api/index.html:/usr/share/nginx/html/index.html
+      - ./config/integration/json-ld-api/hide-authorize-btn.css:/usr/share/nginx/html/hide-authorize-btn.css
+    labels:
+      - 'logging=true'
+    logging: *default-logging
   shared-processes-consumer:
     image: lblod/ldes-client:0.0.4
     profiles:
@@ -333,23 +346,6 @@ services:
   anonymization:
     image: lblod/pii-identification-anonymization-service
     restart: always
-
-  ################################################################################
-  # JSON-LD API
-  ################################################################################
-  swagger:
-    image: swaggerapi/swagger-ui:latest
-    restart: always
-    environment:
-      SWAGGER_JSON: /spec/openapi.yml
-    volumes:
-      - ./config/integration/json-ld-api/openapi.yml:/spec/openapi.yml:ro
-      # Override as we do not want the user to set authorize, they have to do this by login in into our OPH environment!
-      - ./config/integration/json-ld-api/index.html:/usr/share/nginx/html/index.html
-      - ./config/integration/json-ld-api/hide-authorize-btn.css:/usr/share/nginx/html/hide-authorize-btn.css
-    labels:
-      - 'logging=true'
-    logging: *default-logging
   modified:
     image: lblod/track-modified-service:0.2.0
     environment:
