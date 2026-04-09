@@ -60,7 +60,7 @@ services:
       EMAIL_TO: "123@example.com"
     restart: "no"
 
-  deliver-email-service:
+  deliver-email:
     environment:
       NODE_ENV: "development"
       WELL_KNOWN_SERVICE: "test"

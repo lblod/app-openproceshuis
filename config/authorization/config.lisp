@@ -171,9 +171,9 @@
        :to-graph inventory
        :for-allowed-group "public")
 
-(grant (read write)
+(grant (read)
        :to-graph error
-       :for-allowed-group "authenticated")
+       :for-allowed-group "admin")
 
 ;;;;;;;;;
 ;;; Graphs

@@ -238,6 +238,8 @@ services:
       ALLOW_MU_AUTH_SUDO: true
       ERROR_RESOURCE_TYPE_URI: "http://open-services.net/ns/core#Error" # Same as the delta rule error-alert
       ERROR_GRAPH_URI: "http://mu.semte.ch/graphs/integration/vendor-api/errors"
+      ERROR_GRACE_PERIOD_IN_MINUTES: 5
+      ERROR_THRESHOLD_OCCURRENCES: 2
     labels:
       - "logging=true"
     logging: *default-logging
@@ -274,7 +276,7 @@ services:
     restart: always
     logging: *default-logging
 
-  deliver-email-service:
+  deliver-email:
     image: redpencil/deliver-email-service:1.0.0
     profiles:
       - sendEmails
