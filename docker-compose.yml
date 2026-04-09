@@ -238,6 +238,7 @@ services:
       ALLOW_MU_AUTH_SUDO: true
       ERROR_RESOURCE_TYPE_URI: "http://open-services.net/ns/core#Error" # Same as the delta rule error-alert
       ERROR_GRAPH_URI: "http://mu.semte.ch/graphs/integration/vendor-api/errors"
+      SEND_MAIL_ON_THRESHOLD: false
       ERROR_GRACE_PERIOD_IN_MINUTES: 5
       ERROR_THRESHOLD_OCCURRENCES: 2
     labels:
@@ -280,6 +281,7 @@ services:
     image: lblod/loket-error-alert-service:1.0.1
     environment:
       APP_NAME: 'Open Proces Huis'
+      EMAIL_HELP: "loketlokaalbestuur@vlaanderen.be"
       EMAIL_FROM: "loketlokaalbestuur@vlaanderen.be"
       EMAIL_TO: "123@example.com"
       ERROR_TEMPLATE: "/mnt/templates/error.hbs"
