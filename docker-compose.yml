@@ -369,7 +369,7 @@ services:
     image: lblod/ldes-serve-feed-service:0.4.0
     restart: always
     environment:
-      LDES_STREAM_PREFIX: "https://dev.openproceshuis.lblod.info/streams/ldes/"
+      BASE_URL: "https://dev.openproceshuis.lblod.info/streams/ldes/"
       TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
       DATA_FOLDER: "/data"
       LDES_FOLDER: "public"
