@@ -21,17 +21,29 @@ export default {
       PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
       PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
 
-      SELECT DISTINCT ?groupName ?title ?created ?modified ?status ?processViews ?bpmnDownloads ?pdfDownloads ?svgDownloads ?pngDownloads (GROUP_CONCAT(DISTINCT ?adminUnitLabel; SEPARATOR="; ") AS ?adminUnitLabels)
+      SELECT  ?process 
+              ?organizationLabel 
+              ?title 
+              ?created 
+              (MAX(?modified) AS ?lastModified) 
+              (SAMPLE(?status) AS ?status) 
+              (MAX(?processViews) AS ?maxViews) 
+              (MAX(?bpmnDownloads) AS ?maxBpmn) 
+              (MAX(?pdfDownloads) AS ?maxPdf) 
+              (MAX(?svgDownloads) AS ?maxSvg) 
+              (MAX(?pngDownloads) AS ?maxPng) 
+              (GROUP_CONCAT(DISTINCT ?adminUnitLabel; SEPARATOR="; ") AS ?adminUnitLabels)
       WHERE {
         ?group a besluit:Bestuurseenheid ;
-               skos:prefLabel ?groupName .
+        skos:prefLabel ?organizationLabel .
 
-        ?process a dpv:Process ;
-                 dct:publisher ?group ;
-                 dct:title ?title ;
-                 dct:created ?created ;
-                 dct:modified ?modified .
-                 
+        graph <http://mu.semte.ch/graphs/shared> {
+          ?process a dpv:Process .
+          ?process dct:publisher ?group .
+          ?process dct:title ?title .
+          ?process dct:created ?created .
+          ?process dct:modified ?modified .
+        } 
         OPTIONAL { ?process adms:status ?status }
         OPTIONAL { 
           ?process ext:hasStatistics ?stats .
@@ -41,23 +53,22 @@ export default {
           OPTIONAL { ?stats ext:svgDownloads ?svgDownloads }
           OPTIONAL { ?stats ext:pdfDownloads ?pdfDownloads }
         }
-          OPTIONAL {
-                     ?process icr:isRelevantForAdministrativeUnit ?adminUnit .
+        OPTIONAL {
+          ?process icr:isRelevantForAdministrativeUnit ?adminUnit .
           OPTIONAL { ?adminUnit skos:prefLabel ?adminUnitLabel }
         }
-
-}
-      GROUP BY ?groupName ?title ?created ?modified ?status ?processViews ?bpmnDownloads ?pdfDownloads ?svgDownloads ?pngDownloads
-      ORDER BY LCASE(?groupName) LCASE(?title) ?created
-       
+      }
+      GROUP BY ?process ?organizationLabel ?title ?created ?lastModified
+      ORDER BY LCASE(?organizationLabel) LCASE(?title) ?created  
     `;
     const queryResponse = await batchedQuery(queryString);
 
     const data = queryResponse.results.bindings.map((process) => ({
-      Bestuur: process.groupName.value,
+      Uri: process.process.value,
       Proces: process.title.value,
+      Bestuur: process.organizationLabel.value,
       "Aangemaakt op": formatDate(process.created.value),
-      "Aangepast op": formatDate(process.modified.value),
+      "Aangepast op": formatDate(process.lastModified.value),
       Gearchiveerd:
         process.status?.value ===
         "http://lblod.data.gift/concepts/concept-status/gearchiveerd"
@@ -84,13 +95,13 @@ export default {
     await generateReportFromData(
       data,
       [
-        "Bestuur",
+        "Uri",
         "Proces",
+        "Bestuur",
         "Aangemaakt op",
         "Aangepast op",
         "Gearchiveerd",
         "Relevant voor type bestuur",
-        "Aantal weergaven",
         "Totaal aantal downloads",
         "Aantal downloads (bpmn)",
         "Aantal downloads (pdf)",
