@@ -23,6 +23,9 @@ services:
   process:
     image: lblod/openproceshuis-process-service:latest
     restart: "no"
+  report-generation:
+    environment:
+      NODE_ENV: "development"
   sparql-endpoint-proxy:
     restart: "no"
     environment:
