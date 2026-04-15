@@ -30,10 +30,10 @@ export default {
           WHERE {
             ?group a besluit:Bestuurseenheid ;
                    skos:prefLabel ?groupName .
-
-            ?process a dpv:Process ;
-                     dct:publisher ?group .
-
+            graph <http://mu.semte.ch/graphs/shared> {
+              ?process a dpv:Process .
+              ?process dct:publisher ?group .
+            }
             OPTIONAL { ?process adms:status ?status }
 
             BIND(IF(?status = <http://lblod.data.gift/concepts/concept-status/gearchiveerd>, STR(?process), UNDEF) AS ?archivedProcess)
@@ -48,6 +48,7 @@ export default {
                  (COUNT(DISTINCT ?unarchivedProcess) AS ?unarchivedProcesses)
                  (COUNT(DISTINCT ?archivedProcess) AS ?archivedProcesses)
                  (COUNT(DISTINCT ?process) AS ?totalProcesses)
+          FROM <http://mu.semte.ch/graphs/shared>
           WHERE {
             ?process a dpv:Process .
 
