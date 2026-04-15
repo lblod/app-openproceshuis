@@ -105,7 +105,6 @@ export default {
         "Aangepast op",
         "Gearchiveerd",
         "Relevant voor type bestuur",
-        "Aantal weergaven",
         "Totaal aantal downloads",
         "Aantal downloads (bpmn)",
         "Aantal downloads (vsdx)",
