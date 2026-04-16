@@ -48,6 +48,7 @@ services:
     environment:
       LOG_LEVEL: 'debug'
   error-alert:
+    image: lblod/loket-error-alert-service:latest
     environment:
       NODE_ENV: "development"
       EMAIL_FROM: "test@example.com"
