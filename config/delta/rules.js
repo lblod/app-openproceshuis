@@ -1,3 +1,5 @@
+import errorAlert from './error-alert';
+
 export default [
   {
     match: {
@@ -43,4 +45,5 @@ export default [
       gracePeriod: 15000,
     },
   },
+  ...errorAlert,
 ];
