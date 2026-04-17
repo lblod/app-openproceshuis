@@ -15,8 +15,7 @@ services:
       EMBER_OAUTH_API_SCOPE: "openid rrn profile vo abb_openproceshuis"
       EMBER_OAUTH_SWITCH_URL: "https://openproceshuis.lblod.info/switch-login"
       EMBER_ANALYTICS_APP_DOMAIN: "openproceshuis.lblod.info" # Prod: openproceshuis.vlaanderen.be
-      EMBER_ANALYTICS_API_HOST: "https://plausible.lblod.info"
-
+      EMBER_ANALYTICS_API_HOST: "/plausible"
     volumes:
       - ./config/frontend/add-x-frame-options-header.conf:/config/add-x-frame-options.conf
     labels:
@@ -325,6 +324,17 @@ services:
       API_URL: "https://api.ipdc.tni-vlaanderen.be"
       API_KEY: "secret"
       REQUIRED_ROLES: "OpenProcesHuis-Procesbeheerder,LoketLB-OpenProcesHuisGebruiker,LoketLB-OpenProcesHuisAfnemer,LoketLB-admin" # TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
+  plausible-proxy:
+    image: lblod/api-proxy-service:1.0.2
+    links:
+      - virtuoso:database
+    environment:
+      API_URL: "https://plausible.lblod.info"
+      API_KEY: ""
     restart: always
     labels:
       - "logging=true"
