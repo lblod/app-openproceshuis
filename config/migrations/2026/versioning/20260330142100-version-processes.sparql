@@ -33,4 +33,5 @@ WHERE {
     FILTER(?p != dct:isVersionOf)
     FILTER(?p != ext:hasStatistics)
   }
+  ?g ext:ownedBy ?eenheid .
 }
