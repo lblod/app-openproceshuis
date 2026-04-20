@@ -11,11 +11,11 @@ export const ldesInstances: LdesInstances = {
                       )
             )
     `,
-    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://lblod.data.gift/vocabularies/openproceshuis/ConceptueelProces": {
-    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://www.w3.org/2004/02/skos/core#Concept": {
@@ -29,7 +29,7 @@ export const ldesInstances: LdesInstances = {
           )
         )
       `,
-    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#FileDataObject": {
@@ -37,19 +37,23 @@ export const ldesInstances: LdesInstances = {
       ?processOrDiagram ?pp ?s .
       FILTER(?pp IN(<http://schema.org/item>, <http://schema.org/associatedMedia>))
     `,
-    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://schema.org/ItemList": {
-    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://schema.org/ListItem": {
-    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://lblod.data.gift/vocabularies/informationclassification/InformationAsset": {
-    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
+    filter: `
+      ?s ?p ?o .
+      FILTER(?p != <http://purl.org/dc/terms/isVersionOf>)
+    `,
+    graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
 }
