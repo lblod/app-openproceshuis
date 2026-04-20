@@ -29,6 +29,7 @@ export default {
               (SAMPLE(?status) AS ?status) 
               (MAX(?processViews) AS ?maxViews) 
               (MAX(?bpmnDownloads) AS ?maxBpmn) 
+              (MAX(?visioDownloads) AS ?maxVisio) 
               (MAX(?pdfDownloads) AS ?maxPdf) 
               (MAX(?svgDownloads) AS ?maxSvg) 
               (MAX(?pngDownloads) AS ?maxPng) 
@@ -49,6 +50,7 @@ export default {
           ?process ext:hasStatistics ?stats .
           OPTIONAL { ?stats ext:processViews ?processViews }
           OPTIONAL { ?stats ext:bpmnDownloads ?bpmnDownloads }
+          OPTIONAL { ?stats ext:visioDownloads ?visioDownloads }
           OPTIONAL { ?stats ext:pngDownloads ?pngDownloads }
           OPTIONAL { ?stats ext:svgDownloads ?svgDownloads }
           OPTIONAL { ?stats ext:pdfDownloads ?pdfDownloads }
@@ -75,21 +77,22 @@ export default {
           ? "Ja"
           : "Nee",
       "Relevant voor type bestuur": process.adminUnitLabels?.value || "",
-      "Aantal weergaven": process.processViews?.value,
+      "Aantal weergaven": process.maxViews?.value,
       "Totaal aantal downloads": String(
         [
-          process.bpmnDownloads,
-          process.pdfDownloads,
-          process.svgDownloads,
-          process.pngDownloads,
+          process.maxBpmn,
+          process.maxPdf,
+          process.maxSvg,
+          process.maxPng,
         ]
           .map((download) => Number(download?.value) || 0) // Convert SPARQL values to numbers -> sum them up -> return as string
           .reduce((accumulator, currentValue) => accumulator + currentValue, 0)
       ),
-      "Aantal downloads (bpmn)": process.bpmnDownloads?.value || "0",
-      "Aantal downloads (pdf)": process.pdfDownloads?.value || "0",
-      "Aantal downloads (svg)": process.svgDownloads?.value || "0",
-      "Aantal downloads (png)": process.pngDownloads?.value || "0",
+      "Aantal downloads (bpmn)": process.maxBpmn?.value || "0",
+      "Aantal downloads (vsdx)": process.maxVisio?.value || "0",
+      "Aantal downloads (pdf)": process.maxPdf?.value || "0",
+      "Aantal downloads (svg)": process.maxSvg?.value || "0",
+      "Aantal downloads (png)": process.maxPng?.value || "0",
     }));
 
     await generateReportFromData(
@@ -102,8 +105,10 @@ export default {
         "Aangepast op",
         "Gearchiveerd",
         "Relevant voor type bestuur",
+        "Aantal weergaven",
         "Totaal aantal downloads",
         "Aantal downloads (bpmn)",
+        "Aantal downloads (vsdx)",
         "Aantal downloads (pdf)",
         "Aantal downloads (svg)",
         "Aantal downloads (png)",
