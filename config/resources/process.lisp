@@ -35,7 +35,10 @@
               (group :via ,(s-prefix "prov:usedBy")
                      :as "users")
               (link :via ,(s-prefix "rdfs:seeAlso")
-                    :as "links"))
+                    :as "links")
+              (versionedProcess :via ,(s-prefix "dct:isVersionOf")
+                                         :inverse t
+                                         :as "versions"))
   :resource-base (s-url "http://data.lblod.info/processes/")
   :on-path "processes")
 
