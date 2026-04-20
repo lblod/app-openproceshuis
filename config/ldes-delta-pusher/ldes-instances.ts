@@ -44,6 +44,10 @@ export const ldesInstances: LdesInstances = {
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
   "http://lblod.data.gift/vocabularies/informationclassification/InformationAsset": {
+    filter: `
+      ?s ?p ?o .
+      FILTER(?p != <http://purl.org/dc/terms/isVersionOf>)
+    `,
     graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/public> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
   },
