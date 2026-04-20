@@ -1,0 +1,13 @@
+PREFIX mu:   <http://mu.semte.ch/vocabularies/core/>
+PREFIX ext:  <http://mu.semte.ch/vocabularies/ext/>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+INSERT {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+    ?organizationGraph ext:ownedBy ?eenheid.
+  }
+}
+WHERE {
+  ?eenheid a besluit:Bestuurseenheid .
+  ?eenheid mu:uuid ?id .
+  BIND(IRI(CONCAT("http://mu.semte.ch/graphs/organizations/", ?id)) as ?organizationGraph)
+}
