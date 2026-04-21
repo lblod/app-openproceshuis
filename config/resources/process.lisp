@@ -45,7 +45,7 @@
 (define-resource versionedProcess(process)
   :class (s-prefix "ext:VersionedProcess")
   :has-one `((process :via, (s-prefix "dct:isVersionOf")
-                      :as canonical)
+                      :as "canonical")
              (versionedProcess :via ,(s-prefix "prov:wasRevisionOf")
                                :as "previous-version"))
   :resource-base (s-url "http://data.lblod.info/processes/versions/")
