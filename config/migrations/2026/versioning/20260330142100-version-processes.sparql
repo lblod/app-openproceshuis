@@ -28,10 +28,13 @@ WHERE {
 
     ?process ?p ?o .
 
-    FILTER(?p != rdf:type)
-    FILTER(?p != mu:uuid)
-    FILTER(?p != dct:isVersionOf)
-    FILTER(?p != ext:hasStatistics)
+    FILTER(?p NOT IN(
+                    rdf:type,
+                    mu:uuid,
+                    dct:isVersionOf,
+                    ext:hasStatistics
+                  ) 
+    )
   }
   ?g ext:ownedBy ?eenheid .
 }
