@@ -203,6 +203,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://ipdc-proxy/"
   end
 
+  match "/plausible/*path", %{ accept: [:any], layer: :api } do
+    Proxy.forward conn, path, "http://plausible-proxy/"
+  end
+
   ###############################################################
   # frontend
   ###############################################################
