@@ -6,7 +6,8 @@ export const ldesInstances: LdesInstances = {
       ?s ?p ?o .
       FILTER(?p NOT IN (
                         <http://mu.semte.ch/vocabularies/ext/hasStatistics>,
-                        <http://purl.org/dc/terms/isVersionOf>
+                        <http://purl.org/dc/terms/isVersionOf>,
+                        <http://lblod.data.gift/vocabularies/openproceshuis/isVersionedResource>
                       )
     `,
     graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
