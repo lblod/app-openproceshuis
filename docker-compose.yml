@@ -221,7 +221,7 @@ services:
   # Integration services
   ################################################################################  
   m2m:
-    image: lblod/m2m-login-service:0.1.0
+    image: lblod/m2m-login-service:0.1.1
     environment:
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
       MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
