@@ -323,7 +323,7 @@ services:
     environment:
       API_URL: "https://api.ipdc.tni-vlaanderen.be"
       API_KEY: "secret"
-      REQUIRED_ROLES: "OpenProcesHuis-Procesbeheerder,LoketLB-OpenProcesHuisGebruiker,LoketLB-OpenProcesHuisAfnemer,LoketLB-admin" # TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
+      REQUIRED_ROLES: "OpenProcesHuis-Procesbeheerder,LoketLB-OpenProcesHuisGebruiker,LoketLB-OpenProcesHuisAfnemer,LoketLB-admin,Lezer,OpenProcesHuis-Lezer,Medewerker-fixed" # TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
     restart: always
     labels:
       - "logging=true"
