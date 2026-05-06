@@ -244,7 +244,7 @@ services:
       - "logging=true"
     logging: *default-logging
   swagger:
-    image: swaggerapi/swagger-ui:latest
+    image: swaggerapi/swagger-ui:v5.32.0
     restart: always
     environment:
       SWAGGER_JSON: /spec/openapi.yml
