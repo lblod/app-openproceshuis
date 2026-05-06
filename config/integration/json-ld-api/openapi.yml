@@ -331,36 +331,28 @@ components:
         diagrams:
           oneOf:
             - type: array
-              description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+              description: "Simple list of URIs."
               items:
                 type: string
+                format: uri
                 pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
               example:
-                [
-                  'http://mu.semte.ch/services/file-service/files/123456789'
-                ]
-            - type: object
-              description: "List of file URI's with position that needs to be added to the process. For example: bpmn, visio"
-              required: [file]
-              properties:
-                file:
-                  type: string
-                  format: uri
-                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
-                position:
-                  type: number
-                  description: "The display order of the diagram."
+                - "http://mu.semte.ch/services/file-service/files/123456789"
+            - type: array
+              description: "List of objects with file uri and position."
+              items:
+                type: object
+                required: [file]
+                properties:
+                  file:
+                    type: string
+                    format: uri
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                  position:
+                    type: number
               example:
-                [
-                  {
-                    file: 'http://mu.semte.ch/services/file-service/files/123456789',
-                    position: 1
-                  },
-                  {
-                    file: 'http://mu.semte.ch/services/file-service/files/987654321',
-                    position: 2
-                  }
-                ]
+                - file: "http://mu.semte.ch/services/file-service/files/123456789"
+                  position: 1
         attachments:
           type: array
           description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
@@ -413,36 +405,28 @@ components:
         diagrams:
           oneOf:
             - type: array
-              description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+              description: "Simple list of URIs."
               items:
                 type: string
+                format: uri
                 pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
               example:
-                [
-                  'http://mu.semte.ch/services/file-service/files/123456789'
-                ]
-            - type: object
-              description: "List of file URI's with position that needs to be added to the process. For example: bpmn, visio"
-              required: [file]
-              properties:
-                file:
-                  type: string
-                  format: uri
-                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
-                position:
-                  type: number
-                  description: "The display order of the diagram."
+                - "http://mu.semte.ch/services/file-service/files/123456789"
+            - type: array
+              description: "List of objects with file uri and position."
+              items:
+                type: object
+                required: [file]
+                properties:
+                  file:
+                    type: string
+                    format: uri
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                  position:
+                    type: number
               example:
-                [
-                  {
-                    file: 'http://mu.semte.ch/services/file-service/files/123456789',
-                    position: 1
-                  },
-                  {
-                    file: 'http://mu.semte.ch/services/file-service/files/987654321',
-                    position: 2
-                  }
-                ]
+                - file: "http://mu.semte.ch/services/file-service/files/123456789"
+                  position: 1
         attachments:
           type: array
           description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
@@ -502,36 +486,28 @@ components:
         diagrams:
           oneOf:
             - type: array
-              description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
+              description: "Simple list of URIs."
               items:
                 type: string
+                format: uri
                 pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
               example:
-                [
-                  'http://mu.semte.ch/services/file-service/files/123456789'
-                ]
-            - type: object
-              description: "List of file URI's with position that needs to be added to the process. For example: bpmn, visio"
-              required: [file]
-              properties:
-                file:
-                  type: string
-                  format: uri
-                  pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
-                position:
-                  type: number
-                  description: "The display order of the diagram."
+                - "http://mu.semte.ch/services/file-service/files/123456789"
+            - type: array
+              description: "List of objects with file uri and position."
+              items:
+                type: object
+                required: [file]
+                properties:
+                  file:
+                    type: string
+                    format: uri
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                  position:
+                    type: number
               example:
-                [
-                  {
-                    file: 'http://mu.semte.ch/services/file-service/files/123456789',
-                    position: 1
-                  },
-                  {
-                    file: 'http://mu.semte.ch/services/file-service/files/987654321',
-                    position: 2
-                  }
-                ]
+                - file: "http://mu.semte.ch/services/file-service/files/123456789"
+                  position: 1
         attachments:
           type: array
           description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
