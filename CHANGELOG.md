@@ -1,3 +1,41 @@
+## v2.7.0 (2026-05-06)
+
+#### :rocket: Enhancement
+
+- [#144](https://github.com/lblod/app-openproceshuis/pull/144)Add audit vlaanderen through migration by [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#143](https://github.com/lblod/app-openproceshuis/pull/143)OPH-1039 | provide health check for m2m-login service by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#138](https://github.com/lblod/app-openproceshuis/pull/138)OPH-1016 | let the frontend go through the plausible-proxy by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#134](https://github.com/lblod/app-openproceshuis/pull/134)OPH-993 | Monitoring/fallback by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#133](https://github.com/lblod/app-openproceshuis/pull/133)OPH-1014 | Add status property to diagrams by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#104](https://github.com/lblod/app-openproceshuis/pull/104)Introduce subprocesses data model by [@MartijnBogaert](https://github.com/MartijnBogaert)
+
+#### :wrench: Maintenance
+
+- [#132](https://github.com/lblod/app-openproceshuis/pull/132)Move information asset resource config to separate file by [@MartijnBogaert](https://github.com/MartijnBogaert)
+
+#### :bug: Bug Fixes
+
+- [#142](https://github.com/lblod/app-openproceshuis/pull/142)fix: add all roles to the ipdc-proxy by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#139](https://github.com/lblod/app-openproceshuis/pull/139)fix: output of downloads is not supposed to be 0 always by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#137](https://github.com/lblod/app-openproceshuis/pull/137)feat: LoketLB-admin admin role is also allowed for the ipdc-proxy to … by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#136](https://github.com/lblod/app-openproceshuis/pull/136)OPH-1015 | show one process uri per row in report by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#86](https://github.com/lblod/app-openproceshuis/pull/86)Consumer OP data from prod sync base URL by [@MartijnBogaert](https://github.com/MartijnBogaert)
+
+## Deploy instructions
+
+Pull image for the following services:
+
+- frontend
+- vendor-api
+- m2m
+
+Service actions:
+
+- Run the migrations
+- Restart resources & cache | Domain
+- Set the email credentials so mails can be send
+- Enable the error messaging for the vendor-api when deliver emails is set
+
 ## v2.6.0
 
 #### :rocket: Enhancement
