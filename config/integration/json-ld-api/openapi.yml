@@ -329,15 +329,30 @@ components:
               'http://data.lblod.info/id/bestuurseenheden/987654321',
             ]
         diagrams:
-          type: array
-          description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
-          items:
-            type: string
-            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
-          example:
-            [
-              'http://mu.semte.ch/services/file-service/files/123456789'
-            ]
+          oneOf:
+            - type: array
+              description: "Simple list of URIs."
+              items:
+                type: string
+                format: uri
+                pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+              example:
+                - "http://mu.semte.ch/services/file-service/files/123456789"
+            - type: array
+              description: "List of objects with file uri and position."
+              items:
+                type: object
+                required: [file]
+                properties:
+                  file:
+                    type: string
+                    format: uri
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                  position:
+                    type: number
+              example:
+                - file: "http://mu.semte.ch/services/file-service/files/123456789"
+                  position: 1
         attachments:
           type: array
           description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
@@ -388,15 +403,30 @@ components:
               'http://data.lblod.info/id/bestuurseenheden/987654321',
             ]
         diagrams:
-          type: array
-          description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
-          items:
-            type: string
-            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
-          example:
-            [
-              'http://mu.semte.ch/services/file-service/files/123456789'
-            ]
+          oneOf:
+            - type: array
+              description: "Simple list of URIs."
+              items:
+                type: string
+                format: uri
+                pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+              example:
+                - "http://mu.semte.ch/services/file-service/files/123456789"
+            - type: array
+              description: "List of objects with file uri and position."
+              items:
+                type: object
+                required: [file]
+                properties:
+                  file:
+                    type: string
+                    format: uri
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                  position:
+                    type: number
+              example:
+                - file: "http://mu.semte.ch/services/file-service/files/123456789"
+                  position: 1
         attachments:
           type: array
           description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"
@@ -454,15 +484,30 @@ components:
               'http://data.lblod.info/id/bestuurseenheden/987654321',
             ]
         diagrams:
-          type: array
-          description: "List of file URI's that need to be added to this process. For example: bpmn, visio"
-          items:
-            type: string
-            pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
-          example:
-            [
-              'http://mu.semte.ch/services/file-service/files/123456789'
-            ]
+          oneOf:
+            - type: array
+              description: "Simple list of URIs."
+              items:
+                type: string
+                format: uri
+                pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+              example:
+                - "http://mu.semte.ch/services/file-service/files/123456789"
+            - type: array
+              description: "List of objects with file uri and position."
+              items:
+                type: object
+                required: [file]
+                properties:
+                  file:
+                    type: string
+                    format: uri
+                    pattern: '^(https?://)[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(/.*)?$'
+                  position:
+                    type: number
+              example:
+                - file: "http://mu.semte.ch/services/file-service/files/123456789"
+                  position: 1
         attachments:
           type: array
           description: "List of file URI's that need to be added to this process as an attachment. For example: related documents, pdf, csv"

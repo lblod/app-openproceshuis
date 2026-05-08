@@ -75,4 +75,5 @@ services:
       LOGLEVEL: 'error'
       PROXY_LOGLEVEL: 'debug'
   swagger:
+    image: swaggerapi/swagger-ui:latest
     restart: "no"
