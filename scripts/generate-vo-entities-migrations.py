@@ -55,30 +55,38 @@ def read_rows() -> list[dict]:
     return rows
 
 
-def build_triple(row: dict) -> str:
+def build_values_row(row: dict) -> str:
     entity_uuid = derive_uuid(row["id"])
     uri = f"{BESTUURSEENHEID_BASE_URI}{entity_uuid}"
     name = escape_str(row["name"])
+    ovo = escape_str(row["ovo"])
 
-    lines = [
-        f"<{uri}>",
-        f'  mu:uuid "{entity_uuid}" ;',
-        "  rdf:type besluit:Bestuurseenheid ;",
-        f'  skos:prefLabel "{name}" ;',
-        f'  dct:identifier "{escape_str(row["ovo"])}" .',
-    ]
-    return "\n".join(lines)
+    return f'    (<{uri}> "{entity_uuid}" "{name}" "{ovo}")'
 
 
 def generate_migration(rows: list[dict]) -> str:
     prefix_block = "\n".join(PREFIXES)
-    triples_block = "\n\n".join(build_triple(r) for r in rows)
+    values_rows = "\n".join(build_values_row(r) for r in rows)
 
     return (
         f"{prefix_block}\n\n"
-        f"INSERT DATA {{\n"
-        f"  GRAPH <{TARGET_GRAPH}> {{\n\n"
-        f"{triples_block}\n\n"
+        f"INSERT {{\n"
+        f"  GRAPH <{TARGET_GRAPH}> {{\n"
+        f"    ?uri\n"
+        f"      mu:uuid ?uuid ;\n"
+        f"      rdf:type besluit:Bestuurseenheid ;\n"
+        f"      skos:prefLabel ?name ;\n"
+        f"      dct:identifier ?ovo .\n"
+        f"  }}\n"
+        f"}}\n"
+        f"WHERE {{\n"
+        f"  VALUES (?uri ?uuid ?name ?ovo) {{\n"
+        f"{values_rows}\n"
+        f"  }}\n"
+        f"  FILTER NOT EXISTS {{\n"
+        f"    GRAPH <{TARGET_GRAPH}> {{\n"
+        f"      ?existing dct:identifier ?ovo .\n"
+        f"    }}\n"
         f"  }}\n"
         f"}}\n"
     )
