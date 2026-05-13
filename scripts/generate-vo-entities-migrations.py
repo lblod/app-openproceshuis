@@ -65,6 +65,26 @@ def build_values_row(row: dict) -> str:
     return f'    (<{uri}> "{entity_uuid}" "{name}" "{ovo}")'
 
 
+def generate_link_query(rows: list[dict]) -> str:
+    uris = "\n".join(
+        f"    (<http://data.lblod.info/id/bestuurseenheden/{derive_uuid(r['id'])}>)"
+        for r in rows
+    )
+
+    return (
+        f"INSERT {{\n"
+        f"  GRAPH <{TARGET_GRAPH}> {{\n"
+        f"    ?uri org:classification <{VO_CLASSIFICATION_URI}> .\n"
+        f"  }}\n"
+        f"}}\n"
+        f"WHERE {{\n"
+        f"  VALUES (?uri) {{\n"
+        f"{uris}\n"
+        f"  }}\n"
+        f"}}"
+    )
+
+
 def generate_migration(rows: list[dict]) -> str:
     values_rows = "\n".join(build_values_row(r) for r in rows)
 
@@ -119,7 +139,10 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
 
     classification_path = out_dir / f"{timestamp}-insert-vo-classification.sparql"
-    classification_path.write_text(prefix_block + generate_classification_query() + "\n", encoding="utf-8")
+    classification_path.write_text(
+        prefix_block + generate_classification_query() + " ;\n\n" + generate_link_query(rows) + "\n",
+        encoding="utf-8",
+    )
     print(f"Written to {classification_path}")
 
     bestuurseenheden_path = out_dir / f"{timestamp}-insert-vo-bestuurseenheden.sparql"
