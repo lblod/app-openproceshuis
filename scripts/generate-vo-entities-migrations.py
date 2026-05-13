@@ -9,6 +9,7 @@ INPUT_COLS = {
     "Organisatie ID": "id",
     "Organisatienaam": "name",
     "ovoKey": "ovo",
+    "organisationKboNumber": "kbo",
 }
 
 OUTPUT_FILEPATH = "../config/migrations/2026/vo-entities/"
@@ -66,10 +67,13 @@ def read_rows() -> list[dict]:
 
 
 def generate_bestuurseenheden_query(rows: list[dict]) -> str:
+    def values_row(r: dict, entity_uuid: str) -> str:
+        kbo = f'"{escape_str(r["kbo"])}"' if r["kbo"] else "UNDEF"
+        return f'    (<{bestuurseenheid_uri(entity_uuid)}> "{entity_uuid}" "{escape_str(r["name"])}" "{escape_str(r["ovo"])}" {kbo})'
+
     values_rows = "\n".join(
-        f'    (<{bestuurseenheid_uri(entity_uuid)}> "{entity_uuid}" "{escape_str(r["name"])}" "{escape_str(r["ovo"])}")'
+        values_row(r, derive_uuid(r["id"]))
         for r in rows
-        for entity_uuid in [derive_uuid(r["id"])]
     )
 
     return (
@@ -79,11 +83,12 @@ def generate_bestuurseenheden_query(rows: list[dict]) -> str:
         f"      mu:uuid ?uuid ;\n"
         f"      rdf:type besluit:Bestuurseenheid ;\n"
         f"      skos:prefLabel ?name ;\n"
-        f"      dct:identifier ?ovo .\n"
+        f"      dct:identifier ?ovo ;\n"
+        f"      dct:identifier ?kbo .\n"
         f"  }}\n"
         f"}}\n"
         f"WHERE {{\n"
-        f"  VALUES (?uri ?uuid ?name ?ovo) {{\n"
+        f"  VALUES (?uri ?uuid ?name ?ovo ?kbo) {{\n"
         f"{values_rows}\n"
         f"  }}\n"
         f"  FILTER NOT EXISTS {{\n"
