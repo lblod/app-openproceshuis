@@ -22,10 +22,11 @@ PREFIXES = [
     "PREFIX dct: <http://purl.org/dc/terms/>",
     "PREFIX org: <http://www.w3.org/ns/org#>",
 ]
-
 TARGET_GRAPH = "http://mu.semte.ch/graphs/public"
 
-BESTUURSEENHEID_BASE_URI = "http://data.lblod.info/id/bestuurseenheden/"
+VO_CLASSIFICATION_UUID = "d89e882b-4f22-4d25-a63e-17eb246a18e2"
+VO_CLASSIFICATION_URI = f"http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/{VO_CLASSIFICATION_UUID}"
+VO_CLASSIFICATION_LABEL = "Vlaamse Overheid"
 
 UUID_RE = re.compile(
     r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
@@ -57,7 +58,7 @@ def read_rows() -> list[dict]:
 
 def build_values_row(row: dict) -> str:
     entity_uuid = derive_uuid(row["id"])
-    uri = f"{BESTUURSEENHEID_BASE_URI}{entity_uuid}"
+    uri = f"http://data.lblod.info/id/bestuurseenheden/{entity_uuid}"
     name = escape_str(row["name"])
     ovo = escape_str(row["ovo"])
 
@@ -65,11 +66,9 @@ def build_values_row(row: dict) -> str:
 
 
 def generate_migration(rows: list[dict]) -> str:
-    prefix_block = "\n".join(PREFIXES)
     values_rows = "\n".join(build_values_row(r) for r in rows)
 
     return (
-        f"{prefix_block}\n\n"
         f"INSERT {{\n"
         f"  GRAPH <{TARGET_GRAPH}> {{\n"
         f"    ?uri\n"
@@ -92,6 +91,20 @@ def generate_migration(rows: list[dict]) -> str:
     )
 
 
+def generate_classification_query() -> str:
+    return (
+        f"INSERT DATA {{\n"
+        f"  GRAPH <{TARGET_GRAPH}> {{\n"
+        f"    <{VO_CLASSIFICATION_URI}>\n"
+        f"      rdf:type <http://lblod.data.gift/vocabularies/organisatie/BestuurseenheidClassificatieCode> ,\n"
+        f"               <http://mu.semte.ch/vocabularies/ext/OrganizationClassificationCode> ;\n"
+        f'      skos:prefLabel "{VO_CLASSIFICATION_LABEL}" ;\n'
+        f'      mu:uuid "{VO_CLASSIFICATION_UUID}" .\n'
+        f"  }}\n"
+        f"}}"
+    )
+
+
 def main():
     rows = read_rows()
     print(f"Read {len(rows)} organisations")
@@ -100,13 +113,18 @@ def main():
         print("No organisations found, skipping migration file generation")
         return
 
-    migration = generate_migration(rows)
-
+    prefix_block = "\n".join(PREFIXES) + "\n\n"
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    out_path = Path(OUTPUT_FILEPATH) / f"{timestamp}-insert-vo-bestuurseenheden.sparql"
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(migration, encoding="utf-8")
-    print(f"Written to {out_path}")
+    out_dir = Path(OUTPUT_FILEPATH)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    classification_path = out_dir / f"{timestamp}-insert-vo-classification.sparql"
+    classification_path.write_text(prefix_block + generate_classification_query() + "\n", encoding="utf-8")
+    print(f"Written to {classification_path}")
+
+    bestuurseenheden_path = out_dir / f"{timestamp}-insert-vo-bestuurseenheden.sparql"
+    bestuurseenheden_path.write_text(prefix_block + generate_migration(rows) + "\n", encoding="utf-8")
+    print(f"Written to {bestuurseenheden_path}")
 
 
 if __name__ == "__main__":
