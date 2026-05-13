@@ -103,7 +103,7 @@ def main():
     migration = generate_migration(rows)
 
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    out_path = Path(OUTPUT_FILEPATH) / f"{timestamp}_insert-vo-bestuurseenheden.sparql"
+    out_path = Path(OUTPUT_FILEPATH) / f"{timestamp}-insert-vo-bestuurseenheden.sparql"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(migration, encoding="utf-8")
     print(f"Written to {out_path}")
