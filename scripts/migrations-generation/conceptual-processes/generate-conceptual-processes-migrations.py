@@ -13,7 +13,7 @@ EXCEL_COLS = {
     "Hoofdproces": "title",
 }
 
-OUTPUT_FOLDER = "../config/migrations/2025/conceptual-processes/"
+OUTPUT_FOLDER = "../../../config/migrations/2025/conceptual-processes/"
 
 PREFIXES = [
     "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",

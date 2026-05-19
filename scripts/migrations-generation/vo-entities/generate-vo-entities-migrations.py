@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
-INPUT_FILEPATH = "export_20260423_110049.csv"
+INPUT_FILEPATH = "../../export_20260423_110049.csv"
 INPUT_COLS = {
     "Organisatie ID": "id",
     "Organisatienaam": "name",
@@ -12,7 +12,7 @@ INPUT_COLS = {
     "organisationKboNumber": "kbo",
 }
 
-OUTPUT_FILEPATH = "../config/migrations/2026/vo-entities/"
+OUTPUT_FILEPATH = "../../../config/migrations/2026/vo-entities/"
 
 PREFIXES = [
     "PREFIX mu: <http://mu.semte.ch/vocabularies/core/>",
