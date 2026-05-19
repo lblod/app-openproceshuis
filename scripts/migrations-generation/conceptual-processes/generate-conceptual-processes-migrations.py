@@ -2,7 +2,7 @@ import pandas as pd
 import uuid
 from datetime import datetime, timezone
 
-EXCEL_FILEPATH = "20250611_Inventarisatie (kritieke) processen LB_vF.xlsx"
+EXCEL_FILEPATH = "input.xlsx"
 EXCEL_SHEET_NAME = "5. Lijst (kritieke) processen"
 EXCEL_HEADER_ROW = 5
 EXCEL_COLS = {

@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
-INPUT_FILEPATH = "../../export_20260423_110049.csv"
+INPUT_FILEPATH = "input.csv"
 INPUT_COLS = {
     "Organisatie ID": "id",
     "Organisatienaam": "name",
@@ -71,10 +71,7 @@ def generate_bestuurseenheden_query(rows: list[dict]) -> str:
         kbo = f'"{escape_str(r["kbo"])}"' if r["kbo"] else "UNDEF"
         return f'    (<{bestuurseenheid_uri(entity_uuid)}> "{entity_uuid}" "{escape_str(r["name"])}" "{escape_str(r["ovo"])}" {kbo})'
 
-    values_rows = "\n".join(
-        values_row(r, derive_uuid(r["id"]))
-        for r in rows
-    )
+    values_rows = "\n".join(values_row(r, derive_uuid(r["id"])) for r in rows)
 
     return (
         f"INSERT {{\n"
@@ -117,8 +114,7 @@ def generate_classification_query() -> str:
 
 def generate_link_classification_query(rows: list[dict]) -> str:
     uris = "\n".join(
-        f"    (<{bestuurseenheid_uri(derive_uuid(r['id']))}>)"
-        for r in rows
+        f"    (<{bestuurseenheid_uri(derive_uuid(r['id']))}>)" for r in rows
     )
 
     return (
