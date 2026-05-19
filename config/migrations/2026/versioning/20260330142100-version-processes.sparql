@@ -1,0 +1,47 @@
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mu:   <http://mu.semte.ch/vocabularies/core/>
+PREFIX dct:  <http://purl.org/dc/terms/>
+PREFIX dpv:  <https://w3id.org/dpv#>
+PREFIX ext:  <http://mu.semte.ch/vocabularies/ext/>
+PREFIX oph: <http://lblod.data.gift/vocabularies/openproceshuis/>
+
+INSERT {
+  GRAPH ?g {
+    ?versionedProcess a dpv:Process .
+    ?versionedProcess a ext:VersionedProcess .
+    ?versionedProcess mu:uuid ?newUuid .
+    ?versionedProcess dct:isVersionOf ?process .
+    ?versionedProcess oph:isVersionedResource """true"""^^xsd:boolean .
+    ?versionedProcess ?p ?o .
+  }
+}
+WHERE {
+  {
+    SELECT DISTINCT ?process ?newUuid ?versionedProcess WHERE {    
+      GRAPH <http://mu.semte.ch/graphs/shared> {
+        ?process a dpv:Process .
+        ?process mu:uuid ?processId .
+        
+        FILTER NOT EXISTS {
+          ?existingVersion a ext:VersionedProcess .
+          ?existingVersion dct:isVersionOf ?process .
+        }
+      }
+      
+      BIND(STRUUID() AS ?newUuid)
+      BIND(IRI(CONCAT("http://data.lblod.info/processes/versions/", ?newUuid)) AS ?versionedProcess)
+    }
+  }
+
+  GRAPH ?g {
+    ?process ?p ?o .
+    FILTER(?p NOT IN (
+                      rdf:type,
+                      mu:uuid,
+                      dct:isVersionOf,
+                      ext:hasStatistict
+                      )
+            ) 
+  }
+  ?g ext:ownedBy ?eenheid .
+}
