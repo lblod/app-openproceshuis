@@ -73,7 +73,6 @@
             FILTER(?role IN (\"Medewerker-fixed\", \"OpenProcesHuis-Lezer\"))
           }")
 
-;; TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
 (supply-allowed-group "organization-processes-editor"
   :parameters ("graph_extension")
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -91,13 +90,12 @@
               ?group mu:uuid ?group_id ;
                      dct:identifier ?identifier .
             }
-            FILTER(?role IN (\"OpenProcesHuis-Procesbeheerder\", \"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
+            FILTER(?role = \"OpenProcesHuis-Procesbeheerder\")
             BIND(IF(?identifier IN (\"OVO001835\", \"OVO002949\"),
                     \"agentschap-binnenlands-bestuur-digitaal-vlaanderen\",
                     ?group_id) AS ?graph_extension)
           }")
 
-;; TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
 (supply-allowed-group "shared-processes-editor"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
@@ -109,7 +107,7 @@
               <SESSION_ID> ext:originalSessionGroup / mu:uuid ?session_group;
                            ext:originalSessionRole ?role.
             }
-            FILTER(?role IN (\"OpenProcesHuis-Procesbeheerder\", \"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
+            FILTER(?role = \"OpenProcesHuis-Procesbeheerder\")
           }")
 
 (supply-allowed-group "admin"
