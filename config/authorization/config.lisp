@@ -182,6 +182,7 @@
 
 (define-graph shared ("http://mu.semte.ch/graphs/shared")
   ("dpv:Process" x> "ext:hasStatistics")
+  ("ext:VersionedProcess" x> "ext:hasStatistics")
   ("schema:ItemList" -> _)
   ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
@@ -195,6 +196,7 @@
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
   ("dpv:Process" x> "ext:hasStatistics")
+  ("ext:VersionedProcess" x> "ext:hasStatistics")
   ("schema:ItemList" -> _)
   ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
