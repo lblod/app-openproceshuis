@@ -79,12 +79,12 @@
   :properties `((:label :string ,(s-prefix "skos:prefLabel"))
                 (:href :string ,(s-prefix "nie:links"))
                 (:status :url ,(s-prefix "adms:status")))
-  :has-one `((process :via ,(s-prefix "rdfs:seeAlso")
-                      :inverse t
-                      :as "process"))
   :has-many `(
             (informationAsset :via ,(s-prefix "rdfs:seeAlso")
                             :inverse t
-                            :as "information-assets"))
+                            :as "information-assets")
+            (process :via ,(s-prefix "rdfs:seeAlso")
+                      :inverse t
+                      :as "process"))
   :resource-base (s-url "http://data.lblod.info/links/")
   :on-path "links")
