@@ -47,7 +47,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    image: semtech/sparql-parser:0.0.14
+    image: semtech/sparql-parser:0.0.15
     volumes:
       - ./config/authorization:/config
       - ./data/authorization:/data
