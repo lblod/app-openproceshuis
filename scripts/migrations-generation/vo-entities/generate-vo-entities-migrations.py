@@ -113,9 +113,7 @@ def generate_classification_query() -> str:
 
 
 def generate_link_classification_query(rows: list[dict]) -> str:
-    uris = "\n".join(
-        f"    (<{bestuurseenheid_uri(derive_uuid(r['id']))}>)" for r in rows
-    )
+    ovos = "\n".join(f'    ("{escape_str(r["ovo"])}")' for r in rows)
 
     return (
         f"INSERT {{\n"
@@ -124,8 +122,11 @@ def generate_link_classification_query(rows: list[dict]) -> str:
         f"  }}\n"
         f"}}\n"
         f"WHERE {{\n"
-        f"  VALUES (?uri) {{\n"
-        f"{uris}\n"
+        f"  GRAPH <{TARGET_GRAPH}> {{\n"
+        f"    ?uri dct:identifier ?ovo .\n"
+        f"  }}\n"
+        f"  VALUES (?ovo) {{\n"
+        f"{ovos}\n"
         f"  }}\n"
         f"}}"
     )
