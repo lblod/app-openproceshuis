@@ -150,6 +150,10 @@
        :for-allowed-group "organization-processes-editor")
 
 (grant (read write)
+       :to-graph organization-process-steps
+       :for-allowed-group "organization-processes-editor")
+
+(grant (read write)
        :to-graph shared
        :for-allowed-group "shared-processes-editor")
 
@@ -177,47 +181,6 @@
 ;;; Graphs
 
 (define-graph shared ("http://mu.semte.ch/graphs/shared")
-  ;; bpmn-element-type
-  ("bbo:Activity" -> _)
-  ("bbo:BoundaryEvent" -> _)
-  ("bbo:BusinessRuleTask" -> _)
-  ("bbo:CallableElement" -> _)
-  ("bbo:CatchEvent" -> _)
-  ("bbo:EndEvent" -> _)
-  ("bbo:Error" -> _)
-  ("bbo:ErrorEventDefinition" -> _)
-  ("bbo:Event" -> _)
-  ("bbo:EventDefinition" -> _)
-  ("bbo:ExclusiveGateway" -> _)
-  ("bbo:FlowElement" -> _)
-  ("bbo:FlowElementsContainer" -> _)
-  ("bbo:FlowNode" -> _)
-  ("bbo:Gateway" -> _)
-  ("bbo:InclusiveGateway" -> _)
-  ("bbo:IntermediateThrowEvent" -> _)
-  ("bbo:ManualTask" -> _)
-  ("bbo:MessageEventDefinition" -> _)
-  ("bbo:ParallelGateway" -> _)
-  ("bbo:Process" -> _)
-  ("bbo:Property" -> _)
-  ("bbo:ReceiveTask" -> _)
-  ("bbo:RootElement" -> _)
-  ("bbo:ScriptTask" -> _)
-  ("bbo:SendTask" -> _)
-  ("bbo:SequenceFlow" -> _)
-  ("bbo:ServiceTask" -> _)
-  ("bbo:StartEvent" -> _)
-  ("bbo:SubProcess" -> _)
-  ("bbo:Task" -> _)
-  ("bbo:ThrowEvent" -> _)
-  ("bbo:UserTask" -> _)
-  ("bboext:Collaboration" -> _)
-  ("bboext:DataObject" -> _)
-  ("bboext:DataObjectReference" -> _)
-  ("bboext:Lane" -> _)
-  ("bboext:LaneSet" -> _)
-  ("bboext:Participant" -> _)
-  ;; process-type
   ("dpv:Process" x> "ext:hasStatistics")
   ("ext:VersionedProcess" x> "ext:hasStatistics")
   ("schema:ItemList" -> _)
@@ -232,7 +195,20 @@
 
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
-  ;; bpmn-element-type
+  ("dpv:Process" x> "ext:hasStatistics")
+  ("ext:VersionedProcess" x> "ext:hasStatistics")
+  ("schema:ItemList" -> _)
+  ("schema:ListItem" -> _)
+  ("nfo:FileDataObject" -> _)
+  ("ipdc:InstancePublicService" -> _)
+  ("ipdc:ConceptualPublicService" -> _)
+  ("skos:Concept" -> _)
+  ("nfo:Bookmark" -> _)
+  ("icr:InformationAsset" -> _)
+  ("ext:VersionedInformationAsset" -> _))
+
+(define-graph organization-process-steps ("http://mu.semte.ch/graphs/bpmn-extraction/")
+  ("skos:Concept") ;; should only be concepts linked to a bpmn element but thats not possible
   ("bbo:Activity" -> _)
   ("bbo:BoundaryEvent" -> _)
   ("bbo:BusinessRuleTask" -> _)
@@ -271,19 +247,7 @@
   ("bboext:DataObjectReference" -> _)
   ("bboext:Lane" -> _)
   ("bboext:LaneSet" -> _)
-  ("bboext:Participant" -> _)
-  ;; process-type
-  ("dpv:Process" x> "ext:hasStatistics")
-  ("ext:VersionedProcess" x> "ext:hasStatistics")
-  ("schema:ItemList" -> _)
-  ("schema:ListItem" -> _)
-  ("nfo:FileDataObject" -> _)
-  ("ipdc:InstancePublicService" -> _)
-  ("ipdc:ConceptualPublicService" -> _)
-  ("skos:Concept" -> _)
-  ("nfo:Bookmark" -> _)
-  ("icr:InformationAsset" -> _)
-  ("ext:VersionedInformationAsset" -> _))
+  ("bboext:Participant" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("besluit:Bestuurseenheid" -> _)
