@@ -9,6 +9,7 @@ export const ldesInstances: LdesInstances = {
                         <http://purl.org/dc/terms/isVersionOf>,
                         <http://lblod.data.gift/vocabularies/openproceshuis/isVersionedResource>
                       )
+            )
     `,
     graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> <http://mu.semte.ch/graphs/shared> .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
