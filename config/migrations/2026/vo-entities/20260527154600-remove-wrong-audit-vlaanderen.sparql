@@ -7,16 +7,14 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
 PREFIX lblod-org: <http://lblod.data.gift/vocabularies/organisatie/>
 
-INSERT DATA {
+DELETE DATA {
   GRAPH <http://mu.semte.ch/graphs/public> {
 
-    # Classification code
-    <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/811c2f0b-7cb3-42af-bfbe-eebc0d25c4b5> 
+    <http://data.vlaanderen.be/id/concept/BestuurseenheidClassificatieCode/811c2f0b-7cb3-42af-bfbe-eebc0d25c4b5>
       rdf:type lblod-org:BestuurseenheidClassificatieCode, ext:OrganizationClassificationCode ;
       skos:prefLabel "Audit Vlaanderen" ;
       mu:uuid "811c2f0b-7cb3-42af-bfbe-eebc0d25c4b5" .
 
-    # Bestuurseenheid
     <http://data.lblod.info/id/bestuurseenheden/df2c0b8d-8405-49b3-8330-8e918378ea34>
       a besluit:Bestuurseenheid ;
       mu:uuid "df2c0b8d-8405-49b3-8330-8e918378ea34" ;
