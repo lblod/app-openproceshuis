@@ -207,7 +207,7 @@
   ("icr:InformationAsset" -> _)
   ("ext:VersionedInformationAsset" -> _))
 
-(define-graph organization-process-steps ("http://mu.semte.ch/graphs/bpmn-extraction/")
+(define-graph organization-process-steps ("http://mu.semte.ch/graphs/process-steps/organizations/")
   ("skos:Concept" -> _) ;; should only be concepts linked to a bpmn element but thats not possible
   ("bbo:Process" -> _)
   ("bbo:Task" -> _)
