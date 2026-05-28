@@ -4,6 +4,7 @@ PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX org: <http://www.w3.org/ns/org#>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
 
 INSERT {
   GRAPH <http://mu.semte.ch/graphs/public> {
@@ -13,6 +14,7 @@ INSERT {
       skos:prefLabel ?name ;
       dct:identifier ?ovo ;
       dct:identifier ?kbo .
+    ?organizationGraph ext:ownedBy ?uri .
   }
 }
 WHERE {
@@ -206,6 +208,7 @@ WHERE {
     (<http://data.lblod.info/id/bestuurseenheden/8fb3fd1f-5523-4fca-9542-7bb416c34a12> "8fb3fd1f-5523-4fca-9542-7bb416c34a12" "Wonen in Vlaanderen" "OVO000106" UNDEF)
     (<http://data.lblod.info/id/bestuurseenheden/507beea0-bbf8-459b-8cdf-513211d587aa> "507beea0-bbf8-459b-8cdf-513211d587aa" "Zuhal Demir, Vlaams minister van Onderwijs, Justitie en Werk" "OVO054211" UNDEF)
   }
+  BIND(IRI(CONCAT("http://mu.semte.ch/graphs/organizations/", ?uuid)) AS ?organizationGraph)
   FILTER NOT EXISTS {
     GRAPH <http://mu.semte.ch/graphs/public> {
       ?existing dct:identifier ?ovo .
