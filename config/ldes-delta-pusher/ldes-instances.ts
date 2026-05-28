@@ -4,7 +4,12 @@ export const ldesInstances: LdesInstances = {
   "https://w3id.org/dpv#Process": {
     filter: `
       ?s ?p ?o .
-      FILTER(?p != <http://mu.semte.ch/vocabularies/ext/hasStatistics>)
+      FILTER(?p NOT IN (
+                        <http://mu.semte.ch/vocabularies/ext/hasStatistics>,
+                        <http://purl.org/dc/terms/isVersionOf>,
+                        <http://lblod.data.gift/vocabularies/openproceshuis/isVersionedResource>
+                      )
+            )
     `,
     graphFilter: '?g <http://mu.semte.ch/vocabularies/ext/ownedBy> ?owner .',
     healingPredicates: ["http://purl.org/dc/terms/modified"],
