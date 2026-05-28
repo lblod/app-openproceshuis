@@ -21,6 +21,7 @@ PREFIXES = [
     "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>",
     "PREFIX dct: <http://purl.org/dc/terms/>",
     "PREFIX org: <http://www.w3.org/ns/org#>",
+    "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>",
 ]
 
 TARGET_GRAPH = "http://mu.semte.ch/graphs/public"
@@ -82,12 +83,14 @@ def generate_bestuurseenheden_query(rows: list[dict]) -> str:
         f"      skos:prefLabel ?name ;\n"
         f"      dct:identifier ?ovo ;\n"
         f"      dct:identifier ?kbo .\n"
+        f"    ?organizationGraph ext:ownedBy ?uri .\n"
         f"  }}\n"
         f"}}\n"
         f"WHERE {{\n"
         f"  VALUES (?uri ?uuid ?name ?ovo ?kbo) {{\n"
         f"{values_rows}\n"
         f"  }}\n"
+        f'  BIND(IRI(CONCAT("http://mu.semte.ch/graphs/organizations/", ?uuid)) AS ?organizationGraph)\n'
         f"  FILTER NOT EXISTS {{\n"
         f"    GRAPH <{TARGET_GRAPH}> {{\n"
         f"      ?existing dct:identifier ?ovo .\n"
