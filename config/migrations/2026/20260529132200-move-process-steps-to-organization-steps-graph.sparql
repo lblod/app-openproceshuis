@@ -65,7 +65,7 @@ where {
     bbo:RootElement
     bbo:ThrowEvent
   }
-  graph ?g {
+  graph <http://mu.semte.ch/graphs/shared> {
     ?element a ?type .
     ?element ?p ?o .
   }
@@ -73,4 +73,71 @@ where {
   ?organization mu:uuid ?organizationId .
   filter(!contains(STR(?g), "http://mu.semte.ch/graphs/process-steps/organizations/"))
   BIND(IRI(CONCAT("http://mu.semte.ch/graphs/process-steps/organizations/", STR(?organizationId))) AS ?targetGraph)
+}
+
+;
+
+prefix ext: <http://mu.semte.ch/vocabularies/ext/>
+prefix bbo: <https://www.irit.fr/recherches/MELODI/ontologies/BBO#>
+prefix bboextension: <https://www.teamingai-project.eg/BBOExtension#>
+prefix mu: <http://mu.semte.ch/vocabularies/core/>
+
+delete {
+  graph <http://mu.semte.ch/graphs/shared> {
+    ?element ?p ?o .
+  }
+}
+where {
+  values ?type {
+    #skos:Concept
+    bbo:Process
+    bbo:Task
+    bbo:BoundaryEvent
+    bbo:BusinessRuleTask
+    bbo:EndEvent
+    bbo:ErrorEventDefinition
+    bbo:Error
+    bbo:ExclusiveGateway
+    bbo:InclusiveGateway
+    bbo:IntermediateThrowEvent
+    bbo:ManualTask
+    bbo:MessageEventDefinition
+    bbo:ParallelGateway
+    bbo:Property
+    bbo:ReceiveTask
+    bbo:ScriptTask
+    bbo:SendTask
+    bbo:SequenceFlow
+    bbo:ServiceTask
+    bbo:StartEvent
+    bbo:SubProcess
+    bbo:UserTask
+    bboextension:Association
+    bboextension:Collaboration
+    bboextension:DataInputAssociation
+    bboextension:DataObject
+    bboextension:DataObjectReference
+    bboextension:DataOutputAssociation
+    bboextension:DataStoreReference
+    bboextension:Lane
+    bboextension:LaneSet
+    bboextension:MessageFlow
+    bboextension:Participant
+    bboextension:TextAnnotation
+    bbo:Activity
+    bbo:CallableElement
+    bbo:CatchEvent
+    bbo:Event
+    bbo:EventDefinition
+    bbo:FlowElement
+    bbo:FlowElementsContainer
+    bbo:FlowNode
+    bbo:Gateway
+    bbo:RootElement
+    bbo:ThrowEvent
+  }
+  graph <http://mu.semte.ch/graphs/shared> {
+    ?element a ?type .
+    ?element ?p ?o .
+  }
 }
