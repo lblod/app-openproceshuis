@@ -19,7 +19,7 @@
 (add-prefix "adms" "http://www.w3.org/ns/adms#")
 (add-prefix "cogs" "http://vocab.deri.ie/cogs#")
 (add-prefix "task" "http://redpencil.data.gift/vocabularies/tasks/")
-(add-prefix "schema" "https://schema.org/")
+(add-prefix "schema" "http://schema.org/")
 (add-prefix "reporting" "http://lblod.data.gift/vocabularies/reporting/")
 (add-prefix "ipdc" "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#")
 (add-prefix "icr" "http://lblod.data.gift/vocabularies/informationclassification/")

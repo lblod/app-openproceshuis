@@ -11,6 +11,8 @@ services:
       - database:database
     restart: "no"
   op-public-consumer:
+    environment:
+      DCR_SYNC_BASE_URL: "https://organisaties.abb.lblod.info"
     restart: "no"
   frontend:
     image: lblod/frontend-openproceshuis:latest
@@ -20,13 +22,6 @@ services:
     image: lblod/openproceshuis-visio-service:latest
   process:
     image: lblod/openproceshuis-process-service:latest
-    restart: "no"
-  sparql-endpoint-proxy:
-    restart: "no"
-    environment:
-      LOGLEVEL: 'error'
-      PROXY_LOGLEVEL: 'debug'
-  swagger:
     restart: "no"
   modified:
     restart: "no"
@@ -43,6 +38,7 @@ services:
   # Integration services
   ################################################################################ 
   m2m:
+    image: lblod/m2m-login-service:latest
     restart: "no"
     environment:
       MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
@@ -51,9 +47,33 @@ services:
     restart: no
     environment:
       LOG_LEVEL: 'debug'
+  error-alert:
+    image: lblod/loket-error-alert-service:latest
+    environment:
+      NODE_ENV: "development"
+      EMAIL_FROM: "test@example.com"
+      EMAIL_TO: "123@example.com"
+    # ports:
+    #   - "9998:9229"
+    restart: "no"
+
+  deliver-email:
+    environment:
+      NODE_ENV: "development"
+      WELL_KNOWN_SERVICE: "test"
+      EMAIL_CRON_PATTERN: "* * * * *" # Every minute
+    restart: "no"
   shared-processes-consumer:
     restart: no
     environment:
       BATCH_SIZE: 100
       CRON_PATTERN: "*/32 * * * * *" # Every 32 seconds
       LOG_LEVEL: debug
+  sparql-endpoint-proxy:
+    restart: "no"
+    environment:
+      LOGLEVEL: 'error'
+      PROXY_LOGLEVEL: 'debug'
+  swagger:
+    image: swaggerapi/swagger-ui:latest
+    restart: "no"

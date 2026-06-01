@@ -1,0 +1,15 @@
+(in-package :mu-cl-resources)
+
+(define-resource processStatistic()
+  :class (s-prefix "ext:ProcessStatistic")
+  :properties `((:pdf-downloads :number ,(s-prefix "ext:pdfDownloads"))
+                (:png-downloads :number ,(s-prefix "ext:pngDownloads"))
+                (:svg-downloads :number ,(s-prefix "ext:svgDownloads"))
+                (:bpmn-downloads :number ,(s-prefix "ext:bpmnDownloads"))
+                (:visio-downloads :number ,(s-prefix "ext:visioDownloads"))
+                (:process-views :number ,(s-prefix "ext:processViews")))
+  :has-one `((process :via ,(s-prefix "ext:hasStatistics")
+                      :inverse t
+                      :as "process"))
+  :resource-base (s-url "http://data.lblod.info/process-statistics/")
+  :on-path "process-statistics")

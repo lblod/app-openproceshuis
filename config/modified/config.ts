@@ -13,6 +13,9 @@ export const filterModifiedSubjects = "";
 export async function filterDeltas(changeSets: Changeset[]) {
   const modifiedPred = "http://purl.org/dc/terms/modified";
   const subjectsWithModified = new Set();
+  const ignoredPredicates = [
+    "http://mu.semte.ch/vocabularies/ext/hasStatistics", 
+  ];
 
   const trackModifiedSubjects = (quad) => {
     if (quad.predicate.value === modifiedPred) {
@@ -28,7 +31,9 @@ export async function filterDeltas(changeSets: Changeset[]) {
   ];
   const isGoodQuad = (quad) =>
     !subjectsWithModified.has(quad.subject.value) &&
-    !ignoredGraphPrefixes.some((prefix) => quad.graph.value.startsWith(prefix));
+    !ignoredGraphPrefixes.some((prefix) => quad.graph.value.startsWith(prefix)) &&
+    !ignoredPredicates.includes(quad.predicate.value);
+
   return changeSets.map((changeSet) => {
     return {
       inserts: changeSet.inserts.filter(isGoodQuad),

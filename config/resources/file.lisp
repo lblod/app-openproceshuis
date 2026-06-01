@@ -6,15 +6,14 @@
                 (:format :string ,(s-prefix "dct:format"))
                 (:size :number ,(s-prefix "nfo:fileSize"))
                 (:extension :string ,(s-prefix "dbpedia:fileExtension"))
+                (:version :string ,(s-prefix "schema:version"))
                 (:created :datetime ,(s-prefix "dct:created"))
                 (:modified :datetime ,(s-prefix "dct:modified"))
                 (:status :url ,(s-prefix "adms:status")))
   :has-one `((file :via ,(s-prefix "nie:dataSource")
                    :inverse t
                    :as "download"))
-  :has-many `((process :via ,(s-prefix "nie:isPartOf")
-                       :as "processes")
-              (informationAsset :via ,(s-prefix "schema:associatedMedia")
+  :has-many `((informationAsset :via ,(s-prefix "schema:associatedMedia")
                                 :inverse t
                                 :as "information-assets"))
   :resource-base (s-url "http://data.lblod.info/files/")

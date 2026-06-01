@@ -2,7 +2,7 @@ import pandas as pd
 import uuid
 from datetime import datetime, timezone
 
-EXCEL_FILEPATH = "20250611_Inventarisatie (kritieke) processen LB_vF.xlsx"
+EXCEL_FILEPATH = "input.xlsx"
 EXCEL_SHEET_NAME = "5. Lijst (kritieke) processen"
 EXCEL_HEADER_ROW = 5
 EXCEL_COLS = {
@@ -13,7 +13,7 @@ EXCEL_COLS = {
     "Hoofdproces": "title",
 }
 
-OUTPUT_FOLDER = "../config/migrations/2025/conceptual-processes/"
+OUTPUT_FOLDER = "../../../config/migrations/2025/conceptual-processes/"
 
 PREFIXES = [
     "@prefix mu: <http://mu.semte.ch/vocabularies/core/> .",

@@ -1,3 +1,78 @@
+## v2.7.1 (2026-06-01)
+
+#### :rocket: Enhancement
+
+- [#xxx](https://github.com/lblod/app-openproceshuis/tree/fe99706bd0ce94c411a20a156d712b6c6bf7ec93) Bump frontend to v1.6.1 by [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#148](https://github.com/lblod/app-openproceshuis/pull/148) Add entities from Flemish Government [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#146](https://github.com/lblod/app-openproceshuis/pull/146) OPH-959 | Structure for diagrams by [@JonasVanHoof](https://github.com/JonasVanHoof)
+
+#### :wrench: Maintenance
+
+- [#153](https://github.com/lblod/app-openproceshuis/pull/153) OPH-550 | Process steps are saved in a separate graph by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#150](https://github.com/lblod/app-openproceshuis/pull/150) Drop support for openproceshuisgebruiker and openproceshuisafnemer roles by [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#149](https://github.com/lblod/app-openproceshuis/pull/149) Bump virtuoso and SPARQL parser by [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#147](https://github.com/lblod/app-openproceshuis/pull/147) Update Virtuoso image version to 1.2.2 by [@nvdk](https://github.com/nvdk)
+
+#### :bug: Bug Fixes
+
+- [#154](https://github.com/lblod/app-openproceshuis/pull/154) Reset sparql parser to v0.0.14 [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#152](https://github.com/lblod/app-openproceshuis/pull/152) Repair incorrectly inserted VO entities [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#xxx](https://github.com/lblod/app-openproceshuis/tree/6a4a2b0e288c24afcf90474ea618a750a1de554b) fix: links can be added to multiple processes so we can save links and keep them on the versioned ones [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#151](https://github.com/lblod/app-openproceshuis/pull/151) fix: ignore the hasStatistics predicate on the queads so process statist [@JonasVanHoof](https://github.com/JonasVanHoof)
+
+
+## Deploy instructions
+
+Pull image for the following services:
+
+- virtuoso
+
+Service actions:
+
+- Create virtuoso checkpoint + backup
+- Remove the virtuoso.trx file as this is needed for the virtuoso version bump
+- Run the migrations
+- Restart resources & cache | Domain
+- Enable the error messaging for the vendor-api when deliver emails is set
+
+## v2.7.0 (2026-05-06)
+
+#### :rocket: Enhancement
+
+- [#144](https://github.com/lblod/app-openproceshuis/pull/144)Add audit vlaanderen through migration by [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#143](https://github.com/lblod/app-openproceshuis/pull/143)OPH-1039 | provide health check for m2m-login service by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#138](https://github.com/lblod/app-openproceshuis/pull/138)OPH-1016 | let the frontend go through the plausible-proxy by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#134](https://github.com/lblod/app-openproceshuis/pull/134)OPH-993 | Monitoring/fallback by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#133](https://github.com/lblod/app-openproceshuis/pull/133)OPH-1014 | Add status property to diagrams by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#104](https://github.com/lblod/app-openproceshuis/pull/104)Introduce subprocesses data model by [@MartijnBogaert](https://github.com/MartijnBogaert)
+
+#### :wrench: Maintenance
+
+- [#132](https://github.com/lblod/app-openproceshuis/pull/132)Move information asset resource config to separate file by [@MartijnBogaert](https://github.com/MartijnBogaert)
+
+#### :bug: Bug Fixes
+
+- [#142](https://github.com/lblod/app-openproceshuis/pull/142)fix: add all roles to the ipdc-proxy by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#139](https://github.com/lblod/app-openproceshuis/pull/139)fix: output of downloads is not supposed to be 0 always by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#137](https://github.com/lblod/app-openproceshuis/pull/137)feat: LoketLB-admin admin role is also allowed for the ipdc-proxy to … by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#136](https://github.com/lblod/app-openproceshuis/pull/136)OPH-1015 | show one process uri per row in report by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#86](https://github.com/lblod/app-openproceshuis/pull/86)Consumer OP data from prod sync base URL by [@MartijnBogaert](https://github.com/MartijnBogaert)
+
+## Deploy instructions
+
+Pull image for the following services:
+
+- frontend
+- vendor-api
+- m2m
+
+Service actions:
+
+- Run the migrations
+- Restart resources & cache | Domain
+- Set the email credentials so mails can be send
+- Enable the error messaging for the vendor-api when deliver emails is set
+
 ## v2.6.0
 
 #### :rocket: Enhancement

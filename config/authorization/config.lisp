@@ -44,14 +44,14 @@
   :org "http://www.w3.org/ns/org#"
   :foaf "http://xmlns.com/foaf/0.1/"
   :bbo "https://www.irit.fr/recherches/MELODI/ontologies/BBO#"
-  :nfo "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
-  :bboext "https://www.teamingai-project.eg/BBOExtension#"
+  :bboextension "https://www.teamingai-project.eg/BBOExtension#"
   :reporting "http://lblod.data.gift/vocabularies/reporting/"
   :ipdc "https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#"
   :dpv "https://w3id.org/dpv#"
   :oph "http://lblod.data.gift/vocabularies/openproceshuis/"
   :icr "http://lblod.data.gift/vocabularies/informationclassification/"
-  :prov "http://www.w3.org/ns/prov#")
+  :prov "http://www.w3.org/ns/prov#"
+  :os "http://open-services.net/ns/core#")
 
 ;;;;;;;;;;;;;
 ;;; User roles
@@ -73,7 +73,6 @@
             FILTER(?role IN (\"Medewerker-fixed\", \"OpenProcesHuis-Lezer\"))
           }")
 
-;; TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
 (supply-allowed-group "organization-processes-editor"
   :parameters ("graph_extension")
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
@@ -91,13 +90,12 @@
               ?group mu:uuid ?group_id ;
                      dct:identifier ?identifier .
             }
-            FILTER(?role IN (\"OpenProcesHuis-Procesbeheerder\", \"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
+            FILTER(?role = \"OpenProcesHuis-Procesbeheerder\")
             BIND(IF(?identifier IN (\"OVO001835\", \"OVO002949\"),
                     \"agentschap-binnenlands-bestuur-digitaal-vlaanderen\",
                     ?group_id) AS ?graph_extension)
           }")
 
-;; TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
 (supply-allowed-group "shared-processes-editor"
   :query "PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
           PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
@@ -109,7 +107,7 @@
               <SESSION_ID> ext:originalSessionGroup / mu:uuid ?session_group;
                            ext:originalSessionRole ?role.
             }
-            FILTER(?role IN (\"OpenProcesHuis-Procesbeheerder\", \"LoketLB-OpenProcesHuisGebruiker\", \"LoketLB-OpenProcesHuisAfnemer\"))
+            FILTER(?role = \"OpenProcesHuis-Procesbeheerder\")
           }")
 
 (supply-allowed-group "admin"
@@ -152,6 +150,10 @@
        :for-allowed-group "organization-processes-editor")
 
 (grant (read write)
+       :to-graph organization-process-steps
+       :for-allowed-group "organization-processes-editor")
+
+(grant (read write)
        :to-graph shared
        :for-allowed-group "shared-processes-editor")
 
@@ -171,52 +173,17 @@
        :to-graph inventory
        :for-allowed-group "public")
 
+(grant (read)
+       :to-graph error
+       :for-allowed-group "admin")
+
 ;;;;;;;;;
 ;;; Graphs
 
 (define-graph shared ("http://mu.semte.ch/graphs/shared")
-  ;; bpmn-element-type
-  ("bbo:Activity" -> _)
-  ("bbo:BoundaryEvent" -> _)
-  ("bbo:BusinessRuleTask" -> _)
-  ("bbo:CallableElement" -> _)
-  ("bbo:CatchEvent" -> _)
-  ("bbo:EndEvent" -> _)
-  ("bbo:Error" -> _)
-  ("bbo:ErrorEventDefinition" -> _)
-  ("bbo:Event" -> _)
-  ("bbo:EventDefinition" -> _)
-  ("bbo:ExclusiveGateway" -> _)
-  ("bbo:FlowElement" -> _)
-  ("bbo:FlowElementsContainer" -> _)
-  ("bbo:FlowNode" -> _)
-  ("bbo:Gateway" -> _)
-  ("bbo:InclusiveGateway" -> _)
-  ("bbo:IntermediateThrowEvent" -> _)
-  ("bbo:ManualTask" -> _)
-  ("bbo:MessageEventDefinition" -> _)
-  ("bbo:ParallelGateway" -> _)
-  ("bbo:Process" -> _)
-  ("bbo:Property" -> _)
-  ("bbo:ReceiveTask" -> _)
-  ("bbo:RootElement" -> _)
-  ("bbo:ScriptTask" -> _)
-  ("bbo:SendTask" -> _)
-  ("bbo:SequenceFlow" -> _)
-  ("bbo:ServiceTask" -> _)
-  ("bbo:StartEvent" -> _)
-  ("bbo:SubProcess" -> _)
-  ("bbo:Task" -> _)
-  ("bbo:ThrowEvent" -> _)
-  ("bbo:UserTask" -> _)
-  ("bboext:Collaboration" -> _)
-  ("bboext:DataObject" -> _)
-  ("bboext:DataObjectReference" -> _)
-  ("bboext:Lane" -> _)
-  ("bboext:LaneSet" -> _)
-  ("bboext:Participant" -> _)
-  ;; process-type
   ("dpv:Process" x> "ext:hasStatistics")
+  ("schema:ItemList" -> _)
+  ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
@@ -227,48 +194,9 @@
 
 
 (define-graph organizations ("http://mu.semte.ch/graphs/organizations/")
-  ;; bpmn-element-type
-  ("bbo:Activity" -> _)
-  ("bbo:BoundaryEvent" -> _)
-  ("bbo:BusinessRuleTask" -> _)
-  ("bbo:CallableElement" -> _)
-  ("bbo:CatchEvent" -> _)
-  ("bbo:EndEvent" -> _)
-  ("bbo:Error" -> _)
-  ("bbo:ErrorEventDefinition" -> _)
-  ("bbo:Event" -> _)
-  ("bbo:EventDefinition" -> _)
-  ("bbo:ExclusiveGateway" -> _)
-  ("bbo:FlowElement" -> _)
-  ("bbo:FlowElementsContainer" -> _)
-  ("bbo:FlowNode" -> _)
-  ("bbo:Gateway" -> _)
-  ("bbo:InclusiveGateway" -> _)
-  ("bbo:IntermediateThrowEvent" -> _)
-  ("bbo:ManualTask" -> _)
-  ("bbo:MessageEventDefinition" -> _)
-  ("bbo:ParallelGateway" -> _)
-  ("bbo:Process" -> _)
-  ("bbo:Property" -> _)
-  ("bbo:ReceiveTask" -> _)
-  ("bbo:RootElement" -> _)
-  ("bbo:ScriptTask" -> _)
-  ("bbo:SendTask" -> _)
-  ("bbo:SequenceFlow" -> _)
-  ("bbo:ServiceTask" -> _)
-  ("bbo:StartEvent" -> _)
-  ("bbo:SubProcess" -> _)
-  ("bbo:Task" -> _)
-  ("bbo:ThrowEvent" -> _)
-  ("bbo:UserTask" -> _)
-  ("bboext:Collaboration" -> _)
-  ("bboext:DataObject" -> _)
-  ("bboext:DataObjectReference" -> _)
-  ("bboext:Lane" -> _)
-  ("bboext:LaneSet" -> _)
-  ("bboext:Participant" -> _)
-  ;; process-type
   ("dpv:Process" x> "ext:hasStatistics")
+  ("schema:ItemList" -> _)
+  ("schema:ListItem" -> _)
   ("nfo:FileDataObject" -> _)
   ("ipdc:InstancePublicService" -> _)
   ("ipdc:ConceptualPublicService" -> _)
@@ -276,6 +204,56 @@
   ("nfo:Bookmark" -> _)
   ("icr:InformationAsset" -> _)
   ("ext:VersionedInformationAsset" -> _))
+
+(define-graph organization-process-steps ("http://mu.semte.ch/graphs/process-steps/organizations/")
+  ("skos:Concept" -> _) ;; should only be concepts linked to a bpmn element but thats not possible
+  ("bbo:Process" -> _)
+  ("bbo:Task" -> _)
+  ("bbo:BoundaryEvent" -> _)
+  ("bbo:BusinessRuleTask" -> _)
+  ("bbo:EndEvent" -> _)
+  ("bbo:ErrorEventDefinition" -> _)
+  ("bbo:Error" -> _)
+  ("bbo:ExclusiveGateway" -> _)
+  ("bbo:InclusiveGateway" -> _)
+  ("bbo:IntermediateThrowEvent" -> _)
+  ("bbo:ManualTask" -> _)
+  ("bbo:MessageEventDefinition" -> _)
+  ("bbo:ParallelGateway" -> _)
+  ("bbo:Property" -> _)
+  ("bbo:ReceiveTask" -> _)
+  ("bbo:ScriptTask" -> _)
+  ("bbo:SendTask" -> _)
+  ("bbo:SequenceFlow" -> _)
+  ("bbo:ServiceTask" -> _)
+  ("bbo:StartEvent" -> _)
+  ("bbo:SubProcess" -> _)
+  ("bbo:UserTask" -> _)
+  ;; BBO extensions
+  ("bboextension:Association" -> _)
+  ("bboextension:Collaboration" -> _)
+  ("bboextension:DataInputAssociation" -> _)
+  ("bboextension:DataObject" -> _)
+  ("bboextension:DataObjectReference" -> _)
+  ("bboextension:DataOutputAssociation" -> _)
+  ("bboextension:DataStoreReference" -> _)
+  ("bboextension:Lane" -> _)
+  ("bboextension:LaneSet" -> _)
+  ("bboextension:MessageFlow" -> _)
+  ("bboextension:Participant" -> _)
+  ("bboextension:TextAnnotation" -> _)
+  ;; Without resource definitions
+  ("bbo:Activity" -> _)
+  ("bbo:CallableElement" -> _)
+  ("bbo:CatchEvent" -> _)
+  ("bbo:Event" -> _)
+  ("bbo:EventDefinition" -> _)
+  ("bbo:FlowElement" -> _)
+  ("bbo:FlowElementsContainer" -> _)
+  ("bbo:FlowNode" -> _)
+  ("bbo:Gateway" -> _)
+  ("bbo:RootElement" -> _)
+  ("bbo:ThrowEvent" -> _))
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("besluit:Bestuurseenheid" -> _)
@@ -307,3 +285,7 @@
 (define-graph statistics ("http://mu.semte.ch/graphs/statistics")
   ("ext:ProcessStatistic" -> _)
   ("dpv:Process" -> "ext:hasStatistics"))
+
+(define-graph error ("http://mu.semte.ch/graphs/errors")
+  ("os:Error" -> _)
+  ("oph:Error" -> _))

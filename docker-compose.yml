@@ -6,7 +6,7 @@ x-logging: &default-logging
 
 services:
   frontend:
-    image: lblod/frontend-openproceshuis:1.5.8
+    image: lblod/frontend-openproceshuis:1.6.2
     environment:
       EMBER_OAUTH_API_REDIRECT_URL: "https://openproceshuis.lblod.info/authorization/callback"
       EMBER_OAUTH_API_KEY: "aaf8877c-0975-4003-8db8-a9986355b80b"
@@ -15,8 +15,7 @@ services:
       EMBER_OAUTH_API_SCOPE: "openid rrn profile vo abb_openproceshuis"
       EMBER_OAUTH_SWITCH_URL: "https://openproceshuis.lblod.info/switch-login"
       EMBER_ANALYTICS_APP_DOMAIN: "openproceshuis.lblod.info" # Prod: openproceshuis.vlaanderen.be
-      EMBER_ANALYTICS_API_HOST: "https://plausible.lblod.info"
-
+      EMBER_ANALYTICS_API_HOST: "/plausible"
     volumes:
       - ./config/frontend/add-x-frame-options-header.conf:/config/add-x-frame-options.conf
     labels:
@@ -57,7 +56,7 @@ services:
     logging: *default-logging
     labels:
       - "logging=true"
-    image: redpencil/virtuoso:1.2.1
+    image: redpencil/virtuoso:1.4.0
     environment:
       SPARQL_UPDATE: "true"
       DEFAULT_GRAPH: "http://mu.semte.ch/application"
@@ -171,7 +170,7 @@ services:
     image: lblod/delta-consumer:0.1.4
     environment:
       DCR_SERVICE_NAME: "op-public-consumer"
-      DCR_SYNC_BASE_URL: "https://organisaties.abb.lblod.info"
+      DCR_SYNC_BASE_URL: "https://organisaties.abb.vlaanderen.be"
       DCR_SYNC_FILES_PATH: "/sync/public/files"
       DCR_SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/PublicCacheGraphDump"
       DCR_INITIAL_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/op-public"
@@ -222,22 +221,40 @@ services:
   # Integration services
   ################################################################################  
   m2m:
-    image: lblod/m2m-login-service:0.1.0
+    image: lblod/m2m-login-service:0.1.1
     environment:
       MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
-      MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie-ti.vlaanderen.be/.well-known/oauth-authorization-server/op"
+      MU_APPLICATION_AUTH_DISCOVERY_URL: "https://authenticatie.vlaanderen.be/.well-known/oauth-authorization-server/op"
       BH_APPLICATION_NAME: OpenProcesHuis-Procesbeheerder
     restart: always
     labels:
       - "logging=true"
     logging: *default-logging
   vendor-api:
-    image: lblod/vendor-api-openproceshuis-service:0.0.4
+    image: lblod/vendor-api-openproceshuis-service:0.0.5
     restart: always
     environment:
       ALLOW_MU_AUTH_SUDO: true
+      ERROR_RESOURCE_TYPE_URI: "http://open-services.net/ns/core#Error" # Same as the delta rule error-alert
+      ERROR_GRAPH_URI: "http://mu.semte.ch/graphs/integration/vendor-api/errors"
+      SEND_MAIL_ON_THRESHOLD: false
+      ERROR_GRACE_PERIOD_IN_MINUTES: 5
+      ERROR_THRESHOLD_OCCURRENCES: 2
     labels:
       - "logging=true"
+    logging: *default-logging
+  swagger:
+    image: swaggerapi/swagger-ui:v5.32.0
+    restart: always
+    environment:
+      SWAGGER_JSON: /spec/openapi.yml
+    volumes:
+      - ./config/integration/json-ld-api/openapi.yml:/spec/openapi.yml:ro
+      # Override as we do not want the user to set authorize, they have to do this by login in into our OPH environment!
+      - ./config/integration/json-ld-api/index.html:/usr/share/nginx/html/index.html
+      - ./config/integration/json-ld-api/hide-authorize-btn.css:/usr/share/nginx/html/hide-authorize-btn.css
+    labels:
+      - 'logging=true'
     logging: *default-logging
   shared-processes-consumer:
     image: lblod/ldes-client:0.0.4
@@ -259,6 +276,43 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  error-alert:
+    image: lblod/loket-error-alert-service:1.0.2
+    environment:
+      APP_NAME: 'Open Proces Huis'
+      EMAIL_HELP: "loketlokaalbestuur@vlaanderen.be"
+      EMAIL_FROM: "loketlokaalbestuur@vlaanderen.be"
+      EMAIL_TO: "123@example.com"
+      ERROR_TEMPLATE: "/mnt/templates/error.hbs"
+    volumes:
+      - ./config/error-alert/config.json:/config/config.json
+      - ./config/error-alert/error.hbs:/mnt/templates/error.hbs:ro
+    labels:
+      - "logging=true"
+    restart: always
+    logging: *default-logging
+
+  deliver-email:
+    image: redpencil/deliver-email-service:1.0.0
+    profiles:
+      - sendEmails
+    environment:
+      MAILBOX_URI: "http://data.lblod.info/id/mailboxes/1"
+      SECURE_CONNECTION: "true"
+      EMAIL_PROTOCOL: "smtp"
+      EMAIL_ADDRESS: "loketlokaalbestuur@vlaanderen.be"
+      EMAIL_PASSWORD: "myemailpassword"
+      FROM_NAME: "Open Proces Huis"
+      WELL_KNOWN_SERVICE: "Outlook365"
+      NODE_ENV: "production"
+      EMAIL_CRON_PATTERN: "*/5 * * * *" # Every 5 minutes
+      LOG_ERRORS: true
+    volumes:
+      - ./data/mail:/share
+    labels:
+      - "logging=true"
+    restart: always
+    logging: *default-logging
   ################################################################################
   # IPDC PROXY
   ################################################################################
@@ -269,7 +323,18 @@ services:
     environment:
       API_URL: "https://api.ipdc.tni-vlaanderen.be"
       API_KEY: "secret"
-      REQUIRED_ROLES: "OpenProcesHuis-Procesbeheerder,LoketLB-OpenProcesHuisGebruiker,LoketLB-OpenProcesHuisAfnemer" # TODO: drop support for LoketLB-OpenProcesHuisGebruiker and LoketLB-OpenProcesHuisAfnemer when ready
+      REQUIRED_ROLES: "OpenProcesHuis-Procesbeheerder,LoketLB-admin,Lezer,OpenProcesHuis-Lezer,Medewerker-fixed"
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
+  plausible-proxy:
+    image: lblod/api-proxy-service:1.0.2
+    links:
+      - virtuoso:database
+    environment:
+      API_URL: "https://plausible.lblod.info"
+      API_KEY: ""
     restart: always
     labels:
       - "logging=true"
@@ -295,23 +360,6 @@ services:
   anonymization:
     image: lblod/pii-identification-anonymization-service
     restart: always
-
-  ################################################################################
-  # JSON-LD API
-  ################################################################################
-  swagger:
-    image: swaggerapi/swagger-ui:latest
-    restart: always
-    environment:
-      SWAGGER_JSON: /spec/openapi.yml
-    volumes:
-      - ./config/integration/json-ld-api/openapi.yml:/spec/openapi.yml:ro
-      # Override as we do not want the user to set authorize, they have to do this by login in into our OPH environment!
-      - ./config/integration/json-ld-api/index.html:/usr/share/nginx/html/index.html
-      - ./config/integration/json-ld-api/hide-authorize-btn.css:/usr/share/nginx/html/hide-authorize-btn.css
-    labels:
-      - 'logging=true'
-    logging: *default-logging
   modified:
     image: lblod/track-modified-service:0.2.0
     environment:
@@ -328,10 +376,10 @@ services:
   # LDES
   ################################################################################
   ldes-serve-feed:
-    image: lblod/ldes-serve-feed-service:0.1.1
+    image: lblod/ldes-serve-feed-service:0.4.0
     restart: always
     environment:
-      LDES_STREAM_PREFIX: "https://dev.openproceshuis.lblod.info/streams/ldes/"
+      BASE_URL: "https://dev.openproceshuis.lblod.info/streams/ldes/"
       TIME_TREE_RELATION_PATH: "http://www.w3.org/ns/prov#generatedAtTime"
       DATA_FOLDER: "/data"
       LDES_FOLDER: "public"
@@ -359,8 +407,9 @@ services:
       CRON_CHECKPOINT: "0 5 1 * *" # At 05:00 on day-of-month 1
       SUDO_QUERY_RETRY_TIMEOUT_INCREMENT_FACTOR: 0.003
       SUDO_QUERY_RETRY_FOR_HTTP_STATUS_CODES: 429,500,502,503,504
-      MAX_PAGE_SIZE_BYTES: 2500000
+      MAX_PAGE_SIZE_BYTES: 10000
       INITIAL_STATE_LIMIT: 10000
+      HEALING_LIMIT: 10000
       DIRECT_DB_ENDPOINT: "http://virtuoso:8890/sparql"
       WRITE_INITIAL_STATE: "false"
     volumes:
