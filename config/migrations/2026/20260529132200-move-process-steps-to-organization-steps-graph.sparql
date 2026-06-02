@@ -65,7 +65,7 @@ where {
     bbo:RootElement
     bbo:ThrowEvent
   }
-  graph <http://mu.semte.ch/graphs/shared> {
+  graph ?g {
     ?element a ?type .
     ?element ?p ?o .
   }
