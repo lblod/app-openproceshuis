@@ -1,3 +1,40 @@
+## v2.7.1 (2026-06-01)
+
+#### :rocket: Enhancement
+
+- [#xxx](https://github.com/lblod/app-openproceshuis/tree/fe99706bd0ce94c411a20a156d712b6c6bf7ec93) Bump frontend to v1.6.1 by [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#148](https://github.com/lblod/app-openproceshuis/pull/148) Add entities from Flemish Government [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#146](https://github.com/lblod/app-openproceshuis/pull/146) OPH-959 | Structure for diagrams by [@JonasVanHoof](https://github.com/JonasVanHoof)
+
+#### :wrench: Maintenance
+
+- [#153](https://github.com/lblod/app-openproceshuis/pull/153) OPH-550 | Process steps are saved in a separate graph by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#150](https://github.com/lblod/app-openproceshuis/pull/150) Drop support for openproceshuisgebruiker and openproceshuisafnemer roles by [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#149](https://github.com/lblod/app-openproceshuis/pull/149) Bump virtuoso and SPARQL parser by [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#147](https://github.com/lblod/app-openproceshuis/pull/147) Update Virtuoso image version to 1.2.2 by [@nvdk](https://github.com/nvdk)
+
+#### :bug: Bug Fixes
+
+- [#154](https://github.com/lblod/app-openproceshuis/pull/154) Reset sparql parser to v0.0.14 [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#152](https://github.com/lblod/app-openproceshuis/pull/152) Repair incorrectly inserted VO entities [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#xxx](https://github.com/lblod/app-openproceshuis/tree/6a4a2b0e288c24afcf90474ea618a750a1de554b) fix: links can be added to multiple processes so we can save links and keep them on the versioned ones [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#151](https://github.com/lblod/app-openproceshuis/pull/151) fix: ignore the hasStatistics predicate on the queads so process statist [@JonasVanHoof](https://github.com/JonasVanHoof)
+
+
+## Deploy instructions
+
+Pull image for the following services:
+
+- virtuoso
+
+Service actions:
+
+- Create virtuoso checkpoint + backup
+- Remove the virtuoso.trx file as this is needed for the virtuoso version bump
+- Run the migrations
+- Restart resources & cache | Domain
+- Enable the error messaging for the vendor-api when deliver emails is set
+
 ## v2.7.0 (2026-05-06)
 
 #### :rocket: Enhancement
