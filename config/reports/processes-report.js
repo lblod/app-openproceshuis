@@ -20,6 +20,7 @@ export default {
       PREFIX adms: <http://www.w3.org/ns/adms#>
       PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
       PREFIX icr: <http://lblod.data.gift/vocabularies/informationclassification/>
+      PREFIX oph: <http://lblod.data.gift/vocabularies/openproceshuis/>      
 
       SELECT  ?process 
               ?organizationLabel 
@@ -40,6 +41,10 @@ export default {
 
         graph <http://mu.semte.ch/graphs/shared> {
           ?process a dpv:Process .
+          FILTER NOT EXISTS {
+            ?process oph:isVersionedResource "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+          }
+
           ?process dct:publisher ?group .
           ?process dct:title ?title .
           ?process dct:created ?created .
