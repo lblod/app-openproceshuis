@@ -23,7 +23,8 @@ export default {
       PREFIX oph: <http://lblod.data.gift/vocabularies/openproceshuis/>      
 
       SELECT  ?process 
-              ?organizationLabel 
+              ?organizationLabel
+              ?isBlueprint 
               ?title 
               ?created 
               (MAX(?modified) AS ?lastModified) 
@@ -49,6 +50,7 @@ export default {
           ?process dct:title ?title .
           ?process dct:created ?created .
           ?process dct:modified ?modified .
+          OPTIONAL { ?process icr:isBlueprint ?isBlueprint }
         } 
         OPTIONAL { ?process adms:status ?status }
         OPTIONAL { 
@@ -65,7 +67,7 @@ export default {
           OPTIONAL { ?adminUnit skos:prefLabel ?adminUnitLabel }
         }
       }
-      GROUP BY ?process ?organizationLabel ?title ?created ?lastModified
+      GROUP BY ?process ?organizationLabel ?isBlueprint ?title ?created ?lastModified
       ORDER BY LCASE(?organizationLabel) LCASE(?title) ?created  
     `;
     const queryResponse = await batchedQuery(queryString);
@@ -81,11 +83,13 @@ export default {
         "http://lblod.data.gift/concepts/concept-status/gearchiveerd"
           ? "Ja"
           : "Nee",
+      Blauwdruk: process.isBlueprint?.value === "1" ? "Ja" : "Nee",
       "Relevant voor type bestuur": process.adminUnitLabels?.value || "",
       "Aantal weergaven": process.maxViews?.value,
       "Totaal aantal downloads": String(
         [
           process.maxBpmn,
+          process.maxVisio,
           process.maxPdf,
           process.maxSvg,
           process.maxPng,
@@ -108,6 +112,7 @@ export default {
         "Bestuur",
         "Aangemaakt op",
         "Aangepast op",
+        "Blauwdruk",
         "Gearchiveerd",
         "Relevant voor type bestuur",
         "Aantal weergaven",
