@@ -19,6 +19,7 @@ export default {
       PREFIX dpv: <https://w3id.org/dpv#>
       PREFIX dct: <http://purl.org/dc/terms/>
       PREFIX adms: <http://www.w3.org/ns/adms#>
+      PREFIX oph: <http://lblod.data.gift/vocabularies/openproceshuis/>      
 
       SELECT *
       WHERE {
@@ -33,6 +34,10 @@ export default {
             graph <http://mu.semte.ch/graphs/shared> {
               ?process a dpv:Process .
               ?process dct:publisher ?group .
+
+              FILTER NOT EXISTS {
+                ?process oph:isVersionedResource "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+              }
             }
             OPTIONAL { ?process adms:status ?status }
 
@@ -51,6 +56,9 @@ export default {
           FROM <http://mu.semte.ch/graphs/shared>
           WHERE {
             ?process a dpv:Process .
+            FILTER NOT EXISTS {
+              ?process oph:isVersionedResource "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
+            }
 
             OPTIONAL { ?process adms:status ?status }
 
