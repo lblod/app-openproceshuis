@@ -78,6 +78,8 @@
   :class (s-prefix "nfo:Bookmark")
   :properties `((:label :string ,(s-prefix "skos:prefLabel"))
                 (:href :string ,(s-prefix "nie:links"))
+                (:created :datetime ,(s-prefix "dct:created"))
+                (:modified :datetime ,(s-prefix "dct:modified"))
                 (:status :url ,(s-prefix "adms:status")))
   :has-many `(
             (informationAsset :via ,(s-prefix "rdfs:seeAlso")
