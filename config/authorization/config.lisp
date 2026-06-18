@@ -132,11 +132,6 @@
        :to-graph shared
        :for-allowed-group "shared-processes-reader")
 
-(with-scope "http://services.semantic.works/sparql-endpoint-proxy"
-  (grant (read)
-         :to shared
-         :for "authenticated"))
-
 (grant (read)
        :to-graph job
        :for-allowed-group "public")
@@ -176,6 +171,17 @@
 (grant (read)
        :to-graph error
        :for-allowed-group "admin")
+
+(with-scope "http://services.semantic.works/sparql-endpoint-proxy"
+  (grant (read)
+         :to shared
+         :for "authenticated")
+  (grant (read)
+         :to public
+         :for "public")
+  (grant (read)
+         :to inventory
+         :for "public"))
 
 ;;;;;;;;;
 ;;; Graphs
