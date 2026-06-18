@@ -1,0 +1,31 @@
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX mu:   <http://mu.semte.ch/vocabularies/core/>
+PREFIX dct:  <http://purl.org/dc/terms/>
+PREFIX dpv:  <https://w3id.org/dpv#>
+PREFIX ext:  <http://mu.semte.ch/vocabularies/ext/>
+PREFIX oph:  <http://lblod.data.gift/vocabularies/openproceshuis/>
+PREFIX cpsv: <http://purl.org/vocab/cpsv#>
+
+INSERT {
+  GRAPH ?g {
+    ?ipdcProduct cpsv:follows ?versionedProcess .
+  }
+}
+WHERE {
+  ?versionedProcess a ext:VersionedProcess .
+  ?versionedProcess dct:isVersionOf ?process .
+
+  FILTER NOT EXISTS {
+    ?otherVersion a ext:VersionedProcess .
+    ?otherVersion dct:isVersionOf ?process .
+    FILTER(?otherVersion != ?versionedProcess)
+  }
+
+  GRAPH ?g {
+    ?ipdcProduct cpsv:follows ?process .
+  }
+
+  FILTER NOT EXISTS {
+    ?ipdcProduct cpsv:follows ?versionedProcess .
+  }
+}

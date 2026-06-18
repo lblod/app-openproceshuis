@@ -39,7 +39,7 @@ WHERE {
                       rdf:type,
                       mu:uuid,
                       dct:isVersionOf,
-                      ext:hasStatistict
+                      ext:hasStatistics
                       )
             ) 
   }
