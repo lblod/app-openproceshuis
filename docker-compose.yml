@@ -6,7 +6,7 @@ x-logging: &default-logging
 
 services:
   frontend:
-    image: lblod/frontend-openproceshuis:1.6.2
+    image: lblod/frontend-openproceshuis:1.6.3
     environment:
       EMBER_OAUTH_API_REDIRECT_URL: "https://openproceshuis.lblod.info/authorization/callback"
       EMBER_OAUTH_API_KEY: "aaf8877c-0975-4003-8db8-a9986355b80b"
@@ -113,7 +113,7 @@ services:
     restart: always
     logging: *default-logging
   file:
-    image: semtech/mu-file-service:feature-validate-readable-metadata
+    image: semtech/mu-file-service:3.5.1
     labels:
       - "logging=true"
     logging: *default-logging
@@ -142,7 +142,7 @@ services:
       - ./data/files:/share
     restart: always
   process:
-    image: lblod/openproceshuis-process-service:0.0.3
+    image: lblod/openproceshuis-process-service:0.0.4
     restart: always
     labels:
       - "logging=true"

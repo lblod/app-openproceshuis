@@ -16,8 +16,9 @@ services:
     restart: "no"
   frontend:
     image: lblod/frontend-openproceshuis:latest
+    restart: "no"
   file:
-    image: semtech/mu-file-service:3.5.1
+    restart: "no"
   bpmn:
     image: lblod/openproceshuis-bpmn-service:latest
   visio:
