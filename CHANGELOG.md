@@ -1,3 +1,23 @@
+## v2.8.0 (2026-07-28)
+
+#### :rocket: Enhancement
+
+- [#163](https://github.com/lblod/app-openproceshuis/pull/163) Allow SPARQL endpoint proxy to read public and inventory data by [@MartijnBogaert](https://github.com/MartijnBogaert)
+- [#161](https://github.com/lblod/app-openproceshuis/pull/161) OPH-1099 | Transform relevant links to a table with modified dates by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#160](https://github.com/lblod/app-openproceshuis/pull/160) OPH-1087 | Add is blueprint to processes output report by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#140](https://github.com/lblod/app-openproceshuis/pull/140) Introduce process versioning by [@MartijnBogaert](https://github.com/MartijnBogaert)
+
+#### :wrench: Maintenance
+
+- [#156](https://github.com/lblod/app-openproceshuis/pull/156) OPH-1069 | Prepare prod deploy v2.7.x by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#155](https://github.com/lblod/app-openproceshuis/pull/155) OPH-553 | Create new migration that moves the existing process steps by [@JonasVanHoof](https://github.com/JonasVanHoof)
+
+#### :bug: Bug Fixes
+
+- [#164](https://github.com/lblod/app-openproceshuis/pull/164) OPH-906 | Visio isn't called correctly by [@JonasVanHoof](https://github.com/JonasVanHoof)
+- [#162](https://github.com/lblod/app-openproceshuis/pull/162) OPH-1100 | IPDC products not added to the versioned process in the initial migration by [@JonasVanHoof](https://github.com/JonasVanHoof)
+
+
 ## v2.7.1 (2026-06-01)
 
 #### :rocket: Enhancement
