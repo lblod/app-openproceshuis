@@ -177,6 +177,9 @@
          :to shared
          :for "authenticated")
   (grant (read)
+         :to inventory
+         :for "public")
+  (grant (read)
          :to public
          :for "public")
   (grant (read)
