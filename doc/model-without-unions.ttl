@@ -1,0 +1,1078 @@
+@prefix cms: <http://mu.semte.ch/vocabulary/cms/>.
+@prefix icr: <http://lblod.data.gift/vocabularies/informationclassification/>.
+@prefix org: <http://www.w3.org/ns/org#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix besluit: <http://data.vlaanderen.be/ns/besluit#>.
+@prefix locn: <http://www.w3.org/ns/locn#>.
+@prefix ere: <http://data.lblod.info/vocabularies/erediensten/>.
+@prefix schema_http: <http://schema.org/>.
+@prefix adres: <https://data.vlaanderen.be/ns/adres#>.
+@prefix organisatie: <http://lblod.data.gift/vocabularies/organisatie/>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/>.
+@prefix oph: <http://lblod.data.gift/vocabularies/openproceshuis/>.
+@prefix cpsv: <http://purl.org/vocab/cpsv#>.
+@prefix dpv: <https://w3id.org/dpv#>.
+@prefix ipdc: <https://productencatalogus.data.vlaanderen.be/ns/ipdc-lpdc#>.
+@prefix reporting: <http://lblod.data.gift/vocabularies/reporting/>.
+@prefix schema: <http://schema.org/>.
+@prefix task: <http://redpencil.data.gift/vocabularies/tasks/>.
+@prefix cogs: <http://vocab.deri.ie/cogs#>.
+@prefix adms: <http://www.w3.org/ns/adms#>.
+@prefix prov: <http://www.w3.org/ns/prov#>.
+@prefix dbpedia: <http://dbpedia.org/ontology/>.
+@prefix nie: <http://www.semanticdesktop.org/ontologies/2007/01/19/nie#>.
+@prefix nfo: <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>.
+@prefix obo: <http://purl.obolibrary.org/obo/>.
+@prefix teamingAI: <https://www.teamingai-project.eu/>.
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix rami: <https://w3id.org/i40/rami#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix bboExtension: <https://www.teamingai-project.eg/BBOExtension#>.
+@prefix bbo: <https://www.irit.fr/recherches/MELODI/ontologies/BBO#>.
+@prefix ext: <http://mu.semte.ch/vocabularies/ext/>.
+@prefix rm: <http://mu.semte.ch/vocabularies/logical-delete/>.
+@prefix typedLiterals: <http://mu.semte.ch/vocabularies/typed-literals/>.
+@prefix mu: <http://mu.semte.ch/vocabularies/core/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix app: <http://mu.semte.ch/app/>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+
+<http://mu.semte.ch/ontology> rdf:type owl:Ontology.
+<http://mu.semte.ch/ontology> dc:title "Generated resource ontology". 
+<http://mu.semte.ch/ontology> dc:description "Generated resource ontology". 
+
+organisatie:BestuurseenheidClassificatieCode rdf:type owl:Class;
+  rdfs:label "administrative-unit-classification-codes".
+bbo:Error rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "error".
+bbo:ExclusiveGateway rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "exclusivegateway".
+organisatie:TypeVestiging rdf:type owl:Class;
+  rdfs:label "site-types".
+bbo:ParallelGateway rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "parallelgateway".
+ext:ProcessStatistic rdf:type owl:Class;
+  rdfs:label "processstatistic".
+bboExtension:DataObjectReference rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "dataobjectreference".
+skos:Concept rdf:type owl:Class;
+  rdfs:label "processgroup".
+bbo:BusinessRuleTask rdf:type owl:Class;
+   rdfs:subClassOf bbo:Task;
+  rdfs:label "businessruletask".
+schema_http:ContactPoint rdf:type owl:Class;
+  rdfs:label "contact-points".
+bbo:SubProcess rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "subprocess".
+bbo:SendTask rdf:type owl:Class;
+   rdfs:subClassOf bbo:Task;
+  rdfs:label "sendtask".
+skos:Concept rdf:type owl:Class;
+  rdfs:label "processcategory".
+bboExtension:Association rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "association".
+ext:VersionedInformationAsset rdf:type owl:Class;
+   rdfs:subClassOf icr:InformationAsset;
+  rdfs:label "versionedinformationasset".
+ext:VersionedProcess rdf:type owl:Class;
+   rdfs:subClassOf dpv:Process;
+  rdfs:label "versionedprocess".
+bbo:Property rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "property".
+skos:Concept rdf:type owl:Class;
+  rdfs:label "processdomain".
+nfo:Bookmark rdf:type owl:Class;
+  rdfs:label "link".
+NIL rdf:type owl:Class;
+  rdfs:label "bpmnelement".
+bbo:ManualTask rdf:type owl:Class;
+   rdfs:subClassOf bbo:Task;
+  rdfs:label "manualtask".
+bbo:Task rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "task".
+bboExtension:MessageFlow rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "messageflow".
+org:Site rdf:type owl:Class;
+  rdfs:label "sites".
+bboExtension:DataObject rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "dataobject".
+bbo:Process rdf:type owl:Class;
+  rdfs:label "bpmnprocess".
+ipdc:InstancePublicService rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "ipdcinstance".
+bbo:SequenceFlow rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "sequenceflow".
+reporting:Report rdf:type owl:Class;
+  rdfs:label "report".
+ipdc:ConceptualPublicService rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "ipdcconcept".
+bboExtension:TextAnnotation rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "textannotation".
+bbo:EndEvent rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "endevent".
+bboExtension:Participant rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "participant".
+bbo:StartEvent rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "startevent".
+oph:ConceptueelProces rdf:type owl:Class;
+  rdfs:label "conceptualprocess".
+bboExtension:Collaboration rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "collaboration".
+dpv:Process rdf:type owl:Class;
+  rdfs:label "process".
+bbo:BoundaryEvent rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "boundaryevent".
+cogs:Job rdf:type owl:Class;
+  rdfs:label "job".
+bbo:UserTask rdf:type owl:Class;
+   rdfs:subClassOf bbo:Task;
+  rdfs:label "usertask".
+bboExtension:Lane rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "lane".
+schema:ItemList rdf:type owl:Class;
+  rdfs:label "diagram-list".
+bboExtension:DataOutputAssociation rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "dataoutputassociation".
+besluit:Bestuurseenheid rdf:type owl:Class;
+  rdfs:label "group".
+bboExtension:DataStoreReference rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "datastorereference".
+foaf:OnlineAccount rdf:type owl:Class;
+  rdfs:label "account".
+bbo:InclusiveGateway rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "inclusivegateway".
+skos:Concept rdf:type owl:Class;
+  rdfs:label "bpmnelementtype".
+bbo:ReceiveTask rdf:type owl:Class;
+   rdfs:subClassOf bbo:Task;
+  rdfs:label "receivetask".
+NIL rdf:type owl:Class;
+  rdfs:label "ipdcproduct".
+bboExtension:DataInputAssociation rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "datainputassociation".
+foaf:Person rdf:type owl:Class;
+  rdfs:label "user".
+bbo:ServiceTask rdf:type owl:Class;
+   rdfs:subClassOf bbo:Task;
+  rdfs:label "servicetask".
+bbo:ErrorEventDefinition rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "erroreventdefinition".
+bboExtension:LaneSet rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "laneset".
+nfo:FileDataObject rdf:type owl:Class;
+  rdfs:label "file".
+icr:InformationAsset rdf:type owl:Class;
+  rdfs:label "informationasset".
+bbo:MessageEventDefinition rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "messageeventdefinition".
+bbo:IntermediateThrowEvent rdf:type owl:Class;
+   rdfs:subClassOf NIL;
+  rdfs:label "intermediatethrowevent".
+schema:ListItem rdf:type owl:Class;
+  rdfs:label "diagram-list-item".
+bbo:ScriptTask rdf:type owl:Class;
+   rdfs:subClassOf bbo:Task;
+  rdfs:label "scripttask".
+
+ext:local_id_1 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is language-string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_2 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Bestuurseenheid.
+ext:local_id_3 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:Bookmark.
+ext:local_id_4 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_5 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_6 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_7 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain organisatie:TypeVestiging.
+ext:local_id_8 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is skos:prefLabel.";
+  rdfs:label "label";
+  rdfs:range rdfs:Literal;
+  rdfs:domain organisatie:BestuurseenheidClassificatieCode.
+ext:local_id_9 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_defaultElement.";
+  rdfs:label "defaultelement";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:InclusiveGateway.
+ext:local_id_10 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_defaultElement.";
+  rdfs:label "defaultelement";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:ParallelGateway.
+ext:local_id_11 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_defaultElement.";
+  rdfs:label "defaultelement";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:ExclusiveGateway.
+ext:local_id_12 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_outgoing.";
+  rdfs:label "outgoing";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:IntermediateThrowEvent.
+ext:local_id_13 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_outgoing.";
+  rdfs:label "outgoing";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:InclusiveGateway.
+ext:local_id_14 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_outgoing.";
+  rdfs:label "outgoing";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:BoundaryEvent.
+ext:local_id_15 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_outgoing.";
+  rdfs:label "outgoing";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:StartEvent.
+ext:local_id_16 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_outgoing.";
+  rdfs:label "outgoing";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:ParallelGateway.
+ext:local_id_17 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_outgoing.";
+  rdfs:label "outgoing";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:ExclusiveGateway.
+ext:local_id_18 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_incoming.";
+  rdfs:label "incoming";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:IntermediateThrowEvent.
+ext:local_id_19 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_incoming.";
+  rdfs:label "incoming";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:InclusiveGateway.
+ext:local_id_20 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_incoming.";
+  rdfs:label "incoming";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:EndEvent.
+ext:local_id_21 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_incoming.";
+  rdfs:label "incoming";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:ParallelGateway.
+ext:local_id_22 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_incoming.";
+  rdfs:label "incoming";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:ExclusiveGateway.
+ext:pdfDownloads rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is ext:pdfDownloads.";
+  rdfs:label "pdf-downloads";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:ProcessStatistic.
+ext:pngDownloads rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is ext:pngDownloads.";
+  rdfs:label "png-downloads";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:ProcessStatistic.
+ext:svgDownloads rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is ext:svgDownloads.";
+  rdfs:label "svg-downloads";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:ProcessStatistic.
+ext:bpmnDownloads rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is ext:bpmnDownloads.";
+  rdfs:label "bpmn-downloads";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:ProcessStatistic.
+ext:visioDownloads rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is ext:visioDownloads.";
+  rdfs:label "visio-downloads";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:ProcessStatistic.
+ext:processViews rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is ext:processViews.";
+  rdfs:label "process-views";
+  rdfs:range rdfs:Literal;
+  rdfs:domain ext:ProcessStatistic.
+bboExtension:dataObjectRef rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bboExtension:dataObjectRef.";
+  rdfs:label "reference";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:DataObjectReference.
+ext:local_id_23 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema:ListItem.
+ext:local_id_24 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+ext:local_id_25 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:FileDataObject.
+ext:local_id_26 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema:ItemList.
+ext:local_id_27 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain cogs:Job.
+ext:local_id_28 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+ext:local_id_29 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain oph:ConceptueelProces.
+ext:local_id_30 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain reporting:Report.
+ext:local_id_31 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:Bookmark.
+ext:local_id_32 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_33 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_34 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:created.";
+  rdfs:label "created";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_35 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema:ListItem.
+ext:local_id_36 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+ext:local_id_37 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:FileDataObject.
+ext:local_id_38 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema:ItemList.
+ext:local_id_39 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain cogs:Job.
+ext:local_id_40 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+ext:local_id_41 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain oph:ConceptueelProces.
+ext:local_id_42 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:Bookmark.
+ext:local_id_43 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_44 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_45 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is dct:modified.";
+  rdfs:label "modified";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_46 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema:ListItem.
+ext:local_id_47 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+ext:local_id_48 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:FileDataObject.
+ext:local_id_49 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema:ItemList.
+ext:local_id_50 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain cogs:Job.
+ext:local_id_51 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+ext:local_id_52 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain oph:ConceptueelProces.
+ext:local_id_53 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:Bookmark.
+ext:local_id_54 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_55 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_56 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is adms:status.";
+  rdfs:label "status";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_57 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is skos:inScheme.";
+  rdfs:label "scheme";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_58 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is skos:inScheme.";
+  rdfs:label "scheme";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_59 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is skos:inScheme.";
+  rdfs:label "scheme";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_60 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is skos:inScheme.";
+  rdfs:label "scheme";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_61 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is prov:invalidatedAtTime.";
+  rdfs:label "archived-at";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_62 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is prov:invalidatedAtTime.";
+  rdfs:label "archived-at";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+ext:local_id_63 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is datetime.  Original predicate is prov:invalidatedAtTime.";
+  rdfs:label "archived-at";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+schema_http:email rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is schema_http:email.";
+  rdfs:label "email";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema_http:ContactPoint.
+schema_http:telephone rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is schema_http:telephone.";
+  rdfs:label "telephone";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema_http:ContactPoint.
+schema_http:faxNumber rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is schema_http:faxNumber.";
+  rdfs:label "fax";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema_http:ContactPoint.
+foaf:page rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is uri.  Original predicate is foaf:page.";
+  rdfs:label "website";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema_http:ContactPoint.
+schema_http:contactType rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is schema_http:contactType.";
+  rdfs:label "type";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema_http:ContactPoint.
+teamingAI:belongsToRAMILayer rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is uri.  Original predicate is teamingAI:belongsToRAMILayer.";
+  rdfs:label "ramilayer";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:SubProcess.
+teamingAI:belongsToView rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is uri.  Original predicate is teamingAI:belongsToView.";
+  rdfs:label "view";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:SubProcess.
+ext:local_id_64 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_sourceRef.";
+  rdfs:label "source";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:DataInputAssociation.
+ext:local_id_65 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_sourceRef.";
+  rdfs:label "source";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:SequenceFlow.
+ext:local_id_66 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_sourceRef.";
+  rdfs:label "source";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:MessageFlow.
+ext:local_id_67 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_sourceRef.";
+  rdfs:label "source";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:Association.
+ext:local_id_68 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_targetRef.";
+  rdfs:label "target";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:DataInputAssociation.
+ext:local_id_69 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_targetRef.";
+  rdfs:label "target";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:DataOutputAssociation.
+ext:local_id_70 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_targetRef.";
+  rdfs:label "target";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:SequenceFlow.
+ext:local_id_71 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_targetRef.";
+  rdfs:label "target";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:MessageFlow.
+ext:local_id_72 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_targetRef.";
+  rdfs:label "target";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:Association.
+bbo:has_property_element rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_property_element.";
+  rdfs:label "propertyelement";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:Property.
+nie:links rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is nie:links.";
+  rdfs:label "href";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:Bookmark.
+bbo:name rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:name.";
+  rdfs:label "name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain NIL.
+ext:local_id_73 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:description.";
+  rdfs:label "description";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+ext:local_id_74 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:description.";
+  rdfs:label "description";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+ext:local_id_75 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:description.";
+  rdfs:label "description";
+  rdfs:range rdfs:Literal;
+  rdfs:domain reporting:Report.
+ext:local_id_76 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:description.";
+  rdfs:label "site-type-name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain org:Site.
+ext:local_id_77 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:title.";
+  rdfs:label "title";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+ext:local_id_78 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is language-string-set.  Original predicate is dct:title.";
+  rdfs:label "name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain NIL.
+ext:local_id_79 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:title.";
+  rdfs:label "title";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+ext:local_id_80 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:title.";
+  rdfs:label "title";
+  rdfs:range rdfs:Literal;
+  rdfs:domain oph:ConceptueelProces.
+ext:local_id_81 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:title.";
+  rdfs:label "title";
+  rdfs:range rdfs:Literal;
+  rdfs:domain reporting:Report.
+rdfs:comment rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is rdfs:comment.";
+  rdfs:label "comment";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:TextAnnotation.
+bboExtension:processRef rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bboExtension:processRef.";
+  rdfs:label "process";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:Participant.
+ext:local_id_82 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:identifier.";
+  rdfs:label "identifier";
+  rdfs:range rdfs:Literal;
+  rdfs:domain foaf:OnlineAccount.
+ext:local_id_83 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:identifier.";
+  rdfs:label "identifier";
+  rdfs:range rdfs:Literal;
+  rdfs:domain besluit:Bestuurseenheid.
+ext:local_id_84 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is dct:identifier.";
+  rdfs:label "number";
+  rdfs:range rdfs:Literal;
+  rdfs:domain oph:ConceptueelProces.
+schema:email rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is schema:email.";
+  rdfs:label "email";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+icr:isBlueprint rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is boolean.  Original predicate is icr:isBlueprint.";
+  rdfs:label "is-blueprint";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+icr:additionalInformation rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is icr:additionalInformation.";
+  rdfs:label "additional-information";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+icr:hasControlMeasure rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is icr:hasControlMeasure.";
+  rdfs:label "has-control-measure";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+oph:isVersionedResource rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is boolean.  Original predicate is oph:isVersionedResource.";
+  rdfs:label "is-versioned-resource";
+  rdfs:range rdfs:Literal;
+  rdfs:domain dpv:Process.
+bbo:attachedToRef rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:attachedToRef.";
+  rdfs:label "reference";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:BoundaryEvent.
+ext:local_id_85 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_eventDefinition.";
+  rdfs:label "eventdefinition";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:IntermediateThrowEvent.
+ext:local_id_86 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_eventDefinition.";
+  rdfs:label "eventdefinition";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bbo:BoundaryEvent.
+ext:relatedTo rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is ext:relatedTo.";
+  rdfs:label "resource";
+  rdfs:range rdfs:Literal;
+  rdfs:domain cogs:Job.
+task:operation rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is task:operation.";
+  rdfs:label "operation";
+  rdfs:range rdfs:Literal;
+  rdfs:domain cogs:Job.
+bbo:has_activity rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bbo:has_activity.";
+  rdfs:label "activity";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:Lane.
+schema:itemListOrder rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is url.  Original predicate is schema:itemListOrder.";
+  rdfs:label "order";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema:ItemList.
+ext:local_id_87 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is schema:version.";
+  rdfs:label "version";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:FileDataObject.
+ext:local_id_88 rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is schema:version.";
+  rdfs:label "version";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema:ItemList.
+bboExtension:is_dataOutputFrom rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bboExtension:is_dataOutputFrom.";
+  rdfs:label "dataoutputfrom";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:DataOutputAssociation.
+foaf:accountServiceHomepage rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is foaf:accountServiceHomepage.";
+  rdfs:label "provider";
+  rdfs:range rdfs:Literal;
+  rdfs:domain foaf:OnlineAccount.
+skos:hiddenLabel rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is language-string.  Original predicate is skos:hiddenLabel.";
+  rdfs:label "key";
+  rdfs:range rdfs:Literal;
+  rdfs:domain skos:Concept.
+schema:productID rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is schema:productID.";
+  rdfs:label "product-number";
+  rdfs:range rdfs:Literal;
+  rdfs:domain NIL.
+bboExtension:is_dataInputFor rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is bboExtension:is_dataInputFor.";
+  rdfs:label "datainputfor";
+  rdfs:range rdfs:Literal;
+  rdfs:domain bboExtension:DataInputAssociation.
+foaf:firstName rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is foaf:firstName.";
+  rdfs:label "first-name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain foaf:Person.
+foaf:familyName rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is foaf:familyName.";
+  rdfs:label "family-name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain foaf:Person.
+nfo:fileName rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is nfo:fileName.";
+  rdfs:label "name";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:FileDataObject.
+dct:format rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dct:format.";
+  rdfs:label "format";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:FileDataObject.
+nfo:fileSize rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is nfo:fileSize.";
+  rdfs:label "size";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:FileDataObject.
+dbpedia:fileExtension rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is string.  Original predicate is dbpedia:fileExtension.";
+  rdfs:label "extension";
+  rdfs:range rdfs:Literal;
+  rdfs:domain nfo:FileDataObject.
+icr:confidentialityScore rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is icr:confidentialityScore.";
+  rdfs:label "confidentiality-score";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+icr:integrityScore rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is icr:integrityScore.";
+  rdfs:label "integrity-score";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+icr:availabilityScore rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is icr:availabilityScore.";
+  rdfs:label "availability-score";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+icr:containsPersonalData rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is boolean.  Original predicate is icr:containsPersonalData.";
+  rdfs:label "contains-personal-data";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+icr:containsProfessionalData rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is boolean.  Original predicate is icr:containsProfessionalData.";
+  rdfs:label "contains-professional-data";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+icr:containsSensitivePersonalData rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is boolean.  Original predicate is icr:containsSensitivePersonalData.";
+  rdfs:label "contains-sensitive-personal-data";
+  rdfs:range rdfs:Literal;
+  rdfs:domain icr:InformationAsset.
+schema:position rdf:type owl:DatatypeProperty;
+  rdfs:comment "Resources type is number.  Original predicate is schema:position.";
+  rdfs:label "position";
+  rdfs:range rdfs:Literal;
+  rdfs:domain schema:ListItem.
+
+
+org:classification rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "classification";
+  rdfs:domain besluit:Bestuurseenheid;
+  rdfs:range organisatie:BestuurseenheidClassificatieCode.
+icr:isRelevantForAdministrativeUnit rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "relevant-administrative-units";
+  rdfs:domain dpv:Process;
+  rdfs:range organisatie:BestuurseenheidClassificatieCode.
+ext:hasStatistics rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "process-statistics";
+  rdfs:domain dpv:Process;
+  rdfs:range ext:ProcessStatistic.
+ext:local_id_89 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is skos:relatedMatch";
+  rdfs:label "process-categories";
+  rdfs:domain skos:Concept;
+  rdfs:range skos:Concept.
+ext:local_id_90 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is skos:relatedMatch";
+  rdfs:label "process-domains";
+  rdfs:domain skos:Concept;
+  rdfs:range skos:Concept.
+dct:replaces rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "replaced-groups";
+  rdfs:domain skos:Concept;
+  rdfs:range skos:Concept.
+ext:local_id_91 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is dct:isVersionOf";
+  rdfs:label "canonical";
+  rdfs:domain ext:VersionedProcess;
+  rdfs:range dpv:Process.
+ext:local_id_92 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is dct:isVersionOf";
+  rdfs:label "canonical";
+  rdfs:domain ext:VersionedInformationAsset;
+  rdfs:range icr:InformationAsset.
+ext:local_id_93 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is prov:wasRevisionOf";
+  rdfs:label "previous-version";
+  rdfs:domain ext:VersionedProcess;
+  rdfs:range ext:VersionedProcess.
+ext:local_id_94 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is prov:wasRevisionOf";
+  rdfs:label "previous-version";
+  rdfs:domain ext:VersionedInformationAsset;
+  rdfs:range ext:VersionedInformationAsset.
+ext:local_id_95 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is rdfs:seeAlso";
+  rdfs:label "links";
+  rdfs:domain icr:InformationAsset;
+  rdfs:range nfo:Bookmark.
+ext:local_id_96 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is rdfs:seeAlso";
+  rdfs:label "links";
+  rdfs:domain dpv:Process;
+  rdfs:range nfo:Bookmark.
+dct:type rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "type";
+  rdfs:domain NIL;
+  rdfs:range skos:Concept.
+teamingAI:belongsToProcess rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "bpmn-process";
+  rdfs:domain NIL;
+  rdfs:range bbo:Process.
+org:siteAddress rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "contacts";
+  rdfs:domain org:Site;
+  rdfs:range schema_http:ContactPoint.
+ere:vestigingstype rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "site-type";
+  rdfs:domain org:Site;
+  rdfs:range organisatie:TypeVestiging.
+prov:wasDerivedFrom rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "bpmn-file";
+  rdfs:domain bbo:Process;
+  rdfs:range nfo:FileDataObject.
+prov:generated rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "file";
+  rdfs:domain reporting:Report;
+  rdfs:range nfo:FileDataObject.
+oph:procesGroep rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "process-groups";
+  rdfs:domain oph:ConceptueelProces;
+  rdfs:range skos:Concept.
+ext:local_id_97 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is schema:hasPart";
+  rdfs:label "sub-items";
+  rdfs:domain schema:ListItem;
+  rdfs:range schema:ListItem.
+ext:local_id_98 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is schema:hasPart";
+  rdfs:label "diagram-lists";
+  rdfs:domain dpv:Process;
+  rdfs:range schema:ItemList.
+ext:local_id_99 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is schema:associatedMedia";
+  rdfs:label "attachments";
+  rdfs:domain icr:InformationAsset;
+  rdfs:range nfo:FileDataObject.
+ext:local_id_100 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is schema:associatedMedia";
+  rdfs:label "attachments";
+  rdfs:domain dpv:Process;
+  rdfs:range nfo:FileDataObject.
+cpsv:follows rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "processes";
+  rdfs:domain NIL;
+  rdfs:range dpv:Process.
+icr:hasInformationAsset rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "information-assets";
+  rdfs:domain dpv:Process;
+  rdfs:range icr:InformationAsset.
+prov:wasInfluencedBy rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "linked-blueprints";
+  rdfs:domain dpv:Process;
+  rdfs:range dpv:Process.
+prov:usedBy rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "users";
+  rdfs:domain dpv:Process;
+  rdfs:range besluit:Bestuurseenheid.
+dct:publisher rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "publisher";
+  rdfs:domain dpv:Process;
+  rdfs:range besluit:Bestuurseenheid.
+ext:local_id_101 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is dct:creator";
+  rdfs:label "creator";
+  rdfs:domain icr:InformationAsset;
+  rdfs:range besluit:Bestuurseenheid.
+ext:local_id_102 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is dct:creator";
+  rdfs:label "creator";
+  rdfs:domain cogs:Job;
+  rdfs:range besluit:Bestuurseenheid.
+ext:local_id_103 rdf:type owl:ObjectProperty;
+  rdfs:comment "Original relationship is dct:creator";
+  rdfs:label "creator";
+  rdfs:domain dpv:Process;
+  rdfs:range besluit:Bestuurseenheid.
+dct:source rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "linked-concept";
+  rdfs:domain dpv:Process;
+  rdfs:range oph:ConceptueelProces.
+schema:itemListElement rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "diagrams";
+  rdfs:domain schema:ItemList;
+  rdfs:range schema:ListItem.
+org:hasPrimarySite rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "primary-site";
+  rdfs:domain besluit:Bestuurseenheid;
+  rdfs:range org:Site.
+foaf:account rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "accounts";
+  rdfs:domain foaf:Person;
+  rdfs:range foaf:OnlineAccount.
+foaf:member rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "groups";
+  rdfs:domain foaf:Person;
+  rdfs:range besluit:Bestuurseenheid.
+nie:dataSource rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "download";
+  rdfs:domain nfo:FileDataObject;
+  rdfs:range nfo:FileDataObject.
+schema:item rdf:type owl:ObjectProperty;
+  rdfs:comment "";
+  rdfs:label "diagram-file";
+  rdfs:domain schema:ListItem;
+  rdfs:range nfo:FileDataObject.
+
+
+
