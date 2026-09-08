@@ -43,6 +43,9 @@ export default {
         graph <http://mu.semte.ch/graphs/shared> {
           ?process a dpv:Process .
           FILTER NOT EXISTS {
+            ?process a ext:VersionedProcess .
+          }
+          FILTER NOT EXISTS {
             ?process oph:isVersionedResource "true"^^<http://www.w3.org/2001/XMLSchema#boolean> .
           }
 
