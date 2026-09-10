@@ -1,0 +1,13 @@
+{
+    "types" : [
+        {
+            "type" : "process",
+            "on_path" : "processes",
+            "rdf_type" : "https://w3id.org/dpv#Process",
+            "properties" : {
+                "title" : "http://purl.org/dc/terms/title",
+                "description" : "http://purl.org/dc/terms/description"
+            }
+        }
+    ]
+}

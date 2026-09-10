@@ -419,3 +419,26 @@ services:
     labels:
       - "logging=true"
 
+  ################################################################################
+  # SEARCH
+  ################################################################################
+
+  search:
+    image: semtech/mu-search:0.12.1
+    volumes:
+      - ./config/search:/config
+    labels:
+      - "logging=true"
+    restart: always
+    logging: *default-logging
+    profiles:
+      - search
+  elasticsearch:
+    image: semtech/mu-search-elastic-backend:1.0.1
+    volumes:
+      - ./data/elasticsearch/:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+    profiles:
+      - search
+
