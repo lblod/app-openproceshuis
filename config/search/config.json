@@ -21,6 +21,21 @@
             }
         ]
     ],
+    "default_settings": {
+        "analysis": {
+            "normalizer": {
+                "lowercase_normalizer": {
+                    "type": "custom",
+                    "char_filter": [],
+                    "filter": [
+                        "lowercase",
+                        "trim",
+                        "asciifolding"
+                    ]
+                }
+            }
+        }
+    },
     "types": [
         {
             "type": "process",
@@ -30,6 +45,28 @@
                 "title": "http://purl.org/dc/terms/title",
                 "description": "http://purl.org/dc/terms/description",
                 "isVersionedResource": "http://lblod.data.gift/vocabularies/openproceshuis/isVersionedResource"
+            },
+            "mappings": {
+                "properties": {
+                    "title": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "normalizer": "lowercase_normalizer"
+                            }
+                        }
+                    },
+                    "description": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "normalizer": "lowercase_normalizer"
+                            }
+                        }
+                    }
+                }
             }
         }
     ]
