@@ -427,18 +427,19 @@ services:
     image: semtech/mu-search:0.12.1
     volumes:
       - ./config/search:/config
+      - ./data/search:/data
     labels:
       - "logging=true"
     restart: always
     logging: *default-logging
+    environment:
+      DEFAULT_MU_AUTH_SCOPE: "http://services.semantic.works/search"
     profiles:
       - search
   elasticsearch:
-    image: semtech/mu-search-elastic-backend:1.0.1
+    image: semtech/mu-search-elastic-backend:1.3.1
     volumes:
       - ./data/elasticsearch/:/usr/share/elasticsearch/data
     environment:
-      - discovery.type=single-node
-    profiles:
-      - search
+      discovery.type: single-node
 
