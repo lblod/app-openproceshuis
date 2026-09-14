@@ -15,6 +15,10 @@
                 "variables": []
             },
             {
+                "name": "authenticated",
+                "variables": []
+            },
+            {
                 "name": "public",
                 "variables": []
             }
@@ -79,7 +83,11 @@
                     "properties": {
                         "id": "mu:uuid"
                     }
-                }
+                },
+                "ipdcProductIds": [
+                    "^http://purl.org/vocab/cpsv#follows",
+                    "mu:uuid"
+                ]
             },
             "mappings": {
                 "properties": {
