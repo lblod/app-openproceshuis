@@ -38,6 +38,32 @@
                         "asciifolding"
                     ]
                 }
+            },
+            "analyzer": {
+                "autocomplete_index": {
+                    "type": "custom",
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "asciifolding",
+                        "edge_ngram_filter"
+                    ]
+                },
+                "autocomplete_search": {
+                    "type": "custom",
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "asciifolding"
+                    ]
+                }
+            },
+            "filter": {
+                "edge_ngram_filter": {
+                    "type": "edge_ngram",
+                    "min_gram": 2,
+                    "max_gram": 20
+                }
             }
         }
     },
@@ -96,6 +122,8 @@
                 "properties": {
                     "title": {
                         "type": "text",
+                        "analyzer": "autocomplete_index",
+                        "search_analyzer": "autocomplete_search",
                         "fields": {
                             "keyword": {
                                 "type": "keyword",
@@ -105,6 +133,8 @@
                     },
                     "description": {
                         "type": "text",
+                        "analyzer": "autocomplete_index",
+                        "search_analyzer": "autocomplete_search",
                         "fields": {
                             "keyword": {
                                 "type": "keyword",
