@@ -17,7 +17,9 @@
             {
                 "name": "authenticated",
                 "variables": []
-            },
+            }
+        ],
+        [
             {
                 "name": "public",
                 "variables": []
@@ -81,7 +83,8 @@
                     "via": "icr:isRelevantForAdministrativeUnit",
                     "rdf_type": "organisatie:BestuurseenheidClassificatieCode",
                     "properties": {
-                        "id": "mu:uuid"
+                        "id": "mu:uuid",
+                        "name": "skos:prefLabel"
                     }
                 },
                 "ipdcProductIds": [
@@ -101,6 +104,36 @@
                         }
                     },
                     "description": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "normalizer": "lowercase_normalizer"
+                            }
+                        }
+                    },
+                    "modified": {
+                        "type": "date"
+                    },
+                    "publisher.name": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "normalizer": "lowercase_normalizer"
+                            }
+                        }
+                    },
+                    "creator.name": {
+                        "type": "text",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "normalizer": "lowercase_normalizer"
+                            }
+                        }
+                    },
+                    "relevantAdministrativeUnits.name": {
                         "type": "text",
                         "fields": {
                             "keyword": {

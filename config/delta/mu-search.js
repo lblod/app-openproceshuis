@@ -1,14 +1,7 @@
 export default [
   {
     match: {
-      // predicate: {
-      //   type: 'uri',
-      //   value: 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-      // },
-      // object: {
-      //   type: 'uri',
-      //   value: 'https://w3id.org/dpv#/Process',
-      // },
+      // listen to all changes
     },
     callback: {
       url: 'http://search/update',
@@ -16,7 +9,7 @@ export default [
     },
     options: {
       resourceFormat: 'v0.0.1',
-      gracePeriod: 500,
+      gracePeriod: 10000,
       ignoreFromSelf: true,
     },
   },
