@@ -35,15 +35,21 @@
             }
         }
     },
+    "prefixes": {
+        "dpv": "https://w3id.org/dpv#",
+        "dcterms": "http://purl.org/dc/terms/",
+        "oph": "http://lblod.data.gift/vocabularies/openproceshuis/",
+        "skos": "http://www.w3.org/2004/02/skos/core#"
+    },
     "types": [
         {
             "type": "process",
             "on_path": "processes",
-            "rdf_type": "https://w3id.org/dpv#Process",
+            "rdf_type": "dpv:Process",
             "properties": {
-                "title": "http://purl.org/dc/terms/title",
-                "description": "http://purl.org/dc/terms/description",
-                "isVersionedResource": "http://lblod.data.gift/vocabularies/openproceshuis/isVersionedResource"
+                "title": "dcterms:title",
+                "description": "dcterms:description",
+                "isVersionedResource": "oph:isVersionedResource"
             },
             "mappings": {
                 "properties": {
