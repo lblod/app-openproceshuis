@@ -39,7 +39,12 @@
         "dpv": "https://w3id.org/dpv#",
         "dcterms": "http://purl.org/dc/terms/",
         "oph": "http://lblod.data.gift/vocabularies/openproceshuis/",
-        "skos": "http://www.w3.org/2004/02/skos/core#"
+        "icr": "http://lblod.data.gift/vocabularies/informationclassification/",
+        "adms": "http://www.w3.org/ns/adms#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "besluit": "http://data.vlaanderen.be/ns/besluit#",
+        "mu": "http://mu.semte.ch/vocabularies/core/",
+        "organisatie": "http://lblod.data.gift/vocabularies/organisatie/"
     },
     "types": [
         {
@@ -47,9 +52,34 @@
             "on_path": "processes",
             "rdf_type": "dpv:Process",
             "properties": {
+                "created": "dcterms:created",
+                "modified": "dcterms:modified",
+                "status": "adms:status",
                 "title": "dcterms:title",
                 "description": "dcterms:description",
-                "isVersionedResource": "oph:isVersionedResource"
+                "isVersionedResource": "oph:isVersionedResource",
+                "isBlueprint": "icr:isBlueprint",
+                "publisher": {
+                    "via": "dcterms:publisher",
+                    "rdf_type": "besluit:Bestuurseenheid",
+                    "properties": {
+                        "name": "skos:prefLabel"
+                    }
+                },
+                "creator": {
+                    "via": "dcterms:creator",
+                    "rdf_type": "besluit:Bestuurseenheid",
+                    "properties": {
+                        "name": "skos:prefLabel"
+                    }
+                },
+                "relevantAdministrativeUnits": {
+                    "via": "icr:isRelevantForAdministrativeUnit",
+                    "rdf_type": "organisatie:BestuurseenheidClassificatieCode",
+                    "properties": {
+                        "id": "mu:uuid"
+                    }
+                }
             },
             "mappings": {
                 "properties": {
