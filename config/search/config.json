@@ -19,9 +19,7 @@
             {
                 "name": "public",
                 "variables": []
-            }
-        ],
-        [
+            },
             {
                 "name": "authenticated",
                 "variables": []
@@ -29,17 +27,29 @@
         ],
         [
             {
+                "name": "public",
+                "variables": []
+            },
+            {
                 "name": "shared-processes-reader",
                 "variables": []
             }
         ],
         [
             {
+                "name": "public",
+                "variables": []
+            },
+            {
                 "name": "shared-processes-editor",
                 "variables": []
             }
         ],
         [
+            {
+                "name": "public",
+                "variables": []
+            },
             {
                 "name": "admin",
                 "variables": []
@@ -128,7 +138,7 @@
                     "via": "icr:isRelevantForAdministrativeUnit",
                     "rdf_type": "organisatie:BestuurseenheidClassificatieCode",
                     "properties": {
-                        "id": "mu:uuid",
+                        "uuid": "mu:uuid",
                         "name": "skos:prefLabel"
                     }
                 },
@@ -165,30 +175,42 @@
                     "modified": {
                         "type": "date"
                     },
-                    "publisher.name": {
-                        "type": "text",
-                        "fields": {
-                            "keyword": {
-                                "type": "keyword",
-                                "normalizer": "lowercase_normalizer"
+                    "publisher": {
+                        "properties": {
+                            "name": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "normalizer": "lowercase_normalizer"
+                                    }
+                                }
                             }
                         }
                     },
-                    "creator.name": {
-                        "type": "text",
-                        "fields": {
-                            "keyword": {
-                                "type": "keyword",
-                                "normalizer": "lowercase_normalizer"
+                    "creator": {
+                        "properties": {
+                            "name": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "normalizer": "lowercase_normalizer"
+                                    }
+                                }
                             }
                         }
                     },
-                    "relevantAdministrativeUnits.name": {
-                        "type": "text",
-                        "fields": {
-                            "keyword": {
-                                "type": "keyword",
-                                "normalizer": "lowercase_normalizer"
+                    "relevantAdministrativeUnits": {
+                        "properties": {
+                            "name": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "normalizer": "lowercase_normalizer"
+                                    }
+                                }
                             }
                         }
                     }
