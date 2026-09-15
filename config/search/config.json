@@ -6,14 +6,22 @@
         {
             "name": "clean",
             "variables": []
+        },
+        {
+            "name": "organization-processes-editor",
+            "variables": [
+                "*"
+            ]
         }
     ],
     "eager_indexing_groups": [
         [
             {
-                "name": "shared-processes-reader",
+                "name": "public",
                 "variables": []
-            },
+            }
+        ],
+        [
             {
                 "name": "authenticated",
                 "variables": []
@@ -21,7 +29,19 @@
         ],
         [
             {
-                "name": "public",
+                "name": "shared-processes-reader",
+                "variables": []
+            }
+        ],
+        [
+            {
+                "name": "shared-processes-editor",
+                "variables": []
+            }
+        ],
+        [
+            {
+                "name": "admin",
                 "variables": []
             }
         ]
@@ -89,7 +109,6 @@
                 "status": "adms:status",
                 "title": "dcterms:title",
                 "description": "dcterms:description",
-                "isVersionedResource": "oph:isVersionedResource",
                 "isBlueprint": "icr:isBlueprint",
                 "publisher": {
                     "via": "dcterms:publisher",
@@ -116,7 +135,8 @@
                 "ipdcProductIds": [
                     "^http://purl.org/vocab/cpsv#follows",
                     "mu:uuid"
-                ]
+                ],
+                "canonical": "dcterms:isVersionOf"
             },
             "mappings": {
                 "properties": {
