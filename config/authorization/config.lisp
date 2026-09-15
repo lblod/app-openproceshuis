@@ -188,6 +188,9 @@
          :to shared
          :for "authenticated")
   (grant (read)
+         :to organizations
+         :for "authenticated")
+  (grant (read)
          :to public
          :for "public")
   (grant (read)
