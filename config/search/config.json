@@ -138,7 +138,6 @@
                     "via": "icr:isRelevantForAdministrativeUnit",
                     "rdf_type": "organisatie:BestuurseenheidClassificatieCode",
                     "properties": {
-                        "uuid": "mu:uuid",
                         "name": "skos:prefLabel"
                     }
                 },
@@ -146,7 +145,39 @@
                     "^http://purl.org/vocab/cpsv#follows",
                     "mu:uuid"
                 ],
-                "canonical": "dcterms:isVersionOf"
+                "canonical": "dcterms:isVersionOf",
+                "conceptualProcess": {
+                    "via": "dcterms:source",
+                    "rdf_type": "oph:ConceptueelProces",
+                    "properties": {
+                        "name": "dcterms:title",
+                        "number": "dcterms:identifier",
+                        "processGroup": {
+                            "via": "oph:procesGroep",
+                            "rdf_type": "skos:Concept",
+                            "properties": {
+                                "name": "skos:prefLabel",
+                                "status": "adms:status",
+                                "processDomain": {
+                                    "via": "skos:relatedMatch",
+                                    "rdf_type": "skos:Concept",
+                                    "properties": {
+                                        "name": "skos:prefLabel",
+                                        "status": "adms:status",
+                                        "processCategory": {
+                                            "via": "skos:relatedMatch",
+                                            "rdf_type": "skos:Concept",
+                                            "properties": {
+                                                "name": "skos:prefLabel",
+                                                "status": "adms:status"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "mappings": {
                 "properties": {
