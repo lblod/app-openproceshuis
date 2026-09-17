@@ -1,4 +1,5 @@
 import errorAlert from './error-alert';
+import muSearch from './mu-search';
 
 export default [
   {
@@ -46,4 +47,5 @@ export default [
     },
   },
   ...errorAlert,
+  ...muSearch
 ];
