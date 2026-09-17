@@ -244,6 +244,58 @@
                                 }
                             }
                         }
+                    },
+                    "conceptualProcess": {
+                        "properties": {
+                            "name": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "normalizer": "lowercase_normalizer"
+                                    }
+                                }
+                            },
+                            "processGroup": {
+                                "properties": {
+                                    "name": {
+                                        "type": "text",
+                                        "fields": {
+                                            "keyword": {
+                                                "type": "keyword",
+                                                "normalizer": "lowercase_normalizer"
+                                            }
+                                        }
+                                    },
+                                    "processDomain": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "text",
+                                                "fields": {
+                                                    "keyword": {
+                                                        "type": "keyword",
+                                                        "normalizer": "lowercase_normalizer"
+                                                    }
+                                                }
+                                            },
+                                            "processCategory": {
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "text",
+                                                        "fields": {
+                                                            "keyword": {
+                                                                "type": "keyword",
+                                                                "normalizer": "lowercase_normalizer"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
