@@ -1,0 +1,13 @@
+DELETE {
+  GRAPH ?g { ?s ?pHttps ?o }
+}
+INSERT {
+  GRAPH ?g { ?s ?pHttp ?o }
+}
+WHERE {
+  GRAPH ?g {
+    ?s ?pHttps ?o .
+    FILTER(STRSTARTS(STR(?pHttps), "https://schema.org/"))
+  }
+  BIND(IRI(CONCAT("http://schema.org/", STRAFTER(STR(?pHttps), "https://schema.org/"))) AS ?pHttp)
+}
