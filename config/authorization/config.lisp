@@ -183,6 +183,20 @@
          :to inventory
          :for "public"))
 
+(with-scope "http://services.semantic.works/search"
+  (grant (read)
+         :to shared
+         :for "authenticated")
+  (grant (read)
+         :to organizations
+         :for "authenticated")
+  (grant (read)
+         :to public
+         :for "public")
+  (grant (read)
+         :to inventory
+         :for "public"))
+
 ;;;;;;;;;
 ;;; Graphs
 

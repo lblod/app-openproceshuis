@@ -1,0 +1,304 @@
+{
+    "automatic_index_updates": true,
+    "persist_indexes": true,
+    "number_of_threads": 8,
+    "ignored_allowed_groups": [
+        {
+            "name": "clean",
+            "variables": []
+        },
+        {
+            "name": "organization-processes-editor",
+            "variables": [
+                "*"
+            ]
+        }
+    ],
+    "eager_indexing_groups": [
+        [
+            {
+                "name": "public",
+                "variables": []
+            },
+            {
+                "name": "authenticated",
+                "variables": []
+            }
+        ],
+        [
+            {
+                "name": "public",
+                "variables": []
+            },
+            {
+                "name": "shared-processes-reader",
+                "variables": []
+            }
+        ],
+        [
+            {
+                "name": "public",
+                "variables": []
+            },
+            {
+                "name": "shared-processes-editor",
+                "variables": []
+            }
+        ],
+        [
+            {
+                "name": "public",
+                "variables": []
+            },
+            {
+                "name": "admin",
+                "variables": []
+            }
+        ]
+    ],
+    "default_settings": {
+        "analysis": {
+            "normalizer": {
+                "lowercase_normalizer": {
+                    "type": "custom",
+                    "char_filter": [],
+                    "filter": [
+                        "lowercase",
+                        "trim",
+                        "asciifolding"
+                    ]
+                }
+            },
+            "analyzer": {
+                "autocomplete_index": {
+                    "type": "custom",
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "asciifolding",
+                        "edge_ngram_filter"
+                    ]
+                },
+                "autocomplete_search": {
+                    "type": "custom",
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "asciifolding"
+                    ]
+                }
+            },
+            "filter": {
+                "edge_ngram_filter": {
+                    "type": "edge_ngram",
+                    "min_gram": 2,
+                    "max_gram": 20
+                }
+            }
+        }
+    },
+    "prefixes": {
+        "dpv": "https://w3id.org/dpv#",
+        "dcterms": "http://purl.org/dc/terms/",
+        "oph": "http://lblod.data.gift/vocabularies/openproceshuis/",
+        "icr": "http://lblod.data.gift/vocabularies/informationclassification/",
+        "adms": "http://www.w3.org/ns/adms#",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
+        "besluit": "http://data.vlaanderen.be/ns/besluit#",
+        "mu": "http://mu.semte.ch/vocabularies/core/",
+        "organisatie": "http://lblod.data.gift/vocabularies/organisatie/"
+    },
+    "types": [
+        {
+            "type": "process",
+            "on_path": "processes",
+            "rdf_type": "dpv:Process",
+            "properties": {
+                "created": "dcterms:created",
+                "modified": "dcterms:modified",
+                "status": "adms:status",
+                "title": "dcterms:title",
+                "description": "dcterms:description",
+                "isBlueprint": "icr:isBlueprint",
+                "publisher": {
+                    "via": "dcterms:publisher",
+                    "rdf_type": "besluit:Bestuurseenheid",
+                    "properties": {
+                        "name": "skos:prefLabel"
+                    }
+                },
+                "creator": {
+                    "via": "dcterms:creator",
+                    "rdf_type": "besluit:Bestuurseenheid",
+                    "properties": {
+                        "name": "skos:prefLabel"
+                    }
+                },
+                "relevantAdministrativeUnits": {
+                    "via": "icr:isRelevantForAdministrativeUnit",
+                    "rdf_type": "organisatie:BestuurseenheidClassificatieCode",
+                    "properties": {
+                        "name": "skos:prefLabel"
+                    }
+                },
+                "ipdcProductIds": [
+                    "^http://purl.org/vocab/cpsv#follows",
+                    "mu:uuid"
+                ],
+                "canonical": "dcterms:isVersionOf",
+                "conceptualProcess": {
+                    "via": "dcterms:source",
+                    "rdf_type": "oph:ConceptueelProces",
+                    "properties": {
+                        "name": "dcterms:title",
+                        "number": "dcterms:identifier",
+                        "processGroup": {
+                            "via": "oph:procesGroep",
+                            "rdf_type": "skos:Concept",
+                            "properties": {
+                                "name": "skos:prefLabel",
+                                "status": "adms:status",
+                                "processDomain": {
+                                    "via": "skos:relatedMatch",
+                                    "rdf_type": "skos:Concept",
+                                    "properties": {
+                                        "name": "skos:prefLabel",
+                                        "status": "adms:status",
+                                        "processCategory": {
+                                            "via": "skos:relatedMatch",
+                                            "rdf_type": "skos:Concept",
+                                            "properties": {
+                                                "name": "skos:prefLabel",
+                                                "status": "adms:status"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "mappings": {
+                "properties": {
+                    "title": {
+                        "type": "text",
+                        "analyzer": "autocomplete_index",
+                        "search_analyzer": "autocomplete_search",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "normalizer": "lowercase_normalizer"
+                            }
+                        }
+                    },
+                    "description": {
+                        "type": "text",
+                        "analyzer": "autocomplete_index",
+                        "search_analyzer": "autocomplete_search",
+                        "fields": {
+                            "keyword": {
+                                "type": "keyword",
+                                "normalizer": "lowercase_normalizer"
+                            }
+                        }
+                    },
+                    "modified": {
+                        "type": "date"
+                    },
+                    "publisher": {
+                        "properties": {
+                            "name": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "normalizer": "lowercase_normalizer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "creator": {
+                        "properties": {
+                            "name": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "normalizer": "lowercase_normalizer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "relevantAdministrativeUnits": {
+                        "properties": {
+                            "name": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "normalizer": "lowercase_normalizer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "conceptualProcess": {
+                        "properties": {
+                            "name": {
+                                "type": "text",
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "normalizer": "lowercase_normalizer"
+                                    }
+                                }
+                            },
+                            "processGroup": {
+                                "properties": {
+                                    "name": {
+                                        "type": "text",
+                                        "fields": {
+                                            "keyword": {
+                                                "type": "keyword",
+                                                "normalizer": "lowercase_normalizer"
+                                            }
+                                        }
+                                    },
+                                    "processDomain": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "text",
+                                                "fields": {
+                                                    "keyword": {
+                                                        "type": "keyword",
+                                                        "normalizer": "lowercase_normalizer"
+                                                    }
+                                                }
+                                            },
+                                            "processCategory": {
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "text",
+                                                        "fields": {
+                                                            "keyword": {
+                                                                "type": "keyword",
+                                                                "normalizer": "lowercase_normalizer"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
