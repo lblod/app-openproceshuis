@@ -1,0 +1,17 @@
+when:
+  - event: [manual]
+
+steps:
+  deploy:
+    image: bash
+    environment:
+      REMOTE_HOST: ${REMOTE_HOST}
+      REMOTE_APP_DIR: ${REMOTE_APP_DIR}
+      SSH_AUTH_SOCK: /ssh-agent
+    volumes:
+      - ${HOST_SSH_DIR}:/tmp/host-ssh:ro
+      - ${SSH_AUTH_SOCK_HOST_PATH}:/ssh-agent
+    commands:
+      - apk add --no-cache openssh-client
+      - mkdir -p /root/.ssh && cp -r /tmp/host-ssh/. /root/.ssh/
+      - bash deploy-on-server.sh
